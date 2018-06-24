@@ -109,10 +109,10 @@ public class MovieController {
 		model.addAttribute("menu","movie");
 		model.addAttribute("main", service);
 		
-		if(service.equals("reviewInsert")) {
+		/*if(service.equals("reviewInsert")) {
 			
 			model.addAttribute("main", "");
-		}
+		}*/
 		return res;
 	}
 	

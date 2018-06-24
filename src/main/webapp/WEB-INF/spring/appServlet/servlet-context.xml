@@ -44,7 +44,7 @@
 			<mapping path="/reservation/reser" />
 			<mapping path="/reservation/screenchoice" />
 			<mapping path="/info/*" />
-			<mapping path="/movie/reviewInsert" />
+			<!-- <mapping path="/movie/reviewInsert" /> -->
 			<exclude-mapping path="/info/forbidden" />
 			<beans:ref bean="loginChk" />
 		</interceptor>
