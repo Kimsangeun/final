@@ -124,8 +124,8 @@ public class HomeController {
 	
 	@RequestMapping("{menu}/{main}")
 	public String view2(Model model, @PathVariable String menu, @PathVariable String main) {
-		System.out.println("menu::"+menu);
-		System.out.println("main::"+main);
+//		System.out.println("menu::"+menu);
+//		System.out.println("main::"+main);
 		model.addAttribute("menu", menu);
 		model.addAttribute("main", main);
 		return "home";
