@@ -6,11 +6,11 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CinemaDAO { //°üÁ¤º¸
+public class CinemaDAO { //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	
 	@Resource
 	SqlSessionTemplate sessionTemplate;
-	
+	 //asasas
 	public Object list(CinemaVO vo) {
 		return sessionTemplate.selectList("cin.list", vo);
 	}
