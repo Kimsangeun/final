@@ -12,10 +12,20 @@ public class TimeTableDAO {
 	SqlSessionTemplate sessionTemplate;
 	
 	public Object list(TimeTableVO vo) {
-		return sessionTemplate.selectList("adminMapper.screenList");
+		return sessionTemplate.selectList("adminMapper.screenList",vo);
 	}
 	
+	public Object timeChk(TimeTableVO vo) {
+		return sessionTemplate.selectOne("adminMapper.timeChk", vo);
+	}
+	/*
+	public Object timeOverlap(TimeTableVO vo) {
+		return sessionTemplate.selectOne("adminMapper.timeOverlap", vo);
+	}
+	*/
 	public Object insert(TimeTableVO vo) {
 		return sessionTemplate.insert("adminMapper.insertCinema", vo);
 	}
+	
+
 }

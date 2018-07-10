@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,20 +19,18 @@
 <script>
 
 $(document).ready(function(){
-    $('input.timepicker').timepicker({});
+    $('input.timepicker').timepicker({
+    	
+    	 timeFormat: 'HH:mm',
+    	    interval: 30,
+    	    defaultTime: '9',
+    	    startTime: '00:00',
+    	    dynamic: false,
+    	    dropdown: true,
+    	    scrollbar: true
+    });
 });
 
-$('.timepicker').timepicker({
-    timeFormat: 'h:mm p',
-    interval: 30,
-    minTime: '10',
-    maxTime: '6:00pm',
-    defaultTime: '11',
-    startTime: '10:00',
-    dynamic: false,
-    dropdown: true,
-    scrollbar: true
-});
 </script>
 
 
@@ -39,7 +38,7 @@ $('.timepicker').timepicker({
 <form action="?">
 	<input type="date" name="mstart" value="${param.mstart}" onchange="submit()" /> 날짜
 </form>	
-<form action="time" method="POST">
+<form action="insert" method="POST">
 <table border="" >
 
 	<%-- <tr>
@@ -73,37 +72,39 @@ $('.timepicker').timepicker({
 	
 	<tr>
 		<td>번호</td>
-		<td>상영시간</td>
 		<td>상영관</td>
+		<td>상영시간</td>
 		<td>제목</td>
-		<td>날짜</td>
+		<!-- <td>날짜</td> -->
 	</tr>	
 
 <c:forEach items="${data['time'] }" var="mm" varStatus="no">
 	<tr>
 		<td>${mm.sID}</td>
-		<td><fmt:formatDate type="time" value="${mm.mstart}"/></td>
 		<td>${mm.scNum}</td>
-		<td>${mm.mID}</td>
-		<td>${mm.mstart}</td>
+		<td><fmt:formatDate type="time" value="${mm.mstart}"/></td>
+		<td>${mm.title}</td>
+		<%-- <td>${mm.mstart}</td> --%>
 	</tr>
 </c:forEach>
 	<tr>
 		
-		<td colspan="4" align="right">
+		<td colspan="4" align="right">영화명
 		<select name="mID" id="selectDate" >
-				<option value=""> 영화명
+				<!-- <option value=""> 영화명 -->
 				<c:forEach items="${data['movie']}" var="mm">
 					<option value="${mm.mid }">${mm.title }
 				</c:forEach>
-		</select>
+		</select>상영관
 		<select name="scNum" id="selectScreen" >
-				<option value=""> 상영관
+				<!-- <option value=""> 상영관 -->
 				<c:forEach items="${data['screen']}" var="mm">
 					<option value="${mm.scNum }">${mm.scNum }관
 				</c:forEach>
-		</select>		
-		<input type="text" class='timepicker' readonly>
+		</select>	
+		상영시간	
+		<input type="text" class='timepicker' name="timeset" readonly>
+		<form:errors path="timeVo.mID"/>
 		<input type="hidden" value="${param.mstart}" name="mstart"/>
 		<!-- <input class="timepicker" /> -->
 		<input type="submit"/>
