@@ -34,9 +34,9 @@ public class HomeController {
 		ArrayList<String> res = new ArrayList<String>();
 		
 		res.add("info");
-		res.add("reservation"); //¿¹¸Å
-		res.add("movie"); //¿µÈ­
-		res.add("screen"); //¿µÈ­°üÁ¤º¸
+		res.add("reservation"); //ï¿½ï¿½ï¿½ï¿½
+		res.add("movie"); //ï¿½ï¿½È­
+		res.add("screen"); //ï¿½ï¿½È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		return res;
 	}
 	
@@ -49,24 +49,24 @@ public class HomeController {
 		
 		ArrayList<String> info = new ArrayList<String>();
 		
-		info.add("notice"); //°øÁö»çÇ×
-		info.add("faq"); //ÀÚÁÖÇÏ´ÂÁú¹®
-		info.add("qna"); //1:1¹®ÀÇ
+		info.add("notice"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		info.add("faq"); //ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½
+		info.add("qna"); //1:1ï¿½ï¿½ï¿½ï¿½
 		
 		map.put("info", info);
 		
 		ArrayList<String> reservation = new ArrayList<String>();
 		
-		reservation.add("reser"); //¿¹¸Å
-		reservation.add("timetable"); //»ó¿µ½Ã°£Ç¥
+		reservation.add("reser"); //ï¿½ï¿½ï¿½ï¿½
+		reservation.add("timetable"); //ï¿½ó¿µ½Ã°ï¿½Ç¥
 		
 		map.put("reservation", reservation);
 
 		ArrayList<String> movie = new ArrayList<String>();
 		
-		movie.add("boxoffice"); //¹Ú½º¿ÀÇÇ½º
-		movie.add("now"); //ÇöÀç»ó¿µÀÛ
-		movie.add("comming"); //°³ºÀ¿¹Á¤ÀÛ
+		movie.add("boxoffice"); //ï¿½Ú½ï¿½ï¿½ï¿½ï¿½Ç½ï¿½
+		movie.add("now"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+		movie.add("comming"); //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		
 		map.put("movie", movie);
 		
@@ -114,13 +114,13 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("{menu}/{main}")
+	/*@RequestMapping("{menu}/{main}")
 	public String view2(Model model, @PathVariable String menu, @PathVariable String main) {
 //		System.out.println("menu::"+menu);
 //		System.out.println("main::"+main);
 		model.addAttribute("menu", menu);
 		model.addAttribute("main", main);
 		return "home";
-	}
+	}*/
 	
 }

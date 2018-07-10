@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="adminMapper">
+	<select id="screenList" resultType="timeVo" parameterType="timeVo">
+		 select * from screeninfo
+		<!-- <include refid="whereDate"/> -->
+	</select>
+	
+	<sql id="whereDate">
+		<where>	
+			<choose>
+				<when test="mstart!=null">
+					TO_DATE(mstart, 'YYYYMMDD') = TO_DATE(#{mstart}, 'YYYYMMDD')
+				</when>
+				<otherwise>
+					trunc(mstart) = trunc(sysdate)
+				</otherwise>	
+			</choose>
+		</where>
+	</sql>
+	
+	<sql id="whereSch">
+		<where>
+			<if test="title!=null and title!=''">
+				<!-- title = #{title} 
+				title like '%${title}%' -->
+				
+				<choose>
+					<when test="schCol=='cnt'">
+					
+						<![CDATA[ cnt <= #{title}	]]>
+					</when>
+					<otherwise>
+						${schCol} like '%'||#{title}||'%'
+					</otherwise>
+				
+				</choose>
+			</if>
+		</where>
+	</sql>
+	
+	<sql id="maxId">
+		(select max(id)+1 from  mvcboard)
+	</sql>
+	
+	
+	<select id="movieList" resultType="movieVo" >
+		select * from movie 
+	</select>
+	
+	<select id="getScreen" resultType="screenVo" >
+		select * from cinema
+	</select>
+	
+	<select id="insertCinema" parameterType="timeVo"  >
+		insert into screeninfo(sID,scNum,mstart,mID,showtime) 
+		values(SCREEN_SID.NEXTVAL,#{scNum},TO_DATE(sysdate,'mm-dd-yyyy hh24:mi:ss')),#{mID},TO_CHAR(#{mstart},'mm-dd-yyyy hh24:mi:ss'))
+	</select>
+	
+	
+</mapper>
