@@ -4,17 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
-import javax.annotation.Resource;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.jhta.proj.model.CinemaDAO;
-import com.jhta.proj.model.CinemaVO;
 
 /**
  * Handles requests for the application home page.
@@ -27,6 +22,20 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+/*	@RequestMapping("/")
+	public String home(Locale locale, Model model) {
+		//logger.info("Welcome home! The client locale is {}.", locale);
+		System.out.println("menu:");
+		System.out.println("maain:");
+
+//		System.out.println("menu:" + menu);
+//		System.out.println("main:" + main);
+		model.addAttribute("menu","inc");
+		model.addAttribute("main","main");
+		
+		return "home";
+	}*/
+	
 	
 	@ModelAttribute("top")
 	public ArrayList top() {
@@ -106,7 +115,6 @@ public class HomeController {
 			break;
 			
 		case "screen":
-			
 			mm = "screenInfo";
 			break;
 			
@@ -123,5 +131,4 @@ public class HomeController {
 		model.addAttribute("main", main);
 		return "home";
 	}*/
-	
 }

@@ -3,10 +3,13 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="cin">
+<mapper namespace="mem">
 
-	<select id="list" resultType="cinemaVo">
-		select * from cinema order by scNum desc
+	<select id="isChk" parameterType="memberVo" resultType="memberVo">
+		select * from member 
+		<where>
+			id = #{id} and pw= #{pw}
+		</where>
 	</select>
 
 </mapper>

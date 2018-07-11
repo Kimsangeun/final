@@ -23,9 +23,7 @@
 	<jsp:include page="inc/top.jsp" />
 </div>
 <div class="S_temp" style="width: 150px;">
-<c:if test="${menu != 'menu' }">
-<jsp:include page="${menu }/topmenu.jsp" />
-</c:if>
+	<jsp:include page="inc/topmenu.jsp" />
 </div>
 <div class="S_temp">
 	<c:choose>

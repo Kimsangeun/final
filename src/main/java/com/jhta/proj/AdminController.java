@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.jhta.proj.logic.timeChk;
 import com.jhta.proj.model.admin.MovieDAO;
 import com.jhta.proj.model.admin.ScreenDAO;
 import com.jhta.proj.model.admin.TimeTableDAO;

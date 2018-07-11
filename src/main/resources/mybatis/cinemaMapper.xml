@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="cin">
 
 	<select id="list" resultType="cinemaVo">
-		select * from cinema
+		select * from cinema order by scNum desc
 	</select>
 
 </mapper>

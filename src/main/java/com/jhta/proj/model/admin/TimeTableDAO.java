@@ -16,7 +16,7 @@ public class TimeTableDAO {
 	}
 	
 	public Object timeChk(TimeTableVO vo) {
-		return sessionTemplate.selectOne("adminMapper.timeChk", vo);
+		return sessionTemplate.selectList("adminMapper.timeChk", vo);
 	}
 	/*
 	public Object timeOverlap(TimeTableVO vo) {
