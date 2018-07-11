@@ -67,7 +67,7 @@ public class AdminController {
 		System.out.println("안녕하세요");
 		model.addAttribute("main", service);
 		model.addAttribute("menu", "admin");
-
+		System.out.println("포비든킹덤");
 
 		return "home";
 	}
@@ -119,17 +119,30 @@ public class AdminController {
 			model.addAttribute("msg", "동일한 시간에 다른관에서 상영예정입니다.");
 			//TimeTableVO chkVo = (TimeTableVO)timeDao.timeChk(vo);
 			
-			res = timeDao.timeChk(vo);
-			System.out.println("res="+res);
+			Object chk1 = timeDao.timeChk(vo);
+			System.out.println("chk1="+chk1);
 			
-			/*res = timeDao.timeOverlap(vo);
-			System.out.println("res2="+res);*/
+			Object chk2 = timeDao.screenChk(vo);
+			System.out.println("chk2="+chk2);
 			
-			if(res==null) {
+			Object chk3 = timeDao.timeOverlap(vo);
+			System.out.println("chk3="+chk3);
+			
+			Object chk4 = timeDao.timeOverlapEnd(vo);
+			System.out.println("chk4="+chk4);
+			
+			if(chk1==null && chk2==null && chk3==null && chk4==null) {
+				System.out.println("들어오느냐");
 				timeDao.insert(vo);
 				model.addAttribute("msg", 
 						vo.getShowtime()+"//"+vo.getScNum()+"관 추가완료");
 			}
+			/*if(res==null) {
+				System.out.println("들어오느냐");
+				timeDao.insert(vo);
+				model.addAttribute("msg", 
+						vo.getShowtime()+"//"+vo.getScNum()+"관 추가완료");
+			}*/
 			model.addAttribute("url", "time?mstart="+vo.getShowdate());
 			break;
 		

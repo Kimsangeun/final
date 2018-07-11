@@ -6,9 +6,13 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ReserDAO { //¿¹¾à Á¤º¸
+public class ReserDAO { //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
 	@Resource
 	SqlSessionTemplate sessionTemplate;
+	
+	public Object list(ReserVO vo) {
+		return sessionTemplate.selectList("reser.list", vo);
+	}
 	
 }

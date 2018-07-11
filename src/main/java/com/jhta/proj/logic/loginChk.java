@@ -24,7 +24,7 @@ public class loginChk extends HandlerInterceptorAdapter{
 		MemberVO vo = (MemberVO)request.getSession().getAttribute("mem");
 		
 		if(vo==null) {
-			response.sendRedirect("qwer");
+			response.sendRedirect("forbidden");
 			return false;
 		}
 		

@@ -42,8 +42,6 @@ public class TimeTableVO {
 		
 		this.showtime = new SimpleDateFormat("yyyy-MM-dd HH:mm").format(dd);
 
-		
-		
 	}
 	public String getShowdate() {
 		return showdate;

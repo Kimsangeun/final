@@ -26,9 +26,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 	
-	<select id="timeChk" resultType="timeVo" parameterType="timeVo">
-		 select * from screeninfo where TO_CHAR(mstart, 'yyyy-MM-dd hh24:mi') = #{showtime}
-	</select>
 	
 	<sql id="whereInfo">
 		<where>	
@@ -53,15 +50,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="insertCinema" parameterType="timeVo"  >
 		insert into screeninfo(
-		sID,scNum,mstart,mID,showtime) 
+		sID,scNum,mstart,mID) 
 		values(	SCREEN_SID.NEXTVAL,	#{scNum}, 
-		TO_TIMESTAMP(#{showtime},'yyyy-MM-dd hh24:mi'),#{mID},#{showtime})
+		TO_TIMESTAMP(#{showtime},'yyyy-MM-dd hh24:mi'),#{mID})
 	</select>
 
 	
 	<!-- 시간중복체크 -->
-		
+
 	<sql id="runtime">
+		(select runtime from movie where mid=screeninfo.mID)
+	</sql>
+	
+	<sql id="mytime">
 		(select runtime from movie where mid=#{mID})
 	</sql>
 	
@@ -73,11 +74,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and SCNUM = #{scNum}
 		</where>
 	</sql>
-
 	
+	<!-- 1. 같은시간, 모든영화관, 같은영화 //상영관 상관없이 같은시간에 시작하는지 그럼 같은시간 같은관 다른영화도 찾아보고 막아야한다.(->screenChk)-->
+	<select id="timeChk" resultType="timeVo" parameterType="timeVo">
+		 select * from screeninfo where TO_CHAR(mstart, 'yyyy-MM-dd hh24:mi') = #{showtime} and mID = #{mID}
+	</select>
+	
+	<!-- 2. 같은시간, 같은상영관, 다른영화 //다음은 상영 시작, 끝시간 사이에 같은관 시간표 삽입 막기(->시간 중복/timeOverlap) -->
+	<select id="screenChk" resultType="timeVo" parameterType="timeVo">
+		 select * from screeninfo where TO_CHAR(mstart, 'yyyy-MM-dd hh24:mi') = #{showtime} and scNum = #{scNum}
+	</select>
+
+	<!-- 3. 기존영화 시작시간 ~ 시작시간+영화런타임+30분 사이의 타임에 영화 삽입 막기 //
+	 	다음은 넣으려는 영화의 시작~끝+30 사이에 기존 영화 시작시간이 걸치면 막기(->timeOverlapEnd)-->
 	<select id="timeOverlap" resultType="timeVo" parameterType="timeVo" >
 		select * from screeninfo
 		<include refid="ggg"/>
+	</select>
+	 	
+	<!-- 4. 넣으려는 영화 시작 ~ 같은관, 기존영화 시작시간  ~ 넣으려는 영화 끝 경우  // 아마도 마지막-->
+	<select id="timeOverlapEnd" resultType="timeVo" parameterType="timeVo" >
+		select * from screeninfo where mstart
+			BETWEEN CAST(TO_TIMESTAMP(#{showtime},'yyyy-MM-dd hh24:mi') as DATE ) 
+			AND CAST(TO_TIMESTAMP(#{showtime},'yyyy-MM-dd hh24:mi')
+			+(<include refid="mytime"/>+20)/(24*60) as DATE ) 
+			and SCNUM = #{scNum}
+		
 	</select>
 
 	<!--                                         -->

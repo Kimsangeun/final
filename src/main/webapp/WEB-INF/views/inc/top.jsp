@@ -25,10 +25,10 @@ margin: 0 10%;
 
 
 <body>
-<div class="S_top"><a href="info/notice">고객센터</a></div>
-<div class="S_top"><a href="reservation/reser">예매</a></div>
-<div class="S_top"><a href="movie/boxoffice">영화</a></div>
-<div class="S_top"><a href="screen/screenInfo">상영관</a></div>
+<div class="S_top"><a href="/proj/info/notice">고객센터</a></div>
+<div class="S_top"><a href="/proj/reservation/reser">예매</a></div>
+<div class="S_top"><a href="/proj/movie/boxoffice">영화</a></div>
+<div class="S_top"><a href="/proj/screen/screenInfo">상영관</a></div>
 
 <div style="clear: both;"></div>
 

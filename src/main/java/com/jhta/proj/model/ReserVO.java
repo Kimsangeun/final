@@ -4,31 +4,9 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("reserVo")
 public class ReserVO {
-/*	DB
-	회원
-	id pw email phone birth(7자리) name mileage
-
-	영화
-	mID title nation genre runtime image plot rating release(date) director actor
-
-	상영정보
-	sID scNum 날짜(영화시작시간) mID
-
-	예약
-	id rID cost sID seatNum mID
-
-	리뷰
-	mID id reg_date score review
-
-	게시판(문의, 공지사항, F&Q)
-
-	상영관
-	scNum totSeat*/
 	
 	String id, seatNum; //유저아이디, 좌석번호
-	int rId, cash, card, point, sId, mId; //예약번호, 현금, 카드, 포인트, 관, 영화번호
-	
-	
+	int rId, cash, card, sId, mId; //예약번호, 현금, 카드, 관, 영화번호
 	
 	public String getId() {
 		return id;
@@ -59,12 +37,6 @@ public class ReserVO {
 	}
 	public void setCard(int card) {
 		this.card = card;
-	}
-	public int getPoint() {
-		return point;
-	}
-	public void setPoint(int point) {
-		this.point = point;
 	}
 	public int getsId() {
 		return sId;

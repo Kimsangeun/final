@@ -16,13 +16,21 @@ public class TimeTableDAO {
 	}
 	
 	public Object timeChk(TimeTableVO vo) {
-		return sessionTemplate.selectList("adminMapper.timeChk", vo);
+		return sessionTemplate.selectOne("adminMapper.timeChk", vo);
 	}
-	/*
+	
+	public Object screenChk(TimeTableVO vo) {
+		return sessionTemplate.selectOne("adminMapper.screenChk", vo);
+	}
+	
 	public Object timeOverlap(TimeTableVO vo) {
 		return sessionTemplate.selectOne("adminMapper.timeOverlap", vo);
 	}
-	*/
+	
+	public Object timeOverlapEnd(TimeTableVO vo) {
+		return sessionTemplate.selectOne("adminMapper.timeOverlapEnd", vo);
+	}
+	
 	public Object insert(TimeTableVO vo) {
 		return sessionTemplate.insert("adminMapper.insertCinema", vo);
 	}

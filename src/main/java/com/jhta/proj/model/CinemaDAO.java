@@ -10,7 +10,7 @@ public class CinemaDAO { //������
 	
 	@Resource
 	SqlSessionTemplate sessionTemplate;
-	 //asasas
+	
 	public Object list(CinemaVO vo) {
 		return sessionTemplate.selectList("cin.list", vo);
 	}

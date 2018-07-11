@@ -26,16 +26,15 @@
 	<interceptors>
 	
 		<interceptor>
-			<mapping path="/admin/time"/>
+			<mapping path="/admin/*"/>
+			<exclude-mapping path="/admin/forbidden"/>
 			<beans:ref bean="adminChk"/>
 		</interceptor>
 		
-		<!-- <interceptor>
-			<mapping path="/board/register"/>
-            <mapping path="/board/modify"/>
-            <mapping path="/board/delete"/>
+		<interceptor>
+			<mapping path="/reservation/reser"/>
 			<beans:ref bean="loginChk"/>
-		</interceptor> -->
+		</interceptor>
 				
 	</interceptors>
 	
