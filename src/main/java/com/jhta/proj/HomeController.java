@@ -79,6 +79,7 @@ public class HomeController {
 
 	@RequestMapping(value="/", method = RequestMethod.GET)
 	public String view3(Model model) {
+		System.out.println("호움");
 		model.addAttribute("menu","menu");
 		return "home";
 	}

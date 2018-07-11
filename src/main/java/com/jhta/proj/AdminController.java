@@ -42,22 +42,26 @@ public class AdminController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping()
-	String selectList(@PathVariable String service, TimeTableVO vo) {
+	String selectList(@PathVariable String service, TimeTableVO vo, Model model) {
 		
 		
 		String res = "admin/"+service;
-		System.out.println(vo);
+//		System.out.println(vo);
+		System.out.println("안녕하세요");
+		model.addAttribute("main", service);
+		model.addAttribute("menu", service);
 
 
-		return res;
+		return "home";
 	}
 	
 	@RequestMapping(method=RequestMethod.POST)
 	String sss(@PathVariable String service, TimeTableVO vo,BindingResult errors) {
 		
 		//System.out.println("보이루" + vo);
+		System.out.println("포스트");
 		String res = "admin/"+service;
-		System.out.println(vo);
+//		System.out.println(vo);
 
 		if(service.equals("insert")) {
 			res = "admin/alert";
@@ -69,11 +73,12 @@ public class AdminController {
 		}
 		
 
-		return res;
+		return "home";
 	}
 	
 	@ModelAttribute("data")
 	Object res(@PathVariable String service,TimeTableVO vo,Model model) {
+		System.out.println("데이타만");
 		Object res = null;
 		HashMap<String, Object> mapp = new HashMap<>();
 		//System.out.println("날짜르"+vo.getShowtime());
