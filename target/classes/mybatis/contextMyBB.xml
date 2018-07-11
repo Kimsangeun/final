@@ -24,6 +24,9 @@
 		<beans:property name="mapperLocations">
 			<beans:array>
 				<beans:value>classpath:mybatis/cinemaMapper.xml</beans:value>
+				<beans:value>classpath:mybatis/reserMapper.xml</beans:value>
+				<beans:value>classpath:mybatis/adminMapper.xml</beans:value>
+				<beans:value>classpath:mybatis/memberMapper.xml</beans:value>
 			</beans:array>
 		</beans:property>
 	</beans:bean>
