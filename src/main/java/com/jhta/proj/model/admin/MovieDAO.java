@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MovieDAO {
-
+	//머지..?
 	@Resource
 	SqlSessionTemplate sessionTemplate;
 	

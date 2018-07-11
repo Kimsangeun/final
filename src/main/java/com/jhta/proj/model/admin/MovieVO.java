@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("movieVo")
+@Alias("movieVo")//as
 public class MovieVO {
 	Integer mid;
 	String title;

@@ -7,7 +7,7 @@ import java.util.Date;
 import org.apache.ibatis.type.Alias;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Alias("timeVo")
+@Alias("timeVo")//dfdf
 public class TimeTableVO {
 	Integer sID,scNum,mID;
 	String showdate,showtime,timeset,title;

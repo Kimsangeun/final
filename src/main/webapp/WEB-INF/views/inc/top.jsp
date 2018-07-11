@@ -25,18 +25,11 @@ margin: 0 10%;
 
 
 <body>
-<c:forEach items="${top }" var="tt">
-<div class="S_top">
-<c:choose>
-<c:when test="${menu eq 'menu' }">
-<a href="${tt}/">${tt}</a>
-</c:when>
-<c:otherwise>
-<a href="../${tt}/">${tt}</a>
-</c:otherwise>
-</c:choose>
-</div>
-</c:forEach>
+<div class="S_top"><a href="info/notice">고객센터</a></div>
+<div class="S_top"><a href="reservation/reser">예매</a></div>
+<div class="S_top"><a href="movie/boxoffice">영화</a></div>
+<div class="S_top"><a href="screen/screenInfo">상영관</a></div>
+
 <div style="clear: both;"></div>
 
 </body>

@@ -14,32 +14,36 @@ float: left;
 margin-left: 10px;
 }
 </style>
-
-<form action="loginReg" method="post">
+<%-- 
+<form action="loginReg" method="post"> --%>
+<div class="S_log">
+<div><a href="home">메인</a></div>
+</div>
 <div class="S_log">
 	<c:choose>
 		<c:when test="${mem eq null }">
+		<form action="loginReg" method="post">
 			<div id="S_log">ID</div>
 			<div id="S_log"><input type="text" name="id"></div>	
 			<div id="S_log">pw</div>
 			<div id="S_log"><input type="text" name="pw"></div>
 			<div id="S_log"><input type="submit" value="로그인"></div>
 			<div><a href="">회원가입</a></div>
+		</form>
 		</c:when>
 		<c:otherwise>
 			<c:choose>
 				<c:when test="${mem.id eq 'admin' }">
-					<div><a href="admin/time">${mem.id }(${mem.name })님</a></div>
+					<div><a href="admin/time">관리자페이지</a></div>
 				</c:when>
 				<c:otherwise>
 					<div><a href="MyPage">${mem.id }(${mem.name })님</a></div>
 				</c:otherwise>
 			</c:choose>
-			<div><a href="MyPage">${mem.id }(${mem.name })님</a></div>
 			<div><a href="logOut">로그아웃</a></div>
 		</c:otherwise>
 	</c:choose>
 </div>
 	
 <div style="clear: both;"></div>
-</form>
+<%-- </form> --%>

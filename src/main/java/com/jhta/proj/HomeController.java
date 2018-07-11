@@ -93,7 +93,7 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping("{menu}")
+	/*@RequestMapping("{menu}")
 	public String view1(Model model, @PathVariable String menu) {
 		System.out.println("menu::"+menu);
 		model.addAttribute("menu",menu);
@@ -121,7 +121,7 @@ public class HomeController {
 		}
 		model.addAttribute("main", mm);
 		return "home";
-	}
+	}*/
 	
 	/*@RequestMapping("{menu}/{main}")
 	public String view2(Model model, @PathVariable String menu, @PathVariable String main) {

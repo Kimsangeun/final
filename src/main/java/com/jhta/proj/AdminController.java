@@ -12,11 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.jhta.proj.model.admin.MovieDAO;
-import com.jhta.proj.model.admin.ScreenDAO;
-import com.jhta.proj.model.admin.TimeTableDAO;
-import com.jhta.proj.model.admin.TimeTableVO;
-
+import com.jhta.proj.model.admin.*;
 
 
 /**
@@ -40,6 +36,28 @@ public class AdminController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	
+	/*@ModelAttribute("menu")
+	String menu() {
+		return "admin";
+	}
+	
+	@ModelAttribute("main")
+	String main(@PathVariable String service) {
+		String res = service;
+		
+		switch (service) {		
+		
+			case "insert":
+				res = "alert";
+				break;
+		
+		}
+		
+		return res;
+	}
+	*/
+	
 	@RequestMapping()
 	String selectList(@PathVariable String service, TimeTableVO vo, Model model) {
 		
@@ -48,7 +66,7 @@ public class AdminController {
 //		System.out.println(vo);
 		System.out.println("안녕하세요");
 		model.addAttribute("main", service);
-		model.addAttribute("menu", service);
+		model.addAttribute("menu", "admin");
 
 
 		return "home";
@@ -59,7 +77,7 @@ public class AdminController {
 		
 		//System.out.println("보이루" + vo);
 		System.out.println("포스트");
-		String res = "admin/"+service;
+		String res = "home";
 //		System.out.println(vo);
 
 		if(service.equals("insert")) {
@@ -72,7 +90,7 @@ public class AdminController {
 		}
 		
 
-		return "home";
+		return res;
 	}
 	
 	@ModelAttribute("data")

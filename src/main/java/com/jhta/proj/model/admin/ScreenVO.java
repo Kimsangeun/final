@@ -2,7 +2,7 @@ package com.jhta.proj.model.admin;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("screenVo")
+@Alias("screenVo")//tes
 public class ScreenVO {
 	Integer scNum, totSeat;
 
