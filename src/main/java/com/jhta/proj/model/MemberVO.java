@@ -1,13 +1,16 @@
 package com.jhta.proj.model;
 
-import java.util.Date;
+import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 
 import org.apache.ibatis.type.Alias;
 
 @Alias("memberVo")
 public class MemberVO {
 	
-	String id, pw, email, name, phone;
+	String id, pw, email, name, phone, yy, mm, dd;
 	
 	Date birth;
 
@@ -23,6 +26,32 @@ public class MemberVO {
 		this.name = name;
 		this.phone = phone;
 		this.birth = birth;
+	}
+
+	
+	
+	public String getYy() {
+		return yy;
+	}
+
+	public void setYy(String yy) {
+		this.yy = yy;
+	}
+
+	public String getMm() {
+		return mm;
+	}
+
+	public void setMm(String mm) {
+		this.mm = mm;
+	}
+
+	public String getDd() {
+		return dd;
+	}
+
+	public void setDd(String dd) {
+		this.dd = dd;
 	}
 
 	public String getId() {
@@ -70,7 +99,15 @@ public class MemberVO {
 	}
 
 	public void setBirth(Date birth) {
+		
 		this.birth = birth;
+	}
+	
+	public Date makeBirth(String yy, String mm, String dd) {
+		
+		Date bb = Date.valueOf(yy+"-"+mm+"-"+dd);
+		
+		return bb;
 	}
 
 	@Override
@@ -80,5 +117,5 @@ public class MemberVO {
 	}
 	
 	
-	
+	//ㅁㄴㅇ
 }

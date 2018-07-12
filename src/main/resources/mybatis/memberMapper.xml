@@ -12,4 +12,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</select>
 
+	<insert id="join" parameterType="memberVo">
+		insert into member (id, pw, name, email, phone, birth, out)
+		values (#{id}, #{pw}, #{name}, #{email}, #{phone}, #{birth}, 0)
+	
+	</insert><!--  ㅁㅁ-->
 </mapper>

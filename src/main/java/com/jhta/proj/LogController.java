@@ -46,5 +46,5 @@ public class LogController {
 		model.addAttribute("url","/proj");
 		return "member/alert";
 	}
-	
+	//ㄴㅇㄴㅇㄴ
 }

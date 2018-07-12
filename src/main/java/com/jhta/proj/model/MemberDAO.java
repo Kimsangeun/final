@@ -16,4 +16,11 @@ public class MemberDAO {
 		return sessionTemplate.selectOne("mem.isChk", vo);
 	}
 	
+	public void insert(MemberVO vo) {
+		
+		sessionTemplate.insert("mem.join",vo);
+		
+		System.out.println("insert하냐");
+	}
+	//ㅁㅁ
 }
