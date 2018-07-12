@@ -9,12 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 select screeninfo.* ,movie.title from screeninfo,movie
 		<include refid="whereDate"/>
 		
-		order by screeninfo.scNum
+		order by screeninfo.mID,screeninfo.scNum
 	</select>
 	
 	<sql id="whereDate">
 		<where>	
-
 			<choose>
 				<when test="mstart!=null">
 					TO_CHAR(mstart, 'yyyy-MM-dd') = #{showdate} and screeninfo.mID = movie.mID
@@ -38,10 +37,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 	
+	<!-- 지정한 날 상영가능한 영화 불러오기 -->
+	<select id="selectDayMovieList" parameterType="timeVo" resultType="movieVo" >
+		select * from movie <include refid="whereSelectDay"/>
+	</select>
 	
+	<sql id="whereSelectDay">
+		<where>	
+			<choose>
+				<when test="showdate!=null and showdate!=''">
+					<![CDATA[release <= TO_DATE(#{showdate},'yyyy-MM-dd')]]>
+				</when>
+				<otherwise>
+					<![CDATA[release <= sysdate]]>
+				</otherwise>
+			</choose>
+
+		</where>
+	</sql>
 	
 	<select id="movieList" resultType="movieVo" >
-		select * from movie 
+		select * from movie where release <![CDATA[<]]> sysdate
 	</select>
 	
 	<select id="getScreen" resultType="screenVo" >

@@ -103,7 +103,7 @@ public class AdminController {
 		
 		case "time":
 			mapp.put("time", timeDao.list(vo));
-			mapp.put("movie", movieDao.list());
+			mapp.put("movie", movieDao.selectDayMovieList(vo));
 			mapp.put("screen", screenDao.list());
 
 			res = mapp;

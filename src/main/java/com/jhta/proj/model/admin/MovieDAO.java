@@ -20,4 +20,9 @@ public class MovieDAO {
 		return sessionTemplate.selectList("adminMapper.movieList");
 		
 	}
+	
+	public Object selectDayMovieList(TimeTableVO vo) {
+		return sessionTemplate.selectList("adminMapper.selectDayMovieList",vo);
+		
+	}
 }

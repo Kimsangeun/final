@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
@@ -35,36 +36,16 @@ $(document).ready(function(){
 
 
 <body>
+<fmt:formatDate var="mindate" value="<%= new Date() %>" pattern="yyyy-MM-dd"/>
+<fmt:formatDate var="maxdate" value="<%= new Date(new Date().getTime() + 20*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
 <form action="?">
-	<input type="date" name="mstart" value="${param.mstart}" onchange="submit()" /> 날짜
+	<input type="date" name="mstart" min="${mindate }" max="${maxdate }" 
+	value="${param.mstart eq null ? mindate : param.mstart}" onchange="submit()" /> 날짜
 </form>	
+<h2>${param.mstart eq null ? mindate : param.mstart}</h2>
 <form action="insert" method="POST">
 <table border="" >
 
-	<%-- <tr>
-		
-		<td colspan="5" align="center">
-			<select name="selectDate" id="selectDate" >
-				<option value=""> 영화명
-				<c:forEach items="${data['movie']}" var="mm">
-					<option value="${mm.mid }">${mm.title }
-				</c:forEach>
-			</select>	
-			
-		</td>
-	</tr>
-	<tr>
-		
-		<td colspan="5" align="center">
-			<select name="selectScreen" id="selectScreen" >
-				<option value=""> 상영관
-				<c:forEach items="${data['screen']}" var="mm">
-					<option value="${mm.scNum }">${mm.scNum }관
-				</c:forEach>
-			</select>	
-			
-		</td>
-	</tr> --%>
 	<tr>
 	
 	</tr>
