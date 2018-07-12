@@ -5,7 +5,17 @@ import org.apache.ibatis.type.Alias;
 @Alias("cinemaVo")
 public class CinemaVO {
 	
-	int scNum, totSeat; //°ü, ÃÑ ÁÂ¼®¼ö
+	int scNum, totSeat; //ï¿½ï¿½, ï¿½ï¿½ ï¿½Â¼ï¿½ï¿½ï¿½
+String img;
+
+
+	public String getImg() {
+	return img;
+}
+
+public void setImg(String img) {
+	this.img = img;
+}
 
 	public int getScNum() {
 		return scNum;
@@ -22,6 +32,9 @@ public class CinemaVO {
 	public void setTotSeat(int totSeat) {
 		this.totSeat = totSeat;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "CinemaVO [scNum=" + scNum + ", totSeat=" + totSeat + ", img=" + img + "]";
+	}
 }
