@@ -19,31 +19,11 @@
 
 <script>
 
-$(document).ready(function(){
-    $('input.timepicker').timepicker({
-    	
-    	 timeFormat: 'HH:mm',
-    	    interval: 30,
-    	    defaultTime: '9',
-    	    startTime: '00:00',
-    	    dynamic: false,
-    	    dropdown: true,
-    	    scrollbar: true
-    });
-});
-
 </script>
 
 
 <body>
-<fmt:formatDate var="mindate" value="<%= new Date() %>" pattern="yyyy-MM-dd"/>
-<fmt:formatDate var="maxdate" value="<%= new Date(new Date().getTime() + 20*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
-<form action="?">
-	<input type="date" name="mstart" min="${mindate }" max="${maxdate }" 
-	value="${param.mstart eq null ? mindate : param.mstart}" onchange="submit()" /> 날짜
-</form>	
-<h2>${param.mstart eq null ? mindate : param.mstart}</h2>	
-<form action="insert" method="POST">
+<input type="button" value="추가" onclick="location.href='insertMovieForm'">
 <table border="" >
 
 	<tr>
@@ -53,22 +33,26 @@ $(document).ready(function(){
 	
 	<tr>
 		<td>번호</td>
-		<td>상영관</td>
-		<td>상영시간</td>
 		<td>제목</td>
+		<td>런타임</td>
+		<td>개봉일</td>
+		<td>삭제</td>
+		<td>변경</td>
 		<!-- <td>날짜</td> -->
 	</tr>	
 
-<c:forEach items="${data['time'] }" var="mm" varStatus="no">
+<c:forEach items="${data['movie'] }" var="mm" varStatus="no">
 	<tr>
-		<td>${mm.sID}</td>
-		<td>${mm.scNum}</td>
-		<td><fmt:formatDate pattern="HH:mm" value="${mm.mstart}"/></td>
-		<td>${mm.title}</td>
+		<td>${mm.mid}</td>
+		<td><a href="detailMovie?mid=${mm.mid }">${mm.title}</a></td>
+		<td>${mm.runtime}</td>
+		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.release}"/></td>
+		<td><input type="button" value="X" onclick="location.href='deleteMovie?mid=${mm.mid}'"></td>
+		<td>Modify</td>
 		<%-- <td>${mm.mstart}</td> --%>
 	</tr>
 </c:forEach>
-	<tr>
+	<%-- <tr>
 		
 		<td colspan="4" align="right">영화명
 		<select name="mID" id="selectDate" >
@@ -91,9 +75,8 @@ $(document).ready(function(){
 		<input type="submit"/>
 		
 		</td>
-	</tr>	
+	</tr>	 --%>
 
 </table>
-</form>
 </body>
 </html>

@@ -9,7 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		 select screeninfo.* ,movie.title from screeninfo,movie
 		<include refid="whereDate"/>
 		
-		order by screeninfo.mID,screeninfo.scNum
+		order by screeninfo.mID,screeninfo.scNum,screeninfo.mstart
 	</select>
 	
 	<sql id="whereDate">
@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<select id="movieList" resultType="movieVo" >
-		select * from movie where release <![CDATA[<]]> sysdate
+		select * from movie
 	</select>
 	
 	<select id="getScreen" resultType="screenVo" >
@@ -81,7 +81,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="mytime">
 		(select runtime from movie where mid=#{mID})
 	</sql>
-	
+
 	<sql id="ggg">
 		<where>	
 			TO_TIMESTAMP(#{showtime},'yyyy-MM-dd hh24:mi')
@@ -119,6 +119,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 	<!--                                         -->
+	
+	<!--  -->
+	<!--  -->
+	<!--  -->
+	<!-- 영화 관련 -->
+	
+	<insert id="movieInsert" parameterType="movieVo">
+      <!--   <selectKey keyProperty="movieid" resultType="java.lang.Integer" order="BEFORE">
+            <include refid="maxId"/>
+        </selectKey> -->
+    
+        insert into movie (mid,title,director, actor ,plot ,genre ,
+        rating ,nation ,poster,steelcut, release, runtime) 
+        values (MOVIE_MID.NEXTVAL, #{title}, #{director},#{actor}, #{plot}, #{genre}, #{rating},
+        #{nation}, #{poster},#{steelcut},#{release},#{runtime}) 
+    </insert>
+    
+    <select id="movieDetail" resultType="movieVo" parameterType="movieVo">
+        select * from movie where mid = #{mid}
+    </select>
+    
+    <select id="movieDelete" parameterType="movieVo">
+        delete from movie where mid = #{mid}
+    </select>
+	 
+	
+	
 	
 	
 </mapper>

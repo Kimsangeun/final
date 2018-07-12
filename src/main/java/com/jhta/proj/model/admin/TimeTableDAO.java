@@ -32,8 +32,8 @@ public class TimeTableDAO {
 	}
 	
 	public Object insert(TimeTableVO vo) {
+
 		return sessionTemplate.insert("adminMapper.insertCinema", vo);
 	}
 	
-
 }

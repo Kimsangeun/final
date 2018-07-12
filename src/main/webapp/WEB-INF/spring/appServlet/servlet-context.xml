@@ -38,4 +38,15 @@
 				
 	</interceptors>
 	
+	<beans:bean id="multipartResolver"
+	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
+	/>
+		
+	<beans:bean id="messageSource" 
+	class="org.springframework.context.support.ResourceBundleMessageSource">
+	
+		<beans:property name="useCodeAsDefaultMessage" value="true"/>
+	
+	</beans:bean>
+	
 </beans:beans>

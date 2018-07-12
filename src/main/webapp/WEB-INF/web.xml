@@ -32,17 +32,18 @@
 	</servlet-mapping>
 
 	
-	<!-- 한글처리 필터 설정 -->
+	<!-- 한글처리 필터 설정 --> <!-- 전에는 EUC-KR로 되있었는데 왜 -->
   <filter>
    <filter-name>encodingFilter</filter-name>
    <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
    <init-param>
     <param-name>encoding</param-name>
-    <param-value>EUC-KR</param-value>
+    <param-value>UTF-8</param-value>
    </init-param>
   </filter>
   <filter-mapping>
     <filter-name>encodingFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+  
 </web-app>

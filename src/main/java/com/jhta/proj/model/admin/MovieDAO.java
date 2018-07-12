@@ -25,4 +25,19 @@ public class MovieDAO {
 		return sessionTemplate.selectList("adminMapper.selectDayMovieList",vo);
 		
 	}
+	
+	public Object insertMovie(MovieVO vo) {
+
+		return sessionTemplate.insert("adminMapper.movieInsert", vo);
+	}
+	
+	public Object deleteMovie(MovieVO vo) {
+
+		return sessionTemplate.delete("adminMapper.movieDelete", vo);
+	}
+	
+	public Object detailMovie(MovieVO vo) {
+
+		return sessionTemplate.selectOne("adminMapper.movieDetail", vo);
+	}
 }
