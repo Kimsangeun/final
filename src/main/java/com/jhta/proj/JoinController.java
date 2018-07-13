@@ -26,7 +26,7 @@ public class JoinController {
 		
 		return "home";
 	}
-	//ㅁㄴㅇㄹ
+	
 	@RequestMapping("joinMember")
 	public String joinMember(MemberVO vo, Model model) {
 		

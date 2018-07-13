@@ -1,13 +1,51 @@
 package com.jhta.proj.model;
 
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 import org.apache.ibatis.type.Alias;
 
 @Alias("reserVo")
 public class ReserVO {
 	
-	String id, seatNum; //À¯Àú¾ÆÀÌµð, ÁÂ¼®¹øÈ£
-	int rId, cash, card, sId, mId; //¿¹¾à¹øÈ£, Çö±Ý, Ä«µå, °ü, ¿µÈ­¹øÈ£
+	String id, seatNum, title ; //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½, ï¿½Â¼ï¿½ï¿½ï¿½È£
+	int rId, cash, card, sId, mId, cnt, scNum; //ï¿½ï¿½ï¿½ï¿½ï¿½È£, ï¿½ï¿½ï¿½ï¿½, Ä«ï¿½ï¿½, ï¿½ï¿½, ï¿½ï¿½È­ï¿½ï¿½È£
+	Date mstart;
 	
+	
+	
+	
+	public int getScNum() {
+		return scNum;
+	}
+	public void setScNum(int scNum) {
+		this.scNum = scNum;
+	}
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public Date getMstart() {
+		return mstart;
+	}
+	public void setMstart(Date mstart) {
+		SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		try {
+			this.mstart = time.parse(time.format(mstart));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	public String getId() {
 		return id;
 	}
@@ -50,5 +88,13 @@ public class ReserVO {
 	public void setmId(int mId) {
 		this.mId = mId;
 	}
+	@Override
+	public String toString() {
+		return "ReserVO [id=" + id + ", seatNum=" + seatNum + ", title=" + title + ", rId=" + rId + ", cash=" + cash
+				+ ", card=" + card + ", sId=" + sId + ", mId=" + mId + ", cnt=" + cnt + ", scNum=" + scNum + ", mstart="
+				+ mstart + "]";
+	}
+	
+	
 	
 }
