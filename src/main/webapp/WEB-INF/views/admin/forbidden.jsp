@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-사용 권한이 없습니다.
+관리자계정으로 로그인하세요
 </body>
 </html>
