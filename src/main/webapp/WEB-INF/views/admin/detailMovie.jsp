@@ -47,7 +47,8 @@
 		
 		<tr>
 			<td>포스터</td>
-			<td>${data.poster }</td>
+			<td><img src="${pageContext.request.contextPath}\resources\movposter/${data.poster}" /></td>
+			<%-- <td><img src="${data.realpath }movposter\tonight.png"></td> --%>
 		</tr>
 		<tr>
 			<td>스틸컷1</td>

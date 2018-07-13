@@ -143,8 +143,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="movieDelete" parameterType="movieVo">
         delete from movie where mid = #{mid}
     </select>
-	 
+	<!--  -->
 	
+	<!-- 회원 -->
+	
+	<select id="memList" resultType="memVo">
+		 select * from member
+	</select>
+	
+	<!--  -->
+	
+	<!-- 예매 리스트 -->
+	
+	<select id="resvList" resultType="resvVo">
+		  select reser.*,movie.title,screeninfo.scNum,screeninfo.mstart 
+		  from reser,movie,screeninfo 
+		  where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid
+	</select>
+	
+	<!--  -->
 	
 	
 	

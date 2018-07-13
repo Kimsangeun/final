@@ -1,16 +1,22 @@
 package com.jhta.proj.model.admin;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.apache.ibatis.type.Alias;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 @Alias("movieVo")//as
 public class MovieVO {
 	Integer mid,runtime,rating;
-	String title,actor,director,nation,genre,plot,poster,steelcut,grade;
+	String title,actor,director,nation,genre,plot,poster,steelcut,grade
+	,realpath;
 	MultipartFile poster1,steelcut1,steelcut2;
+	
+	ArrayList<MultipartFile> list;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date release;
@@ -87,7 +93,7 @@ public class MovieVO {
 	}
 	public void setPoster1(MultipartFile poster1) {
 		this.poster1 = poster1;
-		this.poster = poster1.getOriginalFilename();
+		//this.poster = poster1.getOriginalFilename();
 	}
 	public MultipartFile getSteelcut1() {
 		return steelcut1;
@@ -101,7 +107,7 @@ public class MovieVO {
 	}
 	public void setSteelcut2(MultipartFile steelcut2) {
 		this.steelcut2 = steelcut2;
-		this.steelcut = steelcut1.getOriginalFilename()+"|"+steelcut2.getOriginalFilename();
+		//this.steelcut = steelcut1.getOriginalFilename()+"|"+steelcut2.getOriginalFilename();
 	}
 	public Date getRelease() {
 		return release;
@@ -109,13 +115,46 @@ public class MovieVO {
 	public void setRelease(Date release) {
 		this.release = release;
 	}
+	public ArrayList<MultipartFile> getList() {
+		return list;
+	}
+	public void setList(ArrayList<MultipartFile> list) {
+		this.list = list;
+	}
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	public void setSteelcut(String steelcut) {
+		this.steelcut = steelcut;
+	}
+	public void setPosterName(String poster) {
+		this.poster = poster;
+	}
+	public void setSteelcut1Name(String steelcut) {
+		
+		this.steelcut = steelcut;
+	}
+	public void setSteelcut2Name(String steelcut) {
+		this.steelcut += "|"+steelcut;
+	}
+	public String getRealpath() {
+		return realpath;
+	}
+	public void setRealpath(String realpath) {
+		this.realpath = realpath;
+	}
 	@Override
 	public String toString() {
 		return "MovieVO [mid=" + mid + ", runtime=" + runtime + ", rating=" + rating + ", title=" + title + ", actor="
 				+ actor + ", director=" + director + ", nation=" + nation + ", genre=" + genre + ", plot=" + plot
-				+ ", poster1=" + poster1 + ", steelcut=" + steelcut + ", grade=" + grade + ", poster=" + poster
-				+ ", steelcut1=" + steelcut1 + ", steelcut2=" + steelcut2 + ", release=" + release + "]";
+				+ ", poster=" + poster + ", steelcut=" + steelcut + ", grade=" + grade + ", poster1=" + poster1
+				+ ", steelcut1=" + steelcut1 + ", steelcut2=" + steelcut2 + ", list=" + list + ", release=" + release
+				+ "]";
 	}
+	
+	
+	
+	
 	
 	
 	
