@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.jhta.proj.model.admin.MovieDAO;
 
 /**
  * Handles requests for the application home page.
@@ -36,6 +40,18 @@ public class HomeController {
 		return "home";
 	}*/
 	
+	@Resource
+	MovieDAO movieDao;
+	
+	@ModelAttribute("mainpagemov")
+	public Object movie() {
+		
+		Object res = movieDao.list();
+		
+		
+		
+		return res;
+	}
 	
 	@ModelAttribute("top")
 	public ArrayList top() {

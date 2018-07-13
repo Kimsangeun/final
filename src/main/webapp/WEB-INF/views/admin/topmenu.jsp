@@ -28,7 +28,7 @@ margin-left: 20px;
 </div>
 
 <div class="S_side">
-<a href="account">정산</a>
+<a href="settle">정산</a>
 </div>
 
 

@@ -91,4 +91,16 @@ public class ReserController {
 		model.addAttribute("main", mm);
 		return "home";
 	}
+	
+	@RequestMapping("/forbidden")
+	public Object cine4(Model model) {
+		
+		model.addAttribute("menu","reservation");
+		
+		String mm = "forbidden";
+		
+		
+		model.addAttribute("main", mm);
+		return "home";
+	}
 }
