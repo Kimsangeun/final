@@ -28,7 +28,7 @@ margin-left: 10px;
 			<div id="S_log">pw</div>
 			<div id="S_log"><input type="text" name="pw"></div>
 			<div id="S_log"><input type="submit" value="로그인"></div>
-			<div><a href="">회원가입</a></div>
+			<div><a href="/proj/joinForm">회원가입</a></div>
 		</form>
 		</c:when>
 		<c:otherwise>
@@ -37,7 +37,7 @@ margin-left: 10px;
 					<div><a href="/proj/admin/time">관리자페이지</a></div>
 				</c:when>
 				<c:otherwise>
-					<div><a href="/proj/MyPage">${mem.id }(${mem.name })님</a></div>
+					<div><a href="/proj/mypage/reser">${mem.id }(${mem.name })님</a></div>
 				</c:otherwise>
 			</c:choose>
 			<div><a href="/proj/logOut">로그아웃</a></div>

@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-제노사이드
+	<div ><a href="/proj/mypage/memInfo">회원정보</a></div>
+	<div ><a href="/proj/mypage/reser">예매내역</a></div>
+	<div ><a href="/proj/mypage/qna">1:1문의</a></div>
 </body>
 </html>

@@ -7,6 +7,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-제노사이드
+	<script>
+		alert('${msg}');
+		location.href="${url}";
+	</script>
 </body>
 </html>

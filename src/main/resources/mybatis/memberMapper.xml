@@ -16,5 +16,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member (id, pw, name, email, phone, birth, out)
 		values (#{id}, #{pw}, #{name}, #{email}, #{phone}, #{birth}, 0)
 	
-	</insert><!--  ㅁㅁ-->
+	</insert>
+	
+	<select id="reser" parameterType="memberVo" resultType="reserVo">
+		select * from reser, movie, screeninfo 
+		where reser.mid = movie.mid 
+		and reser.id = #{id} 
+		and reser.sid = screeninfo.sid
+	</select>
+	
+	<delete id="cancle" parameterType="reserVo">
+		delete from reser where rid=#{rId}
+	</delete>
+	
+	<select id="info" parameterType="memberVo" resultType="memberVo">
+		select * from member where id = #{id}
+	</select>
+	
+	
 </mapper>

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-제노사이드
+	1:1문의
 </body>
 </html>
