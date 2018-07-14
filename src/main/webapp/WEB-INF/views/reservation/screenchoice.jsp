@@ -43,18 +43,22 @@
 	}
 	
 	function chksubmit(){
-		if(cnt != val){
-			alert('틀린데?')
-		}
-		else{
+		if(cnt == val){
 			alert('맞네 넘어간다.')
 			$('#ryu1').html(cnt);
 			$('#ryu2').html(seats);
 			document.seatfrm.submit();
+			var ss = '${rvo.setSeatNum('+seats+')}'
+			var ss = '${rvo.setCnt('+cnt+')}'
+		}
+		else{
+			alert('틀린데?')
 		}
 	}
 	
 </script>
+
+${rvo.sId }
 
 <c:set var="rr" value="<div id='ryu1'> </div>"/>
 <form name="seatfrm" action="/proj/reservation/payment" method="post">

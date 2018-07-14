@@ -8,7 +8,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="reserVo">
 		select * from reser
 	</select>
-
 	<insert id="insert" parameterType="reserVo">
 		insert into reser (id, rid, cash, card, sid, mid, cnt, seatnum) 
 		values(#{id}, #{rId}, #{cash}, #{card}, #{sId}, #{mId}, #{cnt}, #{seatNum})
@@ -17,5 +16,4 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detail" parameterType="reserVo" resultType="reserVo">
 		select * from reser where rid=#{rid}
 	</select>
-
 </mapper>

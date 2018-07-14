@@ -51,9 +51,7 @@ public class CenterController {
 			case "insert":
 				res = "alert";
 				break;
-		
 		}
-		
 		return res;
 	}
 	*/
@@ -85,12 +83,7 @@ public class CenterController {
 
 		}
 		
-
 		return res;
 	}
-	
-	
-	
-	
 	
 }

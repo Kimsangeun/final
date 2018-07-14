@@ -2,8 +2,9 @@ package com.jhta.proj.model.admin;
 
 import org.apache.ibatis.type.Alias;
 
-@Alias("settleVo")//tes
+@Alias("settleVo")
 public class SettleVO {
+
 	String type;
 
 	public String getType() {
@@ -18,7 +19,6 @@ public class SettleVO {
 	public String toString() {
 		return "SettleVO [type=" + type + "]";
 	}
-	
 	
 	
 }
