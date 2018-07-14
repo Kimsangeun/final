@@ -9,42 +9,35 @@ import org.apache.ibatis.type.Alias;
 @Alias("reserVo")
 public class ReserVO {
 	
-	String id, seatNum, title ; //�������̵�, �¼���ȣ
-	int rId, cash, card, sId, mId, cnt, scNum; //�����ȣ, ����, ī��, ��, ��ȭ��ȣ
-	Date mstart;
+	String id, seatNum, accNum,coc; //�������̵�, �¼���ȣ
+	int rId, cost, sId, mId, cnt; //�����ȣ, ����, ī��, ��, ��ȭ��ȣ	
+	
+
 	
 	
-	
-	
-	public int getScNum() {
-		return scNum;
+	public String getAccNum() {
+		return accNum;
 	}
-	public void setScNum(int scNum) {
-		this.scNum = scNum;
+	public void setAccNum(String accNum) {
+		this.accNum = accNum;
+	}
+	public String getCoc() {
+		return coc;
+	}
+	public void setCoc(String coc) {
+		this.coc = coc;
+	}
+	public int getCost() {
+		return cost;
+	}
+	public void setCost(int cost) {
+		this.cost = cost;
 	}
 	public int getCnt() {
 		return cnt;
 	}
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public Date getMstart() {
-		return mstart;
-	}
-	public void setMstart(Date mstart) {
-		SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		try {
-			this.mstart = time.parse(time.format(mstart));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 	}
 	public String getId() {
 		return id;
@@ -64,18 +57,6 @@ public class ReserVO {
 	public void setrId(int rId) {
 		this.rId = rId;
 	}
-	public int getCash() {
-		return cash;
-	}
-	public void setCash(int cash) {
-		this.cash = cash;
-	}
-	public int getCard() {
-		return card;
-	}
-	public void setCard(int card) {
-		this.card = card;
-	}
 	public int getsId() {
 		return sId;
 	}
@@ -90,9 +71,8 @@ public class ReserVO {
 	}
 	@Override
 	public String toString() {
-		return "ReserVO [id=" + id + ", seatNum=" + seatNum + ", title=" + title + ", rId=" + rId + ", cash=" + cash
-				+ ", card=" + card + ", sId=" + sId + ", mId=" + mId + ", cnt=" + cnt + ", scNum=" + scNum + ", mstart="
-				+ mstart + "]";
+		return "ReserVO [id=" + id + ", seatNum=" + seatNum + ", accNum=" + accNum + ", coc=" + coc + ", rId=" + rId
+				+ ", cost=" + cost + ", sId=" + sId + ", mId=" + mId + ", cnt=" + cnt + "]";
 	}
 	
 	

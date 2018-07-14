@@ -14,5 +14,13 @@ public class ReserDAO { //���� ����
 	public Object list(ReserVO vo) {
 		return sessionTemplate.selectList("reser.list", vo);
 	}
-	
+
+	public Object insert(ReserVO vo) {
+		return sessionTemplate.insert("reser.insert", vo);
+	}
+
+	public Object detail(ReserVO vo) {
+		return sessionTemplate.selectOne("reser.detail", vo);
+	}
+
 }
