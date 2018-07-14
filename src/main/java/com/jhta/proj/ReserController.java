@@ -116,7 +116,6 @@ public class ReserController {
 	}
 	
 	
-	
 	@RequestMapping("/payment")
 	public Object cine4(Model model, HttpSession session, ReserVO rvo){
 
@@ -196,5 +195,16 @@ public class ReserController {
 	}
 
 	
-	
+
+	@RequestMapping("/forbidden")
+	public Object cine4(Model model) {
+		
+		model.addAttribute("menu","reservation");
+		
+		String mm = "forbidden";
+		
+		
+		model.addAttribute("main", mm);
+		return "home";
+	}
 }

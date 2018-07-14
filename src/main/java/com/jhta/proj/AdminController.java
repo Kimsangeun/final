@@ -112,7 +112,7 @@ public class AdminController {
 	}
 
 	@ModelAttribute("data")
-	Object res(@PathVariable String service,MovieVO mvo,TimeTableVO tvo
+	Object res(@PathVariable String service,MovieVO mvo,TimeTableVO tvo,SettleVO svo
 			,Model model,HttpServletRequest request) {
 		System.out.println("데이타만");
 		Object res = null;
@@ -189,6 +189,11 @@ public class AdminController {
 
 		case "deleteMovie":
 			System.out.println(mvo);
+			MovieVO deleteFileVO = (MovieVO)movieDao.detailMovie(mvo);
+			System.out.println(deleteFileVO);
+			deleteFile(deleteFileVO.getPoster(),request,"poster");
+			deleteFile(deleteFileVO.getSteelcut().split("[|]")[0],request,"cut");
+			deleteFile(deleteFileVO.getSteelcut().split("[|]")[1],request,"cut");
 			movieDao.deleteMovie(mvo);
 			model.addAttribute("url", "movie");
 			model.addAttribute("msg", "삭제완료");
@@ -216,10 +221,15 @@ public class AdminController {
 			System.out.println(res);
 			break;
 
-		case "account":
+		case "settle":
 			System.out.println("정산");
-			res = movieDao.detailMovie(mvo);
-			System.out.println(res);
+			System.out.println(svo);
+			//if()
+			if(svo.getType().equals("year"))
+				res = adminDao.yearList(svo);
+			if(svo.getType().equals("month"))
+				res = adminDao.monthList(svo);
+			/**/
 			break;
 
 		}
@@ -266,5 +276,28 @@ public class AdminController {
 
 		return changeName;
 	}
+	
+	//파일삭제
+	void deleteFile(String filename,HttpServletRequest request,String root) {
+
+		System.out.println(filename);
+		String folder = root.equals("poster") ? "movposter" : "movcut";
+		String filePath = request.getRealPath("resources/")+folder+"/"+filename;
+		File file = new File(filePath);
+		
+	    if( file.exists() ){
+	        if(file.delete()){
+	            System.out.println("파일삭제 성공");
+	        }else{
+	            System.out.println("파일삭제 실패");
+	        }
+	    }else{
+	        System.out.println("파일이 존재하지 않습니다.");
+	    }
+	    
+	}
+	
+
+
 
 }

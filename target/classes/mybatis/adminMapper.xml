@@ -163,6 +163,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--  -->
 	
+	<!-- 정산 -->
+	<select id="yearList" parameterType="settleVo" resultType="settleVo">
+		select reser.* from reser,screeninfo 
+		where reser.sid = screeninfo.sid 
+		and reser.STATUS = 0 
+		and to_char(mstart,'YYYY')=to_char(to_date(#{dd}),'YYYY')
+	</select>
+	
+	<select id="monthList" parameterType="settleVo" resultType="settleVo">
+		select reser.* from reser,screeninfo 
+		where reser.sid = screeninfo.sid 
+		and reser.STATUS = 0 
+		and to_char(mstart,'YYYY')=to_char(to_date('2018-01-01'),'YYYY')
+		and to_char(mstart,'MM')=#{num}
+	</select>
+	<!--  -->
+	
 	
 	
 </mapper>

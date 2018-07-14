@@ -20,6 +20,17 @@ public class AdminDAO {
 		return sessionTemplate.selectList("adminMapper.resvList");
 		
 	}
+
+	public Object yearList(SettleVO vo) {
+		return sessionTemplate.selectList("adminMapper.yearList",vo);
+		
+	}
+	
+
+	public Object monthList(SettleVO vo) {
+		return sessionTemplate.selectList("adminMapper.monthList",vo);
+		
+	}
 	
 	
 }
