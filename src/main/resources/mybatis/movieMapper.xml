@@ -8,5 +8,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="movVo">
 		select * from movie order by title
 	</select>
-
+	
+ 	<select id="dateList" resultType="screenInfoVo">
+		select * from screeninfo
+		
+		<!-- <include refid="whereDate"></include> -->
+	</select> 
+	
+	<select id="findInfo" resultType="screenInfoVo">
+		select * from screeninfo where sid=#{sId}
+	</select>
+<!-- 	<sql id="whereDate">
+		<where>
+			#{}
+		</where>
+	</sql> -->
 </mapper>
