@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<td>예약자</td>
-				<td>${rvo.id } 님</td>
+				<td>${mem.id } 님</td>
 			</tr>
 			<tr>
 				<td>인원수</td>

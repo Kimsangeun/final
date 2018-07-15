@@ -1,8 +1,9 @@
 package com.jhta.proj;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.HashMap;
 
-import javax.activation.FileDataSource;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,15 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.jhta.proj.model.admin.*;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLEncoder;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import com.jhta.proj.model.admin.AdminDAO;
+import com.jhta.proj.model.admin.MovieDAO;
+import com.jhta.proj.model.admin.MovieVO;
+import com.jhta.proj.model.admin.ScreenDAO;
+import com.jhta.proj.model.admin.SettleVO;
+import com.jhta.proj.model.admin.TimeTableDAO;
+import com.jhta.proj.model.admin.TimeTableVO;
 
 
 
@@ -225,10 +224,16 @@ public class AdminController {
 			System.out.println("정산");
 			System.out.println(svo);
 			//if()
-			if(svo.getType().equals("year"))
+			if(svo.getType()!=null) {
+				System.out.println("띠용");
 				res = adminDao.yearList(svo);
-			if(svo.getType().equals("month"))
-				res = adminDao.monthList(svo);
+				System.out.println(res);
+			}
+				
+			/*if(svo.getType().equals("month"))
+				System.out.println("디용");
+				res = adminDao.monthList(svo);*/
+			//	System.out.println(res);
 			/**/
 			break;
 

@@ -19,7 +19,6 @@
 <div>
 <div style="width:300px;float: left">
 <form action="/proj/reservation/payend" method="post">
-<input type="hidden" value="${rvo }" />
 
 <input type="radio" name="paytype" value="csh" id="cash" onclick="div_OnOff(this.value,'cashview')">
 계좌이체
@@ -74,7 +73,9 @@
 <input type="password" name="cardpw" maxlength="2" style="width: 15px">
 **
 <br>
-유효기간 각 카드별 문의
+유효기간 
+<input type="text" name="cardnum4" maxlength="2" style="width: 30px">월 
+<input type="text" name="cardnum4" maxlength="2" style="width: 30px">년
 <br>
 생년월일(6자리)
 <input type="text" name="birth" maxlength="6" style="width: 45px">

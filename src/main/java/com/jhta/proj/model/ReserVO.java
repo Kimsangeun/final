@@ -65,10 +65,10 @@ public class ReserVO {
 	public int getCnt() {
 		return cnt;
 	}
+
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
-	
 	@Override
 	public String toString() {
 		return "ReserVO [id=" + id + ", seatNum=" + seatNum + ", accNum=" + accNum + ", coc=" + coc + ", rId=" + rId
