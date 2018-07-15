@@ -1,5 +1,7 @@
 package com.jhta.proj;
 
+import java.util.ArrayList;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -55,7 +57,7 @@ public class ReserController {
 		Object res = null;
 
 		res = mdao.list(vo);
-
+		System.out.println(res);
 		return res;
 	}
 
@@ -65,6 +67,27 @@ public class ReserController {
 
 		res = sdao.datelist(vo);
 		// System.out.println(res);
+		return res;
+	}
+
+	@ModelAttribute("midlist")
+	public ArrayList<MovVO> midlist(Model model, ScreenInfoVO vo, MovVO mvo) {
+		ArrayList<ScreenInfoVO> scrArr = null;
+		ArrayList<MovVO> movArr = null;
+
+		ArrayList<MovVO> res = new ArrayList<>();
+
+		scrArr = (ArrayList) mdao.midList(vo);
+		movArr = (ArrayList) mdao.list(mvo);
+
+		for (MovVO movVo : movArr) {
+			for (ScreenInfoVO scrVo : scrArr) {
+				if (scrVo.getmId() == movVo.getmId()) {
+					res.add(movVo);
+				}
+			}
+		}
+		System.out.println(res);
 		return res;
 	}
 
@@ -101,11 +124,10 @@ public class ReserController {
 		return "home";
 	}
 
-	@RequestMapping("/screenchoice")
+	@RequestMapping(value = "/screenchoice")
 	public Object cine6(Model model, @RequestParam Integer sid, HttpSession session) {
 		model.addAttribute("menu", "reservation");
 		// 영화, 날짜, 시간, 등등?
-
 
 		ScreenInfoVO svo = new ScreenInfoVO();
 		svo.setsId(sid);
@@ -123,18 +145,16 @@ public class ReserController {
 		return "home";
 	}
 
-	@RequestMapping("/payment")
-	public Object cine24(Model model, HttpServletRequest request) {
+	@RequestMapping(value="/payment", method=RequestMethod.POST)
+	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt) {
 		System.out.println("병수1");
 		model.addAttribute("menu", "reservation");
 
-		
-//		rvo.setCnt(request.getParameter("cnt"));
-//		rvo.setSeatNum(request.getParameter("seatnum"));
-		
-		
-		rvo.setCnt(2);
-		rvo.setSeatNum("a2,a3");
+		// rvo.setCnt(request.getParameter("cnt"));
+		// rvo.setSeatNum(request.getParameter("seatnum"));
+
+		rvo.setCnt(cnt);
+		rvo.setSeatNum(seatnum);
 		System.out.println("병수2");
 
 		System.out.println("/payment::" + rvo);

@@ -9,32 +9,41 @@
 	border: 1px solid red;
 	float: left;
 }
+
+.royalseat {
+	width: 20px;
+	height: 20px;
+	border: 1px solid green;
+	float: left;
+}
 </style>
 
 <script type="text/javascript">
 
-		var cnt = 0;
-		var seats = "";
+	var cnt = 0;
+	var seats = "";
 
-		var val = 0;
+	var val = 0;
 
-		document.getElementById("maxcnt").onchange
-		function chkseat(ii) {
-			var sel = document.getElementById("maxcnt");
-			val = sel.options[sel.selectedIndex].value;
-			if (val <= cnt) {
-				alert('선택한 좌석이 인원수보다 많습니다.' + cnt + "/" + val)
-				return;
-			}
-			seats += ii + ",";
+	document.getElementById("maxcnt").onchange
+	function chkseat(ii) {
+		var sel = document.getElementById("maxcnt");
+		val = sel.options[sel.selectedIndex].value;
 
-			var seat = document.getElementById("R_seat" + ii);
-			cnt++;
-			alert("val:" + val + "cnt:" + cnt + "//seats:" + seats);
 
-			$('#seatnums').text(seats);
-
+		if (val <= cnt) {
+			alert('선택한 좌석이 인원수보다 많습니다.' + cnt + "/" + val)
+			return;
 		}
+		seats += ii + ",";
+
+		var seat = document.getElementById("R_seat" + ii);
+		cnt++;
+		alert("val:" + val + "cnt:" + cnt + "//seats:" + seats);
+
+		$('#seatnums').text(seats);
+
+	}
 
 
 	function selchg() {
@@ -50,23 +59,22 @@
 			alert('맞네 넘어간다.')
 			$('#ryu1').html(cnt);
 			$('#ryu2').html(seats);
-			
-/* 			document.seatfrm.getElementById("cnt").value = cnt;
-			document.seatfrm.getElementById("seatnum").value = cnt; */
-			
-			
-/* 			$("#cnt").value = cnt;
-			$("#seatnum").value = cnt; */
-/* 			document.getElementById("seatnum").value = seats;
- */
-			document.seatfrm.submit();
-<<<<<<< HEAD
-		} else {
-=======
 
-		}
-		else{
->>>>>>> branch 'master' of https://github.com/Kimsangeun/final.git
+			/* 			document.seatfrm.getElementById("cnt").value = cnt;
+						document.seatfrm.getElementById("seatnum").value = cnt; */
+
+
+			/* 			$("#cnt").value = cnt;
+						$("#seatnum").value = cnt; */
+			/* 			document.getElementById("seatnum").value = seats;
+			 */
+
+			document.seatfrm.cnt.value = cnt;
+			document.seatfrm.seatnum.value = seats;
+
+
+			document.seatfrm.submit();
+		} else {
 			alert('틀린데?')
 		}
 	}
@@ -75,7 +83,7 @@
 ${rvo.sId }
 
 <c:set var="rr" value="<div id='ryu1'> </div>" />
-<form name="seatfrm" id="seatfrm" action="/proj/reservation/payment" method="post">
+<form name="seatfrm" action="/proj/reservation/payment" method="post">
 	<div>
 		<select id="maxcnt" name="maxcnt" onchange="selchg()">
 			<c:forEach begin="0" end="9" var="ii">
@@ -86,7 +94,8 @@ ${rvo.sId }
 	</div>
 	<div>
 		<c:forEach begin="1" end="40" var="ii">
-			<div class="seat" id="R_seat${ii }" onclick="chkseat(${ii})">${ii }</div>
+			<div class="<c:if test='${ii<10 }'>royal</c:if>seat"
+				id="R_seat${ii }" onclick="chkseat(${ii})">${ii }</div>
 			<c:if test="${ii%10==0 }">
 				<br>
 			</c:if>
@@ -96,8 +105,6 @@ ${rvo.sId }
 
 	<!-- 좌석 몇번인지 보여주는 임시창 -->
 	<div id="seatnums"></div>
-	<input type="hidden" name="seatnum" id="seatnum" value="&{seats}">
-		<input type="hidden" name="cnt" id="cnt" value="&{cnt}">
-
+	<input type="hidden" name="seatnum" /> <input type="hidden" name="cnt" />
 	<input type="button" value="결제하러갑시다" onclick="chksubmit()" />
 </form>
