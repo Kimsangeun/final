@@ -9,12 +9,10 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.jhta.proj.model.CinemaVO;
 import com.jhta.proj.model.MovDAO;
 import com.jhta.proj.model.MovVO;
 import com.jhta.proj.model.ReserDAO;
@@ -56,8 +54,6 @@ public class ReserController {
 		
 		Object res=null;
 		
-		
-		
 		return res;
 	}
 
@@ -78,6 +74,29 @@ public class ReserController {
 		//System.out.println(res);
 		return res;
 	}
+	
+	
+	@ModelAttribute("midlist")
+	public ArrayList<MovVO> midlist(Model model, ScreenInfoVO vo, MovVO mvo) {
+		ArrayList<ScreenInfoVO> scrArr = null;
+		ArrayList<MovVO> movArr = null;
+		
+		ArrayList<MovVO> res = new ArrayList<>();
+		
+		scrArr = (ArrayList)mdao.midList(vo);
+		movArr = (ArrayList)mdao.list(mvo);
+		
+		for (MovVO movVo : movArr) {
+			for (ScreenInfoVO scrVo : scrArr) {
+				if(scrVo.getmId()==movVo.getmId()) {
+					res.add(movVo);
+				}
+			}
+		}
+			System.out.println(res);
+		return res;
+	}
+	
 	
 	//@RequestMapping("/")
 /*	public Object cine1(Model model, ReserVO vo) {
@@ -100,7 +119,6 @@ public class ReserController {
 		
 		return "home";
 	}
-	
 	
 	
 	

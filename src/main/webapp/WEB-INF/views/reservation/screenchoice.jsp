@@ -48,8 +48,7 @@
 			$('#ryu1').html(cnt);
 			$('#ryu2').html(seats);
 			document.seatfrm.submit();
-			var ss = '${rvo.setSeatNum('+seats+')}'
-			var ss = '${rvo.setCnt('+cnt+')}'
+
 		}
 		else{
 			alert('틀린데?')
