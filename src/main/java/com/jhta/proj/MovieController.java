@@ -14,6 +14,7 @@ import com.jhta.proj.model.CinemaVO;
 import com.jhta.proj.model.MovDAO;
 import com.jhta.proj.model.MovVO;
 import com.jhta.proj.model.ReserVO;
+import com.jhta.proj.model.admin.MovieDAO;
 import com.jhta.proj.model.admin.TimeTableVO;
 
 @Controller
@@ -22,6 +23,9 @@ public class MovieController {
 
 	@Resource
 	MovDAO mdao;
+	
+	@Resource
+	MovieDAO movieDao;
 	
 	@ModelAttribute("top")
 	public ArrayList top() {
@@ -37,9 +41,24 @@ public class MovieController {
 	
 	
 	@ModelAttribute("moviedata")
-	public Object rese(Model model, MovVO vo) {
+	public Object rese(Model model, MovVO vo,@PathVariable String service) {
 		Object res=null;
 		
+		switch (service) {
+		case "now":
+			
+			break;
+		case "comming":
+					
+			break;
+					
+		case "boxoffice":
+			
+			break;
+
+		default:
+			break;
+		}
 		res = mdao.list(vo);
 		
 		return res;

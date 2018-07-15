@@ -165,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 정산 -->
 	<select id="yearList" parameterType="settleVo" resultType="settleVo">
-		select reser.*,screeninfo.mstart from reser,screeninfo 
+		select reser.*,screeninfo.mstart,to_char(screeninfo.mstart,'YYYY') as mtitle from reser,screeninfo 
 		where reser.sid = screeninfo.sid
 		and to_char(mstart,'YYYY')=#{num}
 	</select>
