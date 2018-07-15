@@ -225,10 +225,16 @@ public class AdminController {
 			System.out.println("정산");
 			System.out.println(svo);
 			//if()
-			if(svo.getType().equals("year"))
+			if(svo.getType()!=null) {
+				System.out.println("띠용");
 				res = adminDao.yearList(svo);
-			if(svo.getType().equals("month"))
-				res = adminDao.monthList(svo);
+				System.out.println(res);
+			}
+				
+			/*if(svo.getType().equals("month"))
+				System.out.println("디용");
+				res = adminDao.monthList(svo);*/
+			//	System.out.println(res);
 			/**/
 			break;
 
