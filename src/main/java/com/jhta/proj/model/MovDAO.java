@@ -19,4 +19,8 @@ public class MovDAO {
 		return sessionTemplate.selectList("mov.midList", vo);
 	}
 	
+	public Object dateTitleList(ScreenInfoVO vo) {
+		return sessionTemplate.selectList("mov.dateTitleList", vo);
+	}
+	
 }

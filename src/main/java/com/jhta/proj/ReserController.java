@@ -1,4 +1,8 @@
 package com.jhta.proj;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +20,7 @@ import com.jhta.proj.model.ReserDAO;
 import com.jhta.proj.model.ReserVO;
 import com.jhta.proj.model.ScreenInfoDAO;
 import com.jhta.proj.model.ScreenInfoVO;
+
 @Controller
 @RequestMapping("reservation")
 public class ReserController {
@@ -29,30 +34,36 @@ public class ReserController {
     @Resource
     ScreenInfoDAO sdao;
     
-//  ReserVO rvo;
     
-    
-/*  @ModelAttribute("top")
-    public ArrayList top() {
-        
-        ArrayList<String> res = new ArrayList<String>();
-        
-        res.add("info");
-        res.add("reservation");
-        res.add("movie"); 
-        res.add("screen"); 
-        return res;
-    }*/
+
+    @ModelAttribute("datelist") //현재 날짜로부터 2주
+    public Object datelist(Model model) {
+    	
+    	ArrayList datearr = new ArrayList<>();
+    	
+    	SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd");
+    	
+    	Date now = new Date();
+		
+		for (int i = 0; i < 14; i++) {
+			Date dlist = new Date(now.getYear(), now.getMonth(), now.getDate()+i);
+			datearr.add(sdfd.format(dlist));
+		}
+		 
+    	return datearr;
+    }
+     
     
     @ModelAttribute("reserdata")
     public Object rese(Model model, ReserVO vo) {
         
         Object res=null;
         
-        
+        res = rdao.list(vo);
         
         return res;
     }
+    
     @ModelAttribute("moviedata")
     public Object mov(Model model, MovVO vo) {
         Object res=null;
@@ -71,17 +82,6 @@ public class ReserController {
         return res;
     }
     
-    //@RequestMapping("/")
-/*  public Object cine1(Model model, ReserVO vo) {
-    
-        model.addAttribute("menu","reservation");
-    
-        String mm = "reser";
-        
-        model.addAttribute("main", mm);
-        return "home";
-    }
-    */
     @RequestMapping("/reser")
     public Object cine2(Model model) {
         model.addAttribute("menu","reservation");
@@ -94,19 +94,18 @@ public class ReserController {
     }
     
     
-    
-    
     @RequestMapping("/timetable")
-    public Object cine3(Model model) {
-        
+    public Object cine3(Model model, ScreenInfoVO svo) {
+        Object res = null;
         model.addAttribute("menu","reservation");
         
         String mm = "timetable";      
-        
+        res = mdao.dateTitleList(svo);
+        System.out.println(res);
         model.addAttribute("main", mm);
+        model.addAttribute("dateTitleList", res);
         return "home";
     }
-    
     
     @RequestMapping("/payment")
     public Object cine4(Model model, HttpSession session, ReserVO rvo){
@@ -119,6 +118,7 @@ public class ReserController {
         model.addAttribute("main", mm);
         return "home";
     }
+    
     @RequestMapping(value = "/payend", method = RequestMethod.POST)
     public Object cine5(Model model, HttpServletRequest request, ReserVO rvo) {
         System.out.println("포스트로 받았다.");
@@ -143,7 +143,6 @@ public class ReserController {
         String mm = "payend";
         
         rdao.insert(rvo);
-        
         
         model.addAttribute("rvo", rvo);
         model.addAttribute("main", mm);

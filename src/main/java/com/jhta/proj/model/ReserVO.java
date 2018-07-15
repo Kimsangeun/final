@@ -1,5 +1,6 @@
 package com.jhta.proj.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,8 +10,10 @@ import org.apache.ibatis.type.Alias;
 @Alias("reserVo")
 public class ReserVO {
 	
-	String id, seatNum, accNum,coc; //�������̵�, �¼���ȣ
-	int rId, cost, sId, mId, cnt; //�����ȣ, ����, ī��, ��, ��ȭ��ȣ	
+	String id, seatNum, accNum,coc;
+	int rId, cost, sId, mId, cnt; 
+		
+	
 	public String getId() {
 		return id;
 	}
@@ -65,6 +68,7 @@ public class ReserVO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
+	
 	@Override
 	public String toString() {
 		return "ReserVO [id=" + id + ", seatNum=" + seatNum + ", accNum=" + accNum + ", coc=" + coc + ", rId=" + rId

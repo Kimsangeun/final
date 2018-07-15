@@ -61,17 +61,15 @@ var midStr = mmmm.split(',');
 		document.getElementById("mid").value= mmid;
 		var now = new Date(); 
 		for(var j=0; j<midStr.length;j++){
-			alert("mid : "+midStr[j]+"mmid : "+mmid+(midStr[j]==mmid))
+		//	alert("mid : "+midStr[j]+"mmid : "+mmid+(midStr[j]==mmid))
 			
 		}
-		
+		/* 
 		for(var j=0; j<midStr.length;j++){
 			if(midStr[j] == mmid){
-				
-			}else{
-				
+				alert(dateStr[j])
 			}	
-		}
+		} */
 		for (var i = 0; i < 15; i++) {
 			var dates = new Date(now.getYear(), now.getMonth(), now.getDate()+i-1).getDate();
 		
@@ -155,7 +153,7 @@ var midStr = mmmm.split(',');
 
 		<hr>
 
- 		<c:forEach items="${midlist }" var="mm" varStatus="no">
+ 		<c:forEach items="${moviedata }" var="mm" varStatus="no">
  		<div id="S_mov"
 				onclick="Check1('${mm.title }', '${mm.image }', ${mm.mId })">
 			${mm.title }
