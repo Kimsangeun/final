@@ -65,6 +65,9 @@ public class ReserVO {
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
 	}
+	public void setCnt(String cnt) {
+		this.cnt = Integer.parseInt(cnt);
+	}
 	@Override
 	public String toString() {
 		return "ReserVO [id=" + id + ", seatNum=" + seatNum + ", accNum=" + accNum + ", coc=" + coc + ", rId=" + rId

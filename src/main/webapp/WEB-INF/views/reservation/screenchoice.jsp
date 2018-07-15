@@ -12,27 +12,30 @@
 </style>
 
 <script type="text/javascript">
-	var cnt = 0;
-	var val = 0;
-	var seats = "";
 
-	document.getElementById("maxcnt").onchange
-	function chkseat(ii) {
-		var sel = document.getElementById("maxcnt");
-		val = sel.options[sel.selectedIndex].value;
-		if (val <= cnt) {
-			alert('선택한 좌석이 인원수보다 많습니다.' + cnt + "/" + val)
-			return;
+		var cnt = 0;
+		var seats = "";
+
+		var val = 0;
+
+		document.getElementById("maxcnt").onchange
+		function chkseat(ii) {
+			var sel = document.getElementById("maxcnt");
+			val = sel.options[sel.selectedIndex].value;
+			if (val <= cnt) {
+				alert('선택한 좌석이 인원수보다 많습니다.' + cnt + "/" + val)
+				return;
+			}
+			seats += ii + ",";
+
+			var seat = document.getElementById("R_seat" + ii);
+			cnt++;
+			alert("val:" + val + "cnt:" + cnt + "//seats:" + seats);
+
+			$('#seatnums').text(seats);
+
 		}
-		seats += ii + ",";
 
-		var seat = document.getElementById("R_seat" + ii);
-		cnt++;
-		alert("val:" + val + "cnt:" + cnt + "//seats:" + seats);
-
-		$('#seatnums').text(seats);
-		
-	}
 
 	function selchg() {
 		seats = "";
@@ -41,27 +44,32 @@
 		$('#seatnums').text(seats);
 
 	}
-	
-	function chksubmit(){
-		if(cnt == val){
+
+	function chksubmit() {
+		if (cnt == val) {
 			alert('맞네 넘어간다.')
 			$('#ryu1').html(cnt);
 			$('#ryu2').html(seats);
+			
+/* 			document.seatfrm.getElementById("cnt").value = cnt;
+			document.seatfrm.getElementById("seatnum").value = cnt; */
+			
+			
+/* 			$("#cnt").value = cnt;
+			$("#seatnum").value = cnt; */
+/* 			document.getElementById("seatnum").value = seats;
+ */
 			document.seatfrm.submit();
-			var ss = '${rvo.setSeatNum('+seats+')}'
-			var ss = '${rvo.setCnt('+cnt+')}'
-		}
-		else{
+		} else {
 			alert('틀린데?')
 		}
 	}
-	
 </script>
 
 ${rvo.sId }
 
-<c:set var="rr" value="<div id='ryu1'> </div>"/>
-<form name="seatfrm" action="/proj/reservation/payment" method="post">
+<c:set var="rr" value="<div id='ryu1'> </div>" />
+<form name="seatfrm" id="seatfrm" action="/proj/reservation/payment" method="post">
 	<div>
 		<select id="maxcnt" name="maxcnt" onchange="selchg()">
 			<c:forEach begin="0" end="9" var="ii">
@@ -70,10 +78,9 @@ ${rvo.sId }
 		</select>명
 
 	</div>
-
 	<div>
 		<c:forEach begin="1" end="40" var="ii">
-			<div class="seat" id="R_seat${ii }" onclick="chkseat(${ii})" >${ii }</div>
+			<div class="seat" id="R_seat${ii }" onclick="chkseat(${ii})">${ii }</div>
 			<c:if test="${ii%10==0 }">
 				<br>
 			</c:if>
@@ -83,6 +90,8 @@ ${rvo.sId }
 
 	<!-- 좌석 몇번인지 보여주는 임시창 -->
 	<div id="seatnums"></div>
+	<input type="hidden" name="seatnum" id="seatnum" value="&{seats}">
+		<input type="hidden" name="cnt" id="cnt" value="&{cnt}">
 
-	<input type="button" value="결제하러갑시다" onclick="chksubmit()"/>
+	<input type="button" value="결제하러갑시다" onclick="chksubmit()" />
 </form>
