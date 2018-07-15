@@ -256,7 +256,7 @@ public class AdminController {
 
 			System.out.println(fileName+"::"+exp);
 			while(new File(filePath).exists()) {
-				System.out.println("파일명 중복됌");
+				System.out.println("파일명 중복됨");
 				changeName= fileName+"_"+i+"."+exp;
 				filePath = request.getRealPath("resources/")+folder+"/"+changeName;
 				i++;
