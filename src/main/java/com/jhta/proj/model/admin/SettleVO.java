@@ -10,10 +10,18 @@ public class SettleVO {
 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date mstart;
-	String type,id,cost,coc,accnum,mtitle,status,num;
+	String type,id,cost,coc,accnum,mtitle,status,num,cnt;
 	
 	
 	
+	public String getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
+	}
+
 	public Date getMstart() {
 		return mstart;
 	}

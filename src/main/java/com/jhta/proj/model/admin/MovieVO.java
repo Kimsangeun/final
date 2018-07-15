@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class MovieVO {
 	Integer mid,runtime,rating;
 	String title,actor,director,nation,genre,plot,poster,steelcut,grade
-	,realpath;
+	,realpath,bookingRate;//예매율
 	MultipartFile poster1,steelcut1,steelcut2;
 	
 	ArrayList<MultipartFile> list;
@@ -22,6 +22,12 @@ public class MovieVO {
 	Date release;
 	public Integer getMid() {
 		return mid;
+	}
+	public String getBookingRate() {
+		return bookingRate;
+	}
+	public void setBookingRate(String bookingRate) {
+		this.bookingRate = bookingRate;
 	}
 	public void setMid(Integer mid) {
 		this.mid = mid;
