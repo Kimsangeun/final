@@ -12,9 +12,13 @@ public class ScreenInfoVO {
 	Date mstart;
 	
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm");
+	SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
 	
 	public String getMstartStr() {
 		return sdf.format(mstart);
+	}
+	public String getMstartTimeStr() {
+		return sdft.format(mstart);
 	}
 	public int getScNum() {
 		return scNum;

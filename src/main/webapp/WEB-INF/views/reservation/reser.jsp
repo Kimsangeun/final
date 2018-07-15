@@ -14,10 +14,12 @@
 	src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 
 <c:set var="dateStr" value=" " />
+<c:set var="midStr" value=" " />
 <c:forEach items="${datedata }" var="dd" varStatus="no">
-
-	<c:set var="dateStr" value="${dateStr}${dd.mstartStr }" />
-
+	
+	<c:set var="dateStr" value="${dateStr}${dd.mstartStr } ${dd.sId }" />
+	<c:set var="midStr" value="${midStr}${dd.mId }," />
+	
 	<c:if test="${datedata.size() > no.index+1 }">
 		<c:set var="dateStr" value="${dateStr }," />
 	</c:if>
@@ -30,43 +32,26 @@
 var dddd = '${dateStr}';
 var dateStr = dddd.split(',');
 
-//alert(dateStr[0]);
-/* 	$(document).ready(function() {
-		$('.S_cho').find('#S_mov').each(function(i, e) {
-			var bb = "#bb" + i;
-			$(bb).toggle(function() {
-				alert(bb + "누름.");
+var mmmm = '${midStr}';
+var midStr = mmmm.split(',');
 
-				$(e).css("color", "yellow");
-			}, function() {
-				alert(bb + "또누름..");
-				$(e).css("color", "red");
-			});
-		})
-	}); */
-	
-//	var dateArr = [];
-	
 	$(document).ready(function(){
 		var now = new Date(); 
 		
 		for (var i = 0; i < 15; i++) {
-			var dddd = new Date(now.getYear(), now.getMonth(), now.getDate()+i-1).getDate();
+			var dates = new Date(now.getYear(), now.getMonth(), now.getDate()+i-1).getDate();
 		
-			$('#S_ddd'+i).attr('ddd',dddd);
+			$('#S_ddd'+i).attr('ddd',dates);
 			$('#S_ddd'+i).html($('#S_ddd'+i).attr('ddd'));
 		}
 	});
 	
 	
-   	function Check1(title,imgStr,mmid){
-		alert(mmid)
-		//alert(num);
-		$img = "<img src='../resources/movimg/"+imgStr+"'/>";
+   	function Check1(title, imgStr, mmid){
+		//alert(mmid)
 		
-/* 		$('#S_movieimg').html($img);
-		$('#S_movie').html(title);
- */
+		$img = "<img src='../resources/movimg/"+imgStr+"'/>";
+
 		$('#S_movieimg').attr('img',$img);
 		$('#S_movie').attr('title',title);
 		
@@ -74,34 +59,39 @@ var dateStr = dddd.split(',');
 		$('#S_movie').html($('#S_movie').attr('title'));
 		
 		document.getElementById("mid").value= mmid;
+		var now = new Date(); 
+		for(var j=0; j<midStr.length;j++){
+			alert("mid : "+midStr[j]+"mmid : "+mmid+(midStr[j]==mmid))
+			
+		}
 		
-/* 	
-         var size = document.getElementsByName("movie").length;
-
-        alert(size);
-
-        var movv = "";
-        
-        for(var i = 0; i < size; i++) {
-             if(document.getElementsByName("movie")[i].checked) {
-            	 	 
-            	 alert(document.getElementsByName("movie")[i].value);
-            	 
-            	//return document.getElementByName("movie")[i].value;
-                break;
-             }
-        }
-        
-        movv = $('input:radio[name="movie"]:checked').val(); 
-        
- */
+		for(var j=0; j<midStr.length;j++){
+			if(midStr[j] == mmid){
+				
+			}else{
+				
+			}	
+		}
+		for (var i = 0; i < 15; i++) {
+			var dates = new Date(now.getYear(), now.getMonth(), now.getDate()+i-1).getDate();
+		
+			/* for(var j=0; j<midStr.length;j++){
+				if(midStr[j] == mmid){
+					$('#S_dddd'+i).css("color","black");
+				}else{
+					$('#S_dddd'+i).css("color","lightgray");
+				}	
+			} */
+			$('#S_ddd'+i).attr('ddd',dates);
+			$('#S_ddd'+i).html($('#S_ddd'+i).attr('ddd'));
+		}
 	}
 	
    	
    	var ttset = '';
-   	
-	function Check2(no, datedata){
-		//document.write(datedata);
+   	var ssset = '';
+	function Check2(no){
+
 		var myData= new Date();
 		
 		var myDate = new Date(myData.getYear(),myData.getMonth(),myData.getDate()+no-1);
@@ -111,7 +101,6 @@ var dateStr = dddd.split(',');
 		$('#S_date').attr('dd',res);
 		$('#S_date').html($('#S_date').attr('dd'));
 
-		//var ttset = '';
 		ttset = '';
 		
 		for (var i = 0; i < dateStr.length; i++) {
@@ -120,41 +109,40 @@ var dateStr = dddd.split(',');
 			
 			var dateset = ss.split(' ')[0];
 			var timeset = ss.split(' ')[1];
+			var sIdset = ss.split(' ')[2];
 			
 			if(res == dateset){
-			//	alert(dateset+","+timeset)
+				
 				ttset += timeset+",";
+				ssset += sIdset+",";
+				
 			}
 		}
 		
-//		for (var i = 1; i < ttset.split(',').length; i++) {
-		for (var i = 1; i < ttset.split(',').length; i++) {
-			//var ttt = "#S_ttt"+i;
-	
-			alert(ttset.split(',')[i-1])
+		for (var i = 1; i < 20; i++) {
 			
-			//$sett = "<c:set var='ss' value="+ttset+" />"
+			var ttsp = ttset.split(',')[i-1];
+			//alert(ttsp);
 			
-			//$("#S_ttt"+i).attr('tt',ttset.split(',')[i-1]);
-			$("#S_ttt"+i).attr('tt',ttset.split(',')[i-1]);
+			if(ttsp==null){
+				$("#S_ttt"+i).attr('tt',' ');
+			}else{
+				$("#S_ttt"+i).attr('tt',ttsp);	
+			}
 			$("#S_ttt"+i).html($("#S_ttt"+i).attr('tt'));
 		}
-		//$('#S_cnt').html(ttset.split(','));
+		
 		alert(ttset);
 	
-		/* var input = true;
-		
-		$('#S_input').html(input); */
 	}
 
-	function Check3(ssid){
-		alert(ssid)
-		//var ree = $('#S_ttt'+no).html();
+	function Check3(no){
+		//alert(ttset)
+		//alert(ssset.split(',')[no-1]);
+		$('#S_time').attr('mmm',ttset.split(',')[no-1]);
+		$('#S_time').html($('#S_time').attr('mmm'));
 		
-		//$('#S_time').attr('mmm',ree);
-		//$('#S_time').html($('#S_time').attr('mmm'));
-		
-		document.getElementById("sid").value= ssid;
+		document.getElementById("sid").value= ssset.split(',')[no-1];
 	}
 	
 </script>
@@ -167,15 +155,12 @@ var dateStr = dddd.split(',');
 
 		<hr>
 
-		<c:forEach items="${moviedata }" var="mm" varStatus="no">
-			<div id="S_mov"
+ 		<c:forEach items="${midlist }" var="mm" varStatus="no">
+ 		<div id="S_mov"
 				onclick="Check1('${mm.title }', '${mm.image }', ${mm.mId })">
-				${mm.title }
-				<%-- <input type="radio" name="movie" value="${mm.mID }"
-					onclick="Check1('${mm.title }', '${mm.image }')"> --%>
-			</div>
+			${mm.title }
+		</div>
 		</c:forEach>
-
 	</div>
 
 	<div class="S_choice" style="overflow: auto;">
@@ -187,10 +172,12 @@ var dateStr = dddd.split(',');
 			<!--날짜 -->
 
 			<c:forEach begin="1" end="14" var="no">
-				<div id="S_ddd${no }" style="float: left"></div>일
- 			<input type="radio" name="ddate" value="${no }" id="S_ddd${no }"
-					onclick="Check2(${no}, '${datedata }')">
+			
+				<div id="S_dddd${no }">
+				<div id="S_ddd${no }" style="float: left" onclick="Check2(${no})"></div>일
+				</div>
 				<div style="clear: both;"></div>
+				
 			</c:forEach>
 
 		</div>
@@ -202,37 +189,19 @@ var dateStr = dddd.split(',');
 
 		<hr>
 
+		<%-- 	
 			<c:forEach items="${datedata}" var="dd" varStatus="no">
-				<div id="time_${no.index }" onclick="Check3(${dd.sId})">
-					<fmt:formatDate value="${dd.mstart }" pattern="HH:mm" /><br>
+				<div id="time_${no.index }" onclick="Check3(${dd.sId},'${dd.mstartTimeStr}')">
+					<fmt:formatDate value="${dd.mstart }" pattern="HH:mm" />
+					${dd.mstartTimeStr}<br>
 				</div>
-			</c:forEach>
-
-		<c:forEach begin="1" end="10" var="no">
-			<%-- <div id="S_ttt${no}" onclick="Check3(${no})"></div> --%>
-
-			<%-- <input type="radio" name="ttime" value="${no }" id="S_ttt${no }" onclick="Check3(${no})"> --%>
-		</c:forEach>
-
-
-		<%-- 		<c:forEach items="${asd}" var="qwe" varStatus="no">
-		${qwe }
-			<input type="radio" name="ttime"  value="" onclick="Check3()">
-		</c:forEach>
- --%>
-		<%-- <c:forEach begin="1" end="${asd.length }" var="no">
-			<div id="S_ttt${no }"> </div>
-			
-			<input type='radio' name='ttime'  onclick='Check3()'>
-			
-		</c:forEach> --%>
-
-		<%-- 		
-		<c:forEach items="${timelist }" var="tt">
-			<div id="S_tim" >${tt }시 </div>
-		</c:forEach>
- --%>
-	</div>
+			</c:forEach> 
+		--%>
+		
+		<c:forEach begin="1" end="20" var="no">
+			<div id="S_ttt${no }" onclick="Check3(${no})"></div>
+		</c:forEach>	
+	</div>		
 	<div style="clear: both"></div>
 
 	<hr>
@@ -246,7 +215,7 @@ var dateStr = dddd.split(',');
 	<div class="S_choice">></div>
 	<div id="S_time" class="S_choice">시간선택</div>
 	<div class="S_choice">></div>
-	<input type="text" name="sid" id="sid" value="">
+	<input type="hidden" name="sid" id="sid" value="">
 	
 	<div class="S_choice">
 		<input type="submit" value="확인" />

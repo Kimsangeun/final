@@ -60,7 +60,13 @@
 /* 			document.getElementById("seatnum").value = seats;
  */
 			document.seatfrm.submit();
+<<<<<<< HEAD
 		} else {
+=======
+
+		}
+		else{
+>>>>>>> branch 'master' of https://github.com/Kimsangeun/final.git
 			alert('틀린데?')
 		}
 	}
