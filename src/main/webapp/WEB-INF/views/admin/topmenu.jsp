@@ -20,5 +20,15 @@ margin-left: 20px;
 </div>
 
 <div class="S_side">
-<a href="#">추가메뉴</a>
+<a href="member">회원</a>
 </div>
+
+<div class="S_side">
+<a href="resv">예약</a>
+</div>
+
+<div class="S_side">
+<a href="settle">정산</a>
+</div>
+
+

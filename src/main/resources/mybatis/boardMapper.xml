@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="boardMapper">
+
+
+	<sql id="bkind">
+		<where> kind = #{kind}</where>
+	</sql>
+
+	<select id="boardList" resultType="boardVo"
+		parameterType="boardVo">
+
+		select * from board
+		<include refid="bkind"></include>
+		order by gid desc
+	</select>
+
+
+
+	<sql id="whereSch">
+		<where>
+			<if test="title!=null and title!=''">
+				title = #{title} title like '%${title}%'
+
+				<choose>
+					<when test="schCol=='cnt'">
+					
+						<![CDATA[ cnt <= #{title}	]]>
+					</when>
+					<otherwise>
+						${schCol} like '%'||#{title}||'%'
+					</otherwise>
+
+				</choose>
+
+
+
+			</if>
+
+		</where>
+	</sql>
+
+
+	<select id="boardListSch" resultType="boardVo"
+		parameterType="boardVo">
+		select * from board
+
+		<include refid="whereSch" />
+
+		order by gid desc
+	</select>
+
+
+	<select id="boardListCnt" resultType="boardVo"
+		parameterType="boardVo">
+		<![CDATA[
+		select * from board where cnt <= #{cnt} order by gid desc
+		]]>
+
+	</select>
+
+
+
+
+
+	<select id="boardDetail" resultType="boardVo"
+		parameterType="boardVo">
+		select * from board where bid = #{bid}
+	</select>
+
+
+	<sql id="maxId">
+		(select max(bid)+1 from board)
+	</sql>
+
+
+	<insert id="boardInsert" parameterType="boardVo">
+		<selectKey keyProperty="bid" order="BEFORE"
+			resultType="java.lang.Integer">
+			<include refid="maxId" />
+		</selectKey>
+
+		insert into board
+		(bid, gid, seq, lev, cnt , regdate, pid, pw,
+		title,content, upfile)
+		values
+		(#{bid}, #{bid}, 0, 0, 0 , sysdate,
+		#{pid}, #{pw}, #{title}, ${content},#{upfile};
+	</insert>
+
+	<!-- <insert id="boardInsertList" parameterType="boardVo"> insert all <foreach 
+		collection="arr" item="row" index="no"> into board (bid, gid, seq, lev, cnt 
+		, regdate, pname, pw, title,content) values ( <include refid="maxId" /> +#{no}, 
+		<include refid="maxId" /> +#{no}, 0, 0, 0 , sysdate, #{row.pname}, #{row.pw}, 
+		#{row.title},#{row.content}) </foreach> select * from dual </insert> -->
+
+
+
+</mapper>

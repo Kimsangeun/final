@@ -8,5 +8,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="list" resultType="movVo">
 		select * from movie order by title
 	</select>
-
+	
+ 	<select id="dateList" resultType="screenInfoVo">
+		select * from screeninfo
+	</select> 
+	
+	<select id="findInfo" resultType="screenInfoVo">
+		select * from screeninfo where sid=#{sId}
+	</select>
+	
+	<select id="midList" resultType="screenInfoVo">
+		select distinct mid from screeninfo  
+	</select>
+	
+	<select id="dateTitleList" resultType="screenInfoVo">
+		select 
+		to_char(screeninfo.mstart,'YYYY-MM-DD') as mdate, 
+		to_char(screeninfo.mstart,'HH:mm') as mtime, 
+		movie.title as movtitle, 
+		screeninfo.sid 
+		from screeninfo, movie 
+		where screeninfo.mid = movie.mid
+	</select>
 </mapper>

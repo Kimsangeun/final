@@ -5,8 +5,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <mapper namespace="reser">
 
+	<sql id="maxId">
+		(select max(rid)+1 from reser)
+	</sql>
+
 	<select id="list" resultType="reserVo">
 		select * from reser
 	</select>
+	<insert id="insert" parameterType="reserVo">
+		<selectKey keyProperty="rId" order="BEFORE"
+			resultType="java.lang.Integer">
+		<include refid="maxId" /></selectKey>
 
+		insert into reser (id, rid, cost, coc, sid, mid, cnt, seatnum, accnum)
+		values(#{id}, #{rId}, #{cost}, #{coc}, #{sId}, #{mId}, #{cnt},
+		#{seatNum}, #{accNum})
+	</insert>
+
+	<select id="detail" parameterType="reserVo" resultType="reserVo">
+		select *
+		from reser where rid=#{rid}
+	</select>
 </mapper>

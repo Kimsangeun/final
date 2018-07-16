@@ -7,19 +7,18 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("movVo")
 public class MovVO {
-	int mID, runtime;
+	int mId, runtime;
 	double rating;
 	String title, nation, genre, image, director, plot, actor;
 	Date release;
 	
 	
-	public int getmID() {
-		return mID;
-	}
 	
-	//@required
-	public void setmID(int mID) {
-		this.mID = mID;
+	public int getmId() {
+		return mId;
+	}
+	public void setmId(int mId) {
+		this.mId = mId;
 	}
 	public int getRuntime() {
 		return runtime;
@@ -84,7 +83,7 @@ public class MovVO {
 
 	@Override
 	public String toString() {
-		return "MovieDTO [mID=" + mID + ", runtime=" + runtime + ", rating=" + rating + ", title=" + title + ", nation="
+		return "MovieDTO [mId=" + mId + ", runtime=" + runtime + ", rating=" + rating + ", title=" + title + ", nation="
 				+ nation + ", genre=" + genre + ", image=" + image + ", director=" + director + ", plot=" + plot
 				+ ", actor=" + actor + ", release=" + release + "]";
 	}
