@@ -1,6 +1,7 @@
 package com.jhta.proj;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.annotation.Resource;
 
@@ -45,6 +46,7 @@ public class MovieController {
 	public Object rese(Model model, MovVO vo,MovieVO mvo,@PathVariable String service) {
 		Object res=null;
 		
+		
 		switch (service) {
 		case "now":
 			res = movieDao.nowMovie();
@@ -56,7 +58,20 @@ public class MovieController {
 		case "boxoffice":
 			res = movieDao.boxoffice();
 			break;
-
+			
+		case "detailMovie":
+			HashMap<String, Object> map = new HashMap<>();
+			System.out.println(mvo);
+			res = movieDao.detailMovie(mvo);
+			System.out.println(res);
+			map.put("movie", res);
+			res = movieDao.review(mvo);	//리뷰
+			System.out.println(res);
+			map.put("review", res);
+			res = map;
+			System.out.println(res);
+			//System.out.println(res);
+			//리뷰를 붙이자
 		default:
 			break;
 		}
@@ -75,16 +90,4 @@ public class MovieController {
 		return res;
 	}
 	
-	//@RequestMapping("/")
-	public Object cine(Model model, MovVO vo) {
-	
-		
-		model.addAttribute("menu","movie");
-	
-		String mm = "";
-		mm = "now";
-		
-		model.addAttribute("main", mm);
-		return "home";
-	}
 }

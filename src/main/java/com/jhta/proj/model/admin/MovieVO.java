@@ -14,10 +14,16 @@ public class MovieVO {
 	Integer mid,runtime,rating;
 	String title,actor,director,nation,genre,plot,poster,steelcut,grade
 	,realpath,bookingRate;//예매율
-	MultipartFile poster1,steelcut1,steelcut2;
 	
-	ArrayList<MultipartFile> list;
+	MultipartFile poster1;
+	ArrayList<MultipartFile> steelcuts;
 	
+	public ArrayList<MultipartFile> getSteelcuts() {
+		return steelcuts;
+	}
+	public void setSteelcuts(ArrayList<MultipartFile> steelcuts) {
+		this.steelcuts = steelcuts;
+	}
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date release;
 	public Integer getMid() {
@@ -99,21 +105,6 @@ public class MovieVO {
 	}
 	public void setPoster1(MultipartFile poster1) {
 		this.poster1 = poster1;
-		//this.poster = poster1.getOriginalFilename();
-	}
-	public MultipartFile getSteelcut1() {
-		return steelcut1;
-	}
-	public void setSteelcut1(MultipartFile steelcut1) {
-		this.steelcut1 = steelcut1;
-	}
-	public MultipartFile getSteelcut2() {
-		return steelcut2;
-		
-	}
-	public void setSteelcut2(MultipartFile steelcut2) {
-		this.steelcut2 = steelcut2;
-		//this.steelcut = steelcut1.getOriginalFilename()+"|"+steelcut2.getOriginalFilename();
 	}
 	public Date getRelease() {
 		return release;
@@ -121,12 +112,7 @@ public class MovieVO {
 	public void setRelease(Date release) {
 		this.release = release;
 	}
-	public ArrayList<MultipartFile> getList() {
-		return list;
-	}
-	public void setList(ArrayList<MultipartFile> list) {
-		this.list = list;
-	}
+	
 	public void setPoster(String poster) {
 		this.poster = poster;
 	}
@@ -136,25 +122,31 @@ public class MovieVO {
 	public void setPosterName(String poster) {
 		this.poster = poster;
 	}
-	public void setSteelcut1Name(String steelcut) {
-		
-		this.steelcut = steelcut;
-	}
-	public void setSteelcut2Name(String steelcut) {
-		this.steelcut += "|"+steelcut;
-	}
+
 	public String getRealpath() {
 		return realpath;
 	}
 	public void setRealpath(String realpath) {
 		this.realpath = realpath;
 	}
+	
+	//스틸컷 이름추가(리네임된 이름으로)
+	public void setSteelcutsName(ArrayList<String> bb) {
+		this.steelcut="";
+		for(String name : bb) {
+			this.steelcut += "|"+name;
+		}
+		this.steelcut = this.steelcut.substring(1);
+		System.out.println(steelcut);
+	}
+	
 	@Override
 	public String toString() {
 		return "MovieVO [mid=" + mid + ", runtime=" + runtime + ", rating=" + rating + ", title=" + title + ", actor="
 				+ actor + ", director=" + director + ", nation=" + nation + ", genre=" + genre + ", plot=" + plot
 				+ ", poster=" + poster + ", steelcut=" + steelcut + ", grade=" + grade + ", poster1=" + poster1
-				+ ", steelcut1=" + steelcut1 + ", steelcut2=" + steelcut2 + ", list=" + list + ", release=" + release
+				+ ", release=" + release +", steelcuts"
+				+ steelcuts
 				+ "]";
 	}
 	

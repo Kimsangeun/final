@@ -48,7 +48,8 @@
  -->
 <c:forEach items="${moviedata}" var="mm" varStatus="no">
 	<tr>
-		<td><img src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></td>
+		<td><a href="detailMovie?mid=${mm.mid }">
+		<img src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></a></td>
 		<td>${mm.title}</td>
 		
 	</tr>

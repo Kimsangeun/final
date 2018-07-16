@@ -7,12 +7,10 @@ import org.apache.ibatis.type.Alias;
 @Alias("reserVo")
 public class ReserVO {
 	
-	String id, seatNum, accNum,coc,title;
-	int rId, cost, sId, mId, cnt, scNum; 
-		
+	String id, seatNum, accNum,coc;
+	int rId, cost, sId, mId, cnt,scNum;
 	Date mstart;
-	
-	
+		
 	
 	public int getScNum() {
 		return scNum;
@@ -25,12 +23,6 @@ public class ReserVO {
 	}
 	public void setMstart(Date mstart) {
 		this.mstart = mstart;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
 	}
 	public String getId() {
 		return id;
