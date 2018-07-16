@@ -2,6 +2,7 @@ package com.jhta.proj;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.annotation.Resource;
@@ -170,16 +171,16 @@ public class AdminController {
 
 		case "insertMovie":
 			System.out.println("가공전"+mvo);
-
 			//fileUp()
+			if(mvo.getSteelcuts()!=null) {
+				mvo.setSteelcutsName(filesUP(mvo.getSteelcuts(),request));
+				mvo.getSteelcut();
+			}
 			if(mvo.getPoster1()!=null)
 				mvo.setPosterName(fileUP(mvo.getPoster1(),request,"poster"));
-			if(mvo.getSteelcut1()!=null)
-				mvo.setSteelcut1Name(fileUP(mvo.getSteelcut1(),request,"cut"));
-			if(mvo.getSteelcut2()!=null)
-				mvo.setSteelcut2Name(fileUP(mvo.getSteelcut2(),request,"cut"));
+
 			System.out.println("가공후"+mvo);
-			
+
 			movieDao.insertMovie(mvo);
 
 			model.addAttribute("url", "movie");
@@ -191,8 +192,11 @@ public class AdminController {
 			MovieVO deleteFileVO = (MovieVO)movieDao.detailMovie(mvo);
 			System.out.println(deleteFileVO);
 			deleteFile(deleteFileVO.getPoster(),request,"poster");
-			deleteFile(deleteFileVO.getSteelcut().split("[|]")[0],request,"cut");
-			deleteFile(deleteFileVO.getSteelcut().split("[|]")[1],request,"cut");
+			
+			//스틸컷들 지우기
+			for(String filename : deleteFileVO.getSteelcut().split("[|]"))
+			{deleteFile(filename,request,"cut");}
+			
 			movieDao.deleteMovie(mvo);
 			model.addAttribute("url", "movie");
 			model.addAttribute("msg", "삭제완료");
@@ -204,7 +208,7 @@ public class AdminController {
 			MovieVO resVO = (MovieVO) movieDao.detailMovie(mvo);
 			resVO.setRealpath(request.getRealPath("resources/"));
 			res = resVO;
-			
+
 			System.out.println(res);
 			break;
 
@@ -229,12 +233,7 @@ public class AdminController {
 				res = adminDao.yearList(svo);
 				System.out.println(res);
 			}
-				
-			/*if(svo.getType().equals("month"))
-				System.out.println("디용");
-				res = adminDao.monthList(svo);*/
-			//	System.out.println(res);
-			/**/
+
 			break;
 
 		}
@@ -281,7 +280,18 @@ public class AdminController {
 
 		return changeName;
 	}
-	
+
+	ArrayList<String> filesUP(ArrayList<MultipartFile> ups, HttpServletRequest request) {
+
+		ArrayList<String> steelcutsNames = new ArrayList<>();
+		for(MultipartFile up:ups) {
+			String bb = fileUP(up,request,"cut");
+			steelcutsNames.add(bb);
+		}
+
+		return steelcutsNames;
+	}
+
 	//파일삭제
 	void deleteFile(String filename,HttpServletRequest request,String root) {
 
@@ -289,20 +299,17 @@ public class AdminController {
 		String folder = root.equals("poster") ? "movposter" : "movcut";
 		String filePath = request.getRealPath("resources/")+folder+"/"+filename;
 		File file = new File(filePath);
-		
-	    if( file.exists() ){
-	        if(file.delete()){
-	            System.out.println("파일삭제 성공");
-	        }else{
-	            System.out.println("파일삭제 실패");
-	        }
-	    }else{
-	        System.out.println("파일이 존재하지 않습니다.");
-	    }
-	    
+
+		if( file.exists() ){
+			if(file.delete()){
+				System.out.println("파일삭제 성공");
+			}else{
+				System.out.println("파일삭제 실패");
+			}
+		}else{
+			System.out.println("파일이 존재하지 않습니다.");
+		}
+
 	}
-	
-
-
 
 }

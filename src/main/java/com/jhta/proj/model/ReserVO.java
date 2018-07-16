@@ -11,9 +11,23 @@ import org.apache.ibatis.type.Alias;
 public class ReserVO {
 	
 	String id, seatNum, accNum,coc;
-	int rId, cost, sId, mId, cnt; 
+	int rId, cost, sId, mId, cnt,scNum;
+	Date mstart;
 		
 	
+	
+	public int getScNum() {
+		return scNum;
+	}
+	public void setScNum(int scNum) {
+		this.scNum = scNum;
+	}
+	public Date getMstart() {
+		return mstart;
+	}
+	public void setMstart(Date mstart) {
+		this.mstart = mstart;
+	}
 	public String getId() {
 		return id;
 	}
