@@ -33,5 +33,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from member where id = #{id}
 	</select>
 	
+	<select id="pwChk" parameterType="map" resultType="map">
+		select * from member where id = #{id} and pw = #{pw}
+	</select>
+	
+	<update id="modify" parameterType="map">
+		update member set pw = #{newpw}, name= #{name}, phone= #{phone}, email = #{email} where id = #{id}
+	</update>
+	
+	<update id="withdrawal" parameterType="map">
+		update member set pw = 'dlkfgjlakejg', out = '1' where id = #{id}
+	</update>
+	
 	
 </mapper>
