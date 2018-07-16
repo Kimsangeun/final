@@ -1,9 +1,6 @@
 package com.jhta.proj.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import org.apache.ibatis.type.Alias;
 
@@ -14,7 +11,6 @@ public class ReserVO {
 	int rId, cost, sId, mId, cnt, scNum; 
 		
 	Date mstart;
-	
 	
 	
 	

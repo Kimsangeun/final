@@ -13,6 +13,7 @@
 <form action="insertMovie" method="post" enctype="multipart/form-data" accept-charset="UTF-8" >
 	<table border="">
 		<tr>
+		
 			<td>타이틀</td>
 			<td><input type="text" name="title" /></td>
 		</tr>
