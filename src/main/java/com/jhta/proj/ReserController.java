@@ -85,7 +85,7 @@ public class ReserController {
       Object res = null;
 
       res = mdao.list(vo);
-      System.out.println(res);
+      //System.out.println(res);
       return res;
    }
 
@@ -98,7 +98,16 @@ public class ReserController {
       return res;
    }
 
-   @ModelAttribute("midlist")
+   @ModelAttribute("titlelist")
+   public Object tit(Model model, MovVO vo) {
+	   Object res = null;
+	   
+	   res = mdao.titlelist(vo);
+	   // System.out.println(res);
+	   return res;
+   }
+   
+/*   @ModelAttribute("midlist")
    public ArrayList<MovVO> midlist(Model model, ScreenInfoVO vo, MovVO mvo) {
       ArrayList<ScreenInfoVO> scrArr = null;
       ArrayList<MovVO> movArr = null;
@@ -115,10 +124,10 @@ public class ReserController {
             }
          }
       }
-      System.out.println(res);
+     // System.out.println(res);
       return res;
    }
-    
+    */ 
     
     // @RequestMapping("/") 
        /* 
@@ -131,17 +140,21 @@ public class ReserController {
        * model.addAttribute("main", mm); return "home"; } 
        */ 
 
-    
+   @ModelAttribute("dateTitleList")
+   public Object datetitlelist(Model model, ScreenInfoVO vo) {
+	   Object res = null;
+	   res = mdao.dateTitleList(vo);
+	  // System.out.println(res);
+	   return res;
+   }
+   
     @RequestMapping("/timetable")
     public Object cine3(Model model, ScreenInfoVO svo) {
-        Object res = null;
-        model.addAttribute("menu","reservation");
+         model.addAttribute("menu","reservation");
         
         String mm = "timetable";      
-        res = mdao.dateTitleList(svo);
-        System.out.println(res);
+       
         model.addAttribute("main", mm);
-        model.addAttribute("dateTitleList", res);
         return "home";
     }
 
@@ -165,14 +178,21 @@ public class ReserController {
       svo.setsId(sid);
       svo = sdao.findSInfo(svo);
 
+      MovVO mvo = new MovVO();
+      
       rvo = new ReserVO();
       rvo.setId(((MemberVO) session.getAttribute("mem")).getId());
       rvo.setmId(svo.getmId());
       rvo.setsId(svo.getsId());
       System.out.println("/screenchoice::" + rvo);
-
+      mvo.setmId(rvo.getmId());
+      mdao.findMovie(mvo);
+      
+      
       String mm = "screenchoice";
       model.addAttribute("rvo", rvo);
+      model.addAttribute("svo", svo);
+      model.addAttribute("mvo", mvo);
       model.addAttribute("main", mm);
       return "home";
    }

@@ -18,9 +18,15 @@ public class MovDAO {
 	public Object midList(ScreenInfoVO vo) {
 		return sessionTemplate.selectList("mov.midList", vo);
 	}
+	public Object findMovie(MovVO vo) {
+		return sessionTemplate.selectList("mov.findMovie", vo);
+	}
 	
 	public Object dateTitleList(ScreenInfoVO vo) {
 		return sessionTemplate.selectList("mov.dateTitleList", vo);
 	}
 	
+	public Object titlelist(MovVO vo) {
+		return sessionTemplate.selectList("mov.titleList",vo);
+	}
 }

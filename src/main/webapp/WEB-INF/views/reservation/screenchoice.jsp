@@ -80,8 +80,9 @@
 	}
 </script>
 
-${rvo.sId }
-
+${svo.movtitle }
+${svo.mdate }
+${svo.mtime}
 <c:set var="rr" value="<div id='ryu1'> </div>" />
 <form name="seatfrm" action="/proj/reservation/payment" method="post">
 	<div>

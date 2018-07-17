@@ -13,7 +13,6 @@ public class MovVO {
 	Date release;
 	
 	
-	
 	public int getmId() {
 		return mId;
 	}
@@ -50,7 +49,6 @@ public class MovVO {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-
 	public String getPoster() {
 		return poster;
 	}

@@ -21,7 +21,8 @@ public class AjaxController {
 	MemberDAO dao;
 	
 	@RequestMapping(value="/ajax/modify", method = RequestMethod.POST)
-	public Map<String, Object> ajaxModify(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
+	@ResponseBody
+	public Map<String,Object> ajaxModify(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
 			throws NoPermissionException{
 		
 		System.out.println(map);
@@ -33,12 +34,26 @@ public class AjaxController {
 	}
 	
 	@RequestMapping(value="/ajax/withdrawal", method = RequestMethod.POST)
+	@ResponseBody
 	public Map<String, Object> ajaxWithdrawal(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
 			throws NoPermissionException{
 		
 		System.out.println(map);
 		
 		dao.ajaxWithdrawal(map);
+		
+		return map;
+		
+	}
+	
+	@RequestMapping(value="/ajax/idChk", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxidChk(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
+			throws NoPermissionException{
+		
+		System.out.println("ajax탔냐"+map);
+		
+		dao.ajaxidChk(map);
 		
 		return map;
 		

@@ -19,16 +19,12 @@ public class BoardVO {
 	public BoardVO() {
 	}
 
-	
-	
 	public BoardVO(String pid, String pw, String title, String content) {
 		this.pid = pid;
 		this.pw = pw;
 		this.title = title;
 		this.content = content;
 	}
-	
-	
 
 	public ArrayList<BoardVO> getArr() {
 		return arr;
@@ -38,44 +34,29 @@ public class BoardVO {
 		this.arr = arr;
 	}
 
-
-	
-	
 	public String getKind() {
 		return kind;
 	}
-
-
 
 	public void setKind(String kind) {
 		this.kind = kind;
 	}
 
-
-
 	public String getReply() {
 		return reply;
 	}
-
-
 
 	public void setReply(String reply) {
 		this.reply = reply;
 	}
 
-
-
 	public MultipartFile getMmfile() {
 		return mmfile;
 	}
 
-
-
 	public void setPid(String pid) {
 		this.pid = pid;
 	}
-
-
 
 	public void setMmfile(MultipartFile mmfile) {
 		this.mmfile = mmfile;
@@ -187,17 +168,11 @@ public class BoardVO {
 		return imgs.contains(exp);
 	}
 
-
-
 	@Override
 	public String toString() {
 		return "BoardVO [bid=" + bid + ", gid=" + gid + ", seq=" + seq + ", lev=" + lev + ", cnt=" + cnt + ", regdate="
 				+ regdate + ", pid=" + pid + ", pw=" + pw + ", title=" + title + ", content=" + content + ", upfile="
 				+ upfile + ", kind=" + kind + ", reply=" + reply + ", mmfile=" + mmfile + ", arr=" + arr + "]";
 	}
-
-
-
-	
 
 }

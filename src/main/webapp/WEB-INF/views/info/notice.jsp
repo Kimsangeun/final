@@ -5,6 +5,7 @@
 
 	<table border="">
 		<form action="?">
+		
 			<tr>
 				<td colspan="5" align="center">검색 <select name="schCol">
 						<option value="title">제목</option>
@@ -34,6 +35,6 @@
 			</tr>
 		</c:forEach>
 		<tr>
-			<td colspan="5" align="right"><a href="insertForm">글쓰기</a></td>
+			<td colspan="5" align="right"><a href="insertForm?kind=${kind }"><c:if test="${mem.id eq 'admin' }">글쓰기</c:if></a></td>
 		</tr>
 	</table>

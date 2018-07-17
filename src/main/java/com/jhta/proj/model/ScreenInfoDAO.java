@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ScreenInfoDAO {
-
+	
 	@Resource
 	SqlSessionTemplate sessionTemplate;
 	
@@ -19,5 +19,5 @@ public class ScreenInfoDAO {
 	public ScreenInfoVO findSInfo(ScreenInfoVO vo) {
 		return sessionTemplate.selectOne("mov.findInfo",vo);
 	}
-	
+
 }
