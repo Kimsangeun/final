@@ -4,12 +4,19 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script type="text/javascript" src="http://code.jquery.com/jquery-3.3.1.min.js" ></script>
+
 <script type="text/javascript">
-var idFlag = false;
 
+	var idFlag = false;
+	var pwFlag = false;
+	var authFlag = false;
+	var certNum;
+	var cnt = 0;
+	
 $(document).ready(function() {
-
+	
+	$("#btnSend").attr("disabled",true);
+	
    //region unreal id
    $("#id").blur(function() {
        idFlag = false;
@@ -48,8 +55,13 @@ $(document).ready(function() {
    $("#phone").blur(function() {
        checkPhoneNo();
    });
+   
+   $("#authNo").blur(function(){
+	   checkAuthNo();
+   });
 
    $("#btnSend").click(function() {
+	   cnt = 0;
        sendSmsButton();
        return false;
    });
@@ -58,7 +70,6 @@ $(document).ready(function() {
    //endregion
 
    $("#btnJoin").click(function(event) {
-       clickcr(this, 'sup.signup', '', '', event);
        submitClose();
        if(idFlag && pwFlag && authFlag) {
            mainSubmit();
@@ -73,6 +84,7 @@ $(document).ready(function() {
 
 
 function checkId(event) {
+
    if(idFlag) return true;
 
    var id = $("#id").val();
@@ -323,7 +335,134 @@ function isValidDate(param) {
     ;
 }
 
+function sendSmsButton() {
+	
+    var phone = $("#phone").val();
+    var oMsg = $("#authNoMsg");
+    var lang = "ko_KR";
+    
+    var data = {phone}
+    
+    authFlag = false;
 
+    $("#authNoMsg").hide();
+    
+    $.ajax({
+        type:"POST",
+        url: "/proj/ajax/smsSend",
+        dataType : 'json',
+        data : data,
+        success : function(result) {
+            
+            if (result.chk == "Y") {
+                showSuccessMsg(oMsg,"인증번호를 발송했습니다.(유효시간 30분)<br>인증번호가 오지 않으면 입력하신 정보가 정확한지 확인하여 주세요.<br>가상전화번호는 인증번호를 받을 수 없습니다.");
+                $("#authNo").attr("disabled", false);
+                certNum = result.certNum;
+            } else {
+                showErrorMsg(oMsg,"전화번호를 다시 확인해주세요.");
+            }
+        }
+    });
+    return false;
+}
+
+
+function checkPhoneNo() {
+    var phoneNo = $("#phone").val();
+    var oMsg = $("#phoneMsg");
+
+    if (phoneNo == "") {
+        showErrorMsg(oMsg,"필수 정보입니다.");
+        $("#btnSend").attr("disabled",true);
+        return false;
+    }
+    
+    if(!isCellPhone(phoneNo)) {
+        showErrorMsg(oMsg,"형식에 맞지 않는 번호입니다.");
+        $("#btnSend").attr("disabled",true);
+        return false;
+    }
+
+    hideMsg(oMsg);
+    $("#btnSend").attr("disabled",false);
+    return true;
+}
+
+function isCellPhone(p) {
+    var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+    return regPhone.test(p);
+}
+
+function checkAuthNo() {
+    var authNo = $("#authNo").val();
+    var oMsg = $("#authNoMsg");
+    
+    if(authNo == certNum){
+    	showSuccessMsg(oMsg,"인증이 성공했습니다.");
+    	authFlag = true;
+        return true;
+    		
+    }else if (authNo == "") {
+    	
+        showErrorMsg(oMsg,"인증이 필요합니다.");
+        return false;
+    }else if (authNo != certNum){
+    	showErrorMsg(oMsg,"인증번호를 다시 확인해주세요.");
+    	++cnt;
+    	
+    	if(cnt >=3) {
+            showErrorMsg(oMsg,"인증을 다시 진행해주세요.");
+            $("#authNo").attr("disabled", true);
+            $("#btnSend").attr("disabled",true);
+        }
+    	return false;
+    } 
+
+    return true;
+}
+
+
+function mainSubmit() {
+    
+    if (!checkUnrealInput()) {
+        submitOpen();
+        return false;
+    }
+    
+    if(idFlag && pwFlag && authFlag) {
+        desk.f(function(a) {
+            $("#join_form").submit();
+        });
+    } else {
+        submitOpen();
+        return false;
+    }
+}
+
+function checkUnrealInput() {
+    if (checkId('join')
+            & checkPswd1()
+            & checkPswd2()
+            & checkName()
+            & checkBirthday()
+            & checkGender()
+            & checkEmail()
+            & checkPhoneNo()
+            & checkAuthNo()
+    ) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function submitClose() {
+    $("#btnJoin").attr("disabled",true);
+}
+
+function submitOpen() {
+    $("#btnJoin").attr("disabled",false);
+}
 		
 	
 	
@@ -332,7 +471,7 @@ function isValidDate(param) {
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="/proj/joinMember">
+	<form id="join_form" action="/proj/joinMember">
 	<input type="hidden" id="birthday" name="birthday" value="">
 	<div class="frame">
 		<!-- 아이디 -->
@@ -372,8 +511,7 @@ function isValidDate(param) {
 			<div class="bir_wrap">
 				<div class="bir_yy">
 					<span class="ps_box"> <input type="text" id="yy" name="yy"
-						placeholder="년(4자)" class="int" maxlength="4"> <label
-						for="yy" class="lbl">년(4자)</label>
+						placeholder="년(4자)" class="int" maxlength="4">
 					</span>
 				</div>
 				<div class="bir_mm">
@@ -396,32 +534,39 @@ function isValidDate(param) {
 				</div>
 				<div class=" bir_dd">
 					<span class="ps_box"> <input type="text" id="dd" name="dd"
-						placeholder="일" class="int" maxlength="2"> <label for="dd"
-						class="lbl">일</label>
+						placeholder="일" class="int" maxlength="2"> 
 					</span>
 				</div>
 			</div>
 			<span class="error_next_box" id="birthMsg" style="display: none"></span>
 		</div>
 		
-		
-	<!-- 핸드폰 -->
-		<div class="each">
-			<h3 class="each_title">휴대폰</h3>
-			<span class="box_phone"> <input type="text" id="phone"
-				name="phone" class="int" title="휴대폰" maxlength="40">
-			</span> <span class="error_next_box" id="phoneMsg" style="display: none"></span>
-		</div>
-        
-    <!-- 이메일인증 -->
+	<!-- 이메일인증 -->
         <div class="each">
 			<h3 class="each_title">이메일</h3>
 			<span class="box_email"> <input type="text" id="email"
 				name="email" class="int" title="이메일" maxlength="40">
 			</span> <span class="error_next_box" id="emailMsg" style="display: none"></span>
 		</div>
+			
+	<!-- 핸드폰 -->
+		<div class="each">
+			<h3 class="each_title">휴대전화</h3>
+			<span class="box_phone"> <input type="text" id="phone"
+				name="phone" class="int" placeholder="'-'없이 입력바랍니다." maxlength="40">
+			</span>
+			<input type="button" id="btnSend" value="인증번호 받기" />
+            
+			<div class="ps_box_disable box_right_space" id="authNoBox">
+    			<input type="tel" id="authNo" name="authNo" placeholder="인증번호 입력하세요" class="int" disabled maxlength="6">
+            </div>
+            <span class="error_next_box" id="authNoMsg" style="display:none"></span>
+            <span class="error_next_box" id="joinMsg" style="display:none"></span>
+		</div>
+        
+   
     
-    <div><input type="submit"></div>
+    <div><input type="button" id="btnJoin" value="가입하기"></div>
     
 	</div>
 	</form>

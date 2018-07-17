@@ -10,13 +10,11 @@
 <meta name="viewport"content="width=device-width, initial-scale=1.0 , 
 user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 
-
-<link rel="stylesheet" href="../resources/bootstrap-3.2.0-dist/css/bootstrap.min.css">
-<link rel="stylesheet" href="../resources/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css">
-
-<script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-
+<link rel="stylesheet" href="/proj/resources/bootstrap-3.2.0-dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="/proj/resources/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css">
+<script type="text/javascript" src="/proj/resources/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="/proj/resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
+    
 <title>Insert title here</title>
 </head>
 <style>
