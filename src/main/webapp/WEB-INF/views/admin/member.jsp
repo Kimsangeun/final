@@ -21,13 +21,9 @@
 
 <body>
 <input type="button" value="추가" onclick="location.href='insertMovieForm'">
-<table border="" >
+<table class="table table-hover" >
 
-	<tr>
-	
-	</tr>
-	
-	
+	<thead>
 	<tr>
 		<td>번호</td>
 		<td>ID</td>
@@ -38,7 +34,8 @@
 		<td>변경</td> -->
 		<!-- <td>날짜</td> -->
 	</tr>	
-
+	</thead>
+	<tbody>
 <c:forEach items="${data }" var="mm" varStatus="no">
 	<tr>
 		<td>${no.index }</td>
@@ -52,7 +49,7 @@
 		<%-- <td>${mm.mstart}</td> --%>
 	</tr>
 </c:forEach>
-
+</tbody>
 </table>
 </body>
 </html>
