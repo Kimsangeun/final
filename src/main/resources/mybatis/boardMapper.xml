@@ -19,38 +19,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+	<select id="totalCount" resultType="java.lang.Integer"
+		parameterType="java.lang.String">
+		select count(*) from board where kind=#{kind}
+	</select>
+
+	<!-- <include refid="boardList"/> -->
+	<select id="someList" resultType="boardVo"
+		parameterType="hashmap">
+		select * from
+		(select rownum rnum, tt.* from
+		(select * from board where kind=#{kind}) tt) 
+	<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
+	</select>
 
 	<sql id="whereSch">
 		<where>
 			<if test="title!=null and title!=''">
 				title = #{title} title like '%${title}%'
-
 				<choose>
 					<when test="schCol=='cnt'">
-					
-						<![CDATA[ cnt <= #{title}	]]>
+						<![CDATA[ cnt <= #{title}]]>
 					</when>
 					<otherwise>
 						${schCol} like '%'||#{title}||'%'
 					</otherwise>
-
 				</choose>
 			</if>
-
 		</where>
 	</sql>
-
-
 	<select id="boardListSch" resultType="boardVo"
 		parameterType="boardVo">
 		select * from board
-
 		<include refid="whereSch" />
-
 		order by gid desc
 	</select>
-
-
 	<select id="boardListCnt" resultType="boardVo"
 		parameterType="boardVo">
 		<![CDATA[
@@ -84,13 +87,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into board
 		(bid, gid, seq, lev, cnt , regdate, pid, pw, title,
 		content, upfile, kind)
-		values (#{bid}, #{bid}, 0, 0, 0 , sysdate,
+		values (#{bid}, #{bid}, 0, 0, -1 , sysdate,
 		#{pid}, #{pw}, #{title}, #{content}, #{upfile}, #{kind})
 	</insert>
 
 	<update id="boardModify" parameterType="boardVo">
 		update board set
-		title=#{title}, content=#{content}, upfile=#{upfile} ,pw=#{pw}
+		title=#{title}, content=#{content}, upfile=#{upfile} ,pw=#{pw},
+		cnt=cnt-1
 		where bid=#{bid}
 	</update>
 
@@ -101,7 +105,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<delete id="boardDelete" parameterType="boardVo">
-		delete from board where bid=#{bid}
+		delete from board where
+		bid=#{bid}
 	</delete>
 
 	<!-- <insert id="boardInsert" parameterType="boardVo"> <selectKey keyProperty="bid" 

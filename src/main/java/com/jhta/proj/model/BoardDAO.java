@@ -1,5 +1,8 @@
 package com.jhta.proj.model;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -50,4 +53,18 @@ public class BoardDAO {
 		return sessionTemplate.update("boardMapper.findBoard", bid);
 	}
 	
+	public Object totalCount(String kind) {
+		return sessionTemplate.selectOne("boardMapper.totalCount", kind);
+	}
+	
+	public Object someList(Integer start, Integer end, String kind) {
+		Map<String, Object> map = new HashMap<>();
+		
+		map.put("start", start);
+		map.put("end", end);
+		map.put("kind", kind);
+		System.out.println("다오맵"+map);
+		return sessionTemplate.selectList("boardMapper.someList", map);
+		
+	}
 }
