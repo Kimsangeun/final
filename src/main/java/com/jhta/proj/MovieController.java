@@ -14,6 +14,8 @@ import com.jhta.proj.model.CinemaVO;
 import com.jhta.proj.model.MovDAO;
 import com.jhta.proj.model.MovVO;
 import com.jhta.proj.model.ReserVO;
+import com.jhta.proj.model.admin.MovieDAO;
+import com.jhta.proj.model.admin.MovieVO;
 import com.jhta.proj.model.admin.TimeTableVO;
 
 @Controller
@@ -22,6 +24,9 @@ public class MovieController {
 
 	@Resource
 	MovDAO mdao;
+	
+	@Resource
+	MovieDAO movieDao;
 	
 	@ModelAttribute("top")
 	public ArrayList top() {
@@ -37,17 +42,32 @@ public class MovieController {
 	
 	
 	@ModelAttribute("moviedata")
-	public Object rese(Model model, MovVO vo) {
+	public Object rese(Model model, MovVO vo,MovieVO mvo,@PathVariable String service) {
 		Object res=null;
 		
-		res = mdao.list(vo);
+		switch (service) {
+		case "now":
+			res = movieDao.nowMovie();
+			break;
+		case "comming":
+			res = movieDao.comingMovie();
+			break;
+					
+		case "boxoffice":
+			res = movieDao.boxoffice();
+			break;
+
+		default:
+			break;
+		}
+		/*res = mdao.list(vo);*/
 		
 		return res;
 	}
 	
 	
 	@RequestMapping()
-	public String cii(@PathVariable String service,MovVO vo, Model model) {
+	public String cii(@PathVariable String service,MovVO vo,MovieVO mvo, Model model) {
 		String res="home";
 		
 		model.addAttribute("menu","movie");

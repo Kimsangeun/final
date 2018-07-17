@@ -13,7 +13,15 @@ public class ReserVO {
 	String id, seatNum, accNum,coc;
 	int rId, cost, sId, mId, cnt; 
 		
+	Date mstart;
 	
+	
+	public Date getMstart() {
+		return mstart;
+	}
+	public void setMstart(Date mstart) {
+		this.mstart = mstart;
+	}
 	public String getId() {
 		return id;
 	}

@@ -40,4 +40,19 @@ public class MovieDAO {
 
 		return sessionTemplate.selectOne("adminMapper.movieDetail", vo);
 	}
+	
+	public Object nowMovie() {
+
+		return sessionTemplate.selectList("adminMapper.nowShowing");
+	}
+	
+	public Object comingMovie() {
+
+		return sessionTemplate.selectList("adminMapper.comingSoon");
+	}
+	
+	public Object boxoffice() {
+
+		return sessionTemplate.selectList("adminMapper.boxoffice");
+	}
 }

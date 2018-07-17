@@ -165,7 +165,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 정산 -->
 	<select id="yearList" parameterType="settleVo" resultType="settleVo">
-		select reser.*,screeninfo.mstart from reser,screeninfo 
+		select reser.*,screeninfo.mstart,to_char(screeninfo.mstart,'YYYY') as mtitle from reser,screeninfo 
 		where reser.sid = screeninfo.sid
 		and to_char(mstart,'YYYY')=#{num}
 	</select>
@@ -179,6 +179,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	<!--  -->
 	
+	<!-- 빡스오피수 -->
+	<select id="boxoffice" resultType="movieVo">
+		SELECT A.*, Round(nvl(B.bb/C.cc*100,0),2) as bookingRate
+		FROM (SELECT * FROM MOVIE) A,
+		      (select mid,count(*) as bb from reser group by mid having count(*) >= 0) B,
+		      (select count(*)as cc from reser) C
+		WHERE A.mid = b.mid(+)
+	</select>
+	<select id="nowShowing" resultType="movieVo">
+		select * from movie where <![CDATA[release <= sysdate]]>
+	</select>
+	<select id="comingSoon" resultType="movieVo">
+		select * from movie where <![CDATA[release > sysdate]]>
+	</select>
+	
+	<!--  -->
 	
 	
 </mapper>
