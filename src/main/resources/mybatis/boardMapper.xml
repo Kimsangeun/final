@@ -35,9 +35,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 					</otherwise>
 
 				</choose>
-
-
-
 			</if>
 
 		</where>
@@ -63,14 +60,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
-
-
-
 	<select id="boardDetail" resultType="boardVo"
 		parameterType="boardVo">
 		select * from board where bid = #{bid}
+
 	</select>
 
+	<update id="cntup" parameterType="boardVo">
+		update board set cnt=cnt+1
+		where bid=${bid}
+	</update>
 
 	<sql id="maxId">
 		(select max(bid)+1 from board)
@@ -82,21 +81,38 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			resultType="java.lang.Integer">
 			<include refid="maxId" />
 		</selectKey>
-
 		insert into board
-		(bid, gid, seq, lev, cnt , regdate, pid, pw,
-		title,content, upfile)
-		values
-		(#{bid}, #{bid}, 0, 0, 0 , sysdate,
-		#{pid}, #{pw}, #{title}, ${content},#{upfile};
+		(bid, gid, seq, lev, cnt , regdate, pid, pw, title,
+		content, upfile, kind)
+		values (#{bid}, #{bid}, 0, 0, 0 , sysdate,
+		#{pid}, #{pw}, #{title}, #{content}, #{upfile}, #{kind})
 	</insert>
 
+	<update id="boardModify" parameterType="boardVo">
+		update board set
+		title=#{title}, content=#{content}, upfile=#{upfile} ,pw=#{pw}
+		where bid=#{bid}
+	</update>
+
+	<select id="findBoard" parameterType="java.lang.Integer"
+		resultType="boardVo">
+		select * from board where bid=#{bid}
+	</select>
+
+
+	<delete id="boardDelete" parameterType="boardVo">
+		delete from board where bid=#{bid}
+	</delete>
+
+	<!-- <insert id="boardInsert" parameterType="boardVo"> <selectKey keyProperty="bid" 
+		order="BEFORE" resultType="java.lang.Integer"> <include refid="maxId" /> 
+		</selectKey> insert into board (bid, gid, seq, lev, cnt , regdate, pid, pw, 
+		title,content, upfile) values (#{bid}, #{bid}, 0, 0, 0 , sysdate, #{pid}, 
+		#{pw}, #{title}, ${content},#{upfile}; </insert> -->
 	<!-- <insert id="boardInsertList" parameterType="boardVo"> insert all <foreach 
 		collection="arr" item="row" index="no"> into board (bid, gid, seq, lev, cnt 
 		, regdate, pname, pw, title,content) values ( <include refid="maxId" /> +#{no}, 
 		<include refid="maxId" /> +#{no}, 0, 0, 0 , sysdate, #{row.pname}, #{row.pw}, 
 		#{row.title},#{row.content}) </foreach> select * from dual </insert> -->
-
-
 
 </mapper>

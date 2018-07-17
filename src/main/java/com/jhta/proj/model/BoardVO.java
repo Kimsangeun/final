@@ -27,6 +27,8 @@ public class BoardVO {
 		this.title = title;
 		this.content = content;
 	}
+	
+	
 
 	public ArrayList<BoardVO> getArr() {
 		return arr;
@@ -133,10 +135,6 @@ public class BoardVO {
 		return pid;
 	}
 
-	public void setPname(String pid) {
-		this.pid = pid;
-	}
-
 	public String getPw() {
 		return pw;
 	}
@@ -197,6 +195,8 @@ public class BoardVO {
 				+ regdate + ", pid=" + pid + ", pw=" + pw + ", title=" + title + ", content=" + content + ", upfile="
 				+ upfile + ", kind=" + kind + ", reply=" + reply + ", mmfile=" + mmfile + ", arr=" + arr + "]";
 	}
+
+
 
 	
 

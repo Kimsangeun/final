@@ -25,7 +25,7 @@
 	border: 1px solid #f00;
 }
 ._list{
-	
+
 }
 </style>
 <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -68,7 +68,7 @@
 			<div class="list_cnt listDiv">${res.cnt }</div>
 			<div class="list_cancel listDiv">
 				<input type="submit" value="예매취소" onclick="cancel()" >
-			</div>		
+			</div>
 		
 		</form>
 		</c:forEach>

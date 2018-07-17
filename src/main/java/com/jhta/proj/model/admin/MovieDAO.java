@@ -55,4 +55,9 @@ public class MovieDAO {
 
 		return sessionTemplate.selectList("adminMapper.boxoffice");
 	}
+	
+	public Object review(MovieVO vo) {
+
+		return sessionTemplate.selectList("adminMapper.review",vo);
+	}
 }

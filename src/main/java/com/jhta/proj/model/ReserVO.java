@@ -1,9 +1,6 @@
 package com.jhta.proj.model;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import org.apache.ibatis.type.Alias;
 
@@ -11,11 +8,16 @@ import org.apache.ibatis.type.Alias;
 public class ReserVO {
 	
 	String id, seatNum, accNum,coc;
-	int rId, cost, sId, mId, cnt; 
-		
+	int rId, cost, sId, mId, cnt,scNum;
 	Date mstart;
-	
-	
+		
+
+	public int getScNum() {
+		return scNum;
+	}
+	public void setScNum(int scNum) {
+		this.scNum = scNum;
+	}
 	public Date getMstart() {
 		return mstart;
 	}

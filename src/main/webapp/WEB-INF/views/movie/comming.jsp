@@ -40,10 +40,12 @@ integerOnly="true" /> 일 지남.
 <fmt:formatDate value="${mm.release}" var="date" pattern="yyyy-MM-dd" /> 
  
 	<tr>
-		<td><img src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></td>
+		<td><a href="detailMovie?mid=${mm.mid }">
+		<img src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></a>
+		</td>
 		<td>${mm.title}</td>
 		<td>개봉일 ${date}</td>
-		<td>d-<fmt:parseNumber value="${(mm.release.time - now.time)  / (1000*60*60*24)}"
+		<td>d-<fmt:parseNumber value="${(mm.release.time - now.time)  / (1000*60*60*24)+1}"
 integerOnly="true" /> </td>
 	</tr>
 </c:forEach>

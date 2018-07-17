@@ -49,7 +49,6 @@ public class MovVO {
 	public void setGenre(String genre) {
 		this.genre = genre;
 	}
-	
 	public String getPoster() {
 		return poster;
 	}
@@ -80,12 +79,14 @@ public class MovVO {
 	public void setRelease(Date release) {
 		this.release = release;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "MovieDTO [mId=" + mId + ", runtime=" + runtime + ", rating=" + rating + ", title=" + title + ", nation="
-				+ nation + ", genre=" + genre + ", poster=" + poster+ ", director=" + director + ", plot=" + plot
+		return "MovVO [mId=" + mId + ", runtime=" + runtime + ", rating=" + rating + ", title=" + title + ", nation="
+				+ nation + ", genre=" + genre + ", poster=" + poster + ", director=" + director + ", plot=" + plot
 				+ ", actor=" + actor + ", release=" + release + "]";
 	}
+
+
 	//asdasd
 }
