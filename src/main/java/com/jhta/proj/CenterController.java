@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jhta.proj.model.BoardDAO;
 import com.jhta.proj.model.BoardVO;
+import com.jhta.proj.model.MemberVO;
 import com.jhta.proj.model.admin.MovieDAO;
 import com.jhta.proj.model.admin.MovieVO;
 import com.jhta.proj.model.admin.ScreenDAO;
@@ -92,6 +93,7 @@ public class CenterController {
 
 			kind = "notice";
 			bvo.setKind("notice");
+			request.setAttribute("kind", kind);
 			System.out.println(bvo);
 
 			res = boardDao.boardlist(bvo);
@@ -102,6 +104,7 @@ public class CenterController {
 			kind = "faq";
 
 			bvo.setKind("faq");
+			request.setAttribute("kind", kind);
 			System.out.println(bvo);
 
 			res = boardDao.boardlist(bvo);
@@ -112,10 +115,21 @@ public class CenterController {
 			System.out.println("qna ㄱㄱ");
 			kind = "qna";
 
+			
 			bvo.setKind("qna");
+			request.setAttribute("kind", kind);
 			System.out.println(bvo);
 
-			res = boardDao.boardlist(bvo);
+//			String id = ((MemberVO)request.getSession().getAttribute("mem")).getId();
+			//ㄴ여기서 에러
+//			if(id.equals("admin"))
+				res = boardDao.boardlist(bvo);
+/*			else if(request.getSession().getAttribute("mem")!=null) {
+				//화원이라면 마이페이지의 1:1문의 링크로
+			}
+			else {
+				//비회원이면 ㄲㅈ
+			}*/
 			break;
 
 		case "insertReg":
@@ -137,7 +151,6 @@ public class CenterController {
 			boardDao.delete(bvo);
 			model.addAttribute("url", kind);
 			model.addAttribute("msg", "삭제완료");
-
 			break;
 
 		case "detail":
@@ -146,6 +159,7 @@ public class CenterController {
 			res = boardDao.detail(bvo);
 			boardDao.cntplus(bvo);
 			break;
+			
 		case "modify":
 			System.out.println("modidi...");
 			System.out.println(bvo);

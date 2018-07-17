@@ -14,7 +14,7 @@
 			<td>제목</td>
 			<td>${data.title }</td>
 			<td>조회수</td>
-			<td>${data.pid }</td>
+			<td>${data.cnt }</td>
 		</tr>
 		<tr>
 			<td>파일</td>

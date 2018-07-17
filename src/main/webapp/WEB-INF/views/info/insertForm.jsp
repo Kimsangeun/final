@@ -5,7 +5,6 @@
 
 <form action="insertReg" method="post" enctype="multipart/form-data"
 	accept-charset="UTF-8">
-<%-- 	<input type="hidden" name="kind" value="${kind }"> --%>
 	<table border="">
 		<tr>
 			<td>작성자</td>
@@ -27,7 +26,7 @@
 		</tr>
 		<tr>
 			<td colspan="4" align="center" ><input type="submit" value="작성">
-			<a href="" >뒤로</a></td>
+			<a href="${param.kind }" >뒤로</a></td>
 		</tr>
 	</table>
 </form>
