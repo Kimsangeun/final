@@ -1,5 +1,6 @@
 package com.jhta.proj.model;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -13,6 +14,7 @@ public class BoardVO {
 	String pid, pw, title, content, upfile, kind, reply;
 
 	MultipartFile mmfile;
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm");
 
 	ArrayList<BoardVO> arr;
 
@@ -106,6 +108,10 @@ public class BoardVO {
 
 	public Date getRegdate() {
 		return regdate;
+	}
+
+	public String getRegdateStr() {
+		return sdf.format(regdate);
 	}
 
 	public void setRegdate(Date regdate) {
