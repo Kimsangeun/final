@@ -25,16 +25,16 @@
 		<td>조회수</td>
 	</tr>
 
-	<c:forEach items="${list }" var="row" varStatus="no">
+	<c:forEach items="${data }" var="row" varStatus="no">
 		<tr>
 			<td>${no.index}</td>
-			<td><a href="detail?id=${row.bid }">${row.title}</a></td>
+				<td><a href="detail?bid=${row.bid }">${row.title}</a></td>
 			<td>${row.pid}</td>
 			<td>${row.regdate}</td>
 			<td>${row.cnt}</td>
 		</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="5" align="right"><a href="insertForm">글쓰기</a></td>
+		<td colspan="5" align="right"><a href="insertForm?kind=${kind }">글쓰기</a></td>
 	</tr>
 </table>

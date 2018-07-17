@@ -1,12 +1,3 @@
-<%-- <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<c:forEach items="${moviedata}" var="dd" varStatus="no">
-		<img src="${pageContext.request.contextPath}\resources\movposter/${dd.poster}" />
-		${dd.title }
-</c:forEach> --%>
 
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -48,7 +39,8 @@
  -->
 <c:forEach items="${moviedata}" var="mm" varStatus="no">
 	<tr>
-		<td><img src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></td>
+		<td><a href="detailMovie?mid=${mm.mid }">
+		<img src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></a></td>
 		<td>${no.index+1}. ${mm.title}</td>
 		<td>예매율${mm.bookingRate }</td>
 		

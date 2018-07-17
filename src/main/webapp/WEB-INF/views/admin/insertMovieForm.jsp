@@ -5,14 +5,72 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
+
 </head>
 <body>
 
-타입1
-<!-- enctype="multipart/form-data" -->
+<script type="text/javascript">
+        $(document).ready(function(){
+         
+            // 스틸컷추가 버튼 클릭시
+            var i = 1;
+            $(".addBtn").live("click", function(){
+            	
+                var clickedRow = $(this).parent().parent();
+                var cls = clickedRow.attr("class");
+                
+
+                var newrow = clickedRow.clone();
+                //alert(newrow);
+                newrow.find("td:eq(1)").find('input[type="file"]').css('background-color','yellow');
+                newrow.find("td:eq(1)").find('input[type="file"]').attr("name","steelcuts["+i+"]");
+                newrow.find("td:eq(0)").remove();           
+                newrow.insertAfter($("#movieClass ."+cls+":last"));
+
+                console.log("네임 : "+ newrow.find("td:eq(0)").find('input[type="file"]').attr("name"));
+
+                // rowspan 조정
+                resizeRowspan(cls);
+                i = i+1;
+                console.log(i);
+               
+            });
+             
+             
+            // 삭제버튼 클릭시
+            $(".delBtn").live("click", function(){
+            	alert('클리크');
+                var clickedRow = $(this).parent().parent();
+                var cls = clickedRow.attr("class");
+                 
+                // 각 항목의 첫번째 row를 삭제한 경우 다음 row에 td 하나를 추가해 준다.
+                if( clickedRow.find("td:eq(0)").attr("rowspan") ){
+                    if( clickedRow.next().hasClass(cls) ){
+                        clickedRow.next().prepend(clickedRow.find("td:eq(0)"));
+                    }
+                }
+ 
+                clickedRow.remove();
+ 
+                // rowspan 조정
+                resizeRowspan(cls);
+            });
+ 
+            // cls : rowspan 을 조정할 class ex) item1, item2, ...
+            function resizeRowspan(cls){
+                var rowspan = $("."+cls).length;
+                $("."+cls+":first td:eq(0)").attr("rowspan", rowspan);
+            }
+        });
+    </script>
+
+
 <form action="insertMovie" method="post" enctype="multipart/form-data" accept-charset="UTF-8" >
-	<table border="">
+	<table id="movieClass" border="">
 		<tr>
+		
 			<td>타이틀</td>
 			<td><input type="text" name="title" /></td>
 		</tr>
@@ -21,13 +79,14 @@
 			<td><input type="text" name="nation" /></td>
 		</tr>
 		<tr>
-			<td>장르</td>
+			<td bgcolor=green>장르</td>
 			<td><input type="text" name="genre" /></td>
 		</tr>
 		<tr>
 			<td>런타임</td>
 			<td><input type="text" name="runtime" /></td>
 		</tr>
+
 		<tr>
 			<td>상영등급</td>
 			<td><input type="text" name="rating" /></td>
@@ -49,13 +108,10 @@
 			<td>포스터</td>
 			<td><input type="file" name="poster1" /></td>
 		</tr>
-		<tr>
-			<td>스틸컷1</td>
-			<td><input type="file" name="steelcut1" /></td>
-		</tr>
-		<tr>
-			<td>스틸컷2</td>
-			<td><input type="file" name="steelcut2" /></td>
+		<tr class="item1">
+			<td>스틸컷<br>
+			<button type="button" class="addBtn">+</button></td>
+			<td><input type="file" name="steelcuts[0]" /></td>
 		</tr>
 		<tr>
 			<td>줄거리</td>
