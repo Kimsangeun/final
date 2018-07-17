@@ -11,7 +11,7 @@ public class ReserVO {
 	int rId, cost, sId, mId, cnt,scNum;
 	Date mstart;
 		
-	
+
 	public int getScNum() {
 		return scNum;
 	}
