@@ -87,8 +87,20 @@
                    
                   </ul>
                 </li>
+                
+            
            
               </ul>
+              <ul class="nav navbar-nav navbar-right">
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">로그인 <span class="caret"></span></a>
+                  <ul class="dropdown-menu" role="menu">
+                    <li><jsp:include page="inc/hightop2.jsp" />ㅁㄴㅇㄹ</li>
+                   
+                  </ul>
+                </li>
+              </ul>
+              
             </div>
           </div>
         </nav>
