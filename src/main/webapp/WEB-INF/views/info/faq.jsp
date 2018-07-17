@@ -27,14 +27,35 @@
 
 	<c:forEach items="${data }" var="row" varStatus="no">
 		<tr>
-			<td>${no.index}</td>
-				<td><a href="detail?bid=${row.bid }">${row.title}</a></td>
+			<td>${total-(no.index + ((page-1)*10))}</td>
+			<td><a href="detail?bid=${row.bid }">${row.title}</a></td>
 			<td>${row.pid}</td>
-			<td>${row.regdate}</td>
+			<td>${row.regdateStr}</td>
 			<td>${row.cnt}</td>
 		</tr>
 	</c:forEach>
 	<tr>
-		<td colspan="5" align="right"><a href="insertForm">글쓰기</a></td>
+		<td colspan="5" align="right"><a href="insertForm?kind=${kind }"><c:if
+					test="${mem.id eq 'admin' }">글쓰기</c:if></a></td>
 	</tr>
 </table>
+<c:if test="${startPage >1 }">
+	<a href="${kind }?page=1">[처음]</a>
+	<a href="${kind }?page=${startPage-1 }"><</a>
+</c:if>
+
+<c:forEach var="i" begin="${startPage }" end="${endPage }">
+	<c:choose>
+		<c:when test="${i==page }">
+				[${i }]
+			</c:when>
+		<c:otherwise>
+			<a href="${kind }?page=${i }">${i }</a>
+		</c:otherwise>
+	</c:choose>
+</c:forEach>
+<c:if test="${endPage<totalPage }">
+	<a href="${kind }?page=${endPage+1 }">></a>
+	<a href="${kind }?page=${totalPage }">[마지막]</a>
+</c:if>
+

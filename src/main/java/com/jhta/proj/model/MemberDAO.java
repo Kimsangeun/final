@@ -66,7 +66,6 @@ public class MemberDAO {
 			
 			map.put("msg", "회원정보수정완료");
 		}else {
-			System.out.println("오냐");
 			
 			map.put("msg", "비밀번호가 맞지않습니다.");
 		}
@@ -84,9 +83,20 @@ public class MemberDAO {
 			
 			map.put("msg", "회원탈퇴완료");
 		}else {
-			System.out.println("오냐");
 			
 			map.put("msg", "비밀번호가 맞지않습니다.");
+		}
+		
+		return map;
+		
+	}
+	
+	public Map<String, Object> ajaxidChk(Map<String, Object> map) {
+		
+		System.out.println("id체크오냐");
+		
+		if(sessionTemplate.selectOne("mem.idChk", map)==null) {
+			map.put("chk", "Y");
 		}
 		
 		return map;

@@ -11,7 +11,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
 
+</style>
 <script>
 
 </script>
@@ -19,31 +21,26 @@
 
 <body>
 
-<table border="" >
+<%-- <table class="mainPage" border="" >
 
-	<tr>
-	
-	</tr>
-	
-	<!-- 
-	<tr>
-		<td>번호</td>
-		<td>제목</td>
-		<td>런타임</td>
-		<td>개봉일</td>
-		<td>삭제</td>
-		<td>변경</td>
-		<td>날짜</td>
-	</tr>	
- -->
 <c:forEach items="${mainpagemov}" var="mm" varStatus="no">
 	<tr>
-		<td><img src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></td>
+		<td><img class="mainImg" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></td>
 		<td>${mm.title}</td>
 		
 	</tr>
 </c:forEach>
 	
-</table>
+</table> --%>
+<div class="mainPage" >
+
+<c:forEach items="${mainpagemov}" var="mm" varStatus="no">
+	<div class="mainMovie">
+		<div><img class="mainImg" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></div>
+		<div>${mm.title}</div>
+	</div>
+</c:forEach>
+	
+</div>
 </body>
 </html>

@@ -24,7 +24,7 @@
 			
 			$.ajax({
 				url: "/proj/ajax/modify",
-				dataType : 'json',
+ 				dataType : 'json',
 				data : data,
 				type : 'POST',
 				success: function(result){
@@ -49,7 +49,7 @@
 				data : data,
 				type : 'POST',
 				success: function(result){
-					console.log(result.textVal);
+					alert(result.msg);
 					
 				}
 			

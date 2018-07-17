@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -7,46 +8,53 @@
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
-	<context:component-scan base-package="com.jhta.proj" />
-	
+
+	<context:component-scan
+		base-package="com.jhta.proj" />
+
 	<interceptors>
-	
+
 		<interceptor>
-			<mapping path="/admin/*"/>
-			<exclude-mapping path="/admin/forbidden"/>
-			<beans:ref bean="adminChk"/>
+			<mapping path="/info/insertForm?kind=notice" />
+			<mapping path="/info/insertForm?kind=faq" />
+			
+			<mapping path="/admin/*" />
+			<exclude-mapping path="/admin/forbidden" />
+			<beans:ref bean="adminChk" />
 		</interceptor>
-		
+
 		<interceptor>
-			<mapping path="/reservation/reser"/>
-			<beans:ref bean="loginChk"/>
+			<mapping path="/reservation/reser" />
+			<mapping path="/info/*" />
+			<exclude-mapping path="/info/forbidden" />
+			<beans:ref bean="loginChk" />
 		</interceptor>
-				
+
 	</interceptors>
-	
+
 	<beans:bean id="multipartResolver"
-	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
-	/>
-		
-	<beans:bean id="messageSource" 
-	class="org.springframework.context.support.ResourceBundleMessageSource">
-	
-		<beans:property name="useCodeAsDefaultMessage" value="true"/>
-	
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+
+	<beans:bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<beans:property name="useCodeAsDefaultMessage"
+			value="true" />
 	</beans:bean>
-	
 </beans:beans>

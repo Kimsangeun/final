@@ -1,17 +1,25 @@
 package com.jhta.proj.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import org.apache.ibatis.type.Alias;
 
 @Alias("reserVo")
 public class ReserVO {
 	
-	String id, seatNum, accNum,coc;
-	int rId, cost, sId, mId, cnt,scNum;
-	Date mstart;
-		
-
+	String id, seatNum, accNum,coc, title;
+	int rId, cost, sId, mId, cnt, scNum; 
+	Date mstart;	
+	
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	public int getScNum() {
 		return scNum;
 	}
