@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <form>
-	<table border="">
+	<table class="table table-hover">
 		<tr>
 			<td>제목</td>
 			<td><input type="text" name="title" value="${data.title }"/></td>

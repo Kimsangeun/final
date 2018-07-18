@@ -108,7 +108,7 @@ public class CenterController {
 
 		int total = 0;
 
-		total = (int) boardDao.totalCount(kind);
+		total = (int) boardDao.totalCount(kind, request.getParameter("title"),request.getParameter("schCol"));
 
 		int totalPage = total / limit;
 
@@ -124,6 +124,9 @@ public class CenterController {
 		request.setAttribute("endPage", endPage);
 		request.setAttribute("totalPage", totalPage);
 
+		bvo.setStart(start);
+		bvo.setEnd(end);
+		
 		switch (service) {
 		case "notice":
 			System.out.println("서비스 타긴 하지");
@@ -133,8 +136,8 @@ public class CenterController {
 			bvo.setKind("notice");
 			request.setAttribute("kind", kind);
 			System.out.println(bvo);
-
-			res = boardDao.someList(start, end, kind);
+//			boardListSch
+			res = boardDao.someList(bvo);
 			break;
 
 		case "faq":
@@ -145,7 +148,7 @@ public class CenterController {
 			request.setAttribute("kind", kind);
 			System.out.println(bvo);
 
-			res = boardDao.someList(start, end, kind);
+			res = boardDao.someList(bvo);
 
 			break;
 
@@ -160,7 +163,7 @@ public class CenterController {
 			String id = ((MemberVO) request.getSession().getAttribute("mem")).getId();
 			// ㄴ여기서 에러
 			if (id.equals("admin"))
-				res = boardDao.someList(start, end, kind);
+				res = boardDao.someList(bvo);
 			break;
 
 		case "insertReg":
