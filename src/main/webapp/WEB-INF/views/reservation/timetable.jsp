@@ -6,7 +6,6 @@
 <style>
 .S_dateset{
 float: left;
-border: solid 1px;
 }
 
 </style>
@@ -16,6 +15,7 @@ border: solid 1px;
 <c:set var="titleStr" value="" />
 <c:set var="sidStr" value="" />
 <c:set var="midStr" value="" />
+<c:set var="dateListStr" value="" />
 
 <c:forEach items="${dateTitleList}" var="dt" varStatus="no" >
 	<c:set var="dateStr" value="${dateStr }${dt.mdate },"/>
@@ -23,6 +23,10 @@ border: solid 1px;
 	<c:set var="titleStr" value="${titleStr }${dt.movtitle },"/>
 	<c:set var="sidStr" value="${sidStr }${dt.sId },"/>
 	<c:set var="midStr" value="${midStr }${dt.mId },"/>
+</c:forEach>
+
+<c:forEach items="${datelist }" var="dd" varStatus="no">
+	<c:set var="dateListStr" value="${dateListStr }${dd },"/>
 </c:forEach>
 
 <script type="text/javascript">
@@ -40,14 +44,18 @@ var sidStr = si.split(',');
 var mi = '${midStr}';
 var midStr = mi.split(',');
 
+var dls = '${dateListStr}';
+var dateListStr = dls.split(',');
+
+var nowtime = '${nowtime}';
+
 	$(document).ready(function(){
-		
-		//$('#S_dateset0').css("border","solid 5px");
-		
+		for(var i = 0;i< dateListStr.length; i++){
+			$('#S_dateset'+i).css("background","white")
+		} 
 	});
 
 	function dateCheck(dd) {
-		
 		
 		var dates = new Date();
 	
@@ -69,8 +77,6 @@ var midStr = mi.split(',');
 		
 			if(dateStr[i]==dd){
 			
-				//alert('#S_title'+cnt)
-				//alert(lastT == titleStr[i])
 				if(lastT == titleStr[i]){
 					$('#S_title'+i).html(' ')
 					$('#S_title'+i).css("border-top" ,"solid 0px")
@@ -78,10 +84,9 @@ var midStr = mi.split(',');
 					$('#S_title'+i).css("border-top" ,"solid 1px")
 					$('#S_title'+i).html(titleStr[i])
 				}
-				
+			//	alert(timeStr[i].split(':')[0]>nowtime.split(':'))
 				$('#S_time'+i).html(timeStr[i])
 				
-				//$('.S_tt'+i).css("border-top" ,"solid 1px")
 				
 				lastT = titleStr[i]
 			}else{
@@ -89,7 +94,6 @@ var midStr = mi.split(',');
 				$('#S_title'+i).html(' ')
 				$('#S_time'+i).html(' ')
 				
-				//$('.S_tt'+i).css("border" ,"solid 0px")
 			}
 			
 		}
@@ -115,6 +119,7 @@ var midStr = mi.split(',');
 <form name="screenchoiceForm" action="screenchoice">
 
 <hr>
+
 <%-- 
 <c:forEach items="${dateTitleList }" var="dt" varStatus="no">
 	${dt.mdate } ${dt.mtime}<br>
@@ -123,11 +128,11 @@ var midStr = mi.split(',');
 
 <!-- 날짜  -->
 
+<div class="btn-group" style="width : 100%; overflow-x: auto;">
 <c:forEach items="${datelist }" var="dd" varStatus="no">
-<div class="S_dateset" id="S_dateset${no.index}" onclick="dateCheck('${dd}')" >
-	${dd }
-</div>
+<input type="button" class="btn btn-secondary" class="S_dateset" id="S_dateset${no.index}" value="${dd }" onclick="dateCheck('${dd}')" />
 </c:forEach>
+</div>
 <div style="clear: both;"></div>
 
 <hr>
@@ -147,11 +152,9 @@ var midStr = mi.split(',');
 
 <hr>
 
-
-<input type="text" name="sid" id="sid" value="sid"/>
-<input type="text" name="mid" id="mid" value="mid"/>
-<input type="text" name="title" id="title" value="title"/>
+<input type="hidden" name="sid" id="sid" value="sid"/>
+<input type="hidden" name="mid" id="mid" value="mid"/>
+<input type="hidden" name="title" id="title" value="title"/>
 
 </form>
-
 

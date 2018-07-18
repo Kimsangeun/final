@@ -59,9 +59,9 @@ public class HomeController {
 		ArrayList<String> res = new ArrayList<String>();
 		
 		res.add("info");
-		res.add("reservation"); //����
-		res.add("movie"); //��ȭ
-		res.add("screen"); //��ȭ������
+		res.add("reservation"); 
+		res.add("movie"); 
+		res.add("screen"); 
 		return res;
 	}
 	
@@ -74,24 +74,24 @@ public class HomeController {
 		
 		ArrayList<String> info = new ArrayList<String>();
 		
-		info.add("notice"); //��������
-		info.add("faq"); //�����ϴ�����
-		info.add("qna"); //1:1����
+		info.add("notice"); 
+		info.add("faq"); 
+		info.add("qna"); 
 		
 		map.put("info", info);
 		
 		ArrayList<String> reservation = new ArrayList<String>();
 		
-		reservation.add("reser"); //����
-		reservation.add("timetable"); //�󿵽ð�ǥ
+		reservation.add("reser"); 
+		reservation.add("timetable"); 
 		
 		map.put("reservation", reservation);
 
 		ArrayList<String> movie = new ArrayList<String>();
 		
-		movie.add("boxoffice"); //�ڽ����ǽ�
-		movie.add("now"); //�������
-		movie.add("comming"); //����������
+		movie.add("boxoffice");
+		movie.add("now"); 
+		movie.add("comming"); 
 		
 		map.put("movie", movie);
 		

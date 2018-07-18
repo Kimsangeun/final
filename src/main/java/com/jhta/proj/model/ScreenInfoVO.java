@@ -23,8 +23,6 @@ public class ScreenInfoVO {
 		
 		for (int i = 0; i < 15; i++) {
 			Date dlist = new Date(now.getYear(), now.getMonth(), now.getDate()+i);
-			//System.out.println("sdfd.format(dlist) : "+sdfd.format(dlist));
-			//System.out.println("sdfd.format(mstart) : "+sdfd.format(mstart));
 			if(sdfd.format(dlist).equals(sdfd.format(mstart))) {
 				return sdfd.format(dlist);	
 			}
@@ -32,6 +30,39 @@ public class ScreenInfoVO {
 		return null;
 	}
 	
+/*	public String getMday() {
+		switch(mday){
+		
+		case "1":
+			mday="일";
+			break;
+		case "2":
+			mday="월";
+			break;
+		case "3":
+			mday="화";
+			break;
+		case "4":
+			mday="수";
+			break;
+		case "5":
+			mday="목";
+			break;
+		case "6":
+			mday="금";
+			break;
+		case "7":
+			mday="토";
+			break;
+		}
+		
+		return mday;
+	}
+
+	public void setMday(String mday) {
+		this.mday = mday;
+	}
+*/
 	public String getMovtitle() {
 		return movtitle;
 	}
