@@ -42,6 +42,7 @@
 
 		<interceptor>
 			<mapping path="/reservation/reser" />
+			<mapping path="/reservation/timetable" />
 			<mapping path="/info/*" />
 			<exclude-mapping path="/info/forbidden" />
 			<beans:ref bean="loginChk" />

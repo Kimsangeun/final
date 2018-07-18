@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -50,9 +49,13 @@ public class ReserController {
 	 * return res; }
 	 */
 
+	SimpleDateFormat sdft=new SimpleDateFormat("HH:mm");
+	SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd ");
+	SimpleDateFormat sdfe = new SimpleDateFormat("E");
+
+
 	@ModelAttribute("datelist") // 현재 날짜로부터 2주
 	public Object datelist(Model model) {
-
 		ArrayList datearr = new ArrayList<>();
 
 		SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd");
@@ -66,6 +69,7 @@ public class ReserController {
 
 		return datearr;
 	}
+	
 
 	@ModelAttribute("reserdata")
 	public Object rese(Model model, ReserVO vo) {
@@ -104,30 +108,6 @@ public class ReserController {
 		return res;
 	}
 
-	/*
-	 * @ModelAttribute("midlist") public ArrayList<MovVO> midlist(Model model,
-	 * ScreenInfoVO vo, MovVO mvo) { ArrayList<ScreenInfoVO> scrArr = null;
-	 * ArrayList<MovVO> movArr = null;
-	 * 
-	 * ArrayList<MovVO> res = new ArrayList<>();
-	 * 
-	 * scrArr = (ArrayList) mdao.midList(vo); movArr = (ArrayList) mdao.list(mvo);
-	 * 
-	 * for (MovVO movVo : movArr) { for (ScreenInfoVO scrVo : scrArr) { if
-	 * (scrVo.getmId() == movVo.getmId()) { res.add(movVo); } } } //
-	 * System.out.println(res); return res; }
-	 */
-
-	// @RequestMapping("/")
-	/*
-	 * public Object cine1(Model model, ReserVO vo) {
-	 * 
-	 * model.addAttribute("menu","reservation");
-	 * 
-	 * String mm = "reser";
-	 * 
-	 * model.addAttribute("main", mm); return "home"; }
-	 */
 
 	@ModelAttribute("dateTitleList")
 	public Object datetitlelist(Model model, ScreenInfoVO vo) {
@@ -137,15 +117,6 @@ public class ReserController {
 		return res;
 	}
 
-	@RequestMapping("/timetable")
-	public Object cine3(Model model, ScreenInfoVO svo) {
-		model.addAttribute("menu", "reservation");
-
-		String mm = "timetable";
-
-		model.addAttribute("main", mm);
-		return "home";
-	}
 
 	@RequestMapping("/reser")
 	public Object cine2(Model model) {
@@ -166,7 +137,6 @@ public class ReserController {
 		ScreenInfoVO svo = new ScreenInfoVO();
 		svo.setsId(sid);
 		svo = sdao.findSInfo(svo);
-
 
 		rvo = new ReserVO();
 		rvo.setId(((MemberVO) session.getAttribute("mem")).getId());
@@ -215,6 +185,26 @@ public class ReserController {
 		model.addAttribute("main", mm);
 		return "home";
 	}
+
+
+	@RequestMapping("/timetable")
+    public Object cine3(Model model, ScreenInfoVO svo) {
+        
+    	Date now = new Date();
+    	
+    	String nowtime = sdft.format(now);
+    	
+    	model.addAttribute("nowtime", nowtime);
+    	
+    	//System.out.println(nowtime);
+    	
+    	model.addAttribute("menu","reservation");
+        
+        String mm = "timetable";      
+       
+        model.addAttribute("main", mm);
+        return "home";
+    }
 
 	@RequestMapping(value = "/payend", method = RequestMethod.POST)
 	public Object cine5(Model model, HttpServletRequest request) {
