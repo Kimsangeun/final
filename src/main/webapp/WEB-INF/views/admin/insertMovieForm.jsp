@@ -65,7 +65,7 @@
         });
     </script>
 
-
+<div class="container">
 <form action="insertMovie" method="post" enctype="multipart/form-data" accept-charset="UTF-8" >
 	<table id="movieClass" border="">
 		<tr>
@@ -123,7 +123,7 @@
 		</tr>
 	</table>
 </form>
-
+</div>
 
 </body>
 </html>

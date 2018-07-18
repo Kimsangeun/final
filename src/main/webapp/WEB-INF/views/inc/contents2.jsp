@@ -12,14 +12,14 @@
 <title>Insert title here</title>
 </head>
 <style>
-</style>
-<script>
 
-</script>
+
+</style>
+
 
 
 <body>
-	<div id="myCarousel" class="carousel slide" data-ride="carousel" style="margin-top :50px">
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
 			<c:forEach items="${mainpagemov}" var="mm" varStatus="no">
@@ -69,23 +69,16 @@
     <div class="container marketing">
 
       <!-- Three columns of text below the carousel -->
-      <div class="row">
+      <div class="row" >
 
         	<c:forEach begin="1" end="8" items="${mainpagemov}" var="mm" varStatus="no">
         		<div align="center" class="col-lg-3 col-xs-6 col-sm-4 col-md-4">
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
-        		<p>${mm.title}</p>
-        		<c:choose>
-        			<c:when test="">
-        			
-        			</c:when>
-        			<c:otherwise>
-        			
-        			</c:otherwise>
-        		</c:choose>
+        		<p class="hidden-xs">${mm.title}</p>
+
         		<p>${mm.rating}</p>
         		<p><a class="btn btn-default" href="/proj/movie/detailMovie?mid=${mm.mid }" role="button">상세정보 &raquo;</a>
-        		<a class="btn btn-default" href="#" role="button">예매하기 &raquo;</a></p>
+        		<a class="btn btn-default" href="/proj/reservation/reser" role="button">예매하기 &raquo;</a></p>
         		
         		</div>
         	</c:forEach>
@@ -103,7 +96,9 @@
           <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img style="padding-top:100px" class="featurette-image img-responsive center-block" 
+          src="${pageContext.request.contextPath}\resources\imgs/cgv.jpg"
+          alt="Generic placeholder image">
         </div>
       </div>
 
@@ -111,11 +106,13 @@
 
       <div class="row featurette">
         <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+          <h2 class="featurette-heading">Oh yeah, it's that good. 영화관 <span class="text-muted">See for yourself.</span></h2>
           <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img style="padding-top:100px" class="featurette-image img-responsive center-block" 
+          src="${pageContext.request.contextPath}\resources\imgs/screen.jpg"
+          alt="Generic placeholder image">
         </div>
       </div>
 
@@ -123,11 +120,13 @@
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">스낵바<span class="text-muted">Checkmate.</span></h2>
+          <p class="lead">없는게 없습니다.</p>
         </div>
         <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
+          <img style="padding-top:100px" class="featurette-image img-responsive center-block" 
+         src="${pageContext.request.contextPath}\resources\imgs/snack.jpg" 
+         alt="Generic placeholder image">
         </div>
       </div>
 

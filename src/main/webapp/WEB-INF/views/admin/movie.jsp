@@ -21,6 +21,7 @@
 
 
 <body>
+<div class="container">
 <button type="button" class="btn btn-danger" onclick="location.href='insertMovieForm'">추가</button>
 <!-- <input type="button" value="추가" onclick="location.href='insertMovieForm'"> -->
 <table class="table table-hover" >
@@ -74,5 +75,6 @@
 	</tr>	 --%>
 </tbody>
 </table>
+</div>
 </body>
 </html>

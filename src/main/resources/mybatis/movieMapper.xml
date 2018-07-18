@@ -17,7 +17,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select 
 		movie.title as movtitle,
 		to_char(screeninfo.mstart,'YYYY-MM-dd') as mdate, 
-		to_char(screeninfo.mstart,'HH:mm ') as mtime 
+		to_char(screeninfo.mstart,'HH24:mi ') as mtime 
 		from screeninfo, movie
 		where screeninfo.mid = movie.mid and screeninfo.sid = #{sId}
 	</select>
@@ -33,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="dateTitleList" resultType="screenInfoVo">
 		select 
 		to_char(screeninfo.mstart,'YYYY-MM-DD') as mdate, 
-		to_char(screeninfo.mstart,'HH:mm') as mtime, 
+		to_char(screeninfo.mstart,'HH24:mi') as mtime, 
 		movie.title as movtitle, 
 		screeninfo.sid,
 		movie.mid  

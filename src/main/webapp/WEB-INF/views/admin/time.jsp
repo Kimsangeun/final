@@ -44,6 +44,7 @@ $(document).ready(function(){
 
 
 <body>
+<div class="container">
 <fmt:formatDate var="mindate" value="<%= new Date() %>" pattern="yyyy-MM-dd"/>
 <fmt:formatDate var="maxdate" value="<%= new Date(new Date().getTime() + 20*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
 <form action="?">
@@ -58,6 +59,7 @@ $(document).ready(function(){
 	<label for="tpick">날짜</label>
 	</div>
 </form>	
+
 <p class="h1">${param.mstart eq null ? mindate : param.mstart}<p>	
 
 <table class="table" >
@@ -110,5 +112,6 @@ $(document).ready(function(){
 		</div>
 
 </form>
+</div>
 </body>
 </html>
