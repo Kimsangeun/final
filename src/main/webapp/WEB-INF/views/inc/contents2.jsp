@@ -4,21 +4,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
 <style>
 
 
 </style>
 
-
-
-<body>
 	<div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
@@ -29,18 +20,21 @@
 		<div class="carousel-inner" role="listbox">
 			<c:forEach items="${event}" var="mm" varStatus="no">
 				<div class="${no.index eq 0 ? 'item active' : 'item' }">
-					<img class="first-slide"
+				<img class="first-slide" 
 						src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"
 						alt="slide">
+					<%-- <a href="/proj/info/detail?bid=${mm.bid }"><img class="first-slide"
+						src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"
+						alt="slide"></a> --%>
 					<div class="container">
 						<div class="carousel-caption">
 							<h1>${mm.title}</h1>
 							<p>${mm.title}
 							</p>
-							<p>
+							<!-- <p>
 								<a class="btn btn-lg btn-primary" href="#" role="button">
 								이벤트보러가기</a>
-							</p>
+							</p> -->
 						</div>
 					</div>
 
@@ -102,8 +96,23 @@
         		<div align="center" class="col-lg-3 col-xs-6 col-sm-4 col-md-4">
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
         		<p class="hidden-xs">${mm.title}</p>
-
-        		<p>${mm.rating}</p>
+				<div class="fixedStar" id="Star_${no.index }"></div>
+				<script type="text/javascript">
+				$(function() {
+				    $('#Star_${no.index }').raty({
+				    	size:24,
+						half:true,
+						path:'/proj/resources/imgs/',
+						scoreName:'rating',
+						starHalf:'star-half-big.png',
+						starOn:'star-on-big.png',
+						starOff:'star-off-big.png',
+				    	  readOnly:  true,
+				    	  start:    ${mm.rating/2}
+				    	});
+				});
+				</script>
+        		<%-- <p>${mm.rating}</p> --%>
         		<p><a class="btn btn-default" href="/proj/movie/detailMovie?mid=${mm.mid }" role="button">상세정보 &raquo;</a>
         		<a class="btn btn-default" href="/proj/reservation/reser" role="button">예매하기 &raquo;</a></p>
         		
@@ -182,5 +191,3 @@
 </c:forEach>
 	
 </div> --%>
-</body>
-</html>

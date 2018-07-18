@@ -21,7 +21,7 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 <script type="text/javascript" src="/proj/resources/jquery-3.3.1.min.js"></script>
 <script type="text/javascript"
 	src="/proj/resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-
+<script type="text/javascript" src="/proj/resources/js/jquery.raty.min.js"></script>
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -40,6 +40,9 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 <script type="text/javascript">
     	/* alert('aa${mem}'); */
     </script>
+    <style type="text/css"> 
+    html, body { height:100%} 
+    </style>
 
 </head>
 <!-- NAVBAR
@@ -95,7 +98,6 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 									<li><a href="/proj/info/notice">공지사항</a></li>
 									<li><a href="/proj/info/faq">자주찾는질문</a></li>
 									<li><a href="/proj/info/qna">1:1문의</a></li>
-									<li>${mem.id}asdf</li>
 								</ul></li>
 							<jsp:include page="admin/topmenu.jsp"></jsp:include>
 						</ul>
