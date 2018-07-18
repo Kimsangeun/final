@@ -64,14 +64,27 @@ public class BoardDAO {
 		map.put("schCol", schCol);
 		map.put("title", title);
 		
-		return sessionTemplate.selectOne("boardMapper.totalCount", map);
+		return sessionTemplate.selectOne("boardMapper.totalCount1", map);
 	}
+
+	public Object totalCount(String kind) {
+		return sessionTemplate.selectOne("boardMapper.totalCount2", kind);
+	}
+
 	
 	public Object someList(BoardVO bvo) {
 		return sessionTemplate.selectList("boardMapper.someList", bvo);
-		
 	}
-/*	public Object someList(BoardVO bvo, Integer start, Integer end, String kind) {
+
+	
+	public Object nextSeq(BoardVO bvo) {
+		return sessionTemplate.insert("boardMapper.nextseq", bvo);
+	}
+	public Object reply(BoardVO bvo) {
+		return sessionTemplate.insert("boardMapper.replyInsert", bvo);
+	}
+
+	/*	public Object someList(BoardVO bvo, Integer start, Integer end, String kind) {
 		Map<String, Object> map = new HashMap<>();
 		
 		map.put("start", start);

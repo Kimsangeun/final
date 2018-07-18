@@ -4,25 +4,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="boardMapper">
-
-
 	<sql id="bkind">
 		<where> kind = #{kind}</where>
 	</sql>
-
+<!-- 
 	<select id="boardList" resultType="boardVo"
 		parameterType="boardVo">
 
 		select * from board
 		<include refid="bkind"></include>
 		order by gid desc
+	</select> -->
+
+
+	<select id="totalCount1" resultType="java.lang.Integer"
+		parameterType="hashmap"><!-- schCol / title -->
+		select count(*) from board
+		<include refid="whereSch" />
 	</select>
 
-
-	<select id="totalCount" resultType="java.lang.Integer"
-		parameterType="hashmap"><!-- schCol / title -->
-		select count(*) from board 
-		<include refid="whereSch" />
+	<select id="totalCount2" resultType="java.lang.Integer"
+		parameterType="java.lang.String"><!-- schCol / title -->
+		select count(*) from board
+		<include refid="bkind" />
 	</select>
 
 	<!-- <include refid="boardList"/> -->
@@ -44,7 +48,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		gogo!=''"> ${schCol} like '%${gogo}%' </if> </where> </sql> -->
 	<sql id="whereSch">
 		<where>
-		kind = #{kind}
+			kind = #{kind}
 			<if test="title!=null and title!=''">
 				<!-- <choose> <when test="schCol=='cnt'"> <![CDATA[ cnt <= #{title}]]> 
 					</when> <otherwise> -->
@@ -65,9 +69,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<![CDATA[
 		select * from board where cnt <= #{cnt} order by gid desc
 		]]>
-
 	</select>
-
 
 	<select id="boardDetail" resultType="boardVo"
 		parameterType="boardVo">
@@ -96,6 +98,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{pid}, #{pw}, #{title}, #{content}, #{upfile}, #{kind})
 	</insert>
 
+
+	<sql id="whereseq">
+		<where>
+<![CDATA[
+gid = #{gid} and seq > #{seq} and kind = #{kind}
+		]]>
+		</where>
+	</sql>
+
+	<update id="nextseq" parameterType="boardVo">
+		update board set seq = seq+1
+		<include refid="whereseq" />
+	</update>
+
+	<insert id="replyInsert" parameterType="boardVo">
+		<selectKey keyProperty="bid" order="BEFORE"
+			resultType="java.lang.Integer">
+			<include refid="maxId" />
+		</selectKey>
+		insert into board
+		(bid, gid, seq, lev, cnt , regdate, pid, pw, title,
+		content, kind)
+		values (#{bid}, #{gid}, #{seq}+1, #{lev}+1, -1
+		, sysdate, #{pid}, #{pw}, #{title}, #{content}, #{kind})
+	</insert>
+
 	<update id="boardModify" parameterType="boardVo">
 		update board set
 		title=#{title}, content=#{content}, upfile=#{upfile} ,pw=#{pw},
@@ -108,21 +136,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from board where bid=#{bid}
 	</select>
 
-
 	<delete id="boardDelete" parameterType="boardVo">
 		delete from board where
 		bid=#{bid}
 	</delete>
-
-	<!-- <insert id="boardInsert" parameterType="boardVo"> <selectKey keyProperty="bid" 
-		order="BEFORE" resultType="java.lang.Integer"> <include refid="maxId" /> 
-		</selectKey> insert into board (bid, gid, seq, lev, cnt , regdate, pid, pw, 
-		title,content, upfile) values (#{bid}, #{bid}, 0, 0, 0 , sysdate, #{pid}, 
-		#{pw}, #{title}, ${content},#{upfile}; </insert> -->
-	<!-- <insert id="boardInsertList" parameterType="boardVo"> insert all <foreach 
-		collection="arr" item="row" index="no"> into board (bid, gid, seq, lev, cnt 
-		, regdate, pname, pw, title,content) values ( <include refid="maxId" /> +#{no}, 
-		<include refid="maxId" /> +#{no}, 0, 0, 0 , sysdate, #{row.pname}, #{row.pw}, 
-		#{row.title},#{row.content}) </foreach> select * from dual </insert> -->
 
 </mapper>

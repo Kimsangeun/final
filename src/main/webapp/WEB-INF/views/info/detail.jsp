@@ -20,6 +20,12 @@
 		<td>파일</td>
 		<td colspan="3">${data.upfile }</td>
 	</tr>
+	<c:if test="${data.img}">
+		<tr>
+			<td colspan="4"><img src="../resource/board/${data.upfile }" />
+			</td>
+		</tr>
+	</c:if>
 	<tr>
 		<td colspan="4">${data.content }</td>
 	</tr>

@@ -23,8 +23,9 @@
 		<tr>
 			<td>파일</td>
 			<td colspan="3"><input type="file" name="mmfile"
-				value="${data.upfile }" /></td>
+				value="${data.mmfile }" /></td>
 		</tr>
+		
 		<tr>
 			<td colspan="4"><textarea rows="5" cols="20" name="content">${data.content }</textarea></td>
 		</tr>

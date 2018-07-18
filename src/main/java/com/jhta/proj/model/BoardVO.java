@@ -13,22 +13,13 @@ public class BoardVO {
 	Integer bid, gid, seq, lev, cnt;
 	Date regdate;
 	String pid, pw, title, content, upfile, kind, reply,schCol;
-
 	MultipartFile mmfile;
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d일 HH:mm시");
 
 	ArrayList<BoardVO> arr;
 
 	public BoardVO() {
 	}
-
-	public BoardVO(String pid, String pw, String title, String content) {
-		this.pid = pid;
-		this.pw = pw;
-		this.title = title;
-		this.content = content;
-	}
-
 	
 	public Integer getStart() {
 		return start;
@@ -169,6 +160,7 @@ public class BoardVO {
 	}
 
 	public void setContent(String content) {
+//		content = content.replace("\n", "<br>");
 		this.content = content;
 	}
 
