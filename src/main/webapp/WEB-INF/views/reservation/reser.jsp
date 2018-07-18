@@ -238,7 +238,6 @@ var titleListStr = tls.split(',');
 	</div>
 	<div class="S_choice" style="overflow: auto;">
 		<div id="S_tim">시간</div>
-
 		<hr>
 		
 		<c:forEach begin="1" end="20" var="no">

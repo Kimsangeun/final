@@ -20,31 +20,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 	<select id="totalCount" resultType="java.lang.Integer"
-		parameterType="java.lang.String">
-		select count(*) from board where kind=#{kind}
+		parameterType="hashmap"><!-- schCol / title -->
+		select count(*) from board 
+		<include refid="whereSch" />
 	</select>
 
 	<!-- <include refid="boardList"/> -->
+	<!-- <select id="someList" resultType="boardVo" parameterType="hashmap"> 
+		select * from (select rownum rnum, tt.* from (select * from board <include 
+		refid="whereSch" /> order by bid desc) tt) <![CDATA[ where rnum >=#{start} 
+		and rnum <= #{end} ]]> </select> -->
 	<select id="someList" resultType="boardVo"
-		parameterType="hashmap">
+		parameterType="boardVo">
 		select * from
 		(select rownum rnum, tt.* from
-		(select * from board where kind=#{kind}) tt) 
+		(select * from board
+		<include refid="whereSch" />
+		order by bid desc) tt) 
 	<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
 	</select>
 
+	<!-- <sql id="whereSch"> <where> kind = #{kind} <if test="gogo!=null and 
+		gogo!=''"> ${schCol} like '%${gogo}%' </if> </where> </sql> -->
 	<sql id="whereSch">
 		<where>
+		kind = #{kind}
 			<if test="title!=null and title!=''">
-				title = #{title} title like '%${title}%'
-				<choose>
-					<when test="schCol=='cnt'">
-						<![CDATA[ cnt <= #{title}]]>
-					</when>
-					<otherwise>
-						${schCol} like '%'||#{title}||'%'
-					</otherwise>
-				</choose>
+				<!-- <choose> <when test="schCol=='cnt'"> <![CDATA[ cnt <= #{title}]]> 
+					</when> <otherwise> -->
+				and ${schCol} like '%'||#{title}||'%'
+				<!-- </otherwise> </choose> -->
 			</if>
 		</where>
 	</sql>
@@ -54,6 +59,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<include refid="whereSch" />
 		order by gid desc
 	</select>
+
 	<select id="boardListCnt" resultType="boardVo"
 		parameterType="boardVo">
 		<![CDATA[
@@ -66,7 +72,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="boardDetail" resultType="boardVo"
 		parameterType="boardVo">
 		select * from board where bid = #{bid}
-
 	</select>
 
 	<update id="cntup" parameterType="boardVo">
