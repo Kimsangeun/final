@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-관리자계정으로 로그인하세요
+<div class="container">
+<p class="h1">관리자계정으로 로그인하세요</p>
+</div>
 </body>
 </html>

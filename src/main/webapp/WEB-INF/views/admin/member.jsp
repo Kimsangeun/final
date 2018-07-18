@@ -20,6 +20,7 @@
 
 
 <body>
+<div class="container">
 <input type="button" value="추가" onclick="location.href='insertMovieForm'">
 <table class="table table-hover" >
 
@@ -51,5 +52,7 @@
 </c:forEach>
 </tbody>
 </table>
+</div>
 </body>
+
 </html>
