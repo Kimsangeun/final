@@ -32,5 +32,9 @@ public class AdminDAO {
 		
 	}
 	
+	public Object event(){
+		return sessionTemplate.selectList("adminMapper.event");
+	}
+	
 	
 }

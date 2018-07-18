@@ -19,15 +19,39 @@
 
 
 <body>
-	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	<div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
+			<c:forEach items="${event}" var="mm" varStatus="no">
+			<li data-target="#myCarousel" data-slide-to="${no.index }" class="${no.index eq 0 ? 'active' : 'a' }"></li>
+			</c:forEach>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<c:forEach items="${event}" var="mm" varStatus="no">
+				<div class="${no.index eq 0 ? 'item active' : 'item' }">
+					<img class="first-slide"
+						src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"
+						alt="slide">
+					<div class="container">
+						<div class="carousel-caption">
+							<h1>${mm.title}</h1>
+							<p>${mm.title}
+							</p>
+							<p>
+								<a class="btn btn-lg btn-primary" href="#" role="button">
+								이벤트보러가기</a>
+							</p>
+						</div>
+					</div>
+
+					<%-- <div>${mm.title}</div> --%>
+				</div>
+			</c:forEach>
+		</div>
+		<%-- <ol class="carousel-indicators">
 			<c:forEach items="${mainpagemov}" var="mm" varStatus="no">
 			<li data-target="#myCarousel" data-slide-to="${no.index }" class="${no.index eq 0 ? 'active' : 'a' }"></li>
 			</c:forEach>
-			<!-- <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li> -->
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<c:forEach items="${mainpagemov}" var="mm" varStatus="no">
@@ -47,10 +71,10 @@
 						</div>
 					</div>
 
-					<%-- <div>${mm.title}</div> --%>
+					<div>${mm.title}</div>
 				</div>
 			</c:forEach>
-		</div>
+		</div> --%>
 		<a class="left carousel-control" href="#myCarousel" role="button"
 			data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
 			aria-hidden="true"></span> <span class="sr-only">Previous</span>
@@ -66,9 +90,12 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
     
  	<!-- <div class="container-fluid"> -->
-    <div class="container marketing">
+    <div class="container marketing" style="margin-top :50px">
 
       <!-- Three columns of text below the carousel -->
+      <div align="center" class="hidden-lg" >
+      	<img class="img-responsive" alt="" src="${pageContext.request.contextPath}\resources\imgs/ticket.png"/>
+      </div>
       <div class="row" >
 
         	<c:forEach begin="1" end="8" items="${mainpagemov}" var="mm" varStatus="no">
@@ -138,7 +165,7 @@
       <!-- FOOTER -->
       <footer>
         <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p>&copy; 2018 JHTA Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
       </footer>
 
     </div><!-- /.container -->

@@ -167,7 +167,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="yearList" parameterType="settleVo" resultType="settleVo">
 		select reser.*,screeninfo.mstart,to_char(screeninfo.mstart,'YYYY') as mtitle from reser,screeninfo 
 		where reser.sid = screeninfo.sid
-		and to_char(mstart,'YYYY')=#{num}
+		and to_char(mstart,'YYYY')=#{num} order by screeninfo.mstart
 	</select>
 	<!-- and reser.STATUS = 0  -->
 	<select id="monthList" parameterType="settleVo" resultType="settleVo">
@@ -199,6 +199,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 리뷰가져오기 -->
 	<select id="review" parameterType="movieVo" resultType="reviewVo">
 		SELECT * from review where mid = #{mid} 
+	</select>
+	<!--  -->
+	
+	<!-- 이벤트(공지사항)게시판 메인화면에 걸을 게시물 가져오기  -->
+	<select id="event" resultType="boardVo">
+		select * from (select * from board order by regdate desc ) 
+		where kind ='notice' and <![CDATA[rownum<=4]]>
 	</select>
 	<!--  -->
 </mapper>

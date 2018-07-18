@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jhta.proj.model.BoardDAO;
+import com.jhta.proj.model.admin.AdminDAO;
 import com.jhta.proj.model.admin.MovieDAO;
 
 /**
@@ -43,13 +45,19 @@ public class HomeController {
 	@Resource
 	MovieDAO movieDao;
 	
+	@Resource
+	AdminDAO adminDao;
+	
+	@ModelAttribute("event")
+	public Object see() {
+		
+		Object res = adminDao.event();
+		return res;
+	}
+	
 	@ModelAttribute("mainpagemov")
 	public Object movie() {
-		
 		Object res = movieDao.list();
-		
-		
-		
 		return res;
 	}
 	
@@ -59,9 +67,9 @@ public class HomeController {
 		ArrayList<String> res = new ArrayList<String>();
 		
 		res.add("info");
-		res.add("reservation"); 
-		res.add("movie"); 
-		res.add("screen"); 
+		res.add("reservation"); //����
+		res.add("movie"); //��ȭ
+		res.add("screen"); //��ȭ������
 		return res;
 	}
 	
@@ -74,24 +82,24 @@ public class HomeController {
 		
 		ArrayList<String> info = new ArrayList<String>();
 		
-		info.add("notice"); 
-		info.add("faq"); 
-		info.add("qna"); 
+		info.add("notice"); //��������
+		info.add("faq"); //�����ϴ�����
+		info.add("qna"); //1:1����
 		
 		map.put("info", info);
 		
 		ArrayList<String> reservation = new ArrayList<String>();
 		
-		reservation.add("reser"); 
-		reservation.add("timetable"); 
+		reservation.add("reser"); //����
+		reservation.add("timetable"); //�󿵽ð�ǥ
 		
 		map.put("reservation", reservation);
 
 		ArrayList<String> movie = new ArrayList<String>();
 		
-		movie.add("boxoffice");
-		movie.add("now"); 
-		movie.add("comming"); 
+		movie.add("boxoffice"); //�ڽ����ǽ�
+		movie.add("now"); //�������
+		movie.add("comming"); //����������
 		
 		map.put("movie", movie);
 		
