@@ -1,18 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+<meta name="viewport"content="width=device-width, initial-scale=1.0 , 
+user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name="description" content="">
-<meta name="author" content="">
-<link rel="icon" href="../../favicon.ico">
 
 <title>중앙박스</title>
 
@@ -42,6 +40,7 @@
 <script type="text/javascript">
     	/* alert('aa${mem}'); */
     </script>
+
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -119,6 +118,7 @@
 	</div>
 
 	<!-- Carousel -->
+	<div style="margin-top :50px">
 	<c:choose>
 		<c:when test="${main==null}">
 			<jsp:include page="inc/contents2.jsp" />
@@ -127,12 +127,12 @@
 			<jsp:include page="inc/contents2.jsp" />
 		</c:when>
 		<c:otherwise>
-			<div class="container marketing" style="margin-top: 100px">
+			<div class="container">
 				<jsp:include page="${menu }/${main }.jsp" />
 			</div>
 		</c:otherwise>
 	</c:choose>
-
+	</div>
 
 
 

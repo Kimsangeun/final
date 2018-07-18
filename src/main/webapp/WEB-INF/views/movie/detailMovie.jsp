@@ -1,11 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-<!DOCTYPE html>
-<html>
-<head>
 <style>
 .star-input>.input,
 .star-input>.input>label:hover,
@@ -27,12 +23,7 @@ star-input>.input.focus{outline:1px dotted #ddd;}
 .star-input>.input>label[for="p5"]{width:150px;z-index:1;}
 .star-input>output{display:inline-block;width:60px; font-size:18px;text-align:right; vertical-align:middle;}
 </style>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
 <script src="../resources/star.js"></script>
-</head>
 <script type="text/javascript">
 $(function() {
     $('#review').keydown(function (e){
@@ -49,65 +40,89 @@ $(function() {
     });
 });
 </script>
-<body>
 
-	<table border="" >
-		<tr>
-			<td>타이틀</td>
-			<td>${moviedata['movie'].title }</td>
-		</tr>
-		<tr>
-			<td>국가</td>
-			<td>${moviedata['movie'].nation }</td>
-		</tr>
-		<tr>
-			<td>장르</td>
-			<td>${moviedata['movie'].genre }</td>
-		</tr>
-		<tr>
-			<td>런타임</td>
-			<td>${moviedata['movie'].runtime }분</td>
-		</tr>
-		<tr>
-			<c:set var="grade" value="${moviedata['movie'].grade }세 관람가"/>
-			<td>상영등급</td>
-			<td>${moviedata['movie'].grade eq 0 ? '전체 관람가': 
-			(moviedata['movie'].grade eq 19?'청소년 관람불가': grade )}</td>
-		</tr>
-		<tr>
-			<td>감독</td>
-			<td>${moviedata['movie'].director }</td>
-		</tr>
-		<tr>
-			<td>배우</td>
-			<td>${moviedata['movie'].actor }</td>
-		</tr>
-		<tr>
-			<td>개봉일</td>
-			<td>${moviedata['movie'].release }</td>
-		</tr>
+	<div class="row" style="padding-top:100px">
+		<div class="col-md-4 col-xs-12" >
+			<img src="${pageContext.request.contextPath}\resources\movposter/${moviedata['movie'].poster}" />
+		</div>
+		<div class="col-md-8  col-xs-12">
+			<div style="padding-bottom:25px;border-bottom:1px solid gray;">
+			<p class="h1">
+			<img alt="fu"
+			src="${pageContext.request.contextPath}\resources\imgs/movie_icon_${moviedata['movie'].grade}.gif" />
+			${moviedata['movie'].title }
+			</p>
+			</div>
+			<div style="padding-top:25px;  border-bottom:   1px solid gray;">
+			<div class="row" style="padding-right:20px">
+			<p class="h3 col-md-10 col-sm-8 col-xs-8">${moviedata['movie'].rating }</p>
+			<button class="btn btn-danger col-md-2 col-sm-4 col-xs-4">예매하기</button>
+			</div>
+			<dl class="dl-horizontal text-left">
+				  <dt><p class="text-left">개봉일 :</p></dt>
+				  <dd> <fmt:formatDate pattern="YYYY-MM-dd" value="${moviedata['movie'].release }"/></dd>
+				  <dt><p class="text-left">감독:</p></dt>
+				  <dd>${moviedata['movie'].director }</dd>
+				  <dt><p class="text-left">출연진:</p></dt>
+				  <dd>${moviedata['movie'].actor }</dd>
+				  <dt><p class="text-left">장르:</p></dt>
+				  <dd>${moviedata['movie'].genre } / ${moviedata['movie'].runtime } 분</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+	<div style="padding-top:25px; padding-bottom:50px;border-bottom:   1px solid gray" >
+	<p class="h2">줄거리</p>
+	<p>${moviedata['movie'].plot}</p>
+	</div>
+	<c:if test="${moviedata['movie'].steelcut != null and moviedata['movie'].steelcut != '' }">
+	<div class="steelcut">
+	<p class="h2">스틸컷</p>
+	<div id="myCarousel" class="carousel slide" data-ride="carousel">
 		
-		<tr>
-			<td>포스터</td>
-			<td><img src="${pageContext.request.contextPath}\resources\movposter/${moviedata['movie'].poster}" /></td>
-		</tr>
-
-		<c:forEach items="${fn:split(moviedata['movie'].steelcut,'[|]')}" var="ss">
-			<tr>
-			<td>스틸컷</td>
-			<td><img src="${pageContext.request.contextPath}\resources\movcut/${ss}"/></td>
-			</tr>
-		</c:forEach>
-		<tr>
-			<td>줄거리</td>
-			<td>${moviedata['movie'].plot }</td>
-		</tr>
-		<tr>
-			<td colspan="2" align="center">
-				<a href='#' onclick='history.back(-1); return false;'>뒤로가기</a>
-			</td>
-		</tr>
-	</table>
+		<!-- Indicators -->
+		<ol class="carousel-indicators">
+			<c:set var="cut_count" value="0"/>
+			<c:forTokens var="mm" items="${moviedata['movie'].steelcut }" delims="|" varStatus="no" >
+			
+			<li data-target="#myCarousel" data-slide-to="${no.index }" class="${no.index eq 0 ? 'active' : 'a' }"></li>
+			<c:set var="cut_count" value="${cut_count+1 }"/>
+			</c:forTokens>
+			
+		</ol>
+		
+		<div class="carousel-inner" role="listbox">
+			
+			<c:forTokens var="mm" items="${moviedata['movie'].steelcut }" delims="|" varStatus="no" >
+			     <div class="${no.index eq 0 ? 'item active' : 'item' }">
+					<img class="first-slide" 
+						src="${pageContext.request.contextPath}\resources\movcut/${mm}"
+						alt="slide">
+						<div class="container">
+						<div class="carousel-caption">
+							<p>
+								${no.index+1 } / ${cut_count}
+							</p>
+						</div>
+					</div>
+				</div>
+		
+			</c:forTokens>
+			
+		</div>
+		
+		<a class="left carousel-control" href="#myCarousel" role="button"
+			data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
+			aria-hidden="true"></span> <span class="sr-only">Previous</span>
+		</a> <a class="right carousel-control" href="#myCarousel" role="button"
+			data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div>
+	</div>
+	</c:if>
+	
 	<div>
 	<form action="" method="POST">
 	<div>
@@ -150,7 +165,47 @@ $(function() {
 	</div>
 	
 <!-- </form> -->
+<!-- 
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		Indicators
+		<ol class="carousel-indicators">
+			<c:forEach items="${mainpagemov}" var="mm" varStatus="no">
+			<li data-target="#myCarousel" data-slide-to="${no.index }" class="${no.index eq 0 ? 'active' : 'a' }"></li>
+			</c:forEach>
+			<!-- <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			<li data-target="#myCarousel" data-slide-to="1"></li>
+			<li data-target="#myCarousel" data-slide-to="2"></li>
+		</ol>
+		<div class="carousel-inner" role="listbox">
+			<c:forEach items="${mainpagemov}" var="mm" varStatus="no">
+				<div class="${no.index eq 0 ? 'item active' : 'item' }">
+					<img class="first-slide"
+						src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}"
+						alt="slide">
+					<div class="container">
+						<div class="carousel-caption">
+							<h1>${mm.title}</h1>
+							<p>${mm.title}
+							</p>
+							<p>
+								<a class="btn btn-lg btn-primary" href="#" role="button">예매하러
+									가기</a>
+							</p>
+						</div>
+					</div>
 
-
-</body>
-</html>
+					<%-- <div>${mm.title}</div> --%>
+				</div>
+			</c:forEach>
+		</div>
+		<a class="left carousel-control" href="#myCarousel" role="button"
+			data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
+			aria-hidden="true"></span> <span class="sr-only">Previous</span>
+		</a> <a class="right carousel-control" href="#myCarousel" role="button"
+			data-slide="next"> <span
+			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+			<span class="sr-only">Next</span>
+		</a>
+	</div> -->
+<!-- </body>
+</html> -->

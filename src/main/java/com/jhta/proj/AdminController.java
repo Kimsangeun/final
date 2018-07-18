@@ -237,8 +237,6 @@ public class AdminController {
 			break;
 
 		}
-
-
 		return res;
 	}
 
@@ -282,13 +280,11 @@ public class AdminController {
 	}
 
 	ArrayList<String> filesUP(ArrayList<MultipartFile> ups, HttpServletRequest request) {
-
 		ArrayList<String> steelcutsNames = new ArrayList<>();
 		for(MultipartFile up:ups) {
 			String bb = fileUP(up,request,"cut");
 			steelcutsNames.add(bb);
 		}
-
 		return steelcutsNames;
 	}
 

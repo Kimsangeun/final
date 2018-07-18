@@ -8,7 +8,7 @@
 	accept-charset="UTF-8">
 	<input type="hidden" name="bid" value="${data.bid}">
 
-	<table border="">
+	<table class="table table-hover">
 		<tr>
 			<td>작성자</td>
 			<td colspan="3"><input type="text" name="pid"
@@ -23,8 +23,9 @@
 		<tr>
 			<td>파일</td>
 			<td colspan="3"><input type="file" name="mmfile"
-				value="${data.upfile }" /></td>
+				value="${data.mmfile }" /></td>
 		</tr>
+		
 		<tr>
 			<td colspan="4"><textarea rows="5" cols="20" name="content">${data.content }</textarea></td>
 		</tr>

@@ -26,4 +26,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select *
 		from reser where rid=#{rid}
 	</select>
+	
+	<select id="schseatnum" parameterType="reserVo" resultType="java.lang.String" >
+		select seatnum from reser where sid=#{sId}
+	</select>
 </mapper>

@@ -318,8 +318,12 @@ var titleListStr = tls.split(',');
 		<div id="S_da"></div>
 	</div>
 	<div class="S_choice" style="overflow: auto;">
+<<<<<<< HEAD
 		<div id="S_tim" align="center"><h2>시간</h2></div>
 
+=======
+		<div id="S_tim">시간</div>
+>>>>>>> branch 'master' of https://github.com/Kimsangeun/final.git
 		<hr>
 		<c:forEach begin="1" end="20" var="no">
 		<div  class="S_time${no }"  onclick="Check3(${no})">

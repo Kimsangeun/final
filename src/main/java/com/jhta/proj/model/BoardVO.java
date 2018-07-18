@@ -9,23 +9,40 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Alias("boardVo")
 public class BoardVO {
+	Integer start, end;
 	Integer bid, gid, seq, lev, cnt;
 	Date regdate;
-	String pid, pw, title, content, upfile, kind, reply;
-
+	String pid, pw, title, content, upfile, kind, reply,schCol;
 	MultipartFile mmfile;
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d일 HH:mm시");
 
 	ArrayList<BoardVO> arr;
 
 	public BoardVO() {
 	}
+	
+	public Integer getStart() {
+		return start;
+	}
 
-	public BoardVO(String pid, String pw, String title, String content) {
-		this.pid = pid;
-		this.pw = pw;
-		this.title = title;
-		this.content = content;
+	public void setStart(Integer start) {
+		this.start = start;
+	}
+
+	public Integer getEnd() {
+		return end;
+	}
+
+	public void setEnd(Integer end) {
+		this.end = end;
+	}
+
+	public String getSchCol() {
+		return schCol;
+	}
+
+	public void setSchCol(String schCol) {
+		this.schCol = schCol;
 	}
 
 	public ArrayList<BoardVO> getArr() {
@@ -143,6 +160,7 @@ public class BoardVO {
 	}
 
 	public void setContent(String content) {
+//		content = content.replace("\n", "<br>");
 		this.content = content;
 	}
 

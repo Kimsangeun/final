@@ -21,24 +21,23 @@
 
 
 <body>
-<input type="button" value="추가" onclick="location.href='insertMovieForm'">
-<table border="" >
+<div class="container">
+<button type="button" class="btn btn-danger" onclick="location.href='insertMovieForm'">추가</button>
+<!-- <input type="button" value="추가" onclick="location.href='insertMovieForm'"> -->
+<table class="table table-hover" >
 
+	<thead>	
 	<tr>
-	
-	</tr>
-	
-	
-	<tr>
-		<td>번호</td>
-		<td>제목</td>
-		<td>런타임</td>
-		<td>개봉일</td>
-		<td>삭제</td>
-		<td>변경</td>
+		<th>번호</th>
+		<th>제목</th>
+		<th>런타임</th>
+		<th>개봉일</th>
+		<th>삭제</th>
+		<th>변경</th>
 		<!-- <td>날짜</td> -->
 	</tr>	
-
+	</thead>
+	<tbody>
 <c:forEach items="${data['movie'] }" var="mm" varStatus="no">
 	<tr>
 		<td>${mm.mid}</td>
@@ -74,7 +73,8 @@
 		
 		</td>
 	</tr>	 --%>
-
+</tbody>
 </table>
+</div>
 </body>
 </html>

@@ -8,10 +8,10 @@
 </head>
 <body>
 
-타입1
+<div class="container">
 <!-- enctype="multipart/form-data" -->
 <!-- <form action="insertMovie" method="post" enctype="multipart/form-data" accept-charset="UTF-8" > -->
-	<table border="">
+	<table class="table" border="">
 		<tr>
 			<td>타이틀</td>
 			<td>${data.title }</td>
@@ -69,7 +69,7 @@
 		</tr>
 	</table>
 <!-- </form> -->
-
+</div>>
 
 </body>
 </html>

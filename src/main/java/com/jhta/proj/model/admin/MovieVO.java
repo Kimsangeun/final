@@ -81,7 +81,9 @@ public class MovieVO {
 		this.genre = genre;
 	}
 	public String getPlot() {
-		return plot;
+		
+		/*plot.replaceAll("\n", "<br>");*/
+		return plot.replaceAll("\n", "<br>");
 	}
 	public void setPlot(String plot) {
 		this.plot = plot;
