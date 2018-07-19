@@ -79,7 +79,7 @@
 
 		<tr>
 			<td>상영등급</td>
-			<td><input type="text" name="rating" /></td>
+			<td><input type="text" name="grade" /></td>
 		</tr>
 		<tr>
 			<td>감독</td>

@@ -196,10 +196,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--  -->
 	
-	<!-- 리뷰가져오기 -->
+	<!-- 리뷰 -->
+		<!-- 리뷰가져오기 -->
 	<select id="review" parameterType="movieVo" resultType="reviewVo">
 		SELECT * from review where mid = #{mid} 
 	</select>
+	
+		<!-- 리뷰등록 -->
+	<insert id="reviewInsert" parameterType="reviewVo">
+		insert into review (mid,id,reg_date,score,review) 
+        values (#{mid},#{mid},sysdate,#{score},#{review}) 
+	</insert>
 	<!--  -->
 	
 	<!-- 이벤트(공지사항)게시판 메인화면에 걸을 게시물 가져오기  -->
