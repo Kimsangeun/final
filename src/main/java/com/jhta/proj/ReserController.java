@@ -163,7 +163,7 @@ public class ReserController {
 		model.addAttribute("menu", "reservation");
 
 		String mm = "reser";
-
+		
 		model.addAttribute("main", mm);
 
 		return "home";
