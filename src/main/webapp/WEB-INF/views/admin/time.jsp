@@ -4,18 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-</head>
+
 
 <script>
 
@@ -30,26 +23,39 @@ $(document).ready(function(){
     	    dropdown: true,
     	    scrollbar: true
     });
+    $('#datetimepicker').data("DateTimePicker").FUNCTION()
+/*     $(".datepico").change(function(){
+      if($.trim($(".datepico").val())==''){
+        alert("날짜를 입력해주세요.");
+        return false;
+      }  
+      $(".datepico").submit();
+    });  */
 });
+
+
+
 
 </script>
 
 
-<body>
+
+<div class="container">
 <fmt:formatDate var="mindate" value="<%= new Date() %>" pattern="yyyy-MM-dd"/>
 <fmt:formatDate var="maxdate" value="<%= new Date(new Date().getTime() + 20*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
+<p class="h1">${param.mstart eq null ? mindate : param.mstart}<p>	
 <form action="?">
-	<input type="date" name="mstart" min="${mindate }" max="${maxdate }" 
-	value="${param.mstart eq null ? mindate : param.mstart}" onchange="submit()" /> 날짜
-</form>	
-<h2>${param.mstart eq null ? mindate : param.mstart}</h2>	
-<form action="insert" method="POST">
-<table border="" >
+<div class="form-group">
 
-	<tr>
-	
-	</tr>
-	
+	<input type="date" id="tpick" class="form_datetime" name="mstart" min="${mindate }" max="${maxdate }" 
+	value="${param.mstart eq null ? mindate : param.mstart}" onchange="submit()" /> 
+	<label for="tpick">날짜</label>
+	</div>
+</form>	
+
+
+<table class="table" >
+
 	
 	<tr>
 		<td>번호</td>
@@ -68,32 +74,35 @@ $(document).ready(function(){
 		<%-- <td>${mm.mstart}</td> --%>
 	</tr>
 </c:forEach>
-	<tr>
+</table>
+<form class="form-inline" action="insert" method="POST">
 		
-		<td colspan="4" align="right">영화명
-		<select name="mID" id="selectDate" >
+		<div class="form-group">
+		<label for="moive">영화명</label>
+		<select id="moive" class="form-control " name="mID" id="selectDate" >
 				<!-- <option value=""> 영화명 -->
 				<c:forEach items="${data['movie']}" var="mm">
 					<option value="${mm.mid }">${mm.title }
 				</c:forEach>
-		</select>상영관
-		<select name="scNum" id="selectScreen" >
+		</select>
+		</div>
+		<div class="form-group">
+		<label for="screen">상영관</label>
+		<select id="screen" class="form-control" name="scNum" id="selectScreen" >
 				<!-- <option value=""> 상영관 -->
 				<c:forEach items="${data['screen']}" var="mm">
 					<option value="${mm.scNum }">${mm.scNum }관
 				</c:forEach>
-		</select>	
-		상영시간	
-		<input type="text" class='timepicker' name="timeset" readonly>
+		</select>
+		</div>
+		<div class="form-group">	
+		<label for="time">상영시간</label>	
+		<input id="time" type="text" class='form-control timepicker' name="timeset" readonly>
 		<form:errors path="timeVo.mID"/>
 		<input type="hidden" value="${param.mstart eq null ? mindate : param.mstart}" name="mstart"/>
 		<!-- <input class="timepicker" /> -->
-		<input type="submit"/>
-		
-		</td>
-	</tr>	
+		<input  class="btn btn-primary" value="시간표 추가" type="submit"/>
+		</div>
 
-</table>
 </form>
-</body>
-</html>
+</div>

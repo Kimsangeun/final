@@ -10,8 +10,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
@@ -23,27 +21,24 @@
 
 
 <body>
+<div class="table-responsive container">
+<table class="table table-hover" >
 
-<table border="" >
-
+<thead class="thead-dark">
 	<tr>
-	
-	</tr>
-	
-	
-	<tr>
-		<td>번호</td>
-		<td>ID</td>
-		<td>영화제목</td>
-		<td>상영시간</td>
-		<td>상영관</td>
-		<td>좌석번호</td>
-		<td>현금</td>
-		<td>카드</td>
+		<th>번호</th>
+		<th>ID</th>
+		<th>영화제목</th>
+		<th>상영시간</th>
+		<th>상영관</th>
+		<th>좌석번호</th>
+		<th>현금</th>
+		<th>카드</th>
 		<!-- <td>변경</td> -->
 		<!-- <td>날짜</td> -->
 	</tr>	
-
+</thead>
+<tbody>
 <c:forEach items="${data }" var="mm" varStatus="no">
 	<tr>
 		<td>${no.index}</td>
@@ -57,8 +52,9 @@
 
 	</tr>
 </c:forEach>
-	
+</tbody>
 
 </table>
+</div>
 </body>
 </html>

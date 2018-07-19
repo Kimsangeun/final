@@ -21,4 +21,7 @@ public class ReserDAO { //���� ����
     public Object detail(ReserVO vo) {
         return sessionTemplate.selectOne("reser.detail", vo);
     }
+    public Object seatlist(ReserVO vo) {
+        return sessionTemplate.selectList("reser.schseatnum", vo);
+    }
 }

@@ -5,7 +5,7 @@
 
 <form action="insertReg" method="post" enctype="multipart/form-data"
 	accept-charset="UTF-8">
-	<table border="">
+	<table class="table table-hover">
 		<tr>
 			<td>작성자</td>
 			<td colspan="3"><input type="text" name="pid" value="${mem.id }"/></td>

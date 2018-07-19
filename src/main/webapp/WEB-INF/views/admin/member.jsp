@@ -10,9 +10,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
-
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </head>
@@ -23,14 +20,11 @@
 
 
 <body>
+<div class="container">
 <input type="button" value="추가" onclick="location.href='insertMovieForm'">
-<table border="" >
+<table class="table table-hover" >
 
-	<tr>
-	
-	</tr>
-	
-	
+	<thead>
 	<tr>
 		<td>번호</td>
 		<td>ID</td>
@@ -41,7 +35,8 @@
 		<td>변경</td> -->
 		<!-- <td>날짜</td> -->
 	</tr>	
-
+	</thead>
+	<tbody>
 <c:forEach items="${data }" var="mm" varStatus="no">
 	<tr>
 		<td>${no.index }</td>
@@ -55,7 +50,9 @@
 		<%-- <td>${mm.mstart}</td> --%>
 	</tr>
 </c:forEach>
-
+</tbody>
 </table>
+</div>
 </body>
+
 </html>

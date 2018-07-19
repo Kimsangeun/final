@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.jhta.proj.model.BoardDAO;
+import com.jhta.proj.model.admin.AdminDAO;
 import com.jhta.proj.model.admin.MovieDAO;
 
 /**
@@ -43,13 +45,19 @@ public class HomeController {
 	@Resource
 	MovieDAO movieDao;
 	
+	@Resource
+	AdminDAO adminDao;
+	
+	@ModelAttribute("event")
+	public Object see() {
+		
+		Object res = adminDao.event();
+		return res;
+	}
+	
 	@ModelAttribute("mainpagemov")
 	public Object movie() {
-		
 		Object res = movieDao.list();
-		
-		
-		
 		return res;
 	}
 	

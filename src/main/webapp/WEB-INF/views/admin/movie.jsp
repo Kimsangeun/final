@@ -10,9 +10,7 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<!-- <script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
- -->
+
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
 </head>
@@ -23,31 +21,30 @@
 
 
 <body>
-<input type="button" value="추가" onclick="location.href='insertMovieForm'">
-<table border="" >
+<div class="container">
+<button type="button" class="btn btn-danger" onclick="location.href='insertMovieForm'">추가</button>
+<!-- <input type="button" value="추가" onclick="location.href='insertMovieForm'"> -->
+<table class="table table-hover" >
 
+	<thead>	
 	<tr>
-	
-	</tr>
-	
-	
-	<tr>
-		<td>번호</td>
-		<td>제목</td>
-		<td>런타임</td>
-		<td>개봉일</td>
-		<td>삭제</td>
-		<td>변경</td>
+		<th>번호</th>
+		<th>제목</th>
+		<th>런타임</th>
+		<th>개봉일</th>
+		<th>삭제</th>
+		<th>변경</th>
 		<!-- <td>날짜</td> -->
 	</tr>	
-
+	</thead>
+	<tbody>
 <c:forEach items="${data['movie'] }" var="mm" varStatus="no">
 	<tr>
 		<td>${mm.mid}</td>
-		<td><a href="detailMovie?mid=${mm.mid }">${mm.title}</a></td>
+		<td><a href="/proj/movie/detailMovie?mid=${mm.mid }">${mm.title}</a></td>
 		<td>${mm.runtime}</td>
 		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.release}"/></td>
-		<td><input type="button" value="X" onclick="location.href='deleteMovie?mid=${mm.mid}'"></td>
+		<td><input class="btn btn-danger" type="button" value="X" onclick="location.href='deleteMovie?mid=${mm.mid}'"></td>
 		<td>Modify</td>
 		<%-- <td>${mm.mstart}</td> --%>
 	</tr>
@@ -76,7 +73,8 @@
 		
 		</td>
 	</tr>	 --%>
-
+</tbody>
 </table>
+</div>
 </body>
 </html>

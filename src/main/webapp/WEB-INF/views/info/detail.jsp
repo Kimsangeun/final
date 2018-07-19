@@ -1,9 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="ct" tagdir="/WEB-INF/tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-<table border="">
+<table class="table table-hover">
 	<tr>
 		<td>작성자</td>
 		<td>${data.pid }</td>
@@ -20,8 +21,14 @@
 		<td>파일</td>
 		<td colspan="3">${data.upfile }</td>
 	</tr>
+	<c:if test="${data.img}">
+		<tr>
+			<td colspan="4"><img src="${pageContext.request.contextPath}\resources\board/${data.upfile}" />
+			</td>
+		</tr>
+	</c:if>
 	<tr>
-		<td colspan="4">${data.content }</td>
+		<td colspan="4"><ct:conBr >${data.content }</ct:conBr></td>
 	</tr>
 	<tr>
 		<td colspan="4" align="right"><a href="${data.kind }">뒤로가기</a> <c:if

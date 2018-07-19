@@ -16,13 +16,11 @@
 			</tr>
 			<tr>
 				<td>영화제목</td>
-				<td>${rvo.mId }</td>
-				<!-- ${mvo.title} -->
+				<td>${svo.movtitle }</td>
 			</tr>
 			<tr>
 				<td>시작시간</td>
-				<td>시작시간</td>
-				<!-- ${svo.mstart} -->
+				<td>${svo.mdate }일 ${svo.mtime }시</td>
 			</tr>
 			<tr>
 				<td>예약자</td>

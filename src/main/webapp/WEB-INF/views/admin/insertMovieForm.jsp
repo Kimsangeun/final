@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js" type="text/javascript"></script>
 
-</head>
-<body>
 
 <script type="text/javascript">
         $(document).ready(function(){
@@ -23,7 +15,6 @@
 
                 var newrow = clickedRow.clone();
                 //alert(newrow);
-                newrow.find("td:eq(1)").find('input[type="file"]').css('background-color','yellow');
                 newrow.find("td:eq(1)").find('input[type="file"]').attr("name","steelcuts["+i+"]");
                 newrow.find("td:eq(0)").remove();           
                 newrow.insertAfter($("#movieClass ."+cls+":last"));
@@ -65,9 +56,9 @@
         });
     </script>
 
-
+<div class="container" style="padding-top:50px">
 <form action="insertMovie" method="post" enctype="multipart/form-data" accept-charset="UTF-8" >
-	<table id="movieClass" border="">
+	<table id="movieClass" class="table table-hover">
 		<tr>
 		
 			<td>타이틀</td>
@@ -78,7 +69,7 @@
 			<td><input type="text" name="nation" /></td>
 		</tr>
 		<tr>
-			<td bgcolor=green>장르</td>
+			<td>장르</td>
 			<td><input type="text" name="genre" /></td>
 		</tr>
 		<tr>
@@ -108,22 +99,19 @@
 			<td><input type="file" name="poster1" /></td>
 		</tr>
 		<tr class="item1">
-			<td>스틸컷<br>
-			<button type="button" class="addBtn">+</button></td>
+			<td>스틸컷
+			<button type="button" class="addBtn btn btn-default">+</button></td>
 			<td><input type="file" name="steelcuts[0]" /></td>
 		</tr>
 		<tr>
 			<td>줄거리</td>
-			<td><textarea name="plot" rows="5" cols="20">줄거리</textarea></td>
+			<td><textarea style="resize: vertical;" class="form-control" rows="5" name="plot" cols="20">줄거리</textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<input type="submit" value="추가" />
+				<input class="btn btn-default" type="submit" value="추가" />
 			</td>
 		</tr>
 	</table>
 </form>
-
-
-</body>
-</html>
+</div>

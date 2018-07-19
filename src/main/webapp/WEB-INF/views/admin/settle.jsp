@@ -10,8 +10,6 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="../resources/jquery-3.3.1.min.js"></script>
-<script type="text/javascript" src="../resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
@@ -23,22 +21,20 @@
 
 
 <body>
-<table border="" >
+<div class="container">
+<p class="h2"><a href='settle?type=year&num=2018'>연간</a></p>
+<table class="table table-hover"  >
 
-	<a href='settle?type=year&num=2018'>연간</a>
-	<tr>
-	
-	</tr>
-	
+
 	
 	<tr>
-		<td>결제일시</td>
-		<td>ID</td>
-		<td>결제금액</td>
-		<td>결제방법</td>
-		<td>카드/계좌번호</td>
-		<td>상태</td>
-		<td>계</td>
+		<th>결제일시</th>
+		<th>ID</th>
+		<th>결제금액</th>
+		<th>결제방법</th>
+		<th>카드/계좌번호</th>
+		<th>상태</th>
+		<th>계</th>
 		<!-- <td>날짜</td> -->
 	</tr>	
 	<c:set var="yearSum" value="0"/>
@@ -75,7 +71,7 @@
 	</tr>
 	</c:if>
 	<c:if test="${week != nowWeek and no.index!=0}">
-	<tr bgcolor=#FF4000>
+	<tr class="warning">
 		<td colspan="6">${month }월 ${week }주차 합계</td>
 		<td>${monthSum }</td>
 		<c:set var="weekSum" value="0"/>
@@ -116,29 +112,29 @@
 		<td colspan="6">${month }월 ${day }일 합계</td>
 		<td>${daySum }</td>
 	</tr>
-	<tr bgcolor=#FF4000>
+	<tr  class="bg-danger">
 		<td colspan="6">${month }월 ${week }주차 합계</td>
 		<td>${monthSum }</td>
 		<c:set var="weekSum" value="0"/>
 		<c:set var="week" value="${nowWeek }"/>
 	</tr>
-	<tr bgcolor=yellow>
+	<tr class="bg-success">
 		<td colspan="6">${month }월 합계</td>
 		<td>${monthSum }</td>
 	</tr>
-	<tr bgcolor=#00FFFF>
+	<tr class="bg-info">
 		<td colspan="6">${quarter }분기 합계</td>
 		<td>${quarterSum }</td>
 		<c:set var="quarterSum" value="0"/>
 		<c:set var="quarter" value="${nowQuarter }"/>
 	</tr>
-	<tr bgcolor=green>
+	<tr class="bg-primary">
 		<td colspan="6">연 합계</td>
 		<td>${yearSum }</td>
 	</tr>
 	
 
-
 </table>
+</div>
 </body>
 </html>

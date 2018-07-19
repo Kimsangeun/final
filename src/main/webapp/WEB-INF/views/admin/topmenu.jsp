@@ -4,31 +4,15 @@
 <!-- info -->
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<style>
-.S_side{
-margin-left: 20px;
-}
-</style>
-<div class="S_side">menu</div>
-
-<div class="S_side">
-<a href="time">상영시간표</a>
-</div>
-
-<div class="S_side">
-<a href="movie">영화</a>
-</div>
-
-<div class="S_side">
-<a href="member">회원</a>
-</div>
-
-<div class="S_side">
-<a href="resv">예약</a>
-</div>
-
-<div class="S_side">
-<a href="settle">정산</a>
-</div>
-
-
+<c:if test="${ mem.id eq 'admin' }">
+	<li class="dropdown"><a href="#" class="dropdown-toggle"
+		data-toggle="dropdown" role="button" aria-expanded="false">관리자 <span
+			class="caret"></span></a>
+		<ul class="dropdown-menu" role="menu">
+			<li><a href="/proj/admin/time">상영시간표</a></li>
+			<li><a href="/proj/admin/movie">영화</a></li>
+			<li><a href="/proj/admin/member">회원</a></li>
+			<li><a href="/proj/admin/resv">예약</a></li>
+			<li><a href="/proj/admin/settle">정산</a></li>
+		</ul></li>
+</c:if>
