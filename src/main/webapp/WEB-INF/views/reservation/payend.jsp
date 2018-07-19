@@ -9,7 +9,7 @@
 
 <div>
 	<div style="width: 300px; float: left; border: 5px">
-		<table>
+		<table class="table">
 			<tr>
 				<td>예매번호</td>
 				<td>${rvo.rId }</td>
@@ -40,7 +40,7 @@
 			</tr>
 			<tr>
 				<td>가격</td>
-				<td>${rvo.cnt*3000 }(<c:if test="${param.paytype eq 'csh' }">
+				<td>${rvo.cost }(<c:if test="${param.paytype eq 'csh' }">
 				현금결제
 				</c:if> <c:if test="${param.paytype eq 'crd' }">
 				카드결제_${param.cardchk }
