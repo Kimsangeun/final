@@ -3,7 +3,8 @@ package com.jhta.proj;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-
+import java.util.HashSet;
+import java.util.Set;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
@@ -51,7 +52,6 @@ public class ReserController {
 
 	SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
 	SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd:E");
-	SimpleDateFormat sdfe = new SimpleDateFormat("E");
 
 	Date now = new Date();
 
@@ -63,21 +63,20 @@ public class ReserController {
 
 		ArrayList datearr = new ArrayList<>();
 
+
 		for (int i = 0; i < 14; i++) {
 			Date dlist = new Date(now.getYear(), now.getMonth(), now.getDate() + i);
 			datearr.add(sdfd.format(dlist));
 		}
-
 		return datearr;
 	}
-
+	
 	@ModelAttribute("reserdata")
 	public Object rese(Model model, ReserVO vo) {
 
 		Object res = null;
-
 		res = rdao.list(vo);
-
+		
 		return res;
 	}
 
@@ -90,6 +89,7 @@ public class ReserController {
 		return res;
 	}
 
+
 	@ModelAttribute("datedata")
 	public Object dat(Model model, ScreenInfoVO vo) {
 		Object res = null;
@@ -98,7 +98,7 @@ public class ReserController {
 		// System.out.println(res);
 		return res;
 	}
-
+	
 	@ModelAttribute("titlelist")
 	public Object tit(Model model, MovVO vo) {
 		Object res = null;
@@ -107,6 +107,7 @@ public class ReserController {
 		// System.out.println(res);
 		return res;
 	}
+
 
 	/*
 	 * @ModelAttribute("midlist") public ArrayList<MovVO> midlist(Model model,
@@ -120,7 +121,6 @@ public class ReserController {
 	 * for (MovVO movVo : movArr) { for (ScreenInfoVO scrVo : scrArr) { if
 	 * (scrVo.getmId() == movVo.getmId()) { res.add(movVo); } } } //
 	 * System.out.println(res); return res; }
-	 */
 
 	// @RequestMapping("/")
 	/*
@@ -137,49 +137,55 @@ public class ReserController {
 	public Object datetitlelist(Model model, ScreenInfoVO vo) {
 		Object res = null;
 		res = mdao.dateTitleList(vo);
-		System.out.println(res);
+		System.out.println("롤롤롤:"+res);
 		return res;
 	}
 
 	@RequestMapping("/timetable")
 	public Object cine3(Model model, ScreenInfoVO svo) {
+		model.addAttribute("menu", "reservation");
 
 		model.addAttribute("nowtime", "13:00");
 		model.addAttribute("nowdate", nowdate);
 
-		model.addAttribute("menu", "reservation");
-
 		String mm = "timetable";
+
+		model.addAttribute("menu", "reservation");
 
 		model.addAttribute("main", mm);
 		return "home";
 	}
 
+
 	@RequestMapping("/reser")
 	public Object cine2(Model model) {
-
-		model.addAttribute("nowtime", nowtime);
-		model.addAttribute("nowdate", nowdate);
 
 		model.addAttribute("menu", "reservation");
 
 		String mm = "reser";
-
+	
+		model.addAttribute("nowtime", nowtime);
+		model.addAttribute("nowdate", nowdate);
+	
 		model.addAttribute("main", mm);
 
 		return "home";
 	}
 
 	@RequestMapping(value = "/screenchoice")
-	public Object cine6(Model model, @RequestParam Integer sid, HttpSession session) {
+	public Object cine6(Model model, @RequestParam Integer sid, @RequestParam Integer mid, HttpSession session) {
 		model.addAttribute("menu", "reservation");
 		// 영화, 날짜, 시간, 등등?
 
 		ScreenInfoVO svo = new ScreenInfoVO();
 		svo.setsId(sid);
+		System.out.println("svo" + svo);
 		svo = sdao.findSInfo(svo);
+		System.out.println("fsvo" + svo);
 
 		MovVO mvo = new MovVO();
+		svo.setsId(sid);
+		svo.setmId(mid);
 
 		rvo = new ReserVO();
 		rvo.setId(((MemberVO) session.getAttribute("mem")).getId());
@@ -190,6 +196,13 @@ public class ReserController {
 		mvo.setmId(rvo.getmId());
 		mdao.findMovie(mvo);
 
+		Set<String> seatList = new HashSet<>();
+		String sss = "";
+		
+		for (String ss : (ArrayList<String>) rdao.seatlist(rvo)) {
+			sss += ss;
+		}
+	
 		String mm = "screenchoice";
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("svo", svo);
@@ -199,7 +212,7 @@ public class ReserController {
 	}
 
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt) {
+	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price) {
 		System.out.println("병수1");
 		model.addAttribute("menu", "reservation");
 
@@ -208,6 +221,7 @@ public class ReserController {
 
 		rvo.setCnt(cnt);
 		rvo.setSeatNum(seatnum);
+		rvo.setCost(price);
 		System.out.println("병수2");
 
 		System.out.println("/payment::" + rvo);
@@ -221,7 +235,7 @@ public class ReserController {
 	public Object cine5(Model model, HttpServletRequest request) {
 		System.out.println("포스트로 받았다.");
 		model.addAttribute("menu", "reservation");
-System.out.println("payend...:rvo::"+rvo);
+
 		if (request.getParameter("paytype").equals("csh")) {
 			rvo.setCoc("cash");
 		} else
@@ -235,10 +249,7 @@ System.out.println("payend...:rvo::"+rvo);
 					+ request.getParameter("cardnum2") + "-" + request.getParameter("cardnum3") + "-"
 					+ request.getParameter("cardnum4");
 			rvo.setAccNum(card);
-
 		}
-
-		rvo.setCost(rvo.getCnt() * 3000);
 
 		System.out.println("/payend::" + rvo);
 
@@ -246,7 +257,13 @@ System.out.println("payend...:rvo::"+rvo);
 
 		rdao.insert(rvo); // 인서트가 안돼. 마이바티스에서 rvo 널값있다고 에러처리. // 됨
 
+		ScreenInfoVO svo = new ScreenInfoVO();
+		svo.setsId(rvo.getsId());
+		svo = sdao.findSInfo(svo);
+
+		System.out.println("ssssssssssssssvo :"+svo);
 		model.addAttribute("rvo", rvo);
+		model.addAttribute("svo", svo);
 		model.addAttribute("main", mm);
 		return "home";
 	}
@@ -261,5 +278,4 @@ System.out.println("payend...:rvo::"+rvo);
 		model.addAttribute("main", mm);
 		return "home";
 	}
-
 }

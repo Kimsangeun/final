@@ -73,7 +73,7 @@ public class CenterController {
 			if (!((MemberVO) request.getSession().getAttribute("mem")).getId().equals("admin")) {
 				System.out.println("내문의 로 가자");
 				model.addAttribute("data", request.getSession().getAttribute("mem"));
-				res = "mypage/qna";
+				res = "/proj/mypage/qna";
 			}
 			break;
 		case "replyForm":
@@ -301,7 +301,5 @@ public class CenterController {
 		} else {
 			System.out.println("파일이 존재하지 않습니다.");
 		}
-
 	}
-
 }

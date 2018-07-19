@@ -15,7 +15,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="findInfo" resultType="screenInfoVo">
 		select 
-		screeninfo.sid, screeninfo.mid, movie.title as movtitle,
+		screeninfo.sid, 
+		screeninfo.mid,
+		screeninfo.scnum,
+		movie.title as movtitle,
 		to_char(screeninfo.mstart,'YYYY-MM-dd') as mdate, 
 		to_char(screeninfo.mstart,'HH24:mi') as mtime 
 		from screeninfo, movie

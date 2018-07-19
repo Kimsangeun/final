@@ -66,6 +66,20 @@ public class AjaxController {
 		
 	}
 	
+	@RequestMapping(value="/ajax/emailChk", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxemailChk(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
+			throws NoPermissionException{
+		
+		System.out.println("ajax email탔냐"+map);
+		
+		dao.ajaxemailChk(map);
+		
+		return map;
+		
+	}
+	
+	
 	@RequestMapping(value="/ajax/smsSend", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> smsSend(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
@@ -73,8 +87,8 @@ public class AjaxController {
 		
 		System.out.println("send다"+map);
 		
-		String api_key = "NCSHUGYQCJ1RNAOB";
-		String api_secret = "PUBVW1V4UIYGRTPONRKE3CQ9JDULA6ZN";
+		String api_key = "NCSFTLCC5UICCUDI";
+		String api_secret = "2ZTHIMVFZSGIFTVWFZ1YGVI6DCERZMSG";
 		//Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성
 		Integer key = cerf.makeNum(6); // 인증키 생성
 		
@@ -90,7 +104,7 @@ public class AjaxController {
 		/*HashMap<String, String> set = new HashMap<String, String>();
 		set.put("to", (String)map.get("phone")); // 수신번호
 		set.put("from", "01071303039"); // 발신번호
-		set.put("text", "안녕하세요 김찬희입니다. 인증번호는 [" + key + "] 입니다."); // 문자내용
+		set.put("text", "안녕하세요 메가시네마입니다. 인증번호는 [" + key + "] 입니다."); // 문자내용
 		set.put("type", "sms"); // 문자 타입
 
 		JSONObject result = coolsms.send(set); // 보내기&전송결과받기
@@ -112,10 +126,8 @@ public class AjaxController {
 			System.out.println(result.get("message")); // 에러메시지
 			
 			map.put("chk", "N");
-		}*/
-		
-		
-		
+		}
+		*/
 		return map;
 		
 	}
