@@ -41,10 +41,10 @@
 <c:forEach items="${data['movie'] }" var="mm" varStatus="no">
 	<tr>
 		<td>${mm.mid}</td>
-		<td><a href="detailMovie?mid=${mm.mid }">${mm.title}</a></td>
+		<td><a href="/proj/movie/detailMovie?mid=${mm.mid }">${mm.title}</a></td>
 		<td>${mm.runtime}</td>
 		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.release}"/></td>
-		<td><input type="button" value="X" onclick="location.href='deleteMovie?mid=${mm.mid}'"></td>
+		<td><input class="btn btn-danger" type="button" value="X" onclick="location.href='deleteMovie?mid=${mm.mid}'"></td>
 		<td>Modify</td>
 		<%-- <td>${mm.mstart}</td> --%>
 	</tr>

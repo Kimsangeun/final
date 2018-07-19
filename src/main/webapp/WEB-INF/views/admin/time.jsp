@@ -4,15 +4,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-</head>
+
 
 <script>
 
@@ -43,24 +39,20 @@ $(document).ready(function(){
 </script>
 
 
-<body>
+
 <div class="container">
 <fmt:formatDate var="mindate" value="<%= new Date() %>" pattern="yyyy-MM-dd"/>
 <fmt:formatDate var="maxdate" value="<%= new Date(new Date().getTime() + 20*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
+<p class="h1">${param.mstart eq null ? mindate : param.mstart}<p>	
 <form action="?">
 <div class="form-group">
-<!-- 	<input size="16" type="text" value="2012-06-15 14:45" readonly class="form_datetime">
- 
-<script type="text/javascript">
-    $(".form_datetime").datetimepicker();
-</script>        -->
+
 	<input type="date" id="tpick" class="form_datetime" name="mstart" min="${mindate }" max="${maxdate }" 
 	value="${param.mstart eq null ? mindate : param.mstart}" onchange="submit()" /> 
 	<label for="tpick">날짜</label>
 	</div>
 </form>	
 
-<p class="h1">${param.mstart eq null ? mindate : param.mstart}<p>	
 
 <table class="table" >
 
@@ -84,6 +76,7 @@ $(document).ready(function(){
 </c:forEach>
 </table>
 <form class="form-inline" action="insert" method="POST">
+		
 		<div class="form-group">
 		<label for="moive">영화명</label>
 		<select id="moive" class="form-control " name="mID" id="selectDate" >
@@ -113,5 +106,3 @@ $(document).ready(function(){
 
 </form>
 </div>
-</body>
-</html>

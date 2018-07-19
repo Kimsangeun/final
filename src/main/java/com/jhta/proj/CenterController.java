@@ -241,9 +241,9 @@ public class CenterController {
 			
 			System.out.println("디테일로 가져온 bvo"+bvo);
 			
+			bvo.setTitle(title);
 			bvo.setContent(content);
 			bvo.setPid(((MemberVO)request.getSession().getAttribute("mem")).getId());
-			
 			
 			model.addAttribute("url", "detail?bid=" + bvo.getBid());
 			model.addAttribute("msg", "답변완료");
@@ -252,7 +252,6 @@ public class CenterController {
 			res = boardDao.reply(bvo);
 			break;
 		}
-
 		return res;
 	}
 

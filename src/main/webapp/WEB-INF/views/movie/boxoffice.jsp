@@ -6,28 +6,26 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-
-
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
-</head>
-
 <!-- width: 232px; height: 500px;  -->
+<<script type="text/javascript">
+$(document).ready(function() {
+	   var maxHeight = -1;
 
+	   $('.features').each(function() {
+	     maxHeight = maxHeight > $(this).height() ? maxHeight : $(this).height();
+	   });
 
-<body>
-
+	   $('.features').each(function() {
+	     $(this).height(maxHeight);
+	   });
+	 });
+</script>
 	<div class="container-fluid" style="margin-top: 100px">
 		<div class="row">
 
 			<c:forEach begin="1" end="12" items="${moviedata}" var="mm"
 				varStatus="no">
-				<div class="movietool col-lg-2 col-xs-6 col-sm-4 col-md-4"  align="center" 
+				<div class="features col-lg-2 col-xs-6 col-sm-4 col-md-4"  align="center" 
 					style="border: 1px solid gray;"
 					>
 					
@@ -67,5 +65,3 @@
 
 		</div>
 	</div>
-</body>
-</html>
