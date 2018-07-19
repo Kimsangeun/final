@@ -32,7 +32,7 @@
 			</tr>
 			<tr>
 				<td>관</td>
-				<td>${rvo. sId}관</td>
+				<td>${svo.scNum}관</td>
 			</tr>
 			<tr>
 				<td>좌석</td>
