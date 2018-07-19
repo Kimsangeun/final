@@ -150,7 +150,8 @@ var titleListStr = tls.split(',');
 				}
 			}
 		titledate = titledate.split(',');
-		
+		//alert(dateStr)
+		//alert(dateListStr)
 		for(var i = 0;i < titledate.length; i++){
 			$(titledate[i]).css("color","black");
 		}
@@ -274,95 +275,108 @@ var titleListStr = tls.split(',');
 
 <form name="screenchoiceForm" action="screenchoice" method="post">
 
-	<div class="S_choice" >
+
+	<!-- 영화  -->
+	
+	<div class="S_choice" style="margin-right: 50px;">
 		<div id="S_mov" align="center" ><h2>영화</h2></div>
 
 		<hr>
-		
-		
-<!-- <button type="button" class="btn btn-outline-primary">Primary</button>
-<button type="button" class="btn btn-outline-secondary">Secondary</button>
-<button type="button" class="btn btn-outline-success">Success</button>
-<button type="button" class="btn btn-outline-info">Info</button>
-<button type="button" class="btn btn-outline-warning">Warning</button>
-<button type="button" class="btn btn-outline-danger">Danger</button>
- -->
 
 		<div  class="btn-group-vertical"class="S_mov"  style="height : 300px; overflow: auto; width:100%;">
  		<c:forEach items="${titlelist }" var="mm" varStatus="no">
  		<input type="button" class="btn btn-secondary"  id="S_mov${no.index }"
-				value="${mm.title }"
+				value="${mm.title } " style="font-size: 20px;"
 				 onclick="Check1('${mm.title }', '${mm.poster }', ${mm.mId }, ${no.index})">
 		</c:forEach>
 		</div>
 	</div>
 
-	<div class="S_choice" style="overflow: auto;">
+
+
+	<!--날짜 --> 
+
+	<div class="S_choice" style="overflow: auto; margin-right: 50px;">
 		<div id="S_da" align="center"><h2>날짜</h2></div>
 
 		<hr>
 
 		<div id="S_da">
-			<!--날짜 --> 
 			<div  class="btn-group-vertical"  style="height : 300px; overflow: auto; width:100%;">
 			<c:forEach items="${datelist }" var="dd" varStatus="no">
-				<input type="button" class="btn btn-outline-secondary" id="S_dateset${no.index}"
-					value="${dd } " 
-					onclick="Check2('${dd}')">
+				<button type="button" class="btn btn-outline-secondary" 
+				id="S_dateset${no.index}" onclick="Check2('${dd}')">
+					<div>${dd.split('-')[1] }월</div>
+					<div style="font-size: 25px ;">${dd.split('-')[2] }일</div>
+				</button>
 			</c:forEach>
 			</div>
 			<div style="clear: both;"></div>
 
 		</div>
 
-		<div id="S_da"></div>
 	</div>
+	
+	
+	
+	<!-- 시간 -->
+	
 	<div class="S_choice" style="overflow: auto;">
-<<<<<<< HEAD
 		<div id="S_tim" align="center"><h2>시간</h2></div>
-
-=======
-		<div id="S_tim">시간</div>
->>>>>>> branch 'master' of https://github.com/Kimsangeun/final.git
 		<hr>
 		<c:forEach begin="1" end="20" var="no">
-		<div  class="S_time${no }"  onclick="Check3(${no})">
-			<button type="button" class="btn btn-outline-secondary" style="background: white; width: 100%;"  align="center">
-				<div id="S_tim${no }" align="center"></div>
+		<div  class="S_time${no }"  onclick="Check3(${no})" style="float: left;"">
+			<button type="button" class="btn btn-outline-secondary" style=" background: white; width: 100%;" align="center">
 				<div id="S_scNum${no }" align="center"></div>
+				<div id="S_tim${no }" align="center" style="font-size: 25px;"></div>
 			</button>
 		</div>
+		<c:if test="${no%3==0 }"><div style="clear: both"></div></c:if>
 		</c:forEach>
 		</div>	
 	<div style="clear: both"></div>
 
-	<hr>
 
-	<div class="S_cho" style="width: 20%;">
-	<div id="S_movieimg" style="float: left;"></div>
-	<div id="S_movie">영화선택</div> 
+
+
+
+
+	<hr>
+	
+	
+	
+	
+	<!-- 선택된 값 -->
+	<div style="background: lightgray; width: 100%; padding : 40px 0;">
+	<div class="S_cho" style="margin-left:5%;">
+	<div id="S_movieimg" style="float: left; margin-right:5%;">&nbsp;&nbsp;&nbsp;&nbsp;</div>
+	<div id="S_movie" style=" width: 250px; font-size: 18px;">영화선택</div> 
 	</div>
+	
 	<input type="hidden" name="mid" id="mid" value="-1">
 
-	<div class="S_cho" style="width: 3%;" >></div>
-	<div class="S_cho" style="width: 10%;"  id="S_date" style="width: 15%;">날짜선택</div>
-	<div class="S_cho" style="width: 3%;">></div>
-	<div class="S_cho" style="width: 10%;">
-	<div id="S_time" >시간선택</div>
-	<div id="S_scNum"></div>
+	<div class="S_cho" style="height: 80px; border-right: solid 3px gray;"></div>
+	<div class="S_cho" id="S_date" style="margin: 0 5%; font-size: 18px;" >날짜선택</div>
+	<div class="S_cho" style="height: 80px; border-right: solid 3px gray;" ></div>
+	<div class="S_cho" style="margin: 0 5%;">
+	<div id="S_scNum">시간선택</div>
+	<div id="S_time" style="font-size: 18px;"></div>
 	</div>
-	<div class="S_cho" style="width: 5%;" >></div>
+	<div class="S_cho" style="height: 80px; border-right: solid 3px gray;"></div>
+	
 	<input type="hidden" name="sid" id="sid" value="-1">	
+	
 	<div>
-		<input class="btn btn-info" type="button" value="좌석선택" onclick="Chk()" />
+		<input class="btn btn-warning" type="button" value="좌석선택" onclick="Chk()"  style="margin: 0 5%;"/>
 	</div>
 	<div style="clear: both"></div>
+	</div>
 </form>	
 	
 	<c:if test="${param.mid != null}">
 	    <c:forEach items="${titlelist }" var="mm" varStatus="no">
 	        <c:if test="${param.mid eq mm.mId }">
-	            <script>Check1('${mm.title }', '${mm.poster }', ${mm.mId} ,${no.index});</script>
+	            <script>Check1('${mm.title }', '${mm.poster }', ${mm.mId} ,${no.index})</script>
 	        </c:if>
 	    </c:forEach>
 	</c:if>

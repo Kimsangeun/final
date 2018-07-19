@@ -32,8 +32,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="dateTitleList" resultType="screenInfoVo">
 		select 
-		to_char(screeninfo.mstart,'YYYY-MM-DD ') as mdate, 
-		to_char(screeninfo.mstart,'D') as mday, 
+		to_char(screeninfo.mstart,'YYYY-MM-DD') as mdate,
 		to_char(screeninfo.mstart,'HH24:mi') as mtime, 
 		movie.title as movtitle, 
 		screeninfo.sid,
