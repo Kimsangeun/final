@@ -9,9 +9,9 @@ import org.apache.ibatis.type.Alias;
 @Alias("screenInfoVo")
 public class ScreenInfoVO {
 
-	int sId, scNum, mId, grade;
+	int sId, scNum, mId, grade, runtime;
 	Date mstart;
-	String mdate, mtime, movtitle;
+	String mdate, mtime, movtitle, poster;
 	
 /*	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm");
 	SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
@@ -30,6 +30,27 @@ public class ScreenInfoVO {
 		return null;
 	}*/
 	
+	public String getDateDay() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d (E)");
+		
+		String dday = sdf.format(mstart);
+		
+		return dday;
+	}
+	
+	public String getPoster() {
+		return poster;
+	}
+
+	public void setPoster(String poster) {
+		this.poster = poster;
+	}
+	public int getRuntime() {
+		return runtime;
+	}
+	public void setRuntime(int runtime) {
+		this.runtime = runtime;
+	}
 	public int getGrade() {
 		return grade;
 	}
