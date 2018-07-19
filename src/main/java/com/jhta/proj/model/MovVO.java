@@ -7,12 +7,18 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("movVo")
 public class MovVO {
-	int mId, runtime;
+	int mId, runtime, grade;
 	double rating;
 	String title, nation, genre, poster, director, plot, actor;
 	Date release;
 	
 	
+	public int getGrade() {
+		return grade;
+	}
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
 	public int getmId() {
 		return mId;
 	}

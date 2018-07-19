@@ -15,7 +15,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="findInfo" resultType="screenInfoVo">
 		select 
-		movie.title as movtitle,
+		screeninfo.sid, screeninfo.mid, movie.title as movtitle,
 		to_char(screeninfo.mstart,'YYYY-MM-dd') as mdate, 
 		to_char(screeninfo.mstart,'HH24:mi') as mtime 
 		from screeninfo, movie
@@ -37,7 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		movie.title as movtitle, 
 		screeninfo.sid,
 		screeninfo.scNum,
-		movie.mid  
+		movie.mid ,
+		movie.grade as grade 
 		from screeninfo, movie 
 		where screeninfo.mid = movie.mid
 		order by movtitle asc, mtime asc
@@ -47,7 +48,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select distinct
 		movie.title,
 		movie.poster, 
-		movie.mid
+		movie.mid,
+		movie.grade
 		from screeninfo, movie
         where screeninfo.mid = movie.mid
         order by movie.title

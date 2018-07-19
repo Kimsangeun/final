@@ -27,249 +27,239 @@ import com.jhta.proj.model.ScreenInfoVO;
 
 @Controller
 @RequestMapping("reservation")
-public class ReserController {   
+public class ReserController {
 
-   @Resource
-   ReserDAO rdao;
+	@Resource
+	ReserDAO rdao;
 
-   @Resource
-   MovDAO mdao;
+	@Resource
+	MovDAO mdao;
 
-   @Resource
-   ScreenInfoDAO sdao;
+	@Resource
+	ScreenInfoDAO sdao;
 
-   ReserVO rvo;
+	ReserVO rvo;
 
-   /*
-    * @ModelAttribute("top") public ArrayList top() {
-    * 
-    * ArrayList<String> res = new ArrayList<String>();
-    * 
-    * res.add("info"); res.add("reservation"); res.add("movie"); res.add("screen");
-    * return res; }
-    */
+	/*
+	 * @ModelAttribute("top") public ArrayList top() {
+	 * 
+	 * ArrayList<String> res = new ArrayList<String>();
+	 * 
+	 * res.add("info"); res.add("reservation"); res.add("movie"); res.add("screen");
+	 * return res; }
+	 */
 
-   SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
-   SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd");
-   SimpleDateFormat sdfe = new SimpleDateFormat("E");
-   
+	SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
+	SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd:E");
+	SimpleDateFormat sdfe = new SimpleDateFormat("E");
 
-    @ModelAttribute("datelist") //현재 날짜로부터 2주
-    public Object datelist(Model model) {
-       
-       ArrayList datearr = new ArrayList<>();
-       
-       Date now = new Date();
-      
-      for (int i = 0; i < 14; i++) {
-         Date dlist = new Date(now.getYear(), now.getMonth(), now.getDate()+i);
-         datearr.add(sdfd.format(dlist));
-      }
-       
-       return datearr;
-    }
-      
-    
-    @ModelAttribute("reserdata")
-    public Object rese(Model model, ReserVO vo) {
-        
-        Object res=null;
-        
-        res = rdao.list(vo);
-        
-        return res;
-    }
+	Date now = new Date();
 
+	String nowtime = sdft.format(now);
+	String nowdate = sdfd.format(now).split(":")[0];
 
-   @ModelAttribute("moviedata")
-   public Object mov(Model model, MovVO vo) {
-      Object res = null;
+	@ModelAttribute("datelist") // 현재 날짜로부터 2주
+	public Object datelist(Model model) {
 
-      res = mdao.list(vo);
-      //System.out.println(res);
-      return res;
-   }
+		ArrayList datearr = new ArrayList<>();
 
-   @ModelAttribute("datedata")
-   public Object dat(Model model, ScreenInfoVO vo) {
-      Object res = null;
+		for (int i = 0; i < 14; i++) {
+			Date dlist = new Date(now.getYear(), now.getMonth(), now.getDate() + i);
+			datearr.add(sdfd.format(dlist));
+		}
 
-      res = sdao.datelist(vo);
-      // System.out.println(res);
-      return res;
-   }
+		return datearr;
+	}
 
-   @ModelAttribute("titlelist")
-   public Object tit(Model model, MovVO vo) {
-	   Object res = null;
-	   
-	   res = mdao.titlelist(vo);
-	   // System.out.println(res);
-	   return res;
-   }
-   
-/*   @ModelAttribute("midlist")
-   public ArrayList<MovVO> midlist(Model model, ScreenInfoVO vo, MovVO mvo) {
-      ArrayList<ScreenInfoVO> scrArr = null;
-      ArrayList<MovVO> movArr = null;
+	@ModelAttribute("reserdata")
+	public Object rese(Model model, ReserVO vo) {
 
-      ArrayList<MovVO> res = new ArrayList<>();
+		Object res = null;
 
-      scrArr = (ArrayList) mdao.midList(vo);
-      movArr = (ArrayList) mdao.list(mvo);
+		res = rdao.list(vo);
 
-      for (MovVO movVo : movArr) {
-         for (ScreenInfoVO scrVo : scrArr) {
-            if (scrVo.getmId() == movVo.getmId()) {
-               res.add(movVo);
-            }
-         }
-      }
-     // System.out.println(res);
-      return res;
-   }
-    */ 
-    
-    // @RequestMapping("/") 
-       /* 
-        * public Object cine1(Model model, ReserVO vo) { 
-       *  
-       * model.addAttribute("menu","reservation"); 
-        *  
-       * String mm = "reser"; 
-       *  
-       * model.addAttribute("main", mm); return "home"; } 
-       */ 
+		return res;
+	}
 
-   @ModelAttribute("dateTitleList")
-   public Object datetitlelist(Model model, ScreenInfoVO vo) {
-	   Object res = null;
-	   res = mdao.dateTitleList(vo);
-	   System.out.println(res);
-	   return res;
-   }
-   
-    @RequestMapping("/timetable")
-    public Object cine3(Model model, ScreenInfoVO svo) {
-        
-    	Date now = new Date();
-    	
-    	String nowtime = sdft.format(now);
-    	String nowdate = sdfd.format(now);
-    	
-    	model.addAttribute("nowtime", "13:00");
-    	model.addAttribute("nowdate",nowdate);
-    	
-    	model.addAttribute("menu","reservation");
-        
-        String mm = "timetable";      
-       
-        model.addAttribute("main", mm);
-        return "home";
-    }
+	@ModelAttribute("moviedata")
+	public Object mov(Model model, MovVO vo) {
+		Object res = null;
 
-   @RequestMapping("/reser")
-   public Object cine2(Model model) {
-      model.addAttribute("menu", "reservation");
+		res = mdao.list(vo);
+		// System.out.println(res);
+		return res;
+	}
 
-      String mm = "reser";
+	@ModelAttribute("datedata")
+	public Object dat(Model model, ScreenInfoVO vo) {
+		Object res = null;
 
-      model.addAttribute("main", mm);
+		res = sdao.datelist(vo);
+		// System.out.println(res);
+		return res;
+	}
 
-      return "home";
-   }
+	@ModelAttribute("titlelist")
+	public Object tit(Model model, MovVO vo) {
+		Object res = null;
 
-   @RequestMapping(value = "/screenchoice")
-   public Object cine6(Model model, @RequestParam Integer sid, HttpSession session) {
-      model.addAttribute("menu", "reservation");
-      // 영화, 날짜, 시간, 등등?
+		res = mdao.titlelist(vo);
+		// System.out.println(res);
+		return res;
+	}
 
-      ScreenInfoVO svo = new ScreenInfoVO();
-      svo.setsId(sid);
-      svo = sdao.findSInfo(svo);
+	/*
+	 * @ModelAttribute("midlist") public ArrayList<MovVO> midlist(Model model,
+	 * ScreenInfoVO vo, MovVO mvo) { ArrayList<ScreenInfoVO> scrArr = null;
+	 * ArrayList<MovVO> movArr = null;
+	 * 
+	 * ArrayList<MovVO> res = new ArrayList<>();
+	 * 
+	 * scrArr = (ArrayList) mdao.midList(vo); movArr = (ArrayList) mdao.list(mvo);
+	 * 
+	 * for (MovVO movVo : movArr) { for (ScreenInfoVO scrVo : scrArr) { if
+	 * (scrVo.getmId() == movVo.getmId()) { res.add(movVo); } } } //
+	 * System.out.println(res); return res; }
+	 */
 
-      MovVO mvo = new MovVO();
-      
-      rvo = new ReserVO();
-      rvo.setId(((MemberVO) session.getAttribute("mem")).getId());
-      rvo.setmId(svo.getmId());
-      rvo.setsId(svo.getsId());
-      System.out.println("/screenchoice::" + rvo);
-      mvo.setmId(rvo.getmId());
-      mdao.findMovie(mvo);
-      
-      
-      String mm = "screenchoice";
-      model.addAttribute("rvo", rvo);
-      model.addAttribute("svo", svo);
-      model.addAttribute("mvo", mvo);
-      model.addAttribute("main", mm);
-      return "home";
-   }
+	// @RequestMapping("/")
+	/*
+	 * public Object cine1(Model model, ReserVO vo) {
+	 * 
+	 * model.addAttribute("menu","reservation");
+	 * 
+	 * String mm = "reser";
+	 * 
+	 * model.addAttribute("main", mm); return "home"; }
+	 */
 
+	@ModelAttribute("dateTitleList")
+	public Object datetitlelist(Model model, ScreenInfoVO vo) {
+		Object res = null;
+		res = mdao.dateTitleList(vo);
+		System.out.println(res);
+		return res;
+	}
 
-   @RequestMapping(value="/payment", method=RequestMethod.POST)
-   public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt) {
-      System.out.println("병수1");
-      model.addAttribute("menu", "reservation");
+	@RequestMapping("/timetable")
+	public Object cine3(Model model, ScreenInfoVO svo) {
 
-      // rvo.setCnt(request.getParameter("cnt"));
-      // rvo.setSeatNum(request.getParameter("seatnum"));
+		model.addAttribute("nowtime", "13:00");
+		model.addAttribute("nowdate", nowdate);
 
-      rvo.setCnt(cnt);
-      rvo.setSeatNum(seatnum);
-      System.out.println("병수2");
+		model.addAttribute("menu", "reservation");
 
-      System.out.println("/payment::" + rvo);
-      String mm = "payment";
-      model.addAttribute("rvo", rvo);
-      model.addAttribute("main", mm);
-      return "home";
-   }
+		String mm = "timetable";
 
-   @RequestMapping(value = "/payend", method = RequestMethod.POST)
-   public Object cine5(Model model, HttpServletRequest request) {
-      System.out.println("포스트로 받았다.");
-      model.addAttribute("menu", "reservation");
+		model.addAttribute("main", mm);
+		return "home";
+	}
 
-      if (request.getParameter("paytype").equals("csh")) {
-         rvo.setCoc("cash");
-      } else
-         rvo.setCoc("card");
-      System.out.println(rvo);
+	@RequestMapping("/reser")
+	public Object cine2(Model model) {
 
-      if (rvo.getCoc().equals("cash")) {
-         rvo.setAccNum(request.getParameter("banknum"));
-      } else if (rvo.getCoc().equals("card")) {
-         String card = request.getParameter("cardchk") + "_" + request.getParameter("cardnum1") + "-"
-               + request.getParameter("cardnum2") + "-" + request.getParameter("cardnum3") + "-"
-               + request.getParameter("cardnum4");
-         rvo.setAccNum(card);
+		model.addAttribute("nowtime", nowtime);
+		model.addAttribute("nowdate", nowdate);
 
-      }
+		model.addAttribute("menu", "reservation");
 
-      rvo.setCost(rvo.getCnt() * 3000);
+		String mm = "reser";
 
-      System.out.println("/payend::" + rvo);
+		model.addAttribute("main", mm);
 
-      String mm = "payend";
+		return "home";
+	}
 
-      rdao.insert(rvo); // 인서트가 안돼. 마이바티스에서 rvo 널값있다고 에러처리. // 됨
+	@RequestMapping(value = "/screenchoice")
+	public Object cine6(Model model, @RequestParam Integer sid, HttpSession session) {
+		model.addAttribute("menu", "reservation");
+		// 영화, 날짜, 시간, 등등?
 
-      model.addAttribute("rvo", rvo);
-      model.addAttribute("main", mm);
-      return "home";
-   }
+		ScreenInfoVO svo = new ScreenInfoVO();
+		svo.setsId(sid);
+		svo = sdao.findSInfo(svo);
 
-   @RequestMapping("/forbidden")
-   public Object cine4(Model model) {
+		MovVO mvo = new MovVO();
 
-      model.addAttribute("menu", "reservation");
+		rvo = new ReserVO();
+		rvo.setId(((MemberVO) session.getAttribute("mem")).getId());
+		rvo.setmId(svo.getmId());
+		rvo.setsId(svo.getsId());
+		System.out.println("/screenchoice::" + svo);
+		System.out.println("/screenchoice::" + rvo);
+		mvo.setmId(rvo.getmId());
+		mdao.findMovie(mvo);
 
-      String mm = "forbidden";
+		String mm = "screenchoice";
+		model.addAttribute("rvo", rvo);
+		model.addAttribute("svo", svo);
+		model.addAttribute("mvo", mvo);
+		model.addAttribute("main", mm);
+		return "home";
+	}
 
-      model.addAttribute("main", mm);
-      return "home";
-   }
-   
+	@RequestMapping(value = "/payment", method = RequestMethod.POST)
+	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt) {
+		System.out.println("병수1");
+		model.addAttribute("menu", "reservation");
+
+		// rvo.setCnt(request.getParameter("cnt"));
+		// rvo.setSeatNum(request.getParameter("seatnum"));
+
+		rvo.setCnt(cnt);
+		rvo.setSeatNum(seatnum);
+		System.out.println("병수2");
+
+		System.out.println("/payment::" + rvo);
+		String mm = "payment";
+		model.addAttribute("rvo", rvo);
+		model.addAttribute("main", mm);
+		return "home";
+	}
+
+	@RequestMapping(value = "/payend", method = RequestMethod.POST)
+	public Object cine5(Model model, HttpServletRequest request) {
+		System.out.println("포스트로 받았다.");
+		model.addAttribute("menu", "reservation");
+System.out.println("payend...:rvo::"+rvo);
+		if (request.getParameter("paytype").equals("csh")) {
+			rvo.setCoc("cash");
+		} else
+			rvo.setCoc("card");
+		System.out.println(rvo);
+
+		if (rvo.getCoc().equals("cash")) {
+			rvo.setAccNum(request.getParameter("banknum"));
+		} else if (rvo.getCoc().equals("card")) {
+			String card = request.getParameter("cardchk") + "_" + request.getParameter("cardnum1") + "-"
+					+ request.getParameter("cardnum2") + "-" + request.getParameter("cardnum3") + "-"
+					+ request.getParameter("cardnum4");
+			rvo.setAccNum(card);
+
+		}
+
+		rvo.setCost(rvo.getCnt() * 3000);
+
+		System.out.println("/payend::" + rvo);
+
+		String mm = "payend";
+
+		rdao.insert(rvo); // 인서트가 안돼. 마이바티스에서 rvo 널값있다고 에러처리. // 됨
+
+		model.addAttribute("rvo", rvo);
+		model.addAttribute("main", mm);
+		return "home";
+	}
+
+	@RequestMapping("/forbidden")
+	public Object cine4(Model model) {
+
+		model.addAttribute("menu", "reservation");
+
+		String mm = "forbidden";
+
+		model.addAttribute("main", mm);
+		return "home";
+	}
+
 }
