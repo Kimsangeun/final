@@ -55,7 +55,7 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 .js-load {
 	display: none;
 }
-.js-load.show {
+.js-load.showMore {
 	display: block;
 }
 .is_comp.js-load:after {

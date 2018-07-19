@@ -8,7 +8,7 @@ $(window).on('load', function () {
 });
 
 function load(id, cnt, btn) {
-	var girls_list = id + " .js-load:not(.show)";
+	var girls_list = id + " .js-load:not(.showMore)";
 
 	var girls_length = $(girls_list).length;
 
@@ -20,5 +20,5 @@ function load(id, cnt, btn) {
 		girls_total_cnt = girls_length;
 		$('#moreButton').hide();
 	}
-	$(girls_list + ":lt(" + girls_total_cnt + ")").addClass("show");
+	$(girls_list + ":lt(" + girls_total_cnt + ")").addClass("showMore");
 }
