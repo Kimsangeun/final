@@ -45,9 +45,7 @@
 	</c:forEach>
  */
  		
- <%
- Set<String> SeatList = (Set<String>)request.getAttribute("seatList");
- %>
+ <%Set<String> SeatList = (Set<String>) request.getAttribute("seatList");%>
  
  var list = <%=SeatList%>;
  		for(ss in list){
