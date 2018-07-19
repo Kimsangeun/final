@@ -507,9 +507,11 @@ function submitOpen() {
     $("#btnJoin").attr("disabled",false);
 }
 		
-	
-	
 </script>
+
+<style>
+	
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -522,7 +524,7 @@ function submitOpen() {
 			<h3 class="each_title">아이디</h3>
 			<span class="box_id"> <input type="text" id="id" name="id"
 				class="int" title="ID" maxlength="14">
-			</span> <span class="error_next_box" id="idMsg" style="display: none"></span>
+			</span> <div><span class="error_next_box" id="idMsg" style="display: none"></span></div>
 		</div>
 
 		<!-- 비밀번호 및 재확인 -->
@@ -531,13 +533,14 @@ function submitOpen() {
 			<span class="box_pw"> <input type="password" id="pw"
 				name="pw" class="int" title="비밀번호 입력" maxlength="14">
 			</span> 
-			<span class="error_next_box" id="pw1Msg" style="display: none">5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span>
+			<div><span class="error_next_box" id="pw1Msg" style="display: none">
+			5~12자의 영문 소문자, 숫자와 특수기호(_)만 사용 가능합니다.</span></div>
 
 			<h3 class="each_title">비밀번호 재확인</h3>
 			<span class="box_pwChk"> <input type="password" id="pw2"
 				name="pw2" class="int" title="비밀번호 재확인 입력" maxlength="14">
 			</span> 
-			<span class="error_next_box" id="pw2Msg" style="display: none"></span>
+			<div><span class="error_next_box" id="pw2Msg" style="display: none"></span></div>
 		</div>
 
 		<!-- 이름 -->
@@ -545,7 +548,7 @@ function submitOpen() {
 			<h3 class="each_title">이름</h3>
 			<span class="box_name"> <input type="text" id="name"
 				name="name" class="int" title="이름" maxlength="40">
-			</span> <span class="error_next_box" id="nameMsg" style="display: none"></span>
+			</span> <div><span class="error_next_box" id="nameMsg" style="display: none"></span></div>
 		</div>
 
 		<!-- 생년월일 -->
@@ -581,7 +584,7 @@ function submitOpen() {
 					</span>
 				</div>
 			</div>
-			<span class="error_next_box" id="birthMsg" style="display: none"></span>
+			<div><span class="error_next_box" id="birthMsg" style="display: none"></span></div>
 		</div>
 		
 	<!-- 이메일인증 -->
@@ -589,7 +592,7 @@ function submitOpen() {
 			<h3 class="each_title">이메일</h3>
 			<span class="box_email"> <input type="text" id="email"
 				name="email" class="int" title="이메일" maxlength="40" placeholder="ID/PW찾기에 필요하니 제대로 기입바랍니다.">
-			</span> <span class="error_next_box" id="emailMsg" style="display: none"></span>
+			</span> <div><span class="error_next_box" id="emailMsg" style="display: none"></span></div>
 		</div>
 			
 	<!-- 핸드폰 -->
@@ -603,8 +606,10 @@ function submitOpen() {
 			<div class="ps_box_disable box_right_space" id="authNoBox">
     			<input type="tel" id="authNo" name="authNo" placeholder="인증번호 입력하세요" class="int" disabled maxlength="6">
             </div>
+            <div>
             <span class="error_next_box" id="authNoMsg" style="display:none"></span>
             <span class="error_next_box" id="joinMsg" style="display:none"></span>
+            </div>
 		</div>
         
    

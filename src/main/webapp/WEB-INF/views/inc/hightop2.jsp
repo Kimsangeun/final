@@ -34,6 +34,7 @@ margin: 0 10%;
 			ID<input type="text" name="id">
 			pw<input type="text" name="pw">
 			<input type="submit" value="로그인">
+			<div><a href="/proj/search">ID/PW찾기</a></div>
 			<a href="/proj/joinForm">회원가입</a>
 		</form></li>
 		</c:when>

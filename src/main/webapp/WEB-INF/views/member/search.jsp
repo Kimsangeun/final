@@ -11,11 +11,32 @@
 	$(function() {
 		$('ul.nav-tabs a').click(function(e) {
 			e.preventDefault()
-			$(this).tab('show')
+			$(this).tab('show');
+// 			$('.form-control').css({'width':'80%'});
+// 			$('.tab-pane').css({'width':'70%'});
 		});
 		
 	})
 </script>
+
+<style>
+.tab-content {
+
+	border: px solid;
+	
+}
+
+.tab-pane {
+
+	width : 70%;
+	min-width : ;
+
+}
+
+.form-control {
+	width : 80%;
+}
+</style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -25,52 +46,60 @@
 		<div>
 			<ul class="nav navbar-nav nav-tabs">
 				<li class="active"><a href="#id">아이디찾기</a></li>
-				<li><a href="#pw">비밀번호찾기</a></li>
+				<li ><a href="#pw">비밀번호찾기</a></li>
 			</ul>
 		</div>
 		</nav>
 		<div class="tab-content" style="margin-top: 80px;">
-			<div class="tab-pane fade active in" id="id">
-			<h3>아이디찾기</h3>
-			<form id="idSearch" action="/proj/idSearch">
-				<table border="/proj/idSearch">
-					<tr>
-						<td>이름</td>
-						<td><input type="text" id="id_name" name="id_name"></td>
-					</tr>
-					<tr>
-						<td>휴대전화</td>
-						<td><input type="text" placeholder="'-'없이 입력바랍니다." id="id_phone" name="id_phone"></td>
-					</tr>
-					<tr>
-						<td colspan="2" align="center"><input type="submit" value="id찾기"></td>					
-					</tr>
-				</table>
+			<div class="tab-pane fade active in" style="width : 70%;" id="id">
+			<div style="margin: 5%"><h3>아이디찾기</h3></div>
+			<hr>
+			<form id="idSearch" action="/proj/idSearch" role="form" class="form-horizontal">
+				<div style="width:; margin-left: 5%;">
+				<div class="form-group">	
+					<label for="id_name" class="col-sm-2 control-label">이                  름</label>
+					<div class="col-sm-10"><input type="text" class="form-control" id="id_name" name="id_name" style="width : 80%;"></div>
+				</div>
+				<div class="form-group">	
+					<label for="id_phone" class="col-sm-2 control-label">휴대전화</label>
+					<div  class="col-sm-10"><input type="text" class="form-control" id="id_phone" name="id_name" style="width : 80%;"></div>
+				</div>
+				<hr style=" margin-top: 50px;">
+				<div>
+					<div class="form-group" style="float: right;"> 
+					<button type="submit" class="btn btn-default">ID찾기</button>
+					</div>
+				</div>
+				</div>		
 			</form>
 			</div>
-			<div class="tab-pane fade" id="pw">
-				<h3>비밀번호찾기</h3>
-				<form id="pwSearch" action="/proj/pwSearch">
-				<table border="">
-					<tr>
-						<td>아이디</td>
-						<td><input type="text" id="pw_id" name="pw_id"></td>
-					</tr>
-					<tr>
-						<td>이름</td>
-						<td><input type="text" id="pw_name" name="pw_name"></td>
-					</tr>
-					<tr>
-						<td>휴대전화</td>
-						<td><input type="text" placeholder="'-'없이 입력바랍니다." id="pw_phone" name="pw_phone"></td>
-					</tr>
-					
-					<tr>
-						<td colspan="2" align="center"><input type="submit" value="pw찾기"></td>	
-					</tr>
-				</table>
-				</form>
-			</div>
+			<div class="tab-pane fade  " style="width : 70%;" id="pw">
+			<div style="margin: 5%"><h3>비밀번호찾기</h3></div>
+			<hr>
+			<form id="pwSearch" action="/proj/pwSearch" role="form" class="form-horizontal">
+				<div style=" margin-left: 5%;">
+				<div class="form-group">	
+					<label for="pw_id" class="col-sm-2 control-label">아이디</label>
+					<div class="col-sm-10"><input type="text" class="form-control" id="pw_id" name="pw_id" style="width : 80%;"></div>
+				</div>
+				<div class="form-group">	
+					<label for="pw_name" class="col-sm-2 control-label">이 &nbsp;&nbsp;
+					&nbsp;름</label>
+					<div class="col-sm-10"><input type="text" class="form-control" id="pw_name" name="pw_name" style="width : 80%;"></div>
+				</div>
+				<div class="form-group">	
+					<label for="pw_phone" class="col-sm-2 control-label">휴대전화</label>
+					<div  class="col-sm-10"><input type="text" class="form-control" id="pw_phone" name="pw_name" style="width : 80%;"></div>
+				</div>
+				<hr style=" margin-top: 50px;">
+				<div>
+					<div class="form-group" style="float: right;"> 
+					<button type="submit" class="btn btn-default">PW찾기</button>
+					</div>
+				</div>
+				</div>		
+			</form>
+			</div>		
 		</div>
 	</div>
 </body>
