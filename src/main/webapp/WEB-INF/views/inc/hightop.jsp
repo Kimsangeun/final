@@ -28,6 +28,7 @@ margin-left: 10px;
 			<div id="S_log">pw</div>
 			<div id="S_log"><input type="text" name="pw"></div>
 			<div id="S_log"><input type="submit" value="로그인"></div>
+			<div><a href="/proj/search">ID/PW찾기</a></div>
 			<div><a href="/proj/joinForm">회원가입</a></div>
 		</form>
 		</c:when>

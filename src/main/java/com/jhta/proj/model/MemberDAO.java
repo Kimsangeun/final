@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
 
+import com.jhta.proj.util.MakeNumber;
+
 @Component
 public class MemberDAO {
 	
@@ -16,6 +18,24 @@ public class MemberDAO {
 	public Object isChk(MemberVO vo){
 		System.out.println("DAO"+vo);
 		return sessionTemplate.selectOne("mem.isChk", vo);
+	}
+	
+	public String idSearch(MemberVO vo) {
+		System.out.println("id찾자");
+		return sessionTemplate.selectOne("mem.idSearch",vo);
+	}
+	
+	public String pwSearch(MemberVO vo) {
+		
+		String email = sessionTemplate.selectOne("mem.pwSearch",vo);
+		
+		if(email!=null) {			
+			sessionTemplate.update("mem.pwChange",vo);
+			System.out.println("임시패스워스로 디비바꿈");
+				
+		}
+	
+		return email;
 	}
 	
 	public void insert(MemberVO vo) {
@@ -102,6 +122,19 @@ public class MemberDAO {
 		return map;
 		
 	}
+	
+	public Map<String,Object> ajaxemailChk(Map<String,Object> map){
+		
+		System.out.println("DAOemail");
+		
+		if(sessionTemplate.selectOne("mem.emailChk",map)==null) {
+			map.put("chk", "Y");
+		}	
+		
+		return map;
+	}
+	
+	
 	
 	
 }
