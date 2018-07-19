@@ -180,15 +180,19 @@ public class ReserController {
    }
 
    @RequestMapping(value = "/screenchoice")
-   public Object cine6(Model model, @RequestParam Integer sid, HttpSession session) {
+   public Object cine6(Model model, @RequestParam Integer sid, @RequestParam Integer mid, HttpSession session) {
       model.addAttribute("menu", "reservation");
       // 영화, 날짜, 시간, 등등?
 
       ScreenInfoVO svo = new ScreenInfoVO();
       svo.setsId(sid);
+      System.out.println("svo"+svo);
       svo = sdao.findSInfo(svo);
+      System.out.println("fsvo"+svo);
 
       MovVO mvo = new MovVO();
+      svo.setsId(sid);
+      svo.setmId(mid);
       
       rvo = new ReserVO();
       rvo.setId(((MemberVO) session.getAttribute("mem")).getId());
@@ -245,7 +249,6 @@ public class ReserController {
                + request.getParameter("cardnum2") + "-" + request.getParameter("cardnum3") + "-"
                + request.getParameter("cardnum4");
          rvo.setAccNum(card);
-
       }
 
       rvo.setCost(rvo.getCnt() * 3000);
@@ -256,7 +259,12 @@ public class ReserController {
 
       rdao.insert(rvo); // 인서트가 안돼. 마이바티스에서 rvo 널값있다고 에러처리. // 됨
 
+      ScreenInfoVO svo = new ScreenInfoVO();
+      svo.setsId(rvo.getsId());
+      svo = sdao.findSInfo(svo);
+      
       model.addAttribute("rvo", rvo);
+      model.addAttribute("svo", svo);
       model.addAttribute("main", mm);
       return "home";
    }
@@ -271,5 +279,4 @@ public class ReserController {
       model.addAttribute("main", mm);
       return "home";
    }
-   
 }

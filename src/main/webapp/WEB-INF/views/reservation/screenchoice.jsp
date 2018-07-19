@@ -45,9 +45,7 @@
 	</c:forEach>
  */
  		
- <%
- Set<String> SeatList = (Set<String>)request.getAttribute("seatList");
- %>
+ <%Set<String> SeatList = (Set<String>) request.getAttribute("seatList");%>
  
  var list = <%=SeatList%>;
  		for(ss in list){
@@ -66,9 +64,25 @@
 		var seat = document.getElementById("R_seat" + ii);
 		cnt++;
 		$('#seatnums').text(seats);
-
 	}
 
+	function resered(ii){
+		 var list = <%=SeatList%>;
+		 		for(ss in list){
+		 			if(list[ss] == ii ){
+		 				document.getElementById('#R_seat'+ii).style.backgroundColor = 'red';
+		 				return;
+		 			}
+		 		}
+
+		
+		//예약됐으면
+		//빨간색 리턴?
+		//innerHtml 칼라 레드
+		
+		
+	}
+	
 	function selchg() {
 		seats = "";
 		cnt = 0;
@@ -103,10 +117,11 @@ ${svo.movtitle } ${svo.mdate } ${svo.mtime}
 			<!-- 1부터 40까지 뿌리는데 숫자가 예약된 좌석에 포함되면 안되는걸로. -->
 
 			<div class="<c:if test='${ii<=10 }'>royal</c:if>seat"
-				id="R_seat${ii }" onclick="chkseat(${ii})">${ii }</div>
+				id="R_seat${ii }" onclick="chkseat(${ii})" style="background-color: blue">${ii }</div>
 			<c:if test="${ii%10==0 }">
 				<br>
 			</c:if>
+<!-- 			resered(ii) -->
 		</c:forEach>
 	</div>
 
