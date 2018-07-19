@@ -12,24 +12,41 @@ public class MemberVO {
 	
 	String id, pw, email, name, phone, yy, mm, dd;
 	
+	Integer out;
+	
 	Date birth;
 
 	public MemberVO() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public MemberVO(String id, String pw, String email, String name, String phone, Date birth) {
+	
+
+	
+	
+	public MemberVO(String id, String pw, String email, String name, String phone, String yy, String mm, String dd,
+			Integer out, Date birth) {
 		super();
 		this.id = id;
 		this.pw = pw;
 		this.email = email;
 		this.name = name;
 		this.phone = phone;
+		this.yy = yy;
+		this.mm = mm;
+		this.dd = dd;
+		this.out = out;
 		this.birth = birth;
 	}
 
-	
-	
+	public Integer getOut() {
+		return out;
+	}
+
+	public void setOut(Integer out) {
+		this.out = out;
+	}
+
 	public String getYy() {
 		return yy;
 	}

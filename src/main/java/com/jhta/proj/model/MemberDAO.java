@@ -15,7 +15,7 @@ public class MemberDAO {
 	@Resource
 	SqlSessionTemplate sessionTemplate;
 	
-	public Object isChk(MemberVO vo){
+	public MemberVO isChk(MemberVO vo){
 		System.out.println("DAO"+vo);
 		return sessionTemplate.selectOne("mem.isChk", vo);
 	}
@@ -25,17 +25,22 @@ public class MemberDAO {
 		return sessionTemplate.selectOne("mem.idSearch",vo);
 	}
 	
-	public String pwSearch(MemberVO vo) {
+	public MemberVO pwSearch(MemberVO vo) {
 		
-		String email = sessionTemplate.selectOne("mem.pwSearch",vo);
+		MemberVO info = sessionTemplate.selectOne("mem.pwSearch",vo);
 		
-		if(email!=null) {			
-			sessionTemplate.update("mem.pwChange",vo);
-			System.out.println("임시패스워스로 디비바꿈");
-				
+		System.out.println(info.getOut());
+		
+		if(info!=null) {
+			
+			if(info.getOut()==0) {
+			
+				sessionTemplate.update("mem.pwChange",vo);
+				System.out.println("임시패스워스로 디비바꿈");
+			}
 		}
 	
-		return email;
+		return info;
 	}
 	
 	public void insert(MemberVO vo) {

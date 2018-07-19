@@ -99,9 +99,12 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 									<li><a href="/proj/info/faq">자주찾는질문</a></li>
 									<li><a href="/proj/info/qna">1:1문의</a></li>
 								</ul></li>
-							<jsp:include page="admin/topmenu.jsp"></jsp:include>
+							<jsp:include page="admin/topmenu.jsp"></jsp:include>	
 						</ul>
 						<ul class="nav navbar-nav navbar-right">
+						<jsp:include page="mypage/topmenu.jsp"></jsp:include>
+						<c:choose>
+							<c:when test="${mem.id == null }">
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown" role="button" aria-expanded="false">로그인
 									<span class="caret"></span>
@@ -110,8 +113,16 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 									<li><jsp:include page="inc/hightop2.jsp" /></li>
 
 								</ul></li>
+							</c:when>
+							<c:otherwise>
+							<li class="dropdown"><a href="/proj/logOut" 
+								role="button" aria-expanded="false">로그아웃
+									<span class="caret"></span>
+							</a></li>	
+							</c:otherwise>
+						</c:choose>
 						</ul>
-
+	
 					</div>
 				</div>
 			</nav>

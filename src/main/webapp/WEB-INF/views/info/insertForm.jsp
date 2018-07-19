@@ -17,6 +17,7 @@
 			<td>비밀번호</td>
 			<td><input type="password" name="pw" /></td>
 		</tr>
+		<!-- kind qna / 회원일때 숨김. -->
 		<tr>
 			<td>파일</td>
 			<td colspan="3"><input type="file" name="mmfile" value=""/></td>
