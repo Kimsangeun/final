@@ -335,6 +335,50 @@ function isValidDate(param) {
     ;
 }
 
+function checkEmail() {
+    var id = $("#id").val();
+    var email = $("#email").val();
+    var oMsg = $("#emailMsg");
+    
+    var data = {email};
+
+    if (email == "") {
+    	showErrorMsg(oMsg,"필수 정보입니다.");
+        return false;
+    }
+
+    var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    var isHan = /[ㄱ-ㅎ가-힣]/g;
+    if (!isEmail.test(email)) {
+        showErrorMsg(oMsg,"이메일 주소를 다시 확인해주세요.");
+        return false;
+    }else if(isHan.test(email)){
+    	showErrorMsg(oMsg,"한글 사용은 불가합니다.");
+        return false;
+    }
+    
+    $.ajax({
+        type:"POST",
+        url: "/proj/ajax/emailChk",
+        dataType : 'json',
+        data : data,
+        success : function(result) {
+        
+            if (result.chk == "Y") {
+                
+               showSuccessMsg(oMsg, "가능한 email입니다!");
+               return true;
+            } else {
+                showErrorMsg(oMsg, "이미 가입되어 있는 email주소입니다.");
+                return false;
+            }
+        }
+    });
+    
+    return true;
+}
+
+
 function sendSmsButton() {
 	
     var phone = $("#phone").val();
@@ -430,9 +474,9 @@ function mainSubmit() {
     }
     
     if(idFlag && pwFlag && authFlag) {
-        desk.f(function(a) {
-            $("#join_form").submit();
-        });
+    	
+        $("#join_form").submit();
+        
     } else {
         submitOpen();
         return false;
@@ -445,7 +489,6 @@ function checkUnrealInput() {
             & checkPswd2()
             & checkName()
             & checkBirthday()
-            & checkGender()
             & checkEmail()
             & checkPhoneNo()
             & checkAuthNo()
@@ -545,7 +588,7 @@ function submitOpen() {
         <div class="each">
 			<h3 class="each_title">이메일</h3>
 			<span class="box_email"> <input type="text" id="email"
-				name="email" class="int" title="이메일" maxlength="40">
+				name="email" class="int" title="이메일" maxlength="40" placeholder="ID/PW찾기에 필요하니 제대로 기입바랍니다.">
 			</span> <span class="error_next_box" id="emailMsg" style="display: none"></span>
 		</div>
 			
