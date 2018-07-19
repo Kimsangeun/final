@@ -9,11 +9,11 @@ import org.apache.ibatis.type.Alias;
 @Alias("screenInfoVo")
 public class ScreenInfoVO {
 
-	int sId, scNum, mId;
+	int sId, scNum, mId, grade;
 	Date mstart;
 	String mdate, mtime, movtitle;
 	
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm");
+/*	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm");
 	SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
 	SimpleDateFormat sdfd = new SimpleDateFormat("yyyy-M-d");
 	
@@ -28,41 +28,14 @@ public class ScreenInfoVO {
 			}
 		}
 		return null;
-	}
+	}*/
 	
-/*	public String getMday() {
-		switch(mday){
-		
-		case "1":
-			mday="일";
-			break;
-		case "2":
-			mday="월";
-			break;
-		case "3":
-			mday="화";
-			break;
-		case "4":
-			mday="수";
-			break;
-		case "5":
-			mday="목";
-			break;
-		case "6":
-			mday="금";
-			break;
-		case "7":
-			mday="토";
-			break;
-		}
-		
-		return mday;
+	public int getGrade() {
+		return grade;
 	}
-
-	public void setMday(String mday) {
-		this.mday = mday;
+	public void setGrade(int grade) {
+		this.grade = grade;
 	}
-*/
 	public String getMovtitle() {
 		return movtitle;
 	}
@@ -81,12 +54,12 @@ public class ScreenInfoVO {
 	public void setMtime(String mtime) {
 		this.mtime = mtime;
 	}
-	public String getMstartStr() {
+/*	public String getMstartStr() {
 		return sdf.format(mstart);
 	}
 	public String getMstartTimeStr() {
 		return sdft.format(mstart);
-	}
+	}*/
 	public int getScNum() {
 		return scNum;
 	}
@@ -117,8 +90,7 @@ public class ScreenInfoVO {
 	@Override
 	public String toString() {
 		return "ScreenInfoVO [sId=" + sId + ", scNum=" + scNum + ", mId=" + mId + ", mstart=" + mstart + ", mdate="
-				+ mdate + ", mtime=" + mtime + ", movtitle=" + movtitle + ", sdf=" + sdf + ", sdft=" + sdft + ", sdfd="
-				+ sdfd + "]";
+				+ mdate + ", mtime=" + mtime + ", movtitle=" + movtitle + "]";
 	}
 
 	

@@ -51,31 +51,32 @@ public class ReserController {
 	 */
 
 	SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
-	SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd");
-	SimpleDateFormat sdfe = new SimpleDateFormat("E");
+	SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd:E");
+
+	Date now = new Date();
+
+	String nowtime = sdft.format(now);
+	String nowdate = sdfd.format(now).split(":")[0];
 
 	@ModelAttribute("datelist") // 현재 날짜로부터 2주
 	public Object datelist(Model model) {
 
 		ArrayList datearr = new ArrayList<>();
 
-		Date now = new Date();
 
 		for (int i = 0; i < 14; i++) {
 			Date dlist = new Date(now.getYear(), now.getMonth(), now.getDate() + i);
 			datearr.add(sdfd.format(dlist));
 		}
-
 		return datearr;
 	}
-
+	
 	@ModelAttribute("reserdata")
 	public Object rese(Model model, ReserVO vo) {
 
 		Object res = null;
-
 		res = rdao.list(vo);
-
+		
 		return res;
 	}
 
@@ -88,6 +89,7 @@ public class ReserController {
 		return res;
 	}
 
+
 	@ModelAttribute("datedata")
 	public Object dat(Model model, ScreenInfoVO vo) {
 		Object res = null;
@@ -96,7 +98,7 @@ public class ReserController {
 		// System.out.println(res);
 		return res;
 	}
-
+	
 	@ModelAttribute("titlelist")
 	public Object tit(Model model, MovVO vo) {
 		Object res = null;
@@ -105,6 +107,7 @@ public class ReserController {
 		// System.out.println(res);
 		return res;
 	}
+
 
 	/*
 	 * @ModelAttribute("midlist") public ArrayList<MovVO> midlist(Model model,
@@ -118,7 +121,6 @@ public class ReserController {
 	 * for (MovVO movVo : movArr) { for (ScreenInfoVO scrVo : scrArr) { if
 	 * (scrVo.getmId() == movVo.getmId()) { res.add(movVo); } } } //
 	 * System.out.println(res); return res; }
-	 */
 
 	// @RequestMapping("/")
 	/*
@@ -141,29 +143,30 @@ public class ReserController {
 
 	@RequestMapping("/timetable")
 	public Object cine3(Model model, ScreenInfoVO svo) {
-
-		Date now = new Date();
-
-		String nowtime = sdft.format(now);
-		String nowdate = sdfd.format(now);
+		model.addAttribute("menu", "reservation");
 
 		model.addAttribute("nowtime", "13:00");
 		model.addAttribute("nowdate", nowdate);
 
-		model.addAttribute("menu", "reservation");
-
 		String mm = "timetable";
+
+		model.addAttribute("menu", "reservation");
 
 		model.addAttribute("main", mm);
 		return "home";
 	}
 
+
 	@RequestMapping("/reser")
 	public Object cine2(Model model) {
+
 		model.addAttribute("menu", "reservation");
 
 		String mm = "reser";
-		
+	
+		model.addAttribute("nowtime", nowtime);
+		model.addAttribute("nowdate", nowdate);
+	
 		model.addAttribute("main", mm);
 
 		return "home";
@@ -188,23 +191,19 @@ public class ReserController {
 		rvo.setId(((MemberVO) session.getAttribute("mem")).getId());
 		rvo.setmId(svo.getmId());
 		rvo.setsId(svo.getsId());
+		System.out.println("/screenchoice::" + svo);
 		System.out.println("/screenchoice::" + rvo);
 		mvo.setmId(rvo.getmId());
 		mdao.findMovie(mvo);
 
 		Set<String> seatList = new HashSet<>();
 		String sss = "";
-
+		
 		for (String ss : (ArrayList<String>) rdao.seatlist(rvo)) {
 			sss += ss;
 		}
-
-		for (String ss : sss.split(",")) {
-			seatList.add(ss);
-		}
+	
 		String mm = "screenchoice";
-
-		model.addAttribute("seatList", seatList);
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("svo", svo);
 		model.addAttribute("mvo", mvo);
