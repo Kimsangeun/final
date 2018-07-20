@@ -63,20 +63,19 @@ public class ReserController {
 
 		ArrayList datearr = new ArrayList<>();
 
-
 		for (int i = 0; i < 14; i++) {
 			Date dlist = new Date(now.getYear(), now.getMonth(), now.getDate() + i);
 			datearr.add(sdfd.format(dlist));
 		}
 		return datearr;
 	}
-	
+
 	@ModelAttribute("reserdata")
 	public Object rese(Model model, ReserVO vo) {
 
 		Object res = null;
 		res = rdao.list(vo);
-		
+
 		return res;
 	}
 
@@ -89,7 +88,6 @@ public class ReserController {
 		return res;
 	}
 
-
 	@ModelAttribute("datedata")
 	public Object dat(Model model, ScreenInfoVO vo) {
 		Object res = null;
@@ -98,7 +96,7 @@ public class ReserController {
 		// System.out.println(res);
 		return res;
 	}
-	
+
 	@ModelAttribute("titlelist")
 	public Object tit(Model model, MovVO vo) {
 		Object res = null;
@@ -107,7 +105,6 @@ public class ReserController {
 		// System.out.println(res);
 		return res;
 	}
-
 
 	/*
 	 * @ModelAttribute("midlist") public ArrayList<MovVO> midlist(Model model,
@@ -121,10 +118,8 @@ public class ReserController {
 	 * for (MovVO movVo : movArr) { for (ScreenInfoVO scrVo : scrArr) { if
 	 * (scrVo.getmId() == movVo.getmId()) { res.add(movVo); } } } //
 	 * System.out.println(res); return res; }
-
-	// @RequestMapping("/")
-	/*
-	 * public Object cine1(Model model, ReserVO vo) {
+	 * 
+	 * // @RequestMapping("/") /* public Object cine1(Model model, ReserVO vo) {
 	 * 
 	 * model.addAttribute("menu","reservation");
 	 * 
@@ -137,7 +132,7 @@ public class ReserController {
 	public Object datetitlelist(Model model, ScreenInfoVO vo) {
 		Object res = null;
 		res = mdao.dateTitleList(vo);
-		System.out.println("롤롤롤:"+res);
+		System.out.println("롤롤롤:" + res);
 		return res;
 	}
 
@@ -156,17 +151,16 @@ public class ReserController {
 		return "home";
 	}
 
-
 	@RequestMapping("/reser")
 	public Object cine2(Model model) {
 
 		model.addAttribute("menu", "reservation");
 
 		String mm = "reser";
-	
+
 		model.addAttribute("nowtime", nowtime);
 		model.addAttribute("nowdate", nowdate);
-	
+
 		model.addAttribute("main", mm);
 
 		return "home";
@@ -198,17 +192,18 @@ public class ReserController {
 
 		Set<String> seatList = new HashSet<>();
 		String sss = "";
-		
+
 		for (String ss : (ArrayList<String>) rdao.seatlist(rvo)) {
 			sss += ss;
 		}
-	
-		for(String ss : sss.split(",")) {
+		
+		for (String ss : sss.split(",")) {
 			seatList.add(ss);
 		}
+		
+		
+		System.out.println(seatList);
 		model.addAttribute("seatList", seatList);
-		
-		
 		
 		String mm = "screenchoice";
 		model.addAttribute("rvo", rvo);
@@ -268,7 +263,7 @@ public class ReserController {
 		svo.setsId(rvo.getsId());
 		svo = sdao.findSInfo(svo);
 
-		System.out.println("ssssssssssssssvo :"+svo);
+		System.out.println("ssssssssssssssvo :" + svo);
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("svo", svo);
 		model.addAttribute("main", mm);
