@@ -27,7 +27,7 @@ $(function() {
         }
     });
     
-    $('#dddd').raty({
+/*     $('#dddd').raty({
 		size:24,
 		half:true,
 		path:'/proj/resources/imgs/',
@@ -38,19 +38,24 @@ $(function() {
 		target:     '#hint2',
 		targetKeep:true,
 		start:1
-	});
+	}); */
     
-    $('#ddddd').raty({
+    $('#starscore').raty({
 		size:24,
 		half:true,
 		path:'/proj/resources/imgs/',
-		scoreName:'score',
+		scoreName:'tmpScore',
 		starHalf:'star-half-big.png',
 		starOn:'star-on-big.png',
 		starOff:'star-off-big.png',
-		target:     '#hint2',
-		targetKeep:true,
-		start:1
+		start:1,
+		click: function(score, evt) {
+				/* var score=score*2;
+				this.attr('score',score*2);
+				console.log('ID: ' + this.attr('id') + '\nscore: ' + score + '\nevent: ' + evt);
+				return score; */
+			/* 	$('#starscore').raty('setScore', 10); */
+			  }
 	});
     
     var ss = ${moviedata['movie'].rating/2};
@@ -72,6 +77,9 @@ $(function() {
   
     
 });
+/* $('#starscore').click({
+	console.log('gg');
+}); */
 </script>
 <style>
 
@@ -93,6 +101,21 @@ $(function() {
 }
 
 </style>
+<style>
+
+.js-load {
+	display: none;
+}
+.js-load.showMore {
+	display: block;
+}
+.is_comp.js-load:after {
+	display: none;
+}
+.btn-wrap, .lists, .main {
+	display: block;
+}
+</style>
 
 <div class="row" style="padding-top: 100px">
 	<div class="col-md-4 col-xs-12">
@@ -112,7 +135,10 @@ $(function() {
 
 				<div class="col-md-3 col-sm-4 col-xs-4" id="fixedStar"></div>
 				<div class="h3 col-md-7 col-sm-4 col-xs-4" id="hint1"></div>
-				<button class="btn btn-danger col-md-2 col-sm-4 col-xs-4">예매하기</button>
+				<a class="btn btn-danger col-md-2 col-sm-4 col-xs-4"
+				 href="/proj/reservation/reser" role="button">예매하기 &raquo;</a>
+				<!-- <button onclick="location.href('proj/reservation/reser')"
+				class="btn btn-danger col-md-2 col-sm-4 col-xs-4">예매하기</button> -->
 			</div>
 			<dl class="dl-horizontal text-left">
 				<dt>
@@ -201,7 +227,7 @@ $(function() {
 <form  action="reviewInsert" method="POST">
 <div class="row qq" >
 	<div class="q form-group col-lg-2 col-xs-3 vertical-align" >
-	<div class=" center-block" id="ddddd"></div>
+	<div class=" center-block" id="starscore"></div><p id="hint2">bad</p>
 	</div>
 	
 	<div class="q wrap form-group col-lg-9 col-xs-8" style="padding:0 0 0 0;">
@@ -212,8 +238,12 @@ $(function() {
 	<button style="width:100%;height:100%" class="btn btn-default"  type="submit" >작성</button>
 	</div>
 </div>
+	<fmt:formatNumber var="ss" value="${scor}" pattern="#.#"/>
+	
+	<c:out value="${ss }"></c:out>
 	<input type="hidden" name="id" value="${mem.id }" />
 	<input type="hidden" name="mid" value="${param.mid }" />
+	<!-- <input type="hidden" name="score"/> -->
 </form>
 
 <div id="js-load" class="main border">
@@ -225,7 +255,9 @@ $(function() {
 		<div>${rr.score }점</div>
 		<div>${rr.reg_date }</div>
 		<div>${rr.review }</div>
-		<br>
+		<c:if test="${mem.id eq rr.id }">
+		<a class="btn btn-danger" href="deleteReview?mid=${param.mid }&id=${rr.id }" role="button">X</a>
+		</c:if>
 
 		</li>
 	</c:forEach>
