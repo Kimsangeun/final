@@ -23,7 +23,8 @@
 	</tr>
 	<c:if test="${data.img}">
 		<tr>
-			<td colspan="4"><img src="${pageContext.request.contextPath}\resources\board/${data.upfile}" />
+			<td colspan="4"><img class="img-responsive"
+			 src="${pageContext.request.contextPath}\resources\board/${data.upfile}" />
 			</td>
 		</tr>
 	</c:if>

@@ -93,6 +93,21 @@ $(function() {
 }
 
 </style>
+<style>
+
+.js-load {
+	display: none;
+}
+.js-load.showMore {
+	display: block;
+}
+.is_comp.js-load:after {
+	display: none;
+}
+.btn-wrap, .lists, .main {
+	display: block;
+}
+</style>
 
 <div class="row" style="padding-top: 100px">
 	<div class="col-md-4 col-xs-12">
@@ -112,7 +127,10 @@ $(function() {
 
 				<div class="col-md-3 col-sm-4 col-xs-4" id="fixedStar"></div>
 				<div class="h3 col-md-7 col-sm-4 col-xs-4" id="hint1"></div>
-				<button class="btn btn-danger col-md-2 col-sm-4 col-xs-4">예매하기</button>
+				<a class="btn btn-danger col-md-2 col-sm-4 col-xs-4"
+				 href="/proj/reservation/reser" role="button">예매하기 &raquo;</a>
+				<!-- <button onclick="location.href('proj/reservation/reser')"
+				class="btn btn-danger col-md-2 col-sm-4 col-xs-4">예매하기</button> -->
 			</div>
 			<dl class="dl-horizontal text-left">
 				<dt>
@@ -225,7 +243,9 @@ $(function() {
 		<div>${rr.score }점</div>
 		<div>${rr.reg_date }</div>
 		<div>${rr.review }</div>
-		<br>
+		<c:if test="${mem.id eq rr.id }">
+		<a class="btn btn-danger" href="deleteReview?mid=${param.mid }&id=${rr.id }" role="button">X</a>
+		</c:if>
 
 		</li>
 	</c:forEach>
