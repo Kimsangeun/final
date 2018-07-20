@@ -25,13 +25,9 @@
 		if (v == "crd") {
 			$('#cashview').css('display','none');
 			$('#cardview').css('display','');
-			//document.getElementById('cashview').style.display = "none"; // 보여줌
-			//document.getElementById('cardview').style.display = ""; // 보여줌
 		} else {
 			$('#cashview').css('display','');
 			$('#cardview').css('display','none');	
-			//document.getElementById('cardview').style.display = "none"; // 숨김
-			//document.getElementById('cashview').style.display = ""; // 보여줌
 		}
 	}
 
