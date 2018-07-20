@@ -7,11 +7,26 @@
 
 		<form action="?">
 			<tr>
+			<c:choose>
+			<c:when test="${kind eq 'qna'}">
+				<td colspan="4" align="center">검색 <select name="schCol">	
+			</c:when>
+			<c:otherwise>
 				<td colspan="5" align="center">검색 <select name="schCol">
+			</c:otherwise>
+			</c:choose>
+				
 						<option value="title">제목</option>
 						<option value="pid">작성자</option>
 						<option value="content">내용</option>
-						<option value="cnt">조회수</option>
+						<c:choose>
+						<c:when test="${kind eq 'qna'}">	
+						</c:when>
+						<c:otherwise>
+							<option value="cnt">조회수</option>
+						</c:otherwise>
+						</c:choose>
+						
 				</select> <input type="text" name="title" /><input type="submit" value="검색" />
 				</td>
 			</tr>
@@ -22,7 +37,13 @@
 			<td>제목</td>
 			<td>작성자</td>
 			<td>작성일</td>
-			<td>조회수</td>
+			<c:choose>
+			<c:when test="${kind eq 'qna'}">	
+			</c:when>
+			<c:otherwise>
+				<td>조회수</td>
+			</c:otherwise>
+			</c:choose>
 		</tr>
 
 		<c:forEach items="${data }" var="row" varStatus="no">
@@ -31,11 +52,24 @@
 				<td><a href="detail?bid=${row.bid }">${row.title}</a></td>
 				<td>${row.pid}</td>
 				<td>${row.regdateStr}</td>
-				<td>${row.cnt}</td>
+				<c:choose>
+				<c:when test="${kind eq 'qna'}">	
+				</c:when>
+				<c:otherwise>
+					<td>${row.cnt}</td>
+				</c:otherwise>
+				</c:choose>	
 			</tr>
 		</c:forEach>
 		<tr>
-			<td colspan="5" align="right"><a href="insertForm?kind=${kind }">글쓰기</a></td>
+			<c:choose>
+			<c:when test="${kind eq 'qna'}">
+				<td colspan="4" align="right"><a href="insertForm?kind=${kind }">글쓰기</a></td>	
+			</c:when>
+			<c:otherwise>
+				<td colspan="5" align="right"><a href="insertForm?kind=${kind }">글쓰기</a></td>
+			</c:otherwise>
+			</c:choose>
 		</tr>
 	</table>
 <c:if test="${startPage >1 }">

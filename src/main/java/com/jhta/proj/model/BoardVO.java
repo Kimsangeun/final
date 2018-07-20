@@ -12,7 +12,7 @@ public class BoardVO {
 	Integer start, end;
 	Integer bid, gid, seq, lev, cnt;
 	Date regdate;
-	String pid, pw, title, content, upfile, kind, reply,schCol;
+	String pid, pw, title, content, upfile, kind, reply,schCol, id;
 	MultipartFile mmfile;
 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d일 HH:mm시");
 
@@ -21,6 +21,16 @@ public class BoardVO {
 	public BoardVO() {
 	}
 	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
+
 	public Integer getStart() {
 		return start;
 	}

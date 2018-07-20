@@ -510,7 +510,35 @@ function submitOpen() {
 </script>
 
 <style>
+
+.frame{
+	margin-left: 40%;
+	margin-right: 20%;
+}
+
+.each{
+	padding :0;
+	margin :0;
+}
+
+.each_title{
+	text-align: left;
+}
+
+.error_next_box{
+	color: red;
+	font-size : 12px;
+}
+
+input[type="text"],
+input[type="password"]
+{
+	width : 69%;
+	height : 35px;
 	
+}
+
+
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -552,16 +580,18 @@ function submitOpen() {
 		</div>
 
 		<!-- 생년월일 -->
-		<div class="each birth">
+		<div class="each">
 			<h3 class="each_title">생년월일</h3>
 			<div class="bir_wrap">
 				<div class="bir_yy">
 					<span class="ps_box"> <input type="text" id="yy" name="yy"
-						placeholder="년(4자)" class="int" maxlength="4">
+						placeholder="년(4자)" class="birth" maxlength="4"
+						style="width:23%; margin:0; height:40px; float:left;">
 					</span>
 				</div>
 				<div class="bir_mm">
-					<span class="ps_box"> <select id="mm" name="mm" title="월" class="sel">
+					<span class="ps_box"> <select id="mm" name="mm" title="월" class="birth" 
+					style="width:23%; margin:0; height:40px; float:left;">
 							<option>월</option>
 							<option value="01">1</option>
 							<option value="02">2</option>
@@ -576,11 +606,12 @@ function submitOpen() {
 							<option value="11">11</option>
 							<option value="12">12</option>
 					</select>
-					</span><!--ㄴ  -->
+					</span>
 				</div>
-				<div class=" bir_dd">
+				<div class="bir_dd">
 					<span class="ps_box"> <input type="text" id="dd" name="dd"
-						placeholder="일" class="int" maxlength="2"> 
+						placeholder="일" class="birth" maxlength="2" 
+						style="width:23%;  margin:0; height:40px; float:none;" > 
 					</span>
 				</div>
 			</div>
@@ -599,12 +630,13 @@ function submitOpen() {
 		<div class="each">
 			<h3 class="each_title">휴대전화</h3>
 			<span class="box_phone"> <input type="text" id="phone"
-				name="phone" class="int" placeholder="'-'없이 입력바랍니다." maxlength="40">
+				name="phone" class="int" placeholder="'-'없이 입력바랍니다." maxlength="40"
+				style="width: 43%;">
 			</span>
-			<input type="button" id="btnSend" value="인증번호 받기" />
+			<input type="button" id="btnSend" value="인증번호 받기" class= "btn btn-default"/>
             
 			<div class="ps_box_disable box_right_space" id="authNoBox">
-    			<input type="tel" id="authNo" name="authNo" placeholder="인증번호 입력하세요" class="int" disabled maxlength="6">
+    			<input type="text" id="authNo" name="authNo" placeholder="인증번호 입력하세요" class="int" disabled maxlength="6">
             </div>
             <div>
             <span class="error_next_box" id="authNoMsg" style="display:none"></span>
@@ -612,9 +644,8 @@ function submitOpen() {
             </div>
 		</div>
         
-   
-    
-    <div><input type="button" id="btnJoin" value="가입하기"></div>
+    <div><input type="button" id="btnJoin" value="가입하기" class= "btn btn-default"
+    	  style="margin-top:5%; margin-left:25%;"></div>
     
 	</div>
 	</form>
