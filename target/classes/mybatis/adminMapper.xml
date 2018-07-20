@@ -204,7 +204,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 리뷰 -->
 		<!-- 리뷰가져오기 -->
 	<select id="review" parameterType="movieVo" resultType="reviewVo">
-		SELECT * from review where mid = #{mid} 
+		SELECT * from review where mid = #{mid} order by reg_date desc 
 	</select>
 	
 		<!-- 리뷰등록 -->

@@ -27,7 +27,7 @@ $(function() {
         }
     });
     
-    $('#dddd').raty({
+/*     $('#dddd').raty({
 		size:24,
 		half:true,
 		path:'/proj/resources/imgs/',
@@ -38,19 +38,24 @@ $(function() {
 		target:     '#hint2',
 		targetKeep:true,
 		start:1
-	});
+	}); */
     
-    $('#ddddd').raty({
+    $('#starscore').raty({
 		size:24,
 		half:true,
 		path:'/proj/resources/imgs/',
-		scoreName:'score',
+		scoreName:'tmpScore',
 		starHalf:'star-half-big.png',
 		starOn:'star-on-big.png',
 		starOff:'star-off-big.png',
-		target:     '#hint2',
-		targetKeep:true,
-		start:1
+		start:1,
+		click: function(score, evt) {
+				/* var score=score*2;
+				this.attr('score',score*2);
+				console.log('ID: ' + this.attr('id') + '\nscore: ' + score + '\nevent: ' + evt);
+				return score; */
+			/* 	$('#starscore').raty('setScore', 10); */
+			  }
 	});
     
     var ss = ${moviedata['movie'].rating/2};
@@ -72,6 +77,9 @@ $(function() {
   
     
 });
+/* $('#starscore').click({
+	console.log('gg');
+}); */
 </script>
 <style>
 
@@ -219,7 +227,7 @@ $(function() {
 <form  action="reviewInsert" method="POST">
 <div class="row qq" >
 	<div class="q form-group col-lg-2 col-xs-3 vertical-align" >
-	<div class=" center-block" id="ddddd"></div>
+	<div class=" center-block" id="starscore"></div><p id="hint2">bad</p>
 	</div>
 	
 	<div class="q wrap form-group col-lg-9 col-xs-8" style="padding:0 0 0 0;">
@@ -230,8 +238,12 @@ $(function() {
 	<button style="width:100%;height:100%" class="btn btn-default"  type="submit" >작성</button>
 	</div>
 </div>
+	<fmt:formatNumber var="ss" value="${scor}" pattern="#.#"/>
+	
+	<c:out value="${ss }"></c:out>
 	<input type="hidden" name="id" value="${mem.id }" />
 	<input type="hidden" name="mid" value="${param.mid }" />
+	<!-- <input type="hidden" name="score"/> -->
 </form>
 
 <div id="js-load" class="main border">
