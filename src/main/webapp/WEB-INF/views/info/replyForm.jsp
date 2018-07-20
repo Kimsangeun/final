@@ -13,19 +13,13 @@
 			<td><input type="text" name="pid" value="${mem.id }" /></td>
 		</tr>
 		<tr>
-			<td>비밀번호</td>
-			<td><input type="text" name="pw" /></td>
-		</tr>
-		<tr>
 			<td>내용</td>
 			<td><textarea name="content" rows="5" cols="30">${data.content }
 			______________________
 </textarea></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="작성" /> <a
-				href="detail?bid=${data.bid}">뒤로</a></td>
+			<td colspan="2"><input type="submit" value="작성" /> <a href="detail?bid=${data.bid}">뒤로</a></td>
 		</tr>
 	</table>
 </form>
-
