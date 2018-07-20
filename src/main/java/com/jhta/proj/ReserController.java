@@ -203,6 +203,13 @@ public class ReserController {
 			sss += ss;
 		}
 	
+		for(String ss : sss.split(",")) {
+			seatList.add(ss);
+		}
+		model.addAttribute("seatList", seatList);
+		
+		
+		
 		String mm = "screenchoice";
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("svo", svo);

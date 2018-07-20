@@ -14,8 +14,6 @@
 			<td>제목</td>
 			<td><input type="text" name="title"/></td>
 			
-			<td>비밀번호</td>
-			<td><input type="password" name="pw" /></td>
 		</tr>
 		<!-- kind qna / 회원일때 숨김. -->
 		<tr>
