@@ -10,7 +10,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("memberVo")
 public class MemberVO {
 	
-	String id, pw, email, name, phone, yy, mm, dd;
+	String id, pw, newpw, email, name, phone, yy, mm, dd;
 	
 	Integer out;
 	
@@ -19,16 +19,13 @@ public class MemberVO {
 	public MemberVO() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 
-	
-	
-	public MemberVO(String id, String pw, String email, String name, String phone, String yy, String mm, String dd,
-			Integer out, Date birth) {
+	public MemberVO(String id, String pw, String newpw, String email, String name, String phone, String yy, String mm,
+			String dd, Integer out, Date birth) {
 		super();
 		this.id = id;
 		this.pw = pw;
+		this.newpw = newpw;
 		this.email = email;
 		this.name = name;
 		this.phone = phone;
@@ -37,6 +34,14 @@ public class MemberVO {
 		this.dd = dd;
 		this.out = out;
 		this.birth = birth;
+	}
+
+	public String getNewpw() {
+		return newpw;
+	}
+
+	public void setNewpw(String newpw) {
+		this.newpw = newpw;
 	}
 
 	public Integer getOut() {
