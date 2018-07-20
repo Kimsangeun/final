@@ -60,4 +60,9 @@ public class MovieDAO {
 
 		return sessionTemplate.selectList("adminMapper.review",vo);
 	}
+	
+	public Object reviewInsert(ReviewVO vo) {
+
+		return sessionTemplate.insert("adminMapper.reviewInsert",vo);
+	}
 }

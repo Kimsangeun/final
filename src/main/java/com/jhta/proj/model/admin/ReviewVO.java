@@ -12,6 +12,7 @@ public class ReviewVO {
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date reg_date;
+	
 	public Integer getMid() {
 		return mid;
 	}

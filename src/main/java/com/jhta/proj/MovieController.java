@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.jhta.proj.model.CinemaVO;
 import com.jhta.proj.model.MovDAO;
@@ -17,6 +18,7 @@ import com.jhta.proj.model.MovVO;
 import com.jhta.proj.model.ReserVO;
 import com.jhta.proj.model.admin.MovieDAO;
 import com.jhta.proj.model.admin.MovieVO;
+import com.jhta.proj.model.admin.ReviewVO;
 import com.jhta.proj.model.admin.TimeTableVO;
 
 @Controller
@@ -43,7 +45,7 @@ public class MovieController {
 	
 	
 	@ModelAttribute("moviedata")
-	public Object rese(Model model, MovVO vo,MovieVO mvo,@PathVariable String service) {
+	public Object rese(Model model, MovVO vo,MovieVO mvo,ReviewVO rvo,@PathVariable String service) {
 		Object res=null;
 		
 		
@@ -72,6 +74,7 @@ public class MovieController {
 			System.out.println(res);
 			//System.out.println(res);
 			//리뷰를 붙이자
+			
 		default:
 			break;
 		}
@@ -80,13 +83,27 @@ public class MovieController {
 		return res;
 	}
 	
+	@RequestMapping(method=RequestMethod.POST)
+	public String ciiPost(@PathVariable String service,ReviewVO rvo, Model model) {
+		System.out.println(rvo);
+		if(service.equals("reviewInsert")) {
+			
+			movieDao.reviewInsert(rvo);
+		}
+		return "redirect:detailMovie?mid="+rvo.getMid();
+	}
 	
 	@RequestMapping()
-	public String cii(@PathVariable String service,MovVO vo,MovieVO mvo, Model model) {
+	public String cii(@PathVariable String service,MovVO vo,ReviewVO rvo,MovieVO mvo, Model model) {
 		String res="home";
 		
 		model.addAttribute("menu","movie");
 		model.addAttribute("main", service);
+		
+		if(service.equals("reviewInsert")) {
+			
+			model.addAttribute("main", "");
+		}
 		return res;
 	}
 	
