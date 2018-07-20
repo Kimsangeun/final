@@ -5,6 +5,7 @@
 <style>
 .form-control{
 	float : left;
+	width : 50px;
 }
 
 .S_s{
@@ -63,7 +64,7 @@
 
 	<hr>
 
-	<div style="width: 300px; float: left">
+	<div style="width: 100%;  float: left">
 		<form action="/proj/reservation/payend" method="post" id="pendfrm">
 			<div style="margin: 0 20px; float : left;">
 			<input type="radio" name="paytype" value="csh" id="cash"
@@ -72,27 +73,28 @@
 			<input
 				type="radio" name="paytype" value="crd" id="card"
 				onclick="div_OnOff(this.value,'cardview')"> 카드결제 </div>
+			
+			<div style="clear : both;"></div>
 
-
-	<hr>
+			<hr>
 
 			<!-- 계좌이체 디브 -->
 
 			<div id="cashview" style="display: none">
 				<div class="S_s1">계좌번호</div>
-				<input type="text" class="form-control" name="banknum">
+				<input type="text" class="form-control" name="banknum" style="width : 200px;">
 				
 				<div style="clear: both;"></div><hr>
 					
 				<div class="S_s1">비밀번호</div>
-				<input type="text" class="form-control" name="bankpw"> 
+				<input type="text" class="form-control" name="bankpw"  style="width : 200px;"> 
 				
 				<div style="clear: both;"></div><hr>
 					
 				<div class="S_s1">보낼 계좌</div>
-				<div  class="form-control" name="sendbank">신한 000-00-000000</div>
+				<div  class="form-control" name="sendbank"  style="width : 200px;">신한 000-00-000000</div>
 				
-				<div style="clear: both;"></div><hr>
+				<div style="clear: both;"></div>
 			</div>
 
 
@@ -101,11 +103,10 @@
 			<!-- 카드결제 디브 -->
 			
 			<div id="cardview" style="display: none">
-				<hr>
 				
 				<div class="S_s1" >카드종류</div>
 				
-				<select name="cardchk" class="form-control">
+				<select name="cardchk" class="form-control" style="width : 100px;">
 					<option>신한</option>
 					<option>대구</option>
 					<option>BC</option>
@@ -120,32 +121,32 @@
 				
 				<div class="S_s1">카드번호</div>
 				 
-				<input type="text" class="form-control" id="cardnum1" name="cardnum1" maxlength="4" onKeyPress="return numkeyCheck(event)" style="width: 30px">
+				<input type="text" class="form-control" id="cardnum1" name="cardnum1" maxlength="4" onKeyPress="return numkeyCheck(event)">
 				<div class="S_s">-</div>
-				<input type="password" class="form-control" id="cardnum2" name="cardnum2" maxlength="4" onKeyPress="return numkeyCheck(event)" style="width: 30px">
+				<input type="password" class="form-control" id="cardnum2" name="cardnum2" maxlength="4" onKeyPress="return numkeyCheck(event)">
 				<div class="S_s">-</div>
-				<input type="password" class="form-control" id="cardnum3" name="cardnum3" maxlength="4" onKeyPress="return numkeyCheck(event)" style="width: 30px"> 
+				<input type="password" class="form-control" id="cardnum3" name="cardnum3" maxlength="4" onKeyPress="return numkeyCheck(event)" > 
 				<div class="S_s">-</div>
-				<input type="text" class="form-control" id="cardnum4" name="cardnum4" maxlength="4" onKeyPress="return numkeyCheck(event)" style="width: 30px">
+				<input type="text" class="form-control" id="cardnum4" name="cardnum4" maxlength="4" onKeyPress="return numkeyCheck(event)" >
 				
 				<div style="clear: both;"></div><hr>
 				<div class="S_s1">비밀번호</div> 
 				
-				<input type="password" class="form-control" id="cardpw" name="cardpw" maxlength="2" onKeyPress="return numkeyCheck(event)" style="width: 15px">
+				<input type="password" class="form-control" id="cardpw" name="cardpw" maxlength="2" onKeyPress="return numkeyCheck(event)" >
 				
 				 <div class="S_s">**</div> 
 				
 				 <div style="clear: both;"></div><hr>
 				 <div class="S_s1">유효기간</div> 
 				 
-				 <input type="text" class="form-control" name="cardnum4" maxlength="2" onKeyPress="return numkeyCheck(event)" style="width: 30px"> 
+				 <input type="text" class="form-control" name="cardnum4" maxlength="2" onKeyPress="return numkeyCheck(event)" > 
 				 <div class="S_s">월</div>
-				 <input type="text" class="form-control" name="cardnum4" maxlength="2" onKeyPress="return numkeyCheck(event)" style="width: 30px"> 
+				 <input type="text" class="form-control" name="cardnum4" maxlength="2" onKeyPress="return numkeyCheck(event)" > 
 				 <div class="S_s">년</div>
 				 
 				 <div style="clear: both;"></div><hr>
 				 <div class="S_s1">생년월일(6자리)</div> 
-				 <input type="text" class="form-control" name="birth" maxlength="6" onKeyPress="return numkeyCheck(event)" style="width: 45px">
+				 <input type="text" class="form-control" name="birth" maxlength="6" onKeyPress="return numkeyCheck(event)"  style="width : 100px;">
 			</div>
 			
 			<div style="clear: both;"></div><hr>

@@ -66,16 +66,16 @@ mm2 = Number(mm2);
 		for (var i = 0; i < gradeStr.length; i++) {
 			switch(gradeStr[i]){
 			case '18':
-				gradeStr[i] = "<img src='../resources/imgs/movie_icon_18.gif' width='30px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/movie_icon_18.gif' width='25px'/> "
 				break;			
 			case '15':
-				gradeStr[i] = "<img src='../resources/imgs/movie_icon_15.gif' width='30px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/movie_icon_15.gif' width='25px'/> "
 				break;
 			case '12':
-				gradeStr[i] = "<img src='../resources/imgs/movie_icon_12.gif' width='30px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/movie_icon_12.gif' width='25px'/> "
 				break;			
 			case '0':
-				gradeStr[i] = "<img src='../resources/imgs/movie_icon_0.gif' width='30px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/movie_icon_0.gif' width='25px'/> "
 				break;
 			}
 		}
@@ -113,8 +113,9 @@ mm2 = Number(mm2);
 					//$('#S_title'+i).css("border-top" ,"solid 0px")
 				}else{
 					$('#S_gradeimg'+i).html(gradeStr[i]);
-					//$('#S_title'+i).css("border-top" ,"solid 1px")
-					$('#S_title'+i).html(titleStr[i])
+					$('#S_gradeimg'+i).css('margin','13px 0');
+					$('#S_title'+i).html(titleStr[i]);
+					$('#S_title'+i).css('margin','10px 0');
 					$('#S_tit'+i).css("clear","both");
 					$('#S_time'+i).css("clear","both"); 
 				}
@@ -200,13 +201,13 @@ mm2 = Number(mm2);
 		<div id="S_tit${no.index }" style=" float : left;">
 			<div id="S_gradeimg${no.index }" style="float: left; width: 30px;"></div>
 			<div id="S_title${no.index }"
-				style="font-size: 25px; cursor: pointer;"
+				style="font-size: 23px; cursor: pointer; width:300px;"
 				onclick="movieCheck(${no.index})" ></div>
 		</div>
 			<!-- 시간리스트(남은좌석수/ 상영관) -->
 
 			<div id="S_time${no.index }" onclick="timeCheck(${no.index})"
-				style="cursor: pointer; font-size: 20px; float:left;"></div>
+				style="cursor: pointer; font-size: 20px; float:left; margin-left: 10px;"></div>
 		</div>
 	</c:forEach>
 	<div style="clear : both;"></div>
