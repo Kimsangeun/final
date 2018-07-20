@@ -359,7 +359,7 @@ mm2 = Number(mm2);
 							<c:when test="${mm.grade ==12}">movie_icon_12.gif</c:when>
 							<c:when test="${mm.grade == 0}">movie_icon_0.gif</c:when>
 						</c:choose>
-					 " alt="이미지없음" width="25px;"/>
+					 " alt="이미지없음" width="25px"/>
 					${mm.title }
 				</div>
 			</c:forEach>

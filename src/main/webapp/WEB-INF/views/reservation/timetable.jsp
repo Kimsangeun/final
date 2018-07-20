@@ -163,6 +163,10 @@ mm2 = Number(mm2);
 	}
 	
 </script>
+<div><h2>상영시간표</h2></div>
+
+<hr>
+
 
 <form name="screenchoiceForm" action="screenchoice">
 
@@ -178,7 +182,7 @@ mm2 = Number(mm2);
 
 	<div style="width: 100%; overflow-x: auto;">
 		<c:forEach items="${datelist }" var="dd" varStatus="no">
-			<div class="S_dateset" id="S_dateset${no.index}" style="padding: 5px; margin: 5px;"
+			<div class="S_dateset" id="S_dateset${no.index}" style="padding: 5px; margin: 5px; cursor: pointer;"
 				onclick="dateCheck('${dd.split(':')[0]}')" align="center">
 				<div>${dd.split('-')[1] }월 (${dd.split(':')[1]})</div>
 				<div style="font-size: 20px;">${dd.split(':')[0].split('-')[2] }</div>
