@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -69,13 +70,7 @@ public class CenterController {
 			model.addAttribute("main", "modify");
 			model.addAttribute("menu", "info");
 			break;
-		case "qna":
-			if (!((MemberVO) request.getSession().getAttribute("mem")).getId().equals("admin")) {
-				System.out.println("내문의 로 가자");
-				model.addAttribute("data", request.getSession().getAttribute("mem"));
-				res = "/proj/mypage/qna";
-			}
-			break;
+
 		case "replyForm":
 
 			break;
@@ -94,9 +89,12 @@ public class CenterController {
 	}
 
 	@ModelAttribute("data")
-	Object list(@PathVariable String service, BoardVO bvo, Model model, HttpServletRequest request) {
+	Object list(@PathVariable String service, BoardVO bvo, Model model, HttpServletRequest request, HttpSession session) {
 		System.out.println("데이타 탄다");
 		Object res = null;
+		
+		MemberVO v1 = (MemberVO)session.getAttribute("mem");
+		bvo.setId(v1.getId());
 		// System.out.println(vo);
 
 		/* * * * * * * * * 페이징.* * * * * * * * * * * * * * * */
@@ -166,7 +164,7 @@ public class CenterController {
 			break;
 
 		case "qna":
-			System.out.println("centercontrol_qna ㄱㄱ");
+			
 			kind = "qna";
 
 			bvo.setKind("qna");
@@ -176,15 +174,23 @@ public class CenterController {
 			String id = ((MemberVO) request.getSession().getAttribute("mem")).getId();
 			if (id.equals("admin"))
 				res = boardDao.someList(bvo);
+			else {
+				res = boardDao.qnaList(bvo);
+			}
 			break;
 
 		case "insertReg":
 
 			System.out.println("insertReg!");
 			bvo.setKind(kind);
+			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
 			System.out.println("centercontrol_insetreg::" + bvo);
-			bvo.setUpfile(fileUP(bvo.getMmfile(), request));
-
+			
+			System.out.println(":::"+bvo.getMmfile());
+			if(bvo.getMmfile() != null) {
+				System.out.println("asdasdasdasdasdasdasd"+bvo.getMmfile());
+				bvo.setUpfile(fileUP(bvo.getMmfile(), request));
+			}
 			res = boardDao.insert(bvo);
 			model.addAttribute("msg", "작성완료");
 			model.addAttribute("url", "detail?bid=" + bvo.getBid());

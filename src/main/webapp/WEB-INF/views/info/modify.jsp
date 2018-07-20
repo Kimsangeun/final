@@ -17,8 +17,6 @@
 		<tr>
 			<td>제목</td>
 			<td><input type="text" name="title" value="${data.title }" /></td>
-			<td>비밀번호</td>
-			<td><input type="password" name="pw" value="${data.pw }" /></td>
 		</tr>
 		<tr>
 			<td>파일</td>

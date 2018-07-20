@@ -57,16 +57,16 @@
 			<form id="idSearch" action="/proj/idSearch" role="form" class="form-horizontal">
 				<div style="width:; margin-left: 5%;">
 				<div class="form-group">	
-					<label for="id_name" class="col-sm-2 control-label">이                  름</label>
-					<div class="col-sm-10"><input type="text" class="form-control" id="id_name" name="id_name" style="width : 80%;"></div>
+					<label for="id_name" class="col-sm-2 control-label">이름</label>
+					<div class="col-sm-6"><input type="text" class="form-control" id="id_name" name="id_name" style="width : 80%;"></div>
 				</div>
 				<div class="form-group">	
 					<label for="id_phone" class="col-sm-2 control-label">휴대전화</label>
-					<div  class="col-sm-10"><input type="text" class="form-control" id="id_phone" name="id_name" style="width : 80%;"></div>
+					<div  class="col-sm-6"><input type="text" class="form-control" id="id_phone" name="id_name" style="width : 80%;"></div>
 				</div>
-				<hr style=" margin-top: 50px;">
+				<hr style=" margin-top: 5%;">
 				<div>
-					<div class="form-group" style="float: right;"> 
+					<div class="form-group" style="float: right; margin-right:43%"> 
 					<button type="submit" class="btn btn-default">ID찾기</button>
 					</div>
 				</div>
@@ -80,20 +80,19 @@
 				<div style=" margin-left: 5%;">
 				<div class="form-group">	
 					<label for="pw_id" class="col-sm-2 control-label">아이디</label>
-					<div class="col-sm-10"><input type="text" class="form-control" id="pw_id" name="pw_id" style="width : 80%;"></div>
+					<div class="col-sm-6"><input type="text" class="form-control" id="pw_id" name="pw_id" style="width : 80%;"></div>
 				</div>
 				<div class="form-group">	
-					<label for="pw_name" class="col-sm-2 control-label">이 &nbsp;&nbsp;
-					&nbsp;름</label>
-					<div class="col-sm-10"><input type="text" class="form-control" id="pw_name" name="pw_name" style="width : 80%;"></div>
+					<label for="pw_name" class="col-sm-2 control-label">이름</label>
+					<div class="col-sm-6"><input type="text" class="form-control" id="pw_name" name="pw_name" style="width : 80%;"></div>
 				</div>
 				<div class="form-group">	
 					<label for="pw_phone" class="col-sm-2 control-label">휴대전화</label>
-					<div  class="col-sm-10"><input type="text" class="form-control" id="pw_phone" name="pw_name" style="width : 80%;"></div>
+					<div  class="col-sm-6"><input type="text" class="form-control" id="pw_phone" name="pw_name" style="width : 80%;"></div>
 				</div>
 				<hr style=" margin-top: 50px;">
 				<div>
-					<div class="form-group" style="float: right;"> 
+					<div class="form-group" style="float: right; margin-right:43%"> 
 					<button type="submit" class="btn btn-default">PW찾기</button>
 					</div>
 				</div>

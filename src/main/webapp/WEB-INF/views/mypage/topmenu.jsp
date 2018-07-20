@@ -9,7 +9,7 @@
 		<ul class="dropdown-menu" role="menu">
 			<li><a href="/proj/mypage/memInfo">회원정보</a></li>
 			<li><a href="/proj/mypage/reser">예매내역</a></li>
-			<li><a href="/proj/mypage/qna">1:1문의</a></li>
+			<li><a href="/proj/info/qna">1:1문의</a></li>
 			
 		</ul></li>
 </c:if>

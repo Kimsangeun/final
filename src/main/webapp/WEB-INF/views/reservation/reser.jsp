@@ -13,7 +13,7 @@
 }
 
 .S_cho {
-	float: left;
+	float :left;
 }
 
 </style>
@@ -359,7 +359,7 @@ mm2 = Number(mm2);
 							<c:when test="${mm.grade ==12}">movie_icon_12.gif</c:when>
 							<c:when test="${mm.grade == 0}">movie_icon_0.gif</c:when>
 						</c:choose>
-					 " alt="이미지없음" width="25px"/>
+					 " alt="이미지없음" width="20px"/>
 					${mm.title }
 				</div>
 			</c:forEach>
@@ -425,40 +425,32 @@ mm2 = Number(mm2);
 	<div style="clear: both"></div>
 
 
-
-
-
-
 	<hr>
 
 
-
-
 	<!-- 선택된 값 -->
-	<div style="background: lightgray; width: 100%; padding: 40px 0;">
-		<div class="S_cho" style="margin-left: 5%;">
-			<div id="S_movieimg" style="float: left; margin-right: 5%;">&nbsp;&nbsp;&nbsp;&nbsp;</div>
-			<div id="S_movie" style="width: 250px; font-size: 18px;">영화선택</div>
+	<div style="background: lightgray; width: 100%;">
+		<div class="S_cho" style="margin-left: 5%; float: left; ">
+			<div id="S_movieimg" style="float: left; ">&nbsp;</div>
+			<div id="S_movie" style="font-size: 18px; float: left;">영화선택</div>
 		</div>
 
 		<input type="hidden" name="mid" id="mid" value="-1">
 
-		<div class="S_cho"
-			style="padding: 40px 0; border-right: solid 3px gray;"></div>
-		<div class="S_cho" id="S_date" style="margin: 0 5%; font-size: 18px;">날짜선택</div>
-		<div class="S_cho"
-			style="padding: 40px 0; border-right: solid 3px gray;"></div>
-		<div class="S_cho" style="margin: 0 5%;" align="center">
+		<div class="S_cho">
+			<div id="S_date" style="font-size: 18px; ">날짜선택</div>
+			<div style="font-size: 18px; ">&nbsp;</div>
+		</div>
+		
+		<div class="S_cho">
 			<div id="S_scNum" style="font-size: 18px;">시간선택</div>
 			<div id="S_time" style="font-size: 18px;"></div>
 		</div>
-		<div class="S_cho"
-			style="padding: 40px 0; border-right: solid 3px gray;"></div>
-
+		
 		<input type="hidden" name="sid" id="sid" value="-1">
 
 		<div onclick="Chk()"
-			style="cursor: pointer; background: red; width: 50px;">좌석선택</div>
+			style="cursor: pointer;margin-left:20px; font-size:15px; color:white; background: red; margin:20px 0; padding:20px 10px; text-align:center; width: 120px; float: left;">좌석선택</div>
 		<div style="clear: both"></div>
 	</div>
 </form>

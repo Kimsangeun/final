@@ -7,7 +7,7 @@
 #S_top {
 	float: left;
 	background: lightgray;
-	padding: 0 20px;
+	padding: 0 30px;
 	height: 100px;
 }
 
@@ -23,43 +23,90 @@
 }
 
 .S_seatcol{
-	padding : 3px 6px;
-	margin-top : 5px;
+	float : left;
+	padding : 3px 4px;
+	margin-top : 2px;
 }
 
-.seat {
+.S_seat {
 	padding : 2px 6px;
 	margin : 5px; 
-	border: 1px solid green;
+	border:solid 1px green;
 	float: left;
-	/* 	cursor:crosshair; */
+	cursor: pointer;
 }
 
-.royalseat {
+.S_royalseat {
 	padding : 2px 6px;
 	margin : 5px;
-	border: 1px solid red;
+	border:solid 1px  red;
 	float: left;
 }
 </style>
 
 <script type="text/javascript">
-<%Set<String> SeatList = (Set<String>) request.getAttribute("seatList");%>
 
-var list = <%=SeatList%>;
+var ll= '${seatList}';
+var list = ll.substring(1,ll.length-1).split(',');
+
+var arr1 = '';
+var arr2 = '';
+var arr3 = '';
+var arr4 = '';
+
+for(var no=1;no<=10;no++){
+	arr1+= 0+" ";
+	arr2+= 0+" ";
+	arr3+= 0+" ";
+	arr4+= 0+" ";
+}
+
+arr1 = arr1.trim().split(' ');
+arr2 = arr2.trim().split(' ');
+arr3 = arr3.trim().split(' ');
+arr4 = arr4.trim().split(' ');
+
+arr = [arr1, arr2, arr3, arr4];
 
 window.onload = function(){
- 	for(var ii=1;ii<=40;ii++){
- 		for(ss in list){
- 			if(list[ss] == ii ){
- 				/* 예약된 좌석 처리부분. */
- 				var resered = document.getElementById('R_seat'+ii);
- 		 		resered.style.backgroundColor= 'RED';
- 				resered.style.pointerEvents = 'none';
- 				
- 				resered.style.cursor = 'no-drop'; 
- 			}
- 		}
+	//alert(list)
+	//alert(arr[0][0]);
+	
+	for (var col = 1; col<= 4; col++) {
+	
+		var alpha = '';
+		
+		switch(col){
+		
+		case 1:
+			alpha = 'A';
+			break;
+		case 2:
+			alpha = 'B';
+			break;
+		case 3:
+			alpha = 'C';
+			break;
+		case 4:
+			alpha = 'D';
+			break;
+		}
+		
+		for(var no =1; no <=10; no++){
+	 		for(ss in list){
+	 			//alert(list[ss]);
+	 			if(list[ss].trim() == alpha+no ){
+	 				
+	 				/* 예약된 좌석 처리부분. */
+	 				
+	 				$('#S_seat'+col+no).html('&nbsp;X&nbsp;');
+	 				$('#S_seat'+col+no).css('background', "gray");
+	 				$('#S_seat'+col+no).css('color', "lightgray");
+	 				$('#S_seat'+col+no).css('pointer-events', "none");
+	 				$('#S_seat'+col+no).css('cursor', "no-drop");
+	 			}
+	 		}
+		}
 	}
 }
 
@@ -69,53 +116,96 @@ window.onload = function(){
 	var val = 0; // 현재 선택한 좌석수
 
 
-	function chkseat(ii) {
+	function chkseat(col, no) {
 		var sel = document.getElementById("maxcnt");
 		val = sel.options[sel.selectedIndex].value;
-
-		var chklist = seats.split(",");
-
-		for (ss in chklist) {
-			var jj = document.getElementById('R_seat'+chklist[ss]);
-
-			if (ii == chklist[ss]) {
-				try{
-
-				if(chklist[ii]<=10){
-					jj.style.border = '1px solid green';
-					price -= 4000;
-				}else{
-					jj.style.border = '1px solid blue';
-					price -= 3000;
-				}
-				}finally{
-				val--;
+		
+		var alpha = '';
+		
+		switch(col){
+		
+		case 1:
+			alpha = 'A';
+			break;
+		case 2:
+			alpha = 'B';
+			break;
+		case 3:
+			alpha = 'C';
+			break;
+		case 4:
+			alpha = 'D';
+			break;
+		}
+		
+		
+		if(arr[col-1][no-1] == 0){
+		
+			if (val <= cnt) {
+				alert('선택한 좌석이 인원수보다 많습니다.' + cnt + "/" + val)
 				return;
+			}
+			
+			$("#S_seat"+col+no).css("background","red");
+			$("#S_seat"+col+no).css("color","lightgray");
+ 			arr[col-1][no-1] = 1;
+			//alert(arr);
+			
+			var money= 3000;
+			if(alpha == 'D'){
+				money += 1000;
+			}
+
+			price += money;
+ 			cnt++;
+		
+		}else if(arr[col-1][no-1] == 1){
+			
+			$("#S_seat"+col+no).css("background","white");
+			$("#S_seat"+col+no).css("color","black");
+			arr[col-1][no-1] = 0;
+			//alert(arr);
+			
+			var money= -3000;
+			if(alpha == 'D'){
+				money -= 1000;
+			}
+			
+			price += money;
+			cnt--;
+			
+		} 
+		var seat = '';
+		
+		for (var i = 0; i < 4; i++) {
+			
+			for (var j = 0; j < 10; j++) {
+				if(arr[i][j] == 1){
+				
+					switch(i){
+					
+					case 0:
+						alpha = 'A';
+						break;
+					case 1:
+						alpha = 'B';
+						break;
+					case 2:
+						alpha = 'C';
+						break;
+					case 3:
+						alpha = 'D';
+						break;
+					}
+					
+					seat += alpha+(j+1)+',';
+					//alert(seat)
 				}
 			}
 		}
- 
-		var list = <%=SeatList%>;
-		if (val <= cnt) {
-			alert('선택한 좌석이 인원수보다 많습니다.' + cnt + "/" + val)
-			return;
-		}
-		seats += ii + ",";
-
 		
-		
-		var money= 3000;
-		if(ii<=10){
-			money += 1000;
-		}
-		
-		price += money;
-		$("#R_seat" + ii).css("background","red");
-		$("#R_seat" + ii).css("color","white");
-		cnt++;
-		$('#seatnums').text(seats);
-		
-		$('#price').text(price);
+		$('#S_seatnums').html(seat);
+		$('#S_price').html(price+'￦');
 
 	}
 	
@@ -123,29 +213,54 @@ window.onload = function(){
 		
 		var splitSeat = seats.split(",");
 		
-		for(ii in splitSeat){
+		var numlist = '';
+		
+		for(var col=1; col<=4; col++){
+			var alpha = '';
 			
-			try{
-				if(splitSeat[ii]<=10){
-					$('#R_seat'+splitSeat[ii]).css('border','solid 2px red' );
-					$('#R_seat'+splitSeat[ii]).css('background','white' );
-					$('#R_seat'+splitSeat[ii]).css('color','black' );
-				}else{
-					$('#R_seat'+splitSeat[ii]).css('border','solid 2px green' );
-					$('#R_seat'+splitSeat[ii]).css('background','white' );
-					$('#R_seat'+splitSeat[ii]).css('color','black' );
-					
-				}
-			}finally{
-				seats = "";
-				cnt = 0;
-				price=0;
-				
-				$('#seatnums').text(seats);
-				$('#price').text(price);
-
+			switch(col){
+			
+			case 1:
+				alpha = 'A';
+				break;
+			case 2:
+				alpha = 'B';
+				break;
+			case 3:
+				alpha = 'C';
+				break;
+			case 4:
+				alpha = 'D';
+				break;
+			}
+			
+			for(var no=1;no<=10; no++){
+				for(ss in list){
+		 			if(list[ss].trim() == alpha+no ){
+		 				numlist += '#S_seat'+col+no+' ' ;
+		 			}
+		 			
+		 			$('#S_seat'+col+no).css('background','white' );
+					$('#S_seat'+col+no).css('color','black' );
+		 			
+					seats = "";
+					cnt = 0;
+					price=0;
+						
+					$('#S_seatnums').text('');
+					$('#S_price').text('');
+		 		}
 			}
 		}
+		
+		numlist = numlist.split(' ');
+		
+		for (var i = 0; i < numlist.length; i++) {
+			$(numlist[i]).css('background', 'gray');
+			$(numlist[i]).css('color', 'lightgray');
+			$(numlist[i]).html('&nbsp;X&nbsp;');
+		}
+	
 		/* 결제 팝업뜨게하고 최대한 비슷하게. */
 		//동의합니다.
 	}
@@ -163,6 +278,7 @@ window.onload = function(){
 			alert('인원수를 확인하세요')
 		}
 	}
+	
 </script>
 
 
@@ -173,18 +289,18 @@ window.onload = function(){
 
 	<hr>
 
-	<div id="S_top" style="border-right: solid 1px gray;">
+	<div id="S_top" style="border-right: solid 1px gray; ">
 		<div id="S_cho1" style="margin-top: 40px;">인원</div>
 		<div id="S_cho1" style="margin-top: 35px;">
 			<select id="maxcnt" class="form-control " name="maxcnt"
-				onchange="selchg()">
+				onchange="selchg()" style="width:100px;">
 				<c:forEach begin="0" end="9" var="ii">
 					<option>${ii }</option>
 				</c:forEach>
 			</select>
 		</div>
 	</div>
-	<div id="S_top">
+	<div id="S_top" style="width: 350px;">
 		<img src="../resources/movposter/${svo.poster }" width="50px"
 			style="margin-top: 15px; margin-right: 10px; float: left;" /> 
 		<img src="../resources/imgs/
@@ -194,10 +310,10 @@ window.onload = function(){
 				<c:when test="${svo.grade ==12}">movie_icon_12.gif</c:when>
 				<c:when test="${svo.grade == 0}">movie_icon_0.gif</c:when>
 			</c:choose>
-		" alt="이미지없음" width="25px" style="float: left; margin-top: 30px;"/>
-		<div id="S_cho2" style="font-size: 25px; margin-top: 30px;">${svo.movtitle }</div>
+		" alt="이미지없음" width="18px" style="float: left; margin-top: 34px;"/>
+		<div id="S_cho2" style="font-size: 20px; margin-top: 30px;">${svo.movtitle }</div>
 	</div>
-	<div id="S_top" style="width: 55%;">
+	<div id="S_top" style="width: 40%; float: left;">
 		<div id="S_cho2" style="margin-top: 25px;">${svo.scNum }관</div>
 		<div id="S_cho2" style="margin-top: 25px;">${svo.runtime}분</div>
 		<div style="clear: both;"></div>
@@ -207,41 +323,69 @@ window.onload = function(){
 	<div style="clear: both;"></div>
 
 
-	<hr>
-
-<div style="margin-left: 25%;">
-		<c:forEach begin="1" end="40" var="ii">
-			<!-- 1부터 40까지 뿌리는데 숫자가 예약된 좌석에 포함되면 안되는걸로. -->
-			<div align="center" class="<c:if test='${ii<=10 }'>royal</c:if>seat"
-				id="R_seat${ii }" onclick="chkseat(${ii})" style="cursor : pointer;">
-				${(ii-1)%10 }
-			</div>
-			<c:if test="${ii%10==0 }">
+	<hr style="margin-bottom : 100px;">
+	
+ 
+ 		<!-- 좌석선택 -->
+ 
+		<div style="clear:both;"></div>
+		
+		<div  style="margin-left: 25%;">
+		
+		<div style="width: 300px; background: gray; text-align: center; margin: 10px; margin-left: 70px;">SCREEN</div>
+		
+		<div style="clear:both;"></div>
+		
+		<c:forEach begin="1" end="4" var="col">
+		
+			<div class="S_seatcol">
 				<c:choose>
-					<c:when test="${(ii-1)/10 < 1 }"><div class="S_seatcol">D</div></c:when>
-					<c:when test="${(ii-1)/10 < 2 }"><div class="S_seatcol">C</div></c:when>
-					<c:when test="${(ii-1)/10 < 3 }"><div class="S_seatcol">B</div></c:when>
-					<c:when test="${(ii-1)/10 < 4 }"><div class="S_seatcol">A</div></c:when>
+					<c:when test="${col==1 }"><div class="S_seatcol">A</div></c:when>
+					<c:when test="${col==2 }"><div class="S_seatcol">B</div></c:when>
+					<c:when test="${col==3 }"><div class="S_seatcol">C</div></c:when>
+					<c:when test="${col==4 }"><div class="S_seatcol">D</div></c:when>
 				</c:choose>
+			</div>
+			
+			<c:forEach begin="1" end="10" var="no">
+				<div class="S_<c:if test='${col==4 }'>royal</c:if>seat" id="S_seat${col }${no }" onclick="chkseat(${col},${no})">
+				<c:if test="${no<10 }">&nbsp;</c:if>
+				${no }
+				</div>
+			</c:forEach>
+			
 			<div style="clear:both;"></div>
-			</c:if>
-			<!-- resered(ii) -->
+		
 		</c:forEach>
-
-</div>
-
-	<hr>
+		
+		</div>
+		
+		
+	<hr style="margin-top: 100px;">
 
 
 
 	<!-- 좌석 몇번인지 보여주는 임시창 -->
-
-	<div id="seatnums"></div>
-	<div id="price"></div>
+	
 	<input type="hidden" name="seatnum" /> <input type="hidden" name="cnt" />
 	<input type="hidden" name="price" />
+	
+	<div style="float: left; margin-left: 45%;">
+	
+	
+	<div style="font-size: 20px; float: left;">좌석번호</div>
+	<div id="S_seatnums" style="font-size: 20px; margin-left: 20px; float: left;"> </div>
+	
+	<div style="clear : both;"></div>
+	
+	<div style="font-size : 20px; float: left;" >결제금액</div>
+	<div id="S_price" style="font-size : 20px; margin-left: 20px; float: left; "> </div>
+	
+	</div>
+	
 	<div style="width: 80%;">
 		<div onclick="chksubmit()"
-			style="cursor: pointer; float: right; font-size: 40px; padding: 10px; border: solid 2px gray;">결제</div>
+			style="cursor: pointer; font-size: 35px; width:100px; ;padding: 5px 10px; text-align:center; border: solid 2px gray; margin-left: 95%;">결제</div>
 	</div>
+	<div style="clear : both;"></div>
 </form>

@@ -6,7 +6,7 @@
 
 <table class="table table-hover">
 	<tr>
-		<td>작성자</td>
+		<td>작성자${data.kind }</td>
 		<td>${data.pid }</td>
 		<td>작성일</td>
 		<td>${data.regdateStr }</td>
@@ -14,14 +14,30 @@
 	<tr>
 		<td>제목</td>
 		<td>${data.title }</td>
-		<td>조회수</td>
-		<td>${data.cnt }</td>
+		<c:choose>
+		<c:when test="${data.kind eq 'qna'}">	
+		</c:when>
+		<c:otherwise>
+			<td>조회수</td>
+			<td>${data.cnt }</td>
+		</c:otherwise>
+		</c:choose>		
 	</tr>
 	<tr>
-		<td>파일</td>
-		<td colspan="3">${data.upfile }</td>
-	</tr>
-	<c:if test="${data.img}">
+		<c:choose>
+		<c:when test="${data.kind eq 'qna'}">	
+		</c:when>
+		<c:otherwise>
+		<c:if test="${data.upfile != null}">
+			<td>파일</td>
+			<td colspan="3">${data.upfile }</td>
+		</c:if>
+		</c:otherwise>
+		</c:choose>
+	</tr>	
+		
+		
+	<c:if test="${data.img && data.upfile!=null}">
 		<tr>
 			<td colspan="4"><img class="img-responsive"
 			 src="${pageContext.request.contextPath}\resources\board/${data.upfile}" />
@@ -32,8 +48,9 @@
 		<td colspan="4"><ct:conBr >${data.content }</ct:conBr></td>
 	</tr>
 	<tr>
-		<td colspan="4" align="right"><a href="${data.kind }">뒤로가기</a> <c:if
-				test="${mem.id=='admin'}">
+		<td colspan="4" align="right"><a href="${data.kind }">뒤로가기</a>
+		<c:choose>
+			<c:when test="${mem.id=='admin'}">
 				<c:choose>
 					<c:when test="${data.kind == 'qna' }">
 						<a href="replyForm?bid=${data.bid }">답변하기</a>
@@ -43,6 +60,13 @@
 						<a href="delete?bid=${data.bid }">삭제하기</a>
 					</c:otherwise>
 				</c:choose>
-			</c:if></td>
+			</c:when>
+			<c:otherwise>	
+				<c:if test="${data.kind == 'qna' }">
+					<a href="delete?bid=${data.bid }">삭제하기</a>
+				</c:if>	
+			</c:otherwise>
+		</c:choose>
+		</td>
 	</tr>
 </table>
