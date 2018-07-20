@@ -14,6 +14,7 @@
 <c:set var="titleStr" value="" />
 <c:set var="sidStr" value="" />
 <c:set var="midStr" value="" />
+<c:set var="gradeStr" value="" />
 <c:set var="dateListStr" value="" />
 
 <c:forEach items="${dateTitleList}" var="dt" varStatus="no">
@@ -22,10 +23,11 @@
 	<c:set var="titleStr" value="${titleStr }${dt.movtitle }," />
 	<c:set var="sidStr" value="${sidStr }${dt.sId }," />
 	<c:set var="midStr" value="${midStr }${dt.mId }," />
+	<c:set var="gradeStr" value="${gradeStr }${dt.grade}," />
 </c:forEach>
 
 <c:forEach items="${datelist }" var="dd" varStatus="no">
-	<c:set var="dateListStr" value="${dateListStr }${dd }," />
+	<c:set var="dateListStr" value="${dateListStr }${dd.split(':')[0] }," />
 </c:forEach>
 
 <script type="text/javascript">
@@ -42,6 +44,8 @@ var si = '${sidStr}';
 var sidStr = si.split(',');
 var mi = '${midStr}';
 var midStr = mi.split(',');
+var gg = '${gradeStr}';
+var gradeStr = gg.split(',');
 
 var dls = '${dateListStr}';
 var dateListStr = dls.split(',');
@@ -49,16 +53,39 @@ var dateListStr = dls.split(',');
 var nowtime = '${nowtime}';
 var nowdate = '${nowdate}';
 
+var HH2 = nowtime.split(':')[0];
+HH2 = Number(HH2);
+var mm2 = nowtime.split(':')[1];
+mm2 = Number(mm2);
+
 	$(document).ready(function(){
 		for(var i = 0;i< dateListStr.length; i++){
 			$('#S_dateset'+i).css("background","white")
 		} 
+		
+		for (var i = 0; i < gradeStr.length; i++) {
+			switch(gradeStr[i]){
+			case '18':
+				gradeStr[i] = "<img src='../resources/imgs/movie_icon_18.gif' width='25px'/> "
+				break;			
+			case '15':
+				gradeStr[i] = "<img src='../resources/imgs/movie_icon_15.gif' width='25px'/> "
+				break;
+			case '12':
+				gradeStr[i] = "<img src='../resources/imgs/movie_icon_12.gif' width='25px'/> "
+				break;			
+			case '0':
+				gradeStr[i] = "<img src='../resources/imgs/movie_icon_0.gif' width='25px'/> "
+				break;
+			}
+		}
 	});
-
+	
 	function dateCheck(dd) {
 		//alert(dd)
 		for(var i = 0; i<dateStr.length; i++){
 			$('#S_time'+i).css("color","black");
+			$('#S_gradeimg'+i).html('');
 		}
 		var dates = new Date();
 	
@@ -76,23 +103,25 @@ var nowdate = '${nowdate}';
 		}
 		var lastT = '';
 		
-		var HH2 = nowtime.split(':')[0];
-		HH2 = Number(HH2);
-		var mm2 = nowtime.split(':')[1];
-		mm2 = Number(mm2);
-		
 		for(var i = 0; i<dateStr.length; i++){
 			
 			if(dateStr[i]==dd){
 			//alert(dateStr[i] +":"+dd)
 				if(lastT == titleStr[i]){
-					$('#S_title'+i).html(' ')
+					$('#S_title'+i).html('');
+					$('#S_gradeimg'+i).html('');
 					//$('#S_title'+i).css("border-top" ,"solid 0px")
 				}else{
-					$('#S_title'+i).css("border-top" ,"solid 1px")
-					$('#S_title'+i).html(titleStr[i])
+					$('#S_gradeimg'+i).html(gradeStr[i]);
+					$('#S_gradeimg'+i).css('margin','13px 0');
+					$('#S_title'+i).html(titleStr[i]);
+					$('#S_title'+i).css('margin','10px 0');
+					$('#S_tit'+i).css("clear","both");
+					$('#S_time'+i).css("clear","both"); 
 				}
-			//	alert(timeStr[i].split(':')[0]>nowtime.split(':'))
+			
+			//alert(timeStr[i].split(':')[0]>nowtime.split(':'))
+			
 				$('#S_time'+i).html(timeStr[i])
 				
 				var HH1 = timeStr[i].split(':')[0];
@@ -110,18 +139,13 @@ var nowdate = '${nowdate}';
 					}
 				}
 				
-				
 				lastT = titleStr[i];
 			}else{
 				$('#S_title'+i).css("border-top" ,"solid 0px")
-				$('#S_title'+i).html(' ')
-				$('#S_time'+i).html(' ')
-				
-			}
-			
+				$('#S_title'+i).html('')
+				$('#S_time'+i).html('')	
+			}	
 		}
-		
-	
 	}
 	
 	function timeCheck(no){
@@ -140,6 +164,9 @@ var nowdate = '${nowdate}';
 	}
 	
 </script>
+<div><h2>상영시간표</h2></div>
+
+<hr>
 
 
 <form name="screenchoiceForm" action="screenchoice">
@@ -154,13 +181,13 @@ var nowdate = '${nowdate}';
 
 	<!-- 날짜  -->
 
-	<div  style="width: 100%; overflow-x: auto;">
+	<div style="width: 100%; overflow-x: auto;">
 		<c:forEach items="${datelist }" var="dd" varStatus="no">
-			<button type="button" class="btn btn-secondary" class="S_dateset"
-				id="S_dateset${no.index}" onclick="dateCheck('${dd}')" >
-				<div>${dd.split('-')[1] }월</div>
-				<div style="font-size: 20px;">${dd.split('-')[2] }일</div>
-			</button>
+			<div class="S_dateset" id="S_dateset${no.index}" style="padding: 5px; margin: 5px; cursor: pointer;"
+				onclick="dateCheck('${dd.split(':')[0]}')" align="center">
+				<div>${dd.split('-')[1] }월 (${dd.split(':')[1]})</div>
+				<div style="font-size: 20px;">${dd.split(':')[0].split('-')[2] }</div>
+			</div>
 		</c:forEach>
 	</div>
 	<div style="clear: both;"></div>
@@ -170,18 +197,20 @@ var nowdate = '${nowdate}';
 	<!-- 영화제목(장르 / 런타임/ 개봉일)  -->
 
 	<c:forEach items="${dateTitleList }" varStatus="no">
-		<div class="S_tt${no.index }">
-			<div id="S_title${no.index }" style="font-size: 25px; cursor:pointer;"
-				onclick="movieCheck(${no.index})"></div>
-
+		<div class="S_tt${no.index }" >
+		<div id="S_tit${no.index }" style=" float : left;">
+			<div id="S_gradeimg${no.index }" style="float: left; width: 30px;"></div>
+			<div id="S_title${no.index }"
+				style="font-size: 23px; cursor: pointer; width:300px;"
+				onclick="movieCheck(${no.index})" ></div>
+		</div>
 			<!-- 시간리스트(남은좌석수/ 상영관) -->
 
-		<div id="S_time${no.index }" onclick="timeCheck(${no.index})" style="cursor:pointer; font-size: 20px;"></div>
-
-		<div style="clear: both;"></div>
+			<div id="S_time${no.index }" onclick="timeCheck(${no.index})"
+				style="cursor: pointer; font-size: 20px; float:left; margin-left: 10px;"></div>
 		</div>
 	</c:forEach>
-
+	<div style="clear : both;"></div>
 	<hr>
 
 	<input type="hidden" name="sid" id="sid" value="sid" /> <input
