@@ -126,7 +126,10 @@
 	}
 
 	function chkchk(){
-		$("input")
+		alert($("input:checkbox[name=aaa]:checked").length);
+		if($("input:checkbox[name=aaa]:checked").length == 4){
+			
+		}
 	}
 </script>
 
@@ -155,11 +158,11 @@
 					<h4 class="modal-title" id="bankModalLabel">TITLE</h4>
 				</div>
 				<div class="modal-body">
-					<div class="R_leftbox"><textarea rows="5" cols="30">글글</textarea><br><input type="checkbox">가가</div>
-					<div class="R_rightbox"><textarea rows="5" cols="30">글글</textarea><br><input type="checkbox">가가</div>
+					<div class="R_leftbox"><textarea rows="5" cols="30">글글</textarea><br><input type="checkbox" name="check">가가</div>
+					<div class="R_rightbox"><textarea rows="5" cols="30">글글</textarea><br><input type="checkbox" name="check">가가</div>
 
-					<div class="R_leftbox"><textarea rows="5" cols="30">글글</textarea><br><input type="checkbox">가가</div>
-					<div class="R_rightbox"><textarea rows="5" cols="30">글글</textarea><br><input type="checkbox">가가</div>
+					<div class="R_leftbox"><textarea rows="5" cols="30">글글</textarea><br><input type="checkbox" name="check">가가</div>
+					<div class="R_rightbox"><textarea rows="5" cols="30">글글</textarea><br><input type="checkbox" name="check">가가</div>
 				</div>
 				
 				<div class="modal-footer">
