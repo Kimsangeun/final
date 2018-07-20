@@ -43,6 +43,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by gid desc, seq) tt) 
 	<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
 	</select>
+	
+	<select id="qnaList" resultType="boardVo"
+		parameterType="boardVo">
+		select * from
+		(select rownum rnum, tt.* from
+		(select * from board
+		 where pid = #{id} or pid = 'admin' and kind = #{kind} order by gid desc, seq) tt) 
+	<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
+	</select>
 
 	<!-- <sql id="whereSch"> <where> kind = #{kind} <if test="gogo!=null and 
 		gogo!=''"> ${schCol} like '%${gogo}%' </if> </where> </sql> -->
@@ -92,10 +101,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			<include refid="maxId" />
 		</selectKey>
 		insert into board
-		(bid, gid, seq, lev, cnt , regdate, pid, pw, title,
+		(bid, gid, seq, lev, cnt , regdate, pid, title,
 		content, upfile, kind)
 		values (#{bid}, #{bid}, 0, 0, -1 , sysdate,
-		#{pid}, #{pw}, #{title}, #{content}, #{upfile}, #{kind})
+		#{pid}, #{title}, #{content}, #{upfile}, #{kind})
 	</insert>
 
 
@@ -118,15 +127,15 @@ gid = #{gid} and seq > #{seq} and kind = #{kind}
 			<include refid="maxId" />
 		</selectKey>
 		insert into board
-		(bid, gid, seq, lev, cnt , regdate, pid, pw, title,
+		(bid, gid, seq, lev, cnt , regdate, pid,title,
 		content, kind)
 		values (#{bid}, #{gid}, #{seq}+1, #{lev}+1, -1
-		, sysdate, #{pid}, #{pw}, #{title}, #{content}, #{kind})
+		, sysdate, #{pid}, #{title}, #{content}, #{kind})
 	</insert>
 
 	<update id="boardModify" parameterType="boardVo">
 		update board set
-		title=#{title}, content=#{content}, upfile=#{upfile} ,pw=#{pw},
+		title=#{title}, content=#{content}, upfile=#{upfile} ,
 		cnt=cnt-1
 		where bid=#{bid}
 	</update>

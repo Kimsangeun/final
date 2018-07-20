@@ -1,8 +1,5 @@
 package com.jhta.proj;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,10 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jhta.proj.model.BoardDAO;
+import com.jhta.proj.model.BoardVO;
 import com.jhta.proj.model.MemberDAO;
 import com.jhta.proj.model.MemberVO;
 import com.jhta.proj.model.ReserVO;
@@ -26,6 +22,9 @@ public class MyPageController {
 	
 	@Resource
 	MemberDAO dao;
+	
+	@Resource
+	BoardDAO bdao;
 	
 	@RequestMapping()
 	public String myPage(Model model,@PathVariable String service) {
@@ -42,12 +41,17 @@ public class MyPageController {
 	}
 	
 	@ModelAttribute("data")
-	Object data(@PathVariable String service, Model model, MemberVO vo, HttpSession session, ReserVO rvo) {
+	Object data(@PathVariable String service, Model model, MemberVO vo, BoardVO bvo, HttpSession session, ReserVO rvo, HttpServletRequest request) {
 		
 		Object res = null;
 		MemberVO v1=(MemberVO)session.getAttribute("mem");
+		bvo.setId(v1.getId());
+		
+		System.out.println(bvo.getId());
 		//vo.setId(session.getAttribute("mem"));
 		System.out.println("vo"+v1.getId());
+		
+		
 		switch(service) {
 		case "reser":
 			
@@ -57,9 +61,7 @@ public class MyPageController {
 			
 			res = dao.reserCancle(rvo,v1);
 			break;
-		/*case "qna":
-			res = dao.qnaList(vo);
-			break;*/
+		
 		case "memInfo":
 			res = dao.info(v1);
 			break;

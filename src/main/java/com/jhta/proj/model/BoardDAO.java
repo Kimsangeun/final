@@ -75,6 +75,10 @@ public class BoardDAO {
 	public Object someList(BoardVO bvo) {
 		return sessionTemplate.selectList("boardMapper.someList", bvo);
 	}
+	
+	public Object qnaList(BoardVO bvo) {
+		return sessionTemplate.selectList("boardMapper.qnaList", bvo);
+	}
 
 	
 	public Object nextSeq(BoardVO bvo) {
