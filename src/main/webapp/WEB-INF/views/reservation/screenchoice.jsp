@@ -51,6 +51,9 @@
 	border: solid 2px gray; 
 	margin-left: 95%;	
 }
+#S_btn:hover{
+
+}
 </style>
 
 <script type="text/javascript">
@@ -353,7 +356,7 @@ window.onload = function(){
 					<c:when test="${col==2 }"><div class="S_seatcol">B</div></c:when>
 					<c:when test="${col==3 }"><div class="S_seatcol">C</div></c:when>
 					<c:when test="${col==4 }"><div class="S_seatcol">D</div></c:when>
-				</c:choose>
+				</c:choose> 
 			</div>
 			
 			<c:forEach begin="1" end="10" var="no">
