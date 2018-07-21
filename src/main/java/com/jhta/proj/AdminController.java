@@ -91,7 +91,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	String sss(@PathVariable String service, TimeTableVO vo,BindingResult errors) {
+	String sss(@PathVariable String service,SettleVO svo ,TimeTableVO vo,BindingResult errors, Model model) {
 
 		//System.out.println("보이루" + vo);
 		System.out.println("포스트");
@@ -106,8 +106,6 @@ public class AdminController {
 				return res;*/
 
 		}
-
-
 		return res;
 	}
 
@@ -227,12 +225,11 @@ public class AdminController {
 		case "settle":
 			System.out.println("정산");
 			System.out.println(svo);
-			//if()
-			if(svo.getType()!=null) {
-				System.out.println("띠용");
-				res = adminDao.yearList(svo);
-				System.out.println(res);
+			if(svo.getStart()!=null && !svo.getStart().equals("")) {
+				System.out.println("aasdf");
+				res = adminDao.dateSettle(svo);
 			}
+			
 
 			break;
 

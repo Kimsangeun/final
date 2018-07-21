@@ -24,6 +24,7 @@ public class MovieVO {
 	public void setSteelcuts(ArrayList<MultipartFile> steelcuts) {
 		this.steelcuts = steelcuts;
 	}
+
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date release;
 	public Integer getMid() {

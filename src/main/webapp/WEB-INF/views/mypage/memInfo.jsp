@@ -6,14 +6,10 @@
 <head>
 
 <script type="text/javascript">
-
-$(function(){
 	
 	var oriEmail = $("#email").val();
 	
-	$("#email").blur(function() {
-	    checkEmail();
-	});
+$(function(){
 	
 	$("#newpw").blur(function() {
        pwFlag = false;
@@ -23,14 +19,18 @@ $(function(){
     $("#newpwChk").blur(function() {
        checkPswd2();
     });
+    
+    $("#email").blur(function() {
+	    checkEmail();
+	});
 	
 	$('#modBtn').on('click', function(){
 		
 		var data = {
 				id : $('#id').text(),
-				pw : $('#oldpw').val(),
-				newpw : $('#pw').val(),
-				newpwChk : $('#pw2').val(),
+				pw : $('#pw').val(),
+				newpw : $('#newpw').val(),
+				newpwChk : $('#newpwChk').val(),
 				name : $('#name').val(),
 				phone : $('#phone').val(),
 				birth : $('#birth').val(),
@@ -54,7 +54,7 @@ $(function(){
 		
 		var data = {
 				id : $('#id').text(),
-				pw : $('#oldpw').val()		
+				pw : $('#pw').val()		
 		}
 		
 		$.ajax({
@@ -77,8 +77,8 @@ function checkPswd1() {
     var oMsg = $("#pw1Msg");
 
     if (pw == "") {
-        showErrorMsg(oMsg,"필수 정보입니다.");
-        return false;
+    	hideMsg(oMsg);
+        return true;
     }
     
     var isPW = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#\$%\^&\*\(\)_\+|\{\}:"<>\?]{6,16}$/;
@@ -97,10 +97,6 @@ function checkPswd2() {
     var pswd2 = $("#newpwChk");
     var oMsg = $("#pw2Msg");
     
-    if (pswd2.val() == "") {
-        showErrorMsg(oMsg,"필수 정보입니다.");
-        return false;
-    }
     if (pswd1.val() != pswd2.val()) {
         showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
         pswd2.val("");
@@ -119,17 +115,12 @@ function checkEmail() {
     var oMsg = $("#emailMsg");
     
     var data = {email};
-
-    if(oriEmail.equals(email)){
-    	hideMsg(oMsg);
-    	return true;
-    }
-    
+	
     if (email == "") {
     	showErrorMsg(oMsg,"이메일 주소를 입력해주세요.");
         return false;
     }
-
+    
     var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var isHan = /[ㄱ-ㅎ가-힣]/g;
     if (!isEmail.test(email)) {
@@ -263,7 +254,7 @@ input[type="password"]
 		
 		<div class="each">
 			<div class="info">e-mail</div>
-			<div class="content"><input type="text" class="form-control" id="email" value="${data.email}"></div>
+			<div class="content"><input type="text" class="form-control" id="email" name="email" value="${data.email}"></div>
 			<div><span class="error_next_box" id="emailMsg" style="display: none"></span></div>
 		</div>
 		

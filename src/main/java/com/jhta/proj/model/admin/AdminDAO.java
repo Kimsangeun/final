@@ -36,5 +36,7 @@ public class AdminDAO {
 		return sessionTemplate.selectList("adminMapper.event");
 	}
 	
-	
+	public Object dateSettle(SettleVO vo){
+		return sessionTemplate.selectList("adminMapper.dateSettle",vo);
+	}
 }
