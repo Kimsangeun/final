@@ -14,8 +14,35 @@
 
 .S_cho {
 	float :left;
+	margin-left: 50px;
+}
+.S_mov{
+	font-size: 20px; 
+	cursor: pointer; 
+	padding: 10px 0;"
+}
+.S_mov:hover{
+	background: lightgray;
 }
 
+#S_btn{
+	cursor: pointer; 
+	margin-left:50px; 
+	font-size:17px; 
+	color:white; 
+	background: red;
+	margin-top: 30px; 
+	padding:20px 10px; 
+	text-align:center;  
+	width: 120px; 
+	float: left;
+	border-radius: 3px;
+}
+#S_btn:hover{
+	font-size:20px; 
+	border: solid 5px red;
+	margin-top: 25px; 
+}
 </style>
 
 <c:set var="scNumStr" value="" />
@@ -94,7 +121,7 @@ var mm2 = nowtime.split(':')[1];
 mm2 = Number(mm2);
 
 	$(document).ready(function(){
-		for(var i = 0; i < titleListStr.length; i++){
+	/* 	for(var i = 0; i < titleListStr.length; i++){
 			$('#S_mov'+i).css("background","white");
 		}
 		for(var i = 0;i< dateListStr.length; i++){
@@ -102,7 +129,12 @@ mm2 = Number(mm2);
 		} 
 		for(var i=1;i<20;i++){
 			$('.S_tim'+i).css("background","white")
+		} */
+		for(var i = 0;i< dateListStr.length; i++){
+			$('#S_dateset'+i).css('color','lightgray')
+			.css('pointer-events','none');
 		}
+		
 	});
 	
 	var scset = '';
@@ -114,31 +146,36 @@ mm2 = Number(mm2);
 	
    	function Check1(title, imgStr, mmid){
 
+   		for(var i = 0;i< dateListStr.length; i++){
+			$('#S_dateset'+i).css('color','lightgray')
+			.css('pointer-events','none');
+		}
+   		
 		mid = mmid;
 		scset = '';
 		ttset = '';
 		ssset = '';
 		titledate = '';
 		
-		$img = "<img src='../resources/movposter/"+imgStr+"' width='50px'/>";
+		$img = "<img src='../resources/movposter/"+imgStr+"' width='55px'/>";
 
-		$('#S_movieimg').attr('img',$img);
-		$('#S_movie').attr('title',title);
-		
-		$('#S_movieimg').html($('#S_movieimg').attr('img'));
-		$('#S_movie').html($('#S_movie').attr('title'));
+		$('#S_movieimg').attr('img',$img)
+						.html($('#S_movieimg').attr('img'));
+		$('#S_movie').attr('title',title)
+					.html($('#S_movie').attr('title'))
+					.css('margin-top','30px');
 		
 		document.getElementById("mid").value= mmid;
 		
 		document.getElementById("sid").value= '-1';
 		
-		$('#S_time').attr('mmm','시간선택');
-		$('#S_time').html($('#S_time').attr('mmm'));	
-		$('#S_scNum').attr('nnn','' );
-		$('#S_scNum').html($('#S_scNum').attr('nnn'));
+		$('#S_time').html('시간선택');	
+		$('#S_scNum').html('');
+		$('#S_date').html('날짜선택');
 		
 		for(var i = 0;i< dateListStr.length; i++){
 			$('#S_dateset'+i).css("color","lightgray")
+							.css("border","solid 0px");
 		} 
 		
 			for(var i = 0;i< dateStr.length; i++){
@@ -146,45 +183,31 @@ mm2 = Number(mm2);
 				//alert(dateStr[i]+":"+clkdate+":"+(dateStr[i] == clkdate))
 				
 				if(midStr[i] == mid){
-					if(dateStr[i] == clkdate){
-						ttset += timeStr[i]+",";
-						ssset += sidStr[i]+",";
-						scset += scNumStr[i]+",";
-					}
 					 for (var j = 0; j < dateListStr.length; j++) {	
 						 if(dateStr[i] == dateListStr[j]){
 							titledate += '#S_dateset'+j+",";
+							
 						}
 					} 
 				}
-				scset = scset.substring(0, scset.length-1);
-				ttset = ttset.substring(0, ttset.length-1);
+				//scset = scset.substring(0, scset.length-1);
+				//ttset = ttset.substring(0, ttset.length-1);
 			}
+			
 		titledate = titledate.split(',');
-		//alert(dateStr)
-		//alert(dateListStr)
-		for(var i = 0;i < titledate.length; i++){
-			$(titledate[i]).css("color","black");
-		}
-		
-		
-		for (var i = 1; i < 20; i++) {
-			
-			var ttsp = ttset.split(',')[i-1];
-			var scsp = scset.split(',')[i-1];
-			
-			
-			if(ttsp==null){
-				$("#S_tim"+i).attr('tt',' ');
-				$("#S_scNum"+i).attr('sc',' ');
-			}else{
-				$("#S_tim"+i).attr('tt',ttsp);	
-				if(scsp != ''){
-					$("#S_scNum"+i).attr('sc',scsp+'관');
-				}
-			}
-			$("#S_tim"+i).html($("#S_tim"+i).attr('tt'));
-			$("#S_scNum"+i).html($("#S_scNum"+i).attr('sc'));
+
+		for(var i = 0;i < titledate.length-1; i++){
+			$(titledate[i])
+						.css("color","black")
+						.css('pointer-events','auto')
+						.hover(
+								function(){
+									$(this).css('background','lightgray');
+								},
+								function(){
+									$(this).css('background','white');
+								}
+							);
 		}
 		
 	 	for(var i = 0; i < titleListStr.length; i++){
@@ -197,36 +220,28 @@ mm2 = Number(mm2);
 		}
 		 
 		for(var i=1;i<20;i++){
-			$('.S_time'+i).css("background","white")
-			$('.S_time'+i).css("border","solid 0px")
+			$("#S_tim"+i).html('');
+			$("#S_scNum"+i).html('');
 			
-			if(clkdate == nowdate){
-				if(HH1<HH2){
-					$('.S_time'+i).css("color","lightgray");
-					$('.S_time'+i).css("pointer-events","none");
-				}else if(HH1=HH2){
-					if(mm1<mm2){
-						$('.S_time'+i).css("color","lightgray");
-						$('.S_time'+i).css("pointer-events","none");
-					}
-				}
-			}else{
-				$('.S_time'+i).css("color","black");
-				$('.S_time'+i).css("pointer-events","auto");
-			}
-			
-			
+			$('.S_time'+i).css("background","white");
+			$('.S_time'+i).css("border","solid 0px");
 		}
 	}
 	
    	
-	function Check2(ddate){
+	function Check2(ddate, day){
 		//alert(mid)
 		scset = '';
 		ttset = '';
 		ssset = '';
-		clkdate = ddate;
-		$('#S_date').attr('dd',ddate);
+		 clkdate = ddate;
+		
+		var YY=ddate.split('-')[0];
+		var MM=ddate.split('-')[1];
+		var dd=ddate.split('-')[2];
+		 
+		 
+		$('#S_date').attr('dd',YY+'/'+MM+'/'+dd+' '+'('+day+')');
 		$('#S_date').html($('#S_date').attr('dd'));
 		
 		for(var i = 0;i< dateStr.length; i++){
@@ -241,21 +256,31 @@ mm2 = Number(mm2);
 		}
 		//alert(ttset)
 		
-		
+		for (var i = 0; i < 20; i++) {
+			$("#S_tim"+i).attr('tt','');
+			$("#S_scNum"+i).attr('sc','');
+		}
 		
 		scset = scset.substring(0, scset.length-1);
 		ttset = ttset.substring(0, ttset.length-1);
-		
+		  
 		for (var i = 1; i < 20; i++) {
 			
 			var ttsp = ttset.split(',')[i-1];
 			var scsp = scset.split(',')[i-1];
 			
-			if(ttsp==null){
-				$("#S_tim"+i).attr('tt',' ');
-				$("#S_scNum"+i).attr('sc',' ');
+			if(ttsp==null || ttsp==''){
+				$("#S_tim"+i).attr('tt','');
+				$("#S_scNum"+i).attr('sc','');
+				$('#S_ti'+i)
+				.css('margin','0px')
+				.css('padding','0px');
+				
 			}else{
 				$("#S_tim"+i).attr('tt',ttsp);	
+				$('#S_ti'+i)
+				.css('margin','5px')
+				.css('padding','5px');
 				
 				var HH1 = ttsp.split(':')[0];
 				HH1 = Number(HH1);
@@ -279,7 +304,7 @@ mm2 = Number(mm2);
 					$('.S_time'+i).css("pointer-events","auto");
 				}
 				
-				if(scsp != ' '){
+				if(scsp != ''){
 					$("#S_scNum"+i).attr('sc',scsp+'관');
 				}
 			}
@@ -339,25 +364,22 @@ mm2 = Number(mm2);
 	<!-- 영화  -->
 
 	<div class="S_choice" style="margin-right: 50px;">
-		<div id="S_mov" align="center">
+		<div align="center">
 			<h2>영화</h2>
 		</div>
 
 		<hr>
 
-		<div class="S_mov" style="height: 300px; overflow: auto; width: 100%;"
-			align="center">
+		<div style="height: 300px; overflow: auto; width: 100%;" align="center">
 			<c:forEach items="${titlelist }" var="mm" varStatus="no">
-				<div id="S_mov${no.index }"
-					style="font-size: 20px; cursor: pointer; padding: 10px 0;"
+				<div class="S_mov" id="S_mov${no.index }"
 					onclick="Check1('${mm.title }', '${mm.poster }', ${mm.mId }, ${no.index})">
-					
 					<img src="../resources/imgs/
 						<c:choose>
-							<c:when test="${mm.grade ==18}">movie_icon_18.gif</c:when>
-							<c:when test="${mm.grade ==15}">movie_icon_15.gif</c:when>
-							<c:when test="${mm.grade ==12}">movie_icon_12.gif</c:when>
-							<c:when test="${mm.grade == 0}">movie_icon_0.gif</c:when>
+							<c:when test="${mm.grade ==18}">grade_18.png</c:when>
+							<c:when test="${mm.grade ==15}">grade_15.png</c:when>
+							<c:when test="${mm.grade ==12}">grade_12.png</c:when>
+							<c:when test="${mm.grade == 0}">grade_0.png</c:when>
 						</c:choose>
 					 " alt="이미지없음" width="20px"/>
 					${mm.title }
@@ -382,7 +404,7 @@ mm2 = Number(mm2);
 			<div style="height: 300px; overflow: auto; width: 100%;"
 				align="center">
 				<c:forEach items="${datelist }" var="dd" varStatus="no">
-					<div id="S_dateset${no.index}" onclick="Check2('${dd.split(':')[0]}')"
+					<div class="S_dateset" id="S_dateset${no.index}" onclick="Check2('${dd.split(':')[0]}','${dd.split(':')[1] }')"
 						style="cursor: pointer; padding: 5px 0;">
 						<div >${dd.split('-')[1] }월</div>
 						<div style="width:60px; height: 25px; line-height: 25px;" align='center'>
@@ -410,11 +432,10 @@ mm2 = Number(mm2);
 		<hr>
 		<c:forEach begin="1" end="20" var="no">
 			<div class="S_time${no }" onclick="Check3(${no})"
-				style="float: left;"">
-				<div style="padding: 5px; margin: 5px; cursor: pointer;"
-					align="center">
+				style="float: left;cursor: pointer;" align="center">
+				<div id="S_ti${no }">
 					<div id="S_scNum${no }" align="center"></div>
-					<div id="S_tim${no }" align="center" style="font-size: 25px;"></div>
+					<div id="S_tim${no }" align="center" style="font-size: 22px;"></div>
 				</div>
 			</div>
 			<c:if test="${no%3==0 }">
@@ -429,28 +450,28 @@ mm2 = Number(mm2);
 
 
 	<!-- 선택된 값 -->
-	<div style="background: lightgray; width: 100%;">
-		<div class="S_cho" style="margin-left: 5%; float: left; ">
-			<div id="S_movieimg" style="float: left; ">&nbsp;</div>
-			<div id="S_movie" style="font-size: 18px; float: left;">영화선택</div>
+	<div style="background: lightgray; height: 130px; width: 90%;">
+		<div class="S_cho" style="width : 250px; " >   
+			<div id="S_movieimg" style="float: left; margin-top: 20px;"></div>
+			<div id="S_movie" style="text-align: center; font-size: 18px; float: left; margin-top: 50px; margin-left: 10px; width: 60%;">영화선택</div>
 		</div>
 
 		<input type="hidden" name="mid" id="mid" value="-1">
 
-		<div class="S_cho">
-			<div id="S_date" style="font-size: 18px; ">날짜선택</div>
-			<div style="font-size: 18px; ">&nbsp;</div>
+		<div class="S_cho" style="width : 150px;" >
+			<div id="S_date" style="font-size: 18px; float:left; margin-top: 50px;">날짜선택</div>
 		</div>
 		
-		<div class="S_cho">
-			<div id="S_scNum" style="font-size: 18px;">시간선택</div>
-			<div id="S_time" style="font-size: 18px;"></div>
+		<div class="S_cho" style="width : 200px;">
+			<div id="S_scNum" style="font-size: 15px; float: left; margin-top: 53px;"></div>
+			<div id="S_time" style="font-size: 18px; float: left; margin-top: 50px; margin-left: 10px;">시간선택</div>
 		</div>
 		
 		<input type="hidden" name="sid" id="sid" value="-1">
-
+		<div class="S_cho">
 		<div onclick="Chk()"
-			style="cursor: pointer;margin-left:20px; font-size:15px; color:white; background: red; margin:20px 0; padding:20px 10px; text-align:center; width: 120px; float: left;">좌석선택</div>
+			id="S_btn" >좌석선택</div>
+		</div>
 		<div style="clear: both"></div>
 	</div>
 </form>

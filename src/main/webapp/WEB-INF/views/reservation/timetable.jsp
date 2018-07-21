@@ -7,6 +7,18 @@
 .S_dateset {
 	float: left;
 }
+
+.S_time{
+	cursor: pointer; 
+	font-size: 20px; 
+	margin-left: 10px;
+	border-radius: 4px;
+	text-align: center;
+}
+.S_time:hover{
+	background-color:gray;
+	color: white;
+}
 </style>
 
 <c:set var="dateStr" value="" />
@@ -66,16 +78,16 @@ mm2 = Number(mm2);
 		for (var i = 0; i < gradeStr.length; i++) {
 			switch(gradeStr[i]){
 			case '18':
-				gradeStr[i] = "<img src='../resources/imgs/movie_icon_18.gif' width='25px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/grade_18.png' width='20px'/> "
 				break;			
 			case '15':
-				gradeStr[i] = "<img src='../resources/imgs/movie_icon_15.gif' width='25px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/grade_15.png' width='20px'/> "
 				break;
 			case '12':
-				gradeStr[i] = "<img src='../resources/imgs/movie_icon_12.gif' width='25px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/grade_12.png' width='20px'/> "
 				break;			
 			case '0':
-				gradeStr[i] = "<img src='../resources/imgs/movie_icon_0.gif' width='25px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/grade_0.png' width='20px'/> "
 				break;
 			}
 		}
@@ -84,7 +96,6 @@ mm2 = Number(mm2);
 	function dateCheck(dd) {
 		//alert(dd)
 		for(var i = 0; i<dateStr.length; i++){
-			$('#S_time'+i).css("color","black");
 			$('#S_gradeimg'+i).html('');
 		}
 		var dates = new Date();
@@ -98,13 +109,19 @@ mm2 = Number(mm2);
 			 if(dates.getDate() == clkdate ){
 				$('#S_dateset'+i).css("border","solid 2px");
 			}else{
-				$('#S_dateset'+i).css("border","solid 0px");
+				$('#S_dateset'+i).css("border","solid 2px white");
 			} 
 		}
+		for(var i = 0; i<dateStr.length; i++){
+			$('#S_time'+i).css('padding','0px')
+						.css('border','solid 0px');
+		}
+		
 		var lastT = '';
 		
+		
 		for(var i = 0; i<dateStr.length; i++){
-			
+
 			if(dateStr[i]==dd){
 			//alert(dateStr[i] +":"+dd)
 				if(lastT == titleStr[i]){
@@ -113,17 +130,17 @@ mm2 = Number(mm2);
 					//$('#S_title'+i).css("border-top" ,"solid 0px")
 				}else{
 					$('#S_gradeimg'+i).html(gradeStr[i]);
-					$('#S_gradeimg'+i).css('margin','13px 0');
 					$('#S_title'+i).html(titleStr[i]);
-					$('#S_title'+i).css('margin','10px 0');
-					$('#S_tit'+i).css("clear","both");
-					$('#S_time'+i).css("clear","both"); 
+					
+					lastT = titleStr[i];
 				}
-			
+				
 			//alert(timeStr[i].split(':')[0]>nowtime.split(':'))
 			
 				$('#S_time'+i).html(timeStr[i])
-				
+				$('#S_time'+i)
+							.css('margin','5px')
+							.css('width','57px');
 				var HH1 = timeStr[i].split(':')[0];
 				HH1 = Number(HH1);
 				var mm1 = timeStr[i].split(':')[1];
@@ -133,13 +150,13 @@ mm2 = Number(mm2);
 					if(HH1<HH2){
 						$('#S_time'+i).css("color","lightgray");
 						$('#S_time'+i).css("pointer-events","none");
+					}else if(HH1==HH2){
 						if(mm1<mm2){
 							$('#S_time'+i).css("color","lightgray");
 						}
 					}
 				}
 				
-				lastT = titleStr[i];
 			}else{
 				$('#S_title'+i).css("border-top" ,"solid 0px")
 				$('#S_title'+i).html('')
@@ -181,15 +198,16 @@ mm2 = Number(mm2);
 
 	<!-- 날짜  -->
 
-	<div style="width: 100%; overflow-x: auto;">
+	<div style="width: 100%; margin: 0 5px;">
 		<c:forEach items="${datelist }" var="dd" varStatus="no">
-			<div class="S_dateset" id="S_dateset${no.index}" style="padding: 5px; margin: 5px; cursor: pointer;"
+			<div class="S_dateset" id="S_dateset${no.index}" style="padding: 5px; margin: 5px; cursor: pointer; border : solid 2px white;"
 				onclick="dateCheck('${dd.split(':')[0]}')" align="center">
 				<div>${dd.split('-')[1] }월 (${dd.split(':')[1]})</div>
 				<div style="font-size: 20px;">${dd.split(':')[0].split('-')[2] }</div>
 			</div>
 		</c:forEach>
 	</div>
+	
 	<div style="clear: both;"></div>
 
 	<hr>
@@ -197,17 +215,16 @@ mm2 = Number(mm2);
 	<!-- 영화제목(장르 / 런타임/ 개봉일)  -->
 
 	<c:forEach items="${dateTitleList }" varStatus="no">
-		<div class="S_tt${no.index }" >
-		<div id="S_tit${no.index }" style=" float : left;">
-			<div id="S_gradeimg${no.index }" style="float: left; width: 30px;"></div>
+		<div class="S_tt${no.index }"  >
+		<div id="S_tit${no.index }">
+			<div id="S_gradeimg${no.index }" style="float:left; width: 25px;"></div>
 			<div id="S_title${no.index }"
-				style="font-size: 23px; cursor: pointer; width:300px;"
+				style="font-size: 23px; cursor: pointer; width:300px;" 
 				onclick="movieCheck(${no.index})" ></div>
 		</div>
 			<!-- 시간리스트(남은좌석수/ 상영관) -->
 
-			<div id="S_time${no.index }" onclick="timeCheck(${no.index})"
-				style="cursor: pointer; font-size: 20px; float:left; margin-left: 10px;"></div>
+			<div class="S_time" id="S_time${no.index }" onclick="timeCheck(${no.index})"></div>
 		</div>
 	</c:forEach>
 	<div style="clear : both;"></div>

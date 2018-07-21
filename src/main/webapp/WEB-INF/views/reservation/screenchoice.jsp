@@ -42,6 +42,15 @@
 	border:solid 1px  red;
 	float: left;
 }
+#S_btn{
+	cursor: pointer; 
+	font-size: 35px; 
+	width:100px; 
+	padding: 5px 10px; 
+	text-align:center; 
+	border: solid 2px gray; 
+	margin-left: 95%;	
+}
 </style>
 
 <script type="text/javascript">
@@ -305,13 +314,13 @@ window.onload = function(){
 			style="margin-top: 15px; margin-right: 10px; float: left;" /> 
 		<img src="../resources/imgs/
 			<c:choose>
-				<c:when test="${svo.grade ==18}">movie_icon_18.gif</c:when>
-				<c:when test="${svo.grade ==15}">movie_icon_15.gif</c:when>
-				<c:when test="${svo.grade ==12}">movie_icon_12.gif</c:when>
-				<c:when test="${svo.grade == 0}">movie_icon_0.gif</c:when>
+				<c:when test="${svo.grade ==18}">grade_18.png</c:when>
+				<c:when test="${svo.grade ==15}">grade_15.png</c:when>
+				<c:when test="${svo.grade ==12}">grade_12.png</c:when>
+				<c:when test="${svo.grade == 0}">grade_0.png</c:when>
 			</c:choose>
-		" alt="이미지없음" width="18px" style="float: left; margin-top: 34px;"/>
-		<div id="S_cho2" style="font-size: 20px; margin-top: 30px;">${svo.movtitle }</div>
+		" alt="이미지없음" width="18px" style="float: left; margin-top: 32px;"/>
+		<div id="S_cho2" style="width:70%; font-size: 17px; margin-top: 30px;">${svo.movtitle }</div>
 	</div>
 	<div id="S_top" style="width: 40%; float: left;">
 		<div id="S_cho2" style="margin-top: 25px;">${svo.scNum }관</div>
@@ -384,8 +393,7 @@ window.onload = function(){
 	</div>
 	
 	<div style="width: 80%;">
-		<div onclick="chksubmit()"
-			style="cursor: pointer; font-size: 35px; width:100px; ;padding: 5px 10px; text-align:center; border: solid 2px gray; margin-left: 95%;">결제</div>
+		<div id="S_btn" onclick="chksubmit()">결제</div>
 	</div>
 	<div style="clear : both;"></div>
 </form>
