@@ -1,140 +1,135 @@
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-<!DOCTYPE html>
-<html>
-<head>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-
-<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-</head>
-
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 
-</script>
 
 
-<body>
-<div class="container">
-<p class="h2"><a href='settle?type=year&num=2018'>연간</a></p>
-<table class="table table-hover"  >
 
+  $( function() {
+	    var dateFormat = "mm/dd/yyyy",
+	      from = $( "#from" )
+	        .datepicker({
+	          defaultDate: "+1w",
+	          changeMonth: true,
+	          maxDate:new Date(),
+		      /*   showOn: "button",
+		        buttonImage: "../resources/imgs/calendar2.png",
+		        buttonImageOnly: true,
+		        buttonText: "Select date" */
+	          /* numberOfMonths: 3 */
+	        })
+	        .on( "change", function() {
+	          to.datepicker( "option", "minDate", getDate( this ) );
+	        }),
+	      to = $( "#to" ).datepicker({
+	        defaultDate: "+1w",
+	        changeMonth: true,
+	        maxDate:new Date(),
+	     /*  showOn: "button", */
+	      /* 
+	      buttonImage: "../resources/imgs/calendar2.png",
+	      buttonImageOnly: true,
+	      buttonText: "Select date" */
+	        /* numberOfMonths: 3 */
+	      })
+	      .on( "change", function() {
+	        from.datepicker( "option", "maxDate", getDate( this ) );
+	      });
+	 
+	    $(".ui-datepicker-trigger").css("margin-bottom","-6px");
+	    function getDate( element ) {
+	      var date;
+	      try {
+	        date = $.datepicker.parseDate( dateFormat, element.value );
+	      } catch( error ) {
+	        date = null;
+	      }
+	 
+	      return date;
+	    }
+	  } );
 
+  </script>
+  
+  <style>
+  .ui-datepicker-trigger { 
+  position: relative; left: -29px; top: 2px; 
+  widht:50px
+  }
+  </style>
+
+ <div style="margin-top: 50px">
+	<form action="?">
+	<p>
+	조회기간: <input type="text" id="from" name="start" value="${param.start }"> ~ 
+	<input type="text" id="to" name="end" value="${param.end }">
+	<button class="btn btn-primary" onclick="submit()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+	</p>
+	<!-- <ul class="dropdown-menu" role="menu">
+    <li><a href="#">Action</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+    <li><a href="#">Separated link</a></li>
+  	</ul> -->
+	</form>
 	
+</div>
+
+<table class="table table-hover">
+
 	<tr>
 		<th>결제일시</th>
 		<th>ID</th>
-		<th>결제금액</th>
+		<th>영화명</th>
 		<th>결제방법</th>
 		<th>카드/계좌번호</th>
 		<th>상태</th>
-		<th>계</th>
-		<!-- <td>날짜</td> -->
-	</tr>	
-	<c:set var="yearSum" value="0"/>
-	<c:set var="quarterSum" value="0"/>
-	<c:set var="monthSum" value="0"/>
-	<c:set var="weekSum" value="0"/>
-	<c:set var="daySum" value="0"/>
-	
-	<c:set var="day" value="1"	/>
-	<c:set var="week" value="1"/>
-	<c:set var="month" value="1"/>
-	<c:set var="quarter" value="1"/>
-	
-	<c:forEach var="mm" items="${data }" varStatus="no">
-	
-	<fmt:formatDate var="nowWeek" pattern="W" value="${mm.mstart}"/>
-	<fmt:formatDate var="nowday" pattern="d" value="${mm.mstart}"/>
-	<fmt:formatDate var="nowMonth" pattern="M" value="${mm.mstart}"/>
-	<c:set var="nq" value="${nowMonth/3 + 1 }" />
-	<fmt:parseNumber integerOnly="true" var="nowQuarter" value="${nq }"/>
-	
-	<c:if test="${no.index eq 0 }">
-		<c:set var="day" value="${nowday }"	/>
-		<c:set var="week" value="${nowWeek }"/>
-		<c:set var="month" value="${nowMonth }"/>
-		<c:set var="quarter" value="${nowQuarter }"/>
-	</c:if>
-	<c:if test="${day != nowday and no.index!=0}">
-	<tr bgcolor=lightgray>
-		<td colspan="6">${month }월 ${day }일 합계</td>
-		<td>${daySum }</td>
-		<c:set var="daySum" value="0"/>
-		<c:set var="day" value="${nowday }"/>
+		<th>결제금액</th>
 	</tr>
-	</c:if>
-	<c:if test="${week != nowWeek and no.index!=0}">
-	<tr class="warning">
-		<td colspan="6">${month }월 ${week }주차 합계</td>
-		<td>${monthSum }</td>
-		<c:set var="weekSum" value="0"/>
-		<c:set var="week" value="${nowWeek }"/>
-	</tr>
-	</c:if>
-	<c:if test="${month != nowMonth and no.index!=0}">
-	<tr bgcolor=yellow>
-		<td colspan="6">${month }월 합계</td>
-		<td>${monthSum }</td>
-		<c:set var="monthSum" value="0"/>
-		<c:set var="month" value="${nowMonth }"/>
-	</tr>
-	</c:if>
-	<c:if test="${quarter != nowQuarter and no.index!=0}">
-	<tr bgcolor=#00FFFF>
-		<td colspan="6">${quarter }분기 합계</td>
-		<td>${monthSum }</td>
-		<c:set var="quarterSum" value="0"/>
-		<c:set var="quarter" value="${nowQuarter }"/>
-	</tr>
-	</c:if>
-	<tr>
-		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.mstart}"/></td>
-		<td>${mm.id }</td>
-		<td>${mm.cost}</td>
-		<td>${mm.coc }</td>
-		<td>${mm.accnum }</td>
-		<td>${mm.status eq 0 ? '처리' : '환불' }</td>
-		<c:set var="yearSum" value="${mm.status eq 0 ? yearSum+mm.cost : yearSum}"/>
-		<c:set var="quarterSum" value="${mm.status eq 0 ? quarterSum+mm.cost : quarterSum}"/>
-		<c:set var="monthSum" value="${mm.status eq 0 ? monthSum+mm.cost : monthSum}"/>
-		<c:set var="weekSum" value="${mm.status eq 0 ? weekSum+mm.cost : weekSum}"/>
-		<c:set var="daySum" value="${mm.status eq 0 ? daySum+mm.cost : daySum}"/>
-	</tr>
-	</c:forEach>
-	<tr bgcolor=lightgray>
-		<td colspan="6">${month }월 ${day }일 합계</td>
-		<td>${daySum }</td>
-	</tr>
-	<tr  class="bg-danger">
-		<td colspan="6">${month }월 ${week }주차 합계</td>
-		<td>${monthSum }</td>
-		<c:set var="weekSum" value="0"/>
-		<c:set var="week" value="${nowWeek }"/>
-	</tr>
-	<tr class="bg-success">
-		<td colspan="6">${month }월 합계</td>
-		<td>${monthSum }</td>
-	</tr>
-	<tr class="bg-info">
-		<td colspan="6">${quarter }분기 합계</td>
-		<td>${quarterSum }</td>
-		<c:set var="quarterSum" value="0"/>
-		<c:set var="quarter" value="${nowQuarter }"/>
-	</tr>
-	<tr class="bg-primary">
-		<td colspan="6">연 합계</td>
-		<td>${yearSum }</td>
-	</tr>
+
+	<c:set var="sum" value="0"/>
+	<c:set var="noCost" value="0"/>
 	
 
+	<c:forEach var="mm" items="${data }" varStatus="no">
+
+		<tr class="${mm.refund eq 0 ? 'primary' : 'danger'  }">
+			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.mstart}" /></td>
+			<td>${mm.id }</td>
+			<td>${mm.title}</td>
+			<td>${mm.coc }</td>
+			<td>${mm.accnum }</td>
+			<td>${mm.refund eq 0 ? '처리' : '환불' }</td>
+			<td>${mm.cost}</td>
+			<c:set var="sum" value="${sum+mm.cost}"/>
+			<c:set var="noCost" value="${mm.refund eq 0 ? noCost:noCost+mm.cost}"/>
+			
+		</tr>
+	</c:forEach>
+	<tr>
+	<td colspan="6">썸</td>
+	<td>${sum}</td>
+	</tr>
+	<tr>
+	<td colspan="6">환불금액</td>
+	<td>${noCost}</td>
+	</tr>
+	<tr>
+	<td colspan="6">합계</td>
+	<td>${sum-noCost }</td>
+	</tr>
+
+
+
+
 </table>
-</div>
-</body>
-</html>

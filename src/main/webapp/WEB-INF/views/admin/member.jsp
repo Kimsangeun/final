@@ -4,24 +4,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-</head>
+
 
 <script>
 
 </script>
 
 
-<body>
 <div class="container">
-<input type="button" value="추가" onclick="location.href='insertMovieForm'">
 <table class="table table-hover" >
 
 	<thead>
@@ -53,6 +46,3 @@
 </tbody>
 </table>
 </div>
-</body>
-
-</html>

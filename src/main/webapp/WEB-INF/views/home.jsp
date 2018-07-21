@@ -19,11 +19,12 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 	href="/proj/resources/bootstrap-3.2.0-dist/css/bootstrap.min.css">
 <link rel="stylesheet"
 	href="/proj/resources/bootstrap-3.2.0-dist/css/bootstrap-theme.min.css">
-<script type="text/javascript" src="/proj/resources/jquery-3.3.1.min.js"></script>
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<!-- <script type="text/javascript" src="/proj/resources/jquery-3.3.1.min.js"></script> -->
 <script type="text/javascript"
 	src="/proj/resources/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script type="text/javascript" src="/proj/resources/js/jquery.raty.min.js"></script>
 <script type="text/javascript" src="/proj/resources/js/js-load.js"></script>
@@ -50,21 +51,7 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
     </style>
 
 </head>
-<style>
 
-.js-load {
-	display: none;
-}
-.js-load.showMore {
-	display: block;
-}
-.is_comp.js-load:after {
-	display: none;
-}
-.btn-wrap, .lists, .main {
-	display: block;
-}
-</style>
 <!-- NAVBAR
 ================================================== -->
 <body>

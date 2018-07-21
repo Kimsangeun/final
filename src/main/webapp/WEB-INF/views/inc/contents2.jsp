@@ -89,12 +89,15 @@
       <!-- Three columns of text below the carousel -->
       <div align="center" class="hidden-lg" >
       	<img class="img-responsive" alt="" src="${pageContext.request.contextPath}\resources\imgs/ticket.png"/>
+      	
       </div>
       <div class="row" >
 
         	<c:forEach begin="1" end="8" items="${mainpagemov}" var="mm" varStatus="no">
         		<div align="center" class="col-lg-3 col-xs-6 col-sm-4 col-md-4">
+        		<a href="/proj/movie/detailMovie?mid=${mm.mid }">
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
+        		</a>
         		<p class="hidden-xs">${mm.title}</p>
 				<div class="fixedStar" id="Star_${no.index }"></div>
 				<script type="text/javascript">

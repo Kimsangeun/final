@@ -7,12 +7,21 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 @Alias("reviewVo")//as
 public class ReviewVO {
+	Float tmpScore;//.5점들 들어가게수정
 	Integer mid,score;
 	String id,review;
 	
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date reg_date;
 	
+	
+	public Float getTmpScore() {
+		return tmpScore;
+	}
+	public void setTmpScore(Float tmpScore) {
+		this.tmpScore = tmpScore;
+		this.score = (int)(tmpScore*2);
+	}
 	public Integer getMid() {
 		return mid;
 	}
