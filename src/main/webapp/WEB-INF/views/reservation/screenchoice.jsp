@@ -116,6 +116,8 @@ window.onload = function(){
 	var val = 0; // 현재 선택한 좌석수
 
 
+	var seat = '';
+	
 	function chkseat(col, no) {
 		var sel = document.getElementById("maxcnt");
 		val = sel.options[sel.selectedIndex].value;
@@ -175,7 +177,7 @@ window.onload = function(){
 			cnt--;
 			
 		} 
-		var seat = '';
+		seat = '';
 		
 		for (var i = 0; i < 4; i++) {
 			
@@ -270,7 +272,7 @@ window.onload = function(){
 			alert('좌석선택 완료.')
 
 			document.seatfrm.cnt.value = cnt;
-			document.seatfrm.seatnum.value = seats;
+			document.seatfrm.seatnum.value = seat;
 			document.seatfrm.price.value = price;
 
 			document.seatfrm.submit();
@@ -368,7 +370,7 @@ window.onload = function(){
 	<!-- 좌석 몇번인지 보여주는 임시창 -->
 	
 	<input type="hidden" name="seatnum" /> <input type="hidden" name="cnt" />
-	<input type="hidden" name="price" />
+	<input type="hidden" name="price" /> 
 	
 	<div style="float: left; margin-left: 45%;">
 	

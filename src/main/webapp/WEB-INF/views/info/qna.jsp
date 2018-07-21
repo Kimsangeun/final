@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<div>
+	<h2>QNA</h2>
+</div>
+<hr>
 
 	<table class="table table-hover">
 
@@ -33,15 +37,15 @@
 		</form>
 
 		<tr>
-			<td>번호</td>
-			<td>제목</td>
-			<td>작성자</td>
-			<td>작성일</td>
+			<td><b>번호</b></td>
+			<td><b>제목</b></td>
+			<td><b>작성자</b></td>
+			<td><b>작성일</b></td>
 			<c:choose>
 			<c:when test="${kind eq 'qna'}">	
 			</c:when>
 			<c:otherwise>
-				<td>조회수</td>
+				<td><b>조회수</b></td>
 			</c:otherwise>
 			</c:choose>
 		</tr>

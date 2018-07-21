@@ -4,22 +4,27 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<div>
+	<h2>${data.kind }</h2>
+</div>
+<hr>
+
 <form action="modifyReg" method="post" enctype="multipart/form-data"
 	accept-charset="UTF-8">
 	<input type="hidden" name="bid" value="${data.bid}">
 
-	<table class="table table-hover">
+	<table class="table table-hover" align="center" style="width:60%;">
 		<tr>
-			<td>작성자</td>
+			<td><b>작성자</b></td>
 			<td colspan="3"><input type="text" name="pid"
 				value="${data.pid }" /></td>
 		</tr>
 		<tr>
-			<td>제목</td>
+			<td><b>제목</b></td>
 			<td><input type="text" name="title" value="${data.title }" /></td>
 		</tr>
 		<tr>
-			<td>파일</td>
+			<td><b>파일</b></td>
 			<td colspan="3"><input type="file" name="mmfile"
 				value="${data.mmfile }" /></td>
 		</tr>
