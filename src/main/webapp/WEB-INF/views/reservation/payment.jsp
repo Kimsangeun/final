@@ -186,7 +186,7 @@
 		} */
 
 	function chkchk() {
-		alert($("input:checkbox[name=check]:checked").length);
+/* 		alert($("input:checkbox[name=check]:checked").length); */
 		if ($("input:checkbox[name=check]:checked").length == 4) {
 
 			$('#agreeexit').trigger('click');
@@ -372,8 +372,8 @@
 					<button type="button" class="btn btn-primary btn-lg" id="agree"
 						data-toggle="modal" data-target="#agreeModal"
 						style="display: none">선택완료</button>
-<!-- 					<button type="button" class="btn btn-primary btn-lg" id="cardmbtn"
-						style="display: none" data-toggle="modal" data-target="#cardModal">선택완료</button> -->
+					<button type="button" class="btn btn-primary btn-lg" id="cardmbtn"
+						style="display: none" data-toggle="modal" data-target="#cardModal">선택완료</button>
 
 					<!-- Modal -->
 					<div class="modal fade" id="cardModal" tabindex="-1" role="dialog"
