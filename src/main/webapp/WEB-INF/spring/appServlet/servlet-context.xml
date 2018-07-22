@@ -41,9 +41,10 @@
 		</interceptor>
 
 		<interceptor>
+			<mapping path="/info/*" />
 			<mapping path="/reservation/reser" />
 			<mapping path="/reservation/screenchoice" />
-			<mapping path="/info/*" />
+			
 			<exclude-mapping path="/info/forbidden" />
 			<beans:ref bean="loginChk" />
 		</interceptor>
@@ -77,8 +78,4 @@
 			</beans:props>
 		</beans:property>
 	</beans:bean>
-	
-	
 </beans:beans>
-
-	

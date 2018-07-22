@@ -1,3 +1,7 @@
+<%@page import="java.io.IOException"%>
+<%@page import="java.io.FileNotFoundException"%>
+<%@page import="java.io.FileReader"%>
+<%@page import="java.io.BufferedReader"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -45,7 +49,6 @@
 	margin: 0 8px;
 }
 </style>
-
 <script type="text/javascript">
 
 	var payname = '';
@@ -158,9 +161,9 @@
 		} else {
 			payname = $('select[name=cardchk]').val();
 			if (payname == "def") {
-				$('#cardmbtn').css('display', 'none');
+				$('#agree').css('display', 'none');
 			} else {
-				$('#cardmbtn').css('display', '');
+				$('#agree').css('display', '');
 			}
 			titleid = 'cardModalLabel';
 			document.getElementById('agreeModalLabel').innerHTML = payname;
@@ -224,25 +227,25 @@
 					</div>
 					<div class="modal-body">
 						<div class="R_leftbox">
-							<b>전자금융거래이용약관</b><br>
-							<textarea rows="5" cols="30">글글</textarea>
-							<br> <input type="checkbox" name="check">가가
+							<b>개인정보 처리방침</b><br>
+							<textarea rows="5" cols="30" style="resize: none">${agree1 }</textarea>
+							<br> <input type="checkbox" name="check">약관을 읽었으며, 동의합니다.
 						</div>
 						<div class="R_rightbox">
-							<b>고유식별정보 수집 및 이용안내</b><br>
-							<textarea rows="5" cols="30">글글</textarea>
-							<br> <input type="checkbox" name="check">가가
+							<b>영상정보 처리기기 운영 관리.방침</b><br>
+							<textarea rows="5" cols="30" style="resize: none">${agree2 }</textarea>
+							<br> <input type="checkbox" name="check">약관을 읽었으며, 동의합니다.
 						</div>
 
 						<div class="R_leftbox">
-							<b>개인정보 수집 및 이용안내</b><br>
-							<textarea rows="5" cols="30">글글</textarea>
-							<br> <input type="checkbox" name="check">가가
+							<b>전자금융거래 이용약관</b><br>
+							<textarea rows="5" cols="30" style="resize: none">${agree3 }</textarea>
+							<br> <input type="checkbox" name="check">약관을 읽었으며, 동의합니다.
 						</div>
 						<div class="R_rightbox">
-							<b>개인정보제공 및 위탁안내</b><br>
-							<textarea rows="5" cols="30">글글</textarea>
-							<br> <input type="checkbox" name="check">가가
+							<b>회원약관</b><br>
+							<textarea rows="5" cols="30" style="resize: none">${agree4 }</textarea>
+							<br> <input type="checkbox" name="check">약관을 읽었으며, 동의합니다.
 						</div>
 					</div>
 
@@ -328,7 +331,7 @@
 										<input type="password" class="form-control" maxlength="4"
 											id="bankpw" onKeyPress="return numkeyCheck(event)"
 											name="bankpw">
-									<div style="clear: both;"></div>
+										<div style="clear: both;"></div>
 									</div>
 
 									<div class="S_s1">보낼 계좌</div>
@@ -369,8 +372,8 @@
 					<button type="button" class="btn btn-primary btn-lg" id="agree"
 						data-toggle="modal" data-target="#agreeModal"
 						style="display: none">선택완료</button>
-					<button type="button" class="btn btn-primary btn-lg" id="cardmbtn"
-						style="display: none" data-toggle="modal" data-target="#cardModal">선택완료</button>
+<!-- 					<button type="button" class="btn btn-primary btn-lg" id="cardmbtn"
+						style="display: none" data-toggle="modal" data-target="#cardModal">선택완료</button> -->
 
 					<!-- Modal -->
 					<div class="modal fade" id="cardModal" tabindex="-1" role="dialog"

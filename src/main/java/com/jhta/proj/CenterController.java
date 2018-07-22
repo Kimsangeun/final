@@ -94,7 +94,8 @@ public class CenterController {
 		Object res = null;
 		
 		MemberVO v1 = (MemberVO)session.getAttribute("mem");
-		bvo.setId(v1.getId());
+		if(v1 != null)
+			bvo.setId(v1.getId());
 		// System.out.println(vo);
 
 		/* * * * * * * * * 페이징.* * * * * * * * * * * * * * * */

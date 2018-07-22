@@ -4,18 +4,17 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("cinemaVo")
 public class CinemaVO {
-	
-	int scNum, totSeat; //��, �� �¼���
-String img;
 
+	int scNum, totSeat;
+	String img;
 
 	public String getImg() {
-	return img;
-}
+		return img;
+	}
 
-public void setImg(String img) {
-	this.img = img;
-}
+	public void setImg(String img) {
+		this.img = img;
+	}
 
 	public int getScNum() {
 		return scNum;

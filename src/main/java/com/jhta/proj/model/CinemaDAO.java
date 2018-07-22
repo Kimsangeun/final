@@ -6,7 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class CinemaDAO { //������
+public class CinemaDAO { 
 	
 	@Resource
 	SqlSessionTemplate sessionTemplate;
