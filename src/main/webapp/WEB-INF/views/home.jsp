@@ -29,6 +29,12 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 <script type="text/javascript" src="/proj/resources/js/jquery.raty.min.js"></script>
 <script type="text/javascript" src="/proj/resources/js/js-load.js"></script>
 
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
 <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 <!--  <script src="../../assets/js/ie-emulation-modes-warning.js"></script> -->

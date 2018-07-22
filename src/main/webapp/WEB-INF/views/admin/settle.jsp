@@ -29,6 +29,7 @@
 	        })
 	        .on( "change", function() {
 	          to.datepicker( "option", "minDate", getDate( this ) );
+	          to.datepicker( "option", "maxDate", new Date() );
 	        }),
 	      to = $( "#to" ).datepicker({
 	        defaultDate: "+1w",
@@ -67,23 +68,27 @@
   }
   </style>
 
- <div style="margin-top: 50px">
-	<form action="?">
-	<p>
-	조회기간: <input type="text" id="from" name="start" value="${param.start }"> ~ 
-	<input type="text" id="to" name="end" value="${param.end }">
+ <div style="margin-top: 50px" class="row">
+	<form action="?" class="form-inline">
+	<div class="form-group">
+	<label for="from">조회기간</label> 
+	<input type="text" id="from" name="start" value="${param.start }" required="required"> ~ 
+	<input type="text" id="to" name="end" value="${param.end }" required="required">
+	</div>
+	<div class="form-group">
+	<label for="movieSelect">영화별 보기</label>
+	 <select name="mid" id="movieSelect" class="selectpicker" data-live-search="true"> 
+	 <option value="0">전체</option> 
+	 <c:forEach items="${data['movie'] }" var="mm">
+	 <option value="${mm.mid }">${ mm.title}</option> 
+	 </c:forEach>
+	 </select>
+	</div>
 	<button class="btn btn-primary" onclick="submit()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
-	</p>
-	<!-- <ul class="dropdown-menu" role="menu">
-    <li><a href="#">Action</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li class="divider"></li>
-    <li><a href="#">Separated link</a></li>
-  	</ul> -->
 	</form>
 	
 </div>
+
 
 <table class="table table-hover">
 
@@ -101,7 +106,7 @@
 	<c:set var="noCost" value="0"/>
 	
 
-	<c:forEach var="mm" items="${data }" varStatus="no">
+	<c:forEach var="mm" items="${data['settle'] }" varStatus="no">
 
 		<tr class="${mm.refund eq 0 ? 'primary' : 'danger'  }">
 			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.mstart}" /></td>
