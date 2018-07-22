@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div>
-	<h2>QNA</h2>
+	<h2>문의 및 답변</h2>
 </div>
 <hr>
 
@@ -19,7 +19,6 @@
 				<td colspan="5" align="center">검색 <select name="schCol">
 			</c:otherwise>
 			</c:choose>
-				
 						<option value="title">제목</option>
 						<option value="pid">작성자</option>
 						<option value="content">내용</option>
@@ -87,12 +86,12 @@
 				[${i }]
 			</c:when>
 		<c:otherwise>
-			<a href="${kind }?page=${i }&schCol=${param.schCol }&title=${param.title}"">${i }</a>
+			<a href="${kind }?page=${i }&schCol=${param.schCol }&title=${param.title}">${i }</a>
 		</c:otherwise>
 	</c:choose>
 </c:forEach>
 <c:if test="${endPage<totalPage }">
-	<a href="${kind }?page=${endPage+1 }&schCol=${param.schCol }&title=${param.title}"">></a>
-	<a href="${kind }?page=${totalPage }&schCol=${param.schCol }&title=${param.title}"">[마지막]</a>
+	<a href="${kind }?page=${endPage+1 }&schCol=${param.schCol }&title=${param.title}">></a>
+	<a href="${kind }?page=${totalPage }&schCol=${param.schCol }&title=${param.title}">[마지막]</a>
 </c:if>
 	</div>

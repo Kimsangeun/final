@@ -7,7 +7,20 @@
 </style>
 
 <div>
-	<h2>${data.kind }</h2>
+	<h2>	<c:choose>
+	
+	<c:when test="${data.kind == 'notice'}">
+	공지사항
+	</c:when>
+	<c:when test="${data.kind == 'faq'}">
+	자주찾는 질문
+	</c:when>
+	<c:when test="${data.kind == 'qna'}">
+	문의 및 답변
+	</c:when>
+	
+	</c:choose>
+</h2>
 </div>
 <hr>
 
@@ -20,7 +33,7 @@
 		</tr>
 		<tr>
 			<td><b>제목</b></td>
-			<td colspan="3"><input type="text" style="width:90%;"  name="title"/></td> 
+			<td colspan="3" style="width:70%"><input type="text" style="width:90%;"  name="title"/></td> 
 			
 		</tr>
 		<c:choose>
@@ -36,7 +49,7 @@
 		</c:choose>
 		<tr>
 			<td><b>내용</b></td>
-			<td colspan="3"><textarea style="width: 90%;" rows="5"  name="content"></textarea></td>
+			<td colspan="3"><textarea style="width: 90%;resize:none" rows="5"  name="content" ></textarea></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center"  ><input type="submit" value="작성">
