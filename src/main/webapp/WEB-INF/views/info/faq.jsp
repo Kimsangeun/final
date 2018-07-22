@@ -4,7 +4,7 @@
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div>
-	<h2>자주찾는 질문</h2>
+	<h2>FAQ</h2>
 </div>
 <hr>
 

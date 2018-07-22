@@ -1,5 +1,11 @@
 package com.jhta.proj;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -196,15 +202,14 @@ public class ReserController {
 		for (String ss : (ArrayList<String>) rdao.seatlist(rvo)) {
 			sss += ss;
 		}
-		
+
 		for (String ss : sss.split(",")) {
 			seatList.add(ss);
 		}
-		
-		
+
 		System.out.println(seatList);
 		model.addAttribute("seatList", seatList);
-		
+
 		String mm = "screenchoice";
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("svo", svo);
@@ -214,13 +219,17 @@ public class ReserController {
 	}
 
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price) {
+	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price,
+			HttpServletRequest request) {
 		System.out.println("병수1");
 		model.addAttribute("menu", "reservation");
 
 		// rvo.setCnt(request.getParameter("cnt"));
 		// rvo.setSeatNum(request.getParameter("seatnum"));
-
+		String agree1 = readFile(request.getRealPath("resources/") + "data/agree1.txt");
+		String agree2 = readFile(request.getRealPath("resources/") + "data/agree2.txt");
+		String agree3 = readFile(request.getRealPath("resources/") + "data/agree3.txt");
+		String agree4 = readFile(request.getRealPath("resources/") + "data/agree4.txt");
 		rvo.setCnt(cnt);
 		rvo.setSeatNum(seatnum);
 		rvo.setCost(price);
@@ -228,6 +237,10 @@ public class ReserController {
 
 		System.out.println("/payment::" + rvo);
 		String mm = "payment";
+		model.addAttribute("agree1", agree1);
+		model.addAttribute("agree2", agree2);
+		model.addAttribute("agree3", agree3);
+		model.addAttribute("agree4", agree4);
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("main", mm);
 		return "home";
@@ -279,5 +292,37 @@ public class ReserController {
 
 		model.addAttribute("main", mm);
 		return "home";
+	}
+
+	public String readFile(String fname) {
+		String data = "";
+		/*
+		 * FileInputStream fis; String data = ""; try { fis = new
+		 * FileInputStream(fname); byte[] buf = new byte[1024];
+		 * 
+		 * while (fis.available() > 0) /// 한글이 깨지지 않음 { int len = fis.read(buf); data +=
+		 * new String(buf, 0, len); }
+		 * 
+		 * fis.close(); } catch (Exception e) { // TODO Auto-generated catch block
+		 * e.printStackTrace(); }
+		 * 
+		 * System.out.println(data); return data;
+		 */
+
+		try {
+			File file = new File(fname);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				data += line;
+				System.out.println(line);
+			}
+		} catch (Exception e) {
+
+		}
+
+		return data;
 	}
 }

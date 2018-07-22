@@ -13,10 +13,10 @@
 	공지사항
 	</c:when>
 	<c:when test="${data.kind == 'faq'}">
-	자주찾는 질문
+	FAQ
 	</c:when>
 	<c:when test="${data.kind == 'qna'}">
-	문의 및 답변
+	QNA
 	</c:when>
 	
 	</c:choose>
