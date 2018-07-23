@@ -1,5 +1,7 @@
 package com.jhta.proj;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -27,11 +29,12 @@ public class MyPageController {
 	BoardDAO bdao;
 	
 	@RequestMapping()
-	public String myPage(Model model,@PathVariable String service) {
+	public String myPage(HttpServletRequest request,Model model,@PathVariable String service) {
 		
 		model.addAttribute("main", service);
 		
 		if(service.equals("cancle")) {
+			System.out.println("cancle탐?");
 			model.addAttribute("main","reser");
 		}
 		
@@ -50,7 +53,6 @@ public class MyPageController {
 		System.out.println(bvo.getId());
 		//vo.setId(session.getAttribute("mem"));
 		System.out.println("vo"+v1.getId());
-		
 		
 		switch(service) {
 		case "reser":

@@ -6,6 +6,30 @@
 
 </style>
 
+<script>
+
+function gogo(){
+	
+	if($('#inmain').is(':checked') == true){
+		$('#pw').val(1);
+	}
+	else{
+		$('#pw').val(0);
+	}
+	if($('#tt').val() == ''){
+		
+		alert('제목을 입력하세요');
+		return;
+	}
+	else if($('#ct').val() == ''){
+		
+		alert('내용을 입력하세요');
+		return;
+	}
+ 	document.insfrm.submit(); 
+}
+</script>
+
 <div>
 	<h2>	<c:choose>
 	
@@ -25,15 +49,27 @@
 <hr>
 
 <form action="insertReg" method="post" enctype="multipart/form-data"
-	accept-charset="UTF-8">
+	accept-charset="UTF-8" name="insfrm">
+	<input type="hidden" name="pw" id="pw"/>
 	<table class="table table-hover" align="center" style="width:60%;">
 		<tr>
 			<td ><b>작성자</b></td>
+			<c:choose>
+			<c:when test="${param.kind != 'notice'}">
 			<td colspan="3" align="center">${mem.id }</td>
+			
+			</c:when>
+			<c:otherwise>
+			<td align="center">${mem.id }</td>
+			<td ><b>메인화면</b></td>
+			<td align="center"><input type="checkbox" name="inmain" id="inmain"></td>
+			
+			</c:otherwise>
+			</c:choose>
 		</tr>
 		<tr>
 			<td><b>제목</b></td>
-			<td colspan="3" style="width:70%"><input type="text" style="width:90%;"  name="title"/></td> 
+			<td colspan="3" style="width:70%"><input type="text" style="width:90%;"  name="title" id="tt"/></td> 
 			
 		</tr>
 		<c:choose>
@@ -49,10 +85,10 @@
 		</c:choose>
 		<tr>
 			<td><b>내용</b></td>
-			<td colspan="3"><textarea style="width: 90%;resize:none" rows="5"  name="content" ></textarea></td>
+			<td colspan="3"><textarea style="width: 90%;resize:none" rows="5"  name="content" id="ct"></textarea></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"  ><input type="submit" value="작성">
+			<td colspan="4" align="center"  ><input type="button" onclick="gogo()" name="smbtn" value="작성">
 			<a href="${param.kind }" >뒤로</a></td>
 		</tr>
 	</table>

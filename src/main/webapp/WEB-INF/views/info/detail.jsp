@@ -45,7 +45,7 @@
 			</c:otherwise>
 		</c:choose>
 	</tr>
-	<c:choose>
+<%-- 	<c:choose>
 		<c:when test="${data.kind eq 'qna'}">
 		</c:when>
 		<c:otherwise>
@@ -56,7 +56,7 @@
 				</tr>
 			</c:if>
 		</c:otherwise>
-	</c:choose>
+	</c:choose> --%>
 
 
 	<c:if test="${data.img && data.upfile!=null}">

@@ -1,5 +1,7 @@
 package com.jhta.proj;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,8 +36,19 @@ public class AjaxController {
 			
 		System.out.println(map);
 		
-		dao.ajaxModify(map);
-		
+		if((map.get("newpw").equals(""))) {
+			
+			if(map.get("emailChange").equals("true")) {
+				System.out.println("이메일은 바뀐다");
+				dao.ajaxModify2(map);
+				
+			}else
+			
+			map.put("msg", "새로 수정된 내용이 없습니다.");
+			
+		}else {
+			dao.ajaxModify(map);
+		}
 		return map;
 		
 	}
@@ -131,6 +144,33 @@ public class AjaxController {
 		return map;
 		
 	}
+	
+	/*@RequestMapping(value="/ajax/cancleChk", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> ajaxcancleChk(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
+			throws Exception{
+		
+		System.out.println("ajax cancle탔냐");
+		
+		SimpleDateFormat aa = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+		
+		Date now = new Date();
+		
+		Date start = aa.parse((String)map.get("ss"));
+		
+		long gap = (start.getTime()-now.getTime())/1000/60;
+		
+		System.out.println(gap);
+		if(gap<30) {
+			System.out.println("N타냐");
+			map.put("chk", "N");
+		}else {
+			map.put("chk", "Y");
+		}
+		
+		return map;
+		
+	}*/
 	
 	
 }

@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		screeninfo.scNum,
 		movie.mid ,
 		movie.grade as grade 
-		from screeninfo, movie 
+		from screeninfo, movie
 		where screeninfo.mid = movie.mid
 		order by movtitle asc, mtime asc
 	</select>
