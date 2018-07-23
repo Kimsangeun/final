@@ -30,8 +30,6 @@ public class loginChk extends HandlerInterceptorAdapter{
 		
 		/*if(url.equals(request.getRequestURI()) && request.getSession().getAttribute("mem")==null)
 		{
-			
-			
 			response.sendRedirect("qwer");
 			
 			return false;

@@ -65,4 +65,19 @@ public class MovieDAO {
 
 		return sessionTemplate.insert("adminMapper.reviewInsert",vo);
 	}
+	
+	public Object deleteChk(ReviewVO vo) {
+
+		return sessionTemplate.selectOne("adminMapper.deleteChk",vo);
+	}
+	
+	public Object reviewDelete(ReviewVO vo) {
+
+		return sessionTemplate.delete("adminMapper.reviewDelete", vo);
+	}
+	
+	public Object scoreUpdate(ReviewVO vo) {
+
+		return sessionTemplate.update("adminMapper.scoreUpdate", vo);
+	}
 }

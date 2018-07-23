@@ -6,49 +6,56 @@
 <script type="text/javascript">
 
 </script>
+<div>
+	<h2>결제정보</h2>
+</div>
+<hr>
 
 <div>
-	<div style="width: 300px; float: left; border: 5px">
-		<table class="table">
-			<tr>
-				<td>예매번호</td>
-				<td>${rvo.rId }</td>
-			</tr>
-			<tr>
-				<td>영화제목</td>
-				<td>${svo.movtitle }</td>
-			</tr>
-			<tr>
-				<td>시작시간</td>
-				<td>${svo.mdate }일 ${svo.mtime }시</td>
-			</tr>
-			<tr>
-				<td>예약자</td>
-				<td>${mem.id } 님</td>
-			</tr>
-			<tr>
-				<td>인원수</td>
-				<td>${rvo.cnt }명</td>
-			</tr>
-			<tr>
-				<td>관</td>
-				<td>${svo.scNum}관</td>
-			</tr>
-			<tr>
-				<td>좌석</td>
-				<td>${rvo.seatNum }석</td>
-			</tr>
-			<tr>
-				<td>가격</td>
-				<td>${rvo.cost }(<c:if test="${param.paytype eq 'csh' }">
+	<!-- 	<div style="width: 300px; float: left; border: 5px"> -->
+	<table class="table table-hover" align="center" style="width: 60%;">
+		<tr>
+			<td><b>예매번호</b></td>
+			<td>${rvo.rId }</td>
+		</tr>
+		<tr>
+			<td><b>영화제목</b></td>
+			<td>${svo.movtitle }</td>
+		</tr>
+		<tr>
+			<td><b>시작시간</b></td>
+			<td>${svo.mdate }&nbsp;${svo.mtime }시</td>
+		</tr>
+		<tr>
+			<td><b>예약자</b></td>
+			<td>${mem.id }님</td>
+		</tr>
+		<tr>
+			<td><b>인원수</b></td>
+			<td>${rvo.cnt }명</td>
+		</tr>
+		<tr>
+			<td><b>관</b></td>
+			<td>${svo.scNum}관</td>
+		</tr>
+		<tr>
+			<td><b>좌석</b></td>
+			<td>${rvo.seatNum }</td>
+		</tr>
+		<tr>
+			<td><b>가격</b></td>
+			<td>${rvo.cost }(<c:if test="${param.paytype eq 'csh' }">
 				현금결제
 				</c:if> <c:if test="${param.paytype eq 'crd' }">
 				카드결제_${param.cardchk }
 				</c:if> )
-				</td>
-			</tr>
-		</table>
-		<br> <br> <input type="button"
-			onclick="location.href='/proj'" value="확인" />
-	</div>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="button"
+				class="btn btn-primary btn-lg" onclick="location.href='/proj'"
+				value="확인" /></td>
+		</tr>
+	</table>
+	<!-- 	</div> -->
 </div>

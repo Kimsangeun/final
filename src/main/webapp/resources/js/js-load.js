@@ -5,6 +5,7 @@ $(window).on('load', function () {
 	$("#js-btn-wrap .button").on("click", function () {
 		load('#js-load', '4', '#js-btn-wrap');
 	})
+	
 });
 
 function load(id, cnt, btn) {

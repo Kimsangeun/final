@@ -14,7 +14,7 @@ public class BoardVO {
 	Date regdate;
 	String pid, pw, title, content, upfile, kind, reply,schCol, id;
 	MultipartFile mmfile;
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d일 HH:mm시");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-d HH:mm");
 
 	ArrayList<BoardVO> arr;
 

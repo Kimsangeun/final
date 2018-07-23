@@ -14,23 +14,58 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-<!DOCTYPE html>
-<html>
-<head>
+<script type="text/javascript">
+$(document).ready(function() {
+	   var maxHeight = -1;
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
+	   $('.features').each(function() {
+	     maxHeight = maxHeight > $(this).height() ? maxHeight : $(this).height();
+	   });
 
-<body>
+	   $('.features').each(function() {
+	     $(this).height(maxHeight);
+	   });
+	 });
 
-<div class="container" style="margin-top: 100px">
+
+
+$(window).on('load', function () {
+	load('#js-load', '4');
+	$("#js-btn-wrap .button").on("click", function () {
+		load('#js-load', '4', '#js-btn-wrap');
+	})
+	
+});
+
+</script>
+
+<style>
+.js-load {
+	display: none;
+}
+
+.js-load.showMore {
+	display: block;
+}
+
+.is_comp.js-load:after {
+	display: none;
+}
+
+.btn-wrap, .lists, .main {
+	display: block;
+}
+
+
+</style>
+
+<div id="js-load" class="container" style="margin-top: 100px">
 		<div class="row">
 
-			<c:forEach begin="1" end="8" items="${moviedata}" var="mm"
+			<c:forEach items="${moviedata}" var="mm"
 				varStatus="no">
-				<div  align="center" style="border: 1px solid gray"
-					class="col-lg-3 col-xs-6 col-sm-4 col-md-4 movietool">
+				<div align="center" style="border: 1px solid lightgray"
+					class="features col-lg-3 col-xs-6 col-sm-4 col-md-4 movietool js-load">
 					<a href="/proj/movie/detailMovie?mid=${mm.mid }"> <img
 						class="img-responsive"
 						src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}"
@@ -57,6 +92,8 @@
 			</c:forEach>
 
 		</div>
+		<div align="center" id="js-btn-wrap" class="btn-wrap">
+		<button id="moreButton" class="button btn btn-default">더보기</button>
+		<!-- <a href="javascript:;" class="button">더보기</a> -->
+		</div>
 	</div>
-</body>
-</html>

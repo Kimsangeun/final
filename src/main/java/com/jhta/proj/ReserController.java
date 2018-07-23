@@ -1,11 +1,14 @@
 package com.jhta.proj;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jhta.proj.model.CinemaDAO;
+import com.jhta.proj.model.CinemaVO;
 import com.jhta.proj.model.MemberVO;
 import com.jhta.proj.model.MovDAO;
 import com.jhta.proj.model.MovVO;
@@ -39,6 +44,9 @@ public class ReserController {
 	@Resource
 	ScreenInfoDAO sdao;
 
+	@Resource
+	CinemaDAO cdao;
+	
 	ReserVO rvo;
 
 	/*
@@ -68,6 +76,15 @@ public class ReserController {
 			datearr.add(sdfd.format(dlist));
 		}
 		return datearr;
+	}
+	
+	@ModelAttribute("cinemadata")
+	public Object cinema(Model model, CinemaVO vo) {
+		
+		Object res = null;
+		res = cdao.list(vo);
+		
+		return res;
 	}
 
 	@ModelAttribute("reserdata")
@@ -132,7 +149,7 @@ public class ReserController {
 	public Object datetitlelist(Model model, ScreenInfoVO vo) {
 		Object res = null;
 		res = mdao.dateTitleList(vo);
-		System.out.println("롤롤롤:" + res);
+		//System.out.println("롤롤롤:" + res);
 		return res;
 	}
 
@@ -140,7 +157,7 @@ public class ReserController {
 	public Object cine3(Model model, ScreenInfoVO svo) {
 		model.addAttribute("menu", "reservation");
 
-		model.addAttribute("nowtime", "13:00");
+		model.addAttribute("nowtime", nowtime);
 		model.addAttribute("nowdate", nowdate);
 
 		String mm = "timetable";
@@ -196,15 +213,15 @@ public class ReserController {
 		for (String ss : (ArrayList<String>) rdao.seatlist(rvo)) {
 			sss += ss;
 		}
-		
+
 		for (String ss : sss.split(",")) {
 			seatList.add(ss);
 		}
-		
-		
+
 		System.out.println(seatList);
 		model.addAttribute("seatList", seatList);
-		
+
+
 		String mm = "screenchoice";
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("svo", svo);
@@ -212,15 +229,19 @@ public class ReserController {
 		model.addAttribute("main", mm);
 		return "home";
 	}
-
+	
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price) {
+	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price,
+			HttpServletRequest request) {
 		System.out.println("병수1");
 		model.addAttribute("menu", "reservation");
 
 		// rvo.setCnt(request.getParameter("cnt"));
 		// rvo.setSeatNum(request.getParameter("seatnum"));
-
+		String agree1 = readFile(request.getRealPath("resources/") + "data/agree1.txt");
+		String agree2 = readFile(request.getRealPath("resources/") + "data/agree2.txt");
+		String agree3 = readFile(request.getRealPath("resources/") + "data/agree3.txt");
+		String agree4 = readFile(request.getRealPath("resources/") + "data/agree4.txt");
 		rvo.setCnt(cnt);
 		rvo.setSeatNum(seatnum);
 		rvo.setCost(price);
@@ -228,6 +249,10 @@ public class ReserController {
 
 		System.out.println("/payment::" + rvo);
 		String mm = "payment";
+		model.addAttribute("agree1", agree1);
+		model.addAttribute("agree2", agree2);
+		model.addAttribute("agree3", agree3);
+		model.addAttribute("agree4", agree4);
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("main", mm);
 		return "home";
@@ -279,5 +304,24 @@ public class ReserController {
 
 		model.addAttribute("main", mm);
 		return "home";
+	}
+
+	public String readFile(String fname) {
+		String data = "";
+
+		try {
+			File file = new File(fname);
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "UTF-8"));
+
+			String line = null;
+			while ((line = br.readLine()) != null) {
+				data += line;
+			}
+		} catch (Exception e) {
+
+		}
+
+		return data;
 	}
 }

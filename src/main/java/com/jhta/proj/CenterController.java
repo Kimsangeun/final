@@ -94,7 +94,8 @@ public class CenterController {
 		Object res = null;
 		
 		MemberVO v1 = (MemberVO)session.getAttribute("mem");
-		bvo.setId(v1.getId());
+		if(v1 != null)
+			bvo.setId(v1.getId());
 		// System.out.println(vo);
 
 		/* * * * * * * * * 페이징.* * * * * * * * * * * * * * * */
@@ -185,9 +186,8 @@ public class CenterController {
 			bvo.setKind(kind);
 			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
 			System.out.println("centercontrol_insetreg::" + bvo);
-			
 			System.out.println(":::"+bvo.getMmfile());
-			if(bvo.getMmfile() != null) {
+			if(bvo.getMmfile() != null || !bvo.getMmfile().equals("")) {
 				System.out.println("asdasdasdasdasdasdasd"+bvo.getMmfile());
 				bvo.setUpfile(fileUP(bvo.getMmfile(), request));
 			}

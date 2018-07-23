@@ -17,7 +17,23 @@ public class MovieVO {
 	
 	MultipartFile poster1;
 	ArrayList<MultipartFile> steelcuts;
+	String genres[];
+	ArrayList<String> gen;
 	
+	
+	
+	public ArrayList<String> getGen() {
+		return gen;
+	}
+	public void setGen(ArrayList<String> gen) {
+		this.gen = gen;
+	}
+	public String[] getGenres() {
+		return genres;
+	}
+	public void setGenres(String[] genres) {
+		this.genres = genres;
+	}
 	public ArrayList<MultipartFile> getSteelcuts() {
 		return steelcuts;
 	}
@@ -149,7 +165,7 @@ public class MovieVO {
 				+ actor + ", director=" + director + ", nation=" + nation + ", genre=" + genre + ", plot=" + plot
 				+ ", poster=" + poster + ", steelcut=" + steelcut + ", grade=" + grade + ", poster1=" + poster1
 				+ ", release=" + release +", steelcuts"
-				+ steelcuts
+				+ steelcuts+", genres="+genres+", gen="+gen
 				+ "]";
 	}
 	
