@@ -24,7 +24,9 @@ public class loginChk extends HandlerInterceptorAdapter{
 		MemberVO vo = (MemberVO)request.getSession().getAttribute("mem");
 		
 		if(vo==null) {
-			response.sendRedirect("forbidden");
+			request.setAttribute("msg", "로그인 후 이용 가능한 서비스 입니다.");
+			request.setAttribute("url", "/proj/");
+			response.sendRedirect("alert");
 			return false;
 		}
 		

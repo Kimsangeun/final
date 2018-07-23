@@ -8,6 +8,12 @@
 
 function gogo(){
 	
+	if($('#inmain').is(':checked') == true){
+		$('#pw').val(1);
+	}
+	else{
+		$('#pw').val(0);
+	}
 	if($('#tt').val() == ''){
 		
 		alert('제목을 입력하세요');
@@ -18,7 +24,7 @@ function gogo(){
 		alert('내용을 입력하세요');
 		return;
 	}
-	document.modfrm.submit();
+ 	document.insfrm.submit(); 
 }
 </script>
 <div>

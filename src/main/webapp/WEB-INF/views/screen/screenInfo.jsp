@@ -13,10 +13,10 @@
 		})
 	})
 </script>
-<div>
+<div align="center">
 	<!-- 전체 디브 -->
 
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-default" style="width:40%">
 	<div>
 		<ul class="nav navbar-nav nav-tabs">
 			<li class="active"><a href="#first">1관</a></li>
@@ -24,13 +24,13 @@
 			<li><a href="#third">3관</a></li>
 			<li><a href="#fourth">4관</a></li>
 		</ul>
-	</div>
+	</div>너무 코앞인가.
+	
 	</nav>
 	<div class="tab-content" style="margin-top: 80px;">
 		<div class="tab-pane fade active in" id="first">
 			<p>
 				1관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(0).img }" />
-				<img src="../resources/screenimg/Screen1.JPG"/>
 			</p>
 		</div>
 		<div class="tab-pane fade" id="second">

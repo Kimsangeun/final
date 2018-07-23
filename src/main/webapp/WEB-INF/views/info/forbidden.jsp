@@ -8,6 +8,7 @@
 </head>
 <body>
 <div class="container">
+
 <p class="h1">
 <c:if test="${mem!=null }">관리자 계정으로 </c:if>
 로그인 후 이용하세요  </p>
