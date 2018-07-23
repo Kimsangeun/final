@@ -105,11 +105,11 @@ function preview_images()
 		</div>
 		<div class="form-group">
 			<label for="actor">배우</label> <input type="text" required value="${data.actor }" 
-				class="form-control" id="actor" name="actor"  placeholder="암호">
+				class="form-control" id="actor" name="actor"  placeholder="배우">
 		</div>
 		<div class="form-group">
 			<label for="release">개봉일</label> <input type="date" required value="${data.release }" 
-				class="form-control" id="release" name="release" placeholder="암호">
+				class="form-control" id="release" name="release" placeholder="">
 		</div>
 		<div class="form-group">
 			<label for="poster">포스터</label> 
@@ -126,7 +126,7 @@ function preview_images()
 		<div class="form-group">
 			<label for="plot">줄거리</label><!--  <input type="text"
 				class="form-control" id="plot" name="plot" placeholder="암호"> -->
-				<textarea style="resize: vertical;" class="form-control" id="plot" maxlength="400"
+				<textarea style="resize: vertical;" class="form-control" id="plot" maxlength="800"
 				placeholder="줄거리를 입력해 주세요" rows="5" name="plot" cols="20">
 				${data.plot }
 				</textarea>
