@@ -3,15 +3,12 @@ package com.jhta.proj;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -322,18 +319,6 @@ public class ReserController {
 
 	public String readFile(String fname) {
 		String data = "";
-		/*
-		 * FileInputStream fis; String data = ""; try { fis = new
-		 * FileInputStream(fname); byte[] buf = new byte[1024];
-		 * 
-		 * while (fis.available() > 0) /// 한글이 깨지지 않음 { int len = fis.read(buf); data +=
-		 * new String(buf, 0, len); }
-		 * 
-		 * fis.close(); } catch (Exception e) { // TODO Auto-generated catch block
-		 * e.printStackTrace(); }
-		 * 
-		 * System.out.println(data); return data;
-		 */
 
 		try {
 			File file = new File(fname);
@@ -343,7 +328,6 @@ public class ReserController {
 			String line = null;
 			while ((line = br.readLine()) != null) {
 				data += line;
-				System.out.println(line);
 			}
 		} catch (Exception e) {
 

@@ -4,9 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
-<!-- (Optional) Latest compiled and minified JavaScript translation files -->
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script> -->
-
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
 
@@ -52,14 +49,15 @@ function preview_images()
 
 <div class="container" style="padding-top: 50px">
 
-	<form name="movie" action="insertMovie" method="post" enctype="multipart/form-data"
+	<form name="movie" action="modifyReg" method="post" enctype="multipart/form-data"
 		accept-charset="UTF-8">
+		<input type="hidden" value="${data.mid }" name="mid">
 		<div class="form-group">
-			<label for="title">영화명</label> <input type="text" required="required" maxlength="50"
+			<label for="title">영화명</label> <input type="text" value="${data.title }" required="required" maxlength="50"
 				class="form-control" id="title" name= "title" placeholder="영화명을 입력하세요">
 		</div>
 		<div class="form-group">
-			<label for="nation">국가</label> <input type="text" required="required" maxlength="30"
+			<label for="nation">국가</label> <input type="text" value="${data.nation }"  required="required" maxlength="30"
 				class="form-control" id="nation" name="nation" placeholder="국가를 입력하세요">
 		</div>
 		<div class="form-group">
@@ -88,13 +86,13 @@ function preview_images()
 		<input type="hidden" value="" name="genre"/>
 		<div class="form-group">
 			<label for="runtime">런타임</label> 
-			<input id="runtime" required="required" name="runtime" type="number" min="1" max="999"
+			<input id="runtime" value="${data.runtime }"  required="required" name="runtime" type="number" min="1" max="999"
 			class="form-control" name="runtime" placeholder="런타임을 입력해주세요">
 		</div>
 		<div class="form-group">
 			<label for="ratingSelect">상영등급</label>
 			<select name="grade" title="상영등급을 선택해 주세요" id="ratingSelect" 
-			required="required" class="form-control selectpicker">
+			required="required"  class="form-control selectpicker">
 			<option value="0">전체이용가</option>
 			<option value="12">12세 이상 관람가</option>
 			<option value="15">15세 이상 관람가</option>
@@ -102,15 +100,15 @@ function preview_images()
 			</select>
 		</div>
 		<div class="form-group"> 
-			<label for="director">감독</label> <input type="text" required 
+			<label for="director">감독</label> <input type="text" required value="${data.director }" 
 				class="form-control" id="director" name="director" placeholder="감독">
 		</div>
 		<div class="form-group">
-			<label for="actor">배우</label> <input type="text" required 
+			<label for="actor">배우</label> <input type="text" required value="${data.actor }" 
 				class="form-control" id="actor" name="actor"  placeholder="암호">
 		</div>
 		<div class="form-group">
-			<label for="release">개봉일</label> <input type="date" required min="sysdate"
+			<label for="release">개봉일</label> <input type="date" required value="${data.release }" 
 				class="form-control" id="release" name="release" placeholder="암호">
 		</div>
 		<div class="form-group">
@@ -129,88 +127,12 @@ function preview_images()
 			<label for="plot">줄거리</label><!--  <input type="text"
 				class="form-control" id="plot" name="plot" placeholder="암호"> -->
 				<textarea style="resize: vertical;" class="form-control" id="plot" maxlength="400"
-				placeholder="줄거리를 입력해 주세요" rows="5" name="plot" cols="20"></textarea>
+				placeholder="줄거리를 입력해 주세요" rows="5" name="plot" cols="20">
+				${data.plot }
+				</textarea>
 		</div>
 		
-		<button type="submit" class="btn btn-default">제출</button>
+		<button type="submit" class="btn btn-default">수정</button>
 	</form>
-	<!-- <form action="insertMovie" method="post" enctype="multipart/form-data"
-		accept-charset="UTF-8">
-		<table id="movieClass" class="table table-hover">
-			<tr>
 
-				<td>타이틀</td>
-				<td><input type="text" name="title" /></td>
-			</tr>
-			<tr>
-				<td>국가</td>
-				<td><input type="text" name="nation" /></td>
-			</tr>
-			<tr>
-				<td>장르</td>
-				<td><input type="text" name="genre" /></td>
-			</tr>
-			<tr>
-				<td>런타임</td>
-				<td><input type="text" name="runtime" /></td>
-			</tr>
-
-			<tr>
-				<td>상영등급</td>
-				<td><input type="text" name="grade" /></td>
-			</tr>
-			<tr>
-				<td>감독</td>
-				<td><input type="text" name="director" /></td>
-			</tr>
-			<tr>
-				<td>배우</td>
-				<td><input type="text" name="actor" /></td>
-			</tr>
-			<tr>
-				<td>개봉일</td>
-				<td><input type="date" name="release" /></td>
-			</tr>
-
-			<tr>
-			<td>다중이</td>
-			<td><div class="input_wrap">
-            <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
-            <input type="file" name="steelcutss" id="input_imgs" multiple/>
-        </div> 
-        <div>
-        <div class="imgs_wrap">
-            <img class="img-responsive" id="img" />
-        </div>
-    </div></td>
-		</tr>
-       
-
-			<tr>
-				<td>스틸컷(여러장 업로드)</td>
-				<td><input type="file" name="steelcuts" id="input_imgs"
-					multiple="multiple" /></td>
-			</tr>
-
-
-			<tr>
-				<td>포스터</td>
-				<td><input type="file" name="poster1" /></td>
-			</tr>
-			<tr class="item1">
-			<td>스틸컷
-			<button type="button" class="addBtn btn btn-default">+</button></td>
-			<td><input type="file" name="steelcuts[0]" /></td>
-		</tr>
-			<tr>
-				<td>줄거리</td>
-				<td><textarea style="resize: vertical;" class="form-control"
-						rows="5" name="plot" cols="20">줄거리</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input class="btn btn-default"
-					type="submit" value="추가" /></td>
-			</tr>
-		</table>
-	</form> -->
 </div>

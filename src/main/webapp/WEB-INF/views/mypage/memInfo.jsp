@@ -7,12 +7,17 @@
 
 <script type="text/javascript">
 	
-	var oriEmail = $("#email").val();
+	var oriEmail;
+	
+	var emailChange = false;
+	
+	window.onload = function(){
+		oriEmail = $("#email").val();
+	}
 	
 $(function(){
-	
+
 	$("#newpw").blur(function() {
-       pwFlag = false;
        checkPswd1();
     });
 
@@ -20,11 +25,16 @@ $(function(){
        checkPswd2();
     });
     
-    $("#email").blur(function() {
+    $("#email").blur(function() {	
 	    checkEmail();
 	});
 	
 	$('#modBtn').on('click', function(){
+		
+		if(!checkUnrealInput()){
+			alert('입력정보를 확인해주세요.');
+			return false;
+		}
 		
 		var data = {
 				id : $('#id').text(),
@@ -34,7 +44,8 @@ $(function(){
 				name : $('#name').val(),
 				phone : $('#phone').val(),
 				birth : $('#birth').val(),
-				email : $('#email').val()		
+				email : $('#email').val(),
+				emailChange : emailChange
 		}
 		
 		$.ajax({
@@ -43,8 +54,14 @@ $(function(){
 			data : data,
 			type : 'POST',
 			success: function(result){
-				alert(result.msg);
 				
+				if(result.msg=="회원정보수정완료"){
+					alert(result.msg);
+					location.reload();
+				}else{
+					alert(result.msg);
+				}
+
 			}
 		
 		});
@@ -79,6 +96,8 @@ function checkPswd1() {
     if (pw == "") {
     	hideMsg(oMsg);
         return true;
+    }else{
+    	$('#newpwChk').attr("disabled",false);
     }
     
     var isPW = /^[A-Za-z0-9`\-=\\\[\];',\./~!@#\$%\^&\*\(\)_\+|\{\}:"<>\?]{6,16}$/;
@@ -97,13 +116,25 @@ function checkPswd2() {
     var pswd2 = $("#newpwChk");
     var oMsg = $("#pw2Msg");
     
-    if (pswd1.val() != pswd2.val()) {
-        showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
+    
+    if (pswd1.val() != pswd2.val()) {	
+   
+   		showErrorMsg(oMsg,"비밀번호가 일치하지 않습니다.");
         pswd2.val("");
         return false;
+ 
     } else {
-    	showSuccessMsg(oMsg, "비밀번호가 일치합니다!");
-        return true;
+    	
+		if(pswd1.val()==""){
+    		
+    		hideMsg(oMsg);
+            return true;
+    		
+    	}else{
+    		showSuccessMsg(oMsg, "비밀번호가 일치합니다!");
+       	 	return true;
+       	 }
+ 	
     }
 
     return true;
@@ -120,6 +151,13 @@ function checkEmail() {
     	showErrorMsg(oMsg,"이메일 주소를 입력해주세요.");
         return false;
     }
+    
+	if(email==oriEmail){
+		hideMsg(oMsg);
+		emailChanege = false;
+		return true;
+	}
+    
     
     var isEmail = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     var isHan = /[ㄱ-ㅎ가-힣]/g;
@@ -141,8 +179,10 @@ function checkEmail() {
             if (result.chk == "Y") {
                 
                showSuccessMsg(oMsg, "가능한 email입니다!");
+               emailChange = true;
                return true;
             } else {
+
                 showErrorMsg(oMsg, "이미 가입되어 있는 email주소입니다.");
                 return false;
             }
@@ -166,6 +206,18 @@ function showSuccessMsg(obj, msg) {
     obj.attr("class", "error_next_box green");
     obj.html(msg);
     obj.show();
+}
+
+function checkUnrealInput() {
+    if (	checkPswd1()
+            & checkPswd2()
+            & checkEmail()
+            
+    ) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
@@ -228,7 +280,7 @@ input[type="password"]
 		<div class="each">
 			<div class="info">새 비밀번호 확인</div>
 			<div class="content"><span class="newpwChk">
-			<input type="password" id="newpwChk" class="form-control" name="newpwChk" >
+			<input type="password" id="newpwChk" class="form-control" name="newpwChk" disabled="disabled">
 			<span class="error_next_box" id="pw2Msg" style="display: none"></span></div>
 			<div>
 			</div>

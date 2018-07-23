@@ -186,9 +186,8 @@ public class CenterController {
 			bvo.setKind(kind);
 			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
 			System.out.println("centercontrol_insetreg::" + bvo);
-			
 			System.out.println(":::"+bvo.getMmfile());
-			if(bvo.getMmfile() != null) {
+			if(bvo.getMmfile() != null || !bvo.getMmfile().equals("")) {
 				System.out.println("asdasdasdasdasdasdasd"+bvo.getMmfile());
 				bvo.setUpfile(fileUP(bvo.getMmfile(), request));
 			}

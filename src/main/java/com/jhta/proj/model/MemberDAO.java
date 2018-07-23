@@ -62,20 +62,12 @@ public class MemberDAO {
 		
 		System.out.println("예약지웠다");
 		
-		sessionTemplate.selectList("mem.cancle",vo);
+		sessionTemplate.delete("mem.cancle",vo);
 		
 		return sessionTemplate.selectList("mem.reser", v1);
 
 	}
 	
-	/*public Object qnaList(MemberVO vo) {
-		
-		System.out.println("qna가져옴");
-		
-		return sessionTemplate.selectList("mem.qna", vo);
-			
-	}*/
-
 	public Object info(MemberVO vo) {
 	
 	System.out.println("info가져옴");
@@ -87,7 +79,24 @@ public class MemberDAO {
 	public Map<String, Object> ajaxModify(Map<String, Object> map) {
 		
 		if(sessionTemplate.selectOne("mem.pwChk", map)!=null) {
+			
 			sessionTemplate.update("mem.modify",map);
+			
+			map.put("msg", "회원정보수정완료");
+		}else {
+			
+			map.put("msg", "비밀번호가 맞지않습니다.");
+		}
+		
+		return map;
+		
+	}
+	
+	public Map<String, Object> ajaxModify2(Map<String, Object> map) {
+		
+		if(sessionTemplate.selectOne("mem.pwChk", map)!=null) {
+				
+			sessionTemplate.update("mem.modify2",map);
 			
 			map.put("msg", "회원정보수정완료");
 		}else {

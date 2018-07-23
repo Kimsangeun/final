@@ -4,23 +4,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-</head>
+
 
 <script>
 
 </script>
 
 
-<body>
 <div class="table-responsive container">
 <table class="table table-hover" >
 
@@ -32,8 +26,7 @@
 		<th>상영시간</th>
 		<th>상영관</th>
 		<th>좌석번호</th>
-		<th>현금</th>
-		<th>카드</th>
+		<th>금액</th>
 		<!-- <td>변경</td> -->
 		<!-- <td>날짜</td> -->
 	</tr>	
@@ -47,14 +40,39 @@
 		<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${mm.mstart}"/></td>
 		<td>${mm.scNum}관</td>
 		<td>${mm.seatNum}</td>
-		<td>${mm.cash}</td>
-		<td>${mm.card}</td>
+		<td>${mm.cost}</td>
 
 	</tr>
 </c:forEach>
 </tbody>
 
 </table>
+<div class="center-block">
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    
+    <c:forEach var="i" begin="${startPage }" end="${endPage }">
+	    <c:choose>
+			<c:when test="${i==page }">
+				<li class="active"><a href="#">${i }</a></li>
+			</c:when>
+			<c:otherwise>
+				<li class=""><a href="resv?page=${i }">${i }</a></li>
+			</c:otherwise>
+		</c:choose>
+    </c:forEach>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
 </div>
-</body>
-</html>
+</div>

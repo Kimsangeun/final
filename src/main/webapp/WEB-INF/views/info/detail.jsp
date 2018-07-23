@@ -45,7 +45,7 @@
 			</c:otherwise>
 		</c:choose>
 	</tr>
-	<c:choose>
+<%-- 	<c:choose>
 		<c:when test="${data.kind eq 'qna'}">
 		</c:when>
 		<c:otherwise>
@@ -56,12 +56,12 @@
 				</tr>
 			</c:if>
 		</c:otherwise>
-	</c:choose>
+	</c:choose> --%>
 
 
 	<c:if test="${data.img && data.upfile!=null}">
 		<tr>
-			<td colspan="4"><img
+			<td colspan="4"><img class="img-responsive"
 				src="${pageContext.request.contextPath}\resources\board/${data.upfile}" />
 			</td>
 		</tr>
