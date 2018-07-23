@@ -49,7 +49,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from
 		(select rownum rnum, tt.* from
 		(select * from board
-		 where pid = #{id} or pid = 'admin' and kind = #{kind} order by gid desc, seq) tt) 
+		 where pid = #{id}<!--  or pid = 'admin' and kind = #{kind}  --> order by gid desc, seq) tt) 
 	<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
 	</select>
 
@@ -102,9 +102,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</selectKey>
 		insert into board
 		(bid, gid, seq, lev, cnt , regdate, pid, title,
-		content, upfile, kind)
+		content, upfile, kind, pw)
 		values (#{bid}, #{bid}, 0, 0, -1 , sysdate,
-		#{pid}, #{title}, #{content}, #{upfile}, #{kind})
+		#{pid}, #{title}, #{content}, #{upfile}, #{kind}, #{pw})
 	</insert>
 
 
