@@ -128,7 +128,7 @@ function preview_images()
 		<div class="form-group">
 			<label for="plot">줄거리</label><!--  <input type="text"
 				class="form-control" id="plot" name="plot" placeholder="암호"> -->
-				<textarea style="resize: vertical;" class="form-control" id="plot" maxlength="400"
+				<textarea style="resize: vertical;" class="form-control" id="plot" maxlength="800"
 				placeholder="줄거리를 입력해 주세요" rows="5" name="plot" cols="20"></textarea>
 		</div>
 		

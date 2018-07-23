@@ -5,7 +5,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<!-- width: 232px; height: 500px;  -->
 <script type="text/javascript">
 /* $(document).ready(function() {
 	   var maxHeight = -1;
@@ -47,6 +46,7 @@ $(window).on('load', function () {
 	display: block;
 }
 
+
 /* @media screen and (max-width : 600px){
 .movietool{
 	height:300px;
@@ -62,11 +62,15 @@ img{
 }
 } */
 </style>
+<div><h2>박스오피스</h2></div>
+
+<hr>
 <div id="js-load" class="container" style="margin-top: 100px">
 	<div class="row">
-
+	
 		<c:forEach items="${moviedata}" var="mm" varStatus="no">
-			<div align="center" style="border: 1px solid lightgray;"
+
+			<div align="center" style="height:500px"
 				class="features col-lg-3 col-xs-6 col-sm-3 col-md-3 movietool js-load">
 				<div class="img">
 				<a href="/proj/movie/detailMovie?mid=${mm.mid }"> <img
@@ -108,6 +112,7 @@ img{
 				</p>
 
 			</div>
+			
 		</c:forEach>
 
 	</div>

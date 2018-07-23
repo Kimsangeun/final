@@ -391,7 +391,8 @@ mm2 = Number(mm2);
 						}
 					}
 				}else{
-					$('#S_tim'+i)
+					$('#S_tim
+							'+i)
 								.css("border","solid 2px white")
 								.css("background","white")
 								.css("color","black")
@@ -466,7 +467,6 @@ mm2 = Number(mm2);
 	}
 
 	function Check3(no){
-		
 		$('#S_time').attr('mmm',ttset.split(',')[no-1]);
 		$('#S_time').html('시간&nbsp;&nbsp;&nbsp;'+$('#S_time').attr('mmm'));
 		$('#S_scNum').attr('nnn',scset.split(',')[no-1]+'관');

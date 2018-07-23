@@ -61,7 +61,6 @@ $(window).on('load', function () {
 
 <div id="js-load" class="container" style="margin-top: 100px">
 		<div class="row">
-
 			<c:forEach items="${moviedata}" var="mm"
 				varStatus="no">
 				<div align="center" style="border: 1px solid lightgray"

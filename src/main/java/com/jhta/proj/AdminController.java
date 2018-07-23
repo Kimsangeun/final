@@ -270,8 +270,13 @@ public class AdminController {
 		case "modifyReg":
 			System.out.println("수정할 녀석스"+mvo);
 			MovieVO modifyFileVO = (MovieVO)movieDao.detailMovie(mvo);
-			for(String filename : modifyFileVO.getSteelcut().split("[|]"))
-			{deleteFile(filename,request,"cut");}
+			if(modifyFileVO.getSteelcut()!=null && modifyFileVO.getSteelcut().equals("")) {
+				for(String filename : modifyFileVO.getSteelcut().split("[|]"))
+				{deleteFile(filename,request,"cut");}
+				
+				deleteFile(modifyFileVO.getPoster(),request,"poster");
+			}
+			
 			
 			if(mvo.getSteelcuts()!=null) {
 				mvo.setSteelcutsName(filesUP(mvo.getSteelcuts(),request));

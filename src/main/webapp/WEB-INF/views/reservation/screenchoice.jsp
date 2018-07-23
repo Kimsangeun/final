@@ -177,7 +177,7 @@ window.onload = function(){
 							.css("background-color","#ff0000")
 							.css("color","white");
  			arr[col-1][no-1] = 1;
-			alert(arr);
+			//alert(arr);
 			
 			var money= 3000;
 			if(alpha == 'D'){
@@ -242,12 +242,38 @@ window.onload = function(){
 		for(var col=1; col<=4; col++){
 			for(var no=1;no<=10; no++){
 				arr[col-1][no-1] = 0;
-				$('#S_seat'+col+no)
-					.css("background-color","#ffffff" )
-					.css("color","black" );
+				switch(scnum){
+	 			case 1:
+	 				if(no!=5 && no!=6){
+	 					$('#S_seat'+col+no)
+	 						.css("background-color","#ffffff" )
+							.css("color","black" );
+	 				}
+	 				break;
+	 			case 2:
+	 				$('#S_seat'+col+no)
+							.css("background-color","#ffffff" )
+						.css("color","black" );
+	 				break;
+	 			case 3:
+	 				if(no!=3 && no!=8){
+	 					$('#S_seat'+col+no)
+								.css("background-color","#ffffff" )
+							.css("color","black" );
+	 				}
+	 				break;
+	 			case 4:
+	 				if((col==1 && col==2)||(no==9 &&no==10) ){
+		 				$('#S_seat'+col+no)
+ 						.css("background-color","#ffffff" )
+						.css("color","black" );
+	 				}
+	 				break;
+	 			
+	 			}
 			}
 		} 
-		alert(arr)
+		//alert(arr)
 		var splitSeat = seats.split(",");
 		
 		var numlist = '';
