@@ -8,13 +8,41 @@
 <style>
 .S_choice {
 	float: left;
-	margin-left: 20px;
-	width: 25%;
-}
+	margin: 10px 0;
+	width: 290px;
+} 
 
 .S_cho {
+	height: 95%;
 	float :left;
-	margin-left: 50px;
+	color : #F6F6F6;
+	 margin-left:20px;
+}
+#S_movieimg{
+	width : 60px;
+	float: left; 
+	margin-top: 20px;
+	margin-left: 10px;
+}
+#S_movie{
+	width : 40%;
+	font-size: 15px; 
+	float: left; 
+	margin-top: 50px; 
+	margin-left: 15px; 
+}
+#S_date{
+	width : 55%;
+	font-size: 15px; 
+	margin-top: 45px; 
+}
+#S_scNum{
+	width : 55%;
+	font-size: 15px; 
+}
+#S_time{
+	width : 55%;
+	font-size: 15px; 
 }
 .S_mov{
 	font-size: 20px; 
@@ -22,7 +50,7 @@
 	padding: 10px 0;"
 }
 .S_mov:hover{
-	background: lightgray;
+	background: #EAEAEA;
 }
 
 #S_btn{
@@ -51,8 +79,16 @@
 <c:set var="titleStr" value="" />
 <c:set var="sidStr" value="" />
 <c:set var="midStr" value="" />
+
 <c:set var="dateListStr" value="" />
+
 <c:set var="titleListStr" value="" />
+
+<c:set var="cntStr" value=""/>
+<c:set var="rsidStr" value=""/>
+
+<c:set var="cineScNumStr" value=""/>
+<c:set var="totseatStr" value=""/>
 
 <c:forEach items="${dateTitleList}" var="dt" varStatus="no">
 	<c:set var="scNumStr" value="${scNumStr }${dt.scNum }," />
@@ -70,30 +106,29 @@
 <c:forEach items="${titlelist }" var="tt" varStatus="no">
 	<c:set var="titleListStr" value="${titleListStr }${tt.title }," />
 </c:forEach>
+
+<c:forEach items="${reserdata }" var="rr" varStatus="no">
+	<c:set var="cntStr" value="${cntStr }${rr.cnt },"/>
+	<c:set var="rsidStr" value="${rsidStr }${rr.sId },"/>
+</c:forEach>
+
+<c:forEach items="${cinemadata }" var="cc" varStatus="no">
+	<c:set var="cineScNumStr" value="${cineScNumStr }${cc.scNum },"/>
+	<c:set var="totseatStr" value="${totseatStr }${cc.totSeat },"/>
+</c:forEach>
+
 <script type="text/javascript">
+
+(function($){
+    $(window).on("load",function(){
+        $(".content").mCustomScrollbar();
+    });
+})(jQuery);
 
 var now = new Date(); 
 
 var dddd = '${dateStr}';
 var dateStr = dddd.split(',');
-
-var YYYYStr = '';
-var MMStr = '';
-var ddStr = '';
-var EStr = '';
-/* 
-for(var i=0; i<dateStr.length-1;i++){
-	
-	YYYYStr += dateStr[i].split('-')[0]+",";
-	MMStr += dateStr[i].split('-')[1]+",";
-	ddStr += dateStr[i].split('-')[2]+",";
-	
-}
-
-YYYYStr = YYYYStr.split(',');
-MMStr = MMStr.split(',');
-ddStr = ddStr.split(',');
- */
 
 var sc = '${scNumStr}';
 var scNumStr = sc.split(',');
@@ -111,6 +146,16 @@ var dateListStr = dls.split(',');
 
 var tls = '${titleListStr}';
 var titleListStr = tls.split(',');
+
+var cc = '${cntStr}';
+var cntStr = cc.split(',');
+var rs = '${rsidStr}';
+var rsidStr = rs.split(',');
+
+var cn = '${cineScNumStr}';
+var cineScNumStr = cn.split(',');
+var to = '${totseatStr}';
+var totseatStr = to.split(',');
 
 var nowtime = '${nowtime}';
 var nowdate = '${nowdate}';
@@ -136,10 +181,12 @@ mm2 = Number(mm2);
 		}
 		
 	});
-	
 	var scset = '';
 	var ttset = '';
    	var ssset = '';
+   	var ccset = '';
+   	var toset = '';
+   	
 	var mid = '';
 	var clkdate ='';
 	var titledate = '';
@@ -147,17 +194,17 @@ mm2 = Number(mm2);
    	function Check1(title, imgStr, mmid){
 
    		for(var i = 0;i< dateListStr.length; i++){
-			$('#S_dateset'+i).css('color','lightgray')
+			$('#S_dateset'+i)
+			.css('color','lightgray')
 			.css('pointer-events','none');
 		}
    		
 		mid = mmid;
-		scset = '';
-		ttset = '';
+	
 		ssset = '';
 		titledate = '';
 		
-		$img = "<img src='../resources/movposter/"+imgStr+"' width='55px'/>";
+		$img = "<img src='../resources/movposter/"+imgStr+"' width='60px'/>";
 
 		$('#S_movieimg').attr('img',$img)
 						.html($('#S_movieimg').attr('img'));
@@ -186,7 +233,6 @@ mm2 = Number(mm2);
 					 for (var j = 0; j < dateListStr.length; j++) {	
 						 if(dateStr[i] == dateListStr[j]){
 							titledate += '#S_dateset'+j+",";
-							
 						}
 					} 
 				}
@@ -202,7 +248,7 @@ mm2 = Number(mm2);
 						.css('pointer-events','auto')
 						.hover(
 								function(){
-									$(this).css('background','lightgray');
+									$(this).css('background','#EAEAEA');
 								},
 								function(){
 									$(this).css('background','white');
@@ -222,9 +268,11 @@ mm2 = Number(mm2);
 		for(var i=1;i<20;i++){
 			$("#S_tim"+i).html('');
 			$("#S_scNum"+i).html('');
+			$('#S_seat'+i).html('');
 			
-			$('.S_time'+i).css("background","white");
-			$('.S_time'+i).css("border","solid 0px");
+			$('.S_time'+i)
+						.css("background","white")
+						.css("border","solid 0px");
 		}
 	}
 	
@@ -234,20 +282,41 @@ mm2 = Number(mm2);
 		scset = '';
 		ttset = '';
 		ssset = '';
+		toset = '';
+		
 		 clkdate = ddate;
 		
 		var YY=ddate.split('-')[0];
 		var MM=ddate.split('-')[1];
 		var dd=ddate.split('-')[2];
 		 
-		 
+		var emptyseat = 0;
+		var tot = 0;
+		
 		$('#S_date').attr('dd',YY+'/'+MM+'/'+dd+' '+'('+day+')');
-		$('#S_date').html($('#S_date').attr('dd'));
+		$('#S_date').html('날짜&nbsp;&nbsp;&nbsp;' +$('#S_date').attr('dd'))
+					.css('margin-top','30px');
 		
 		for(var i = 0;i< dateStr.length; i++){
 			
 			if(midStr[i] == mid){
+				var cnt = 0;
+				
+				for(var j=0;j<cntStr.length;j++){
+					if(rsidStr[j]==sidStr[i]){
+						cnt += Number(cntStr[j]);
+					}
+				}
+				
+				for(var j=0;j<totseatStr.length;j++){
+					if(cineScNumStr[j]==scNumStr[i]){
+						tot = Number(totseatStr[j]);
+						emptyseat = Number(totseatStr[j])-cnt;
+					}
+				}
+					
 				if(dateStr[i] == ddate){
+					toset += emptyseat+"/"+tot+",";
 					ttset += timeStr[i]+",";
 					ssset += sidStr[i]+",";
 					scset += scNumStr[i]+",";
@@ -263,15 +332,19 @@ mm2 = Number(mm2);
 		
 		scset = scset.substring(0, scset.length-1);
 		ttset = ttset.substring(0, ttset.length-1);
-		  
+		toset = toset.substring(0, toset.length-1);
+		
+		
 		for (var i = 1; i < 20; i++) {
 			
 			var ttsp = ttset.split(',')[i-1];
 			var scsp = scset.split(',')[i-1];
+			var tosp = toset.split(',')[i-1];
 			
 			if(ttsp==null || ttsp==''){
 				$("#S_tim"+i).attr('tt','');
 				$("#S_scNum"+i).attr('sc','');
+				$("#S_seat"+i).attr('to','');
 				$('#S_ti'+i)
 				.css('margin','0px')
 				.css('padding','0px');
@@ -291,25 +364,41 @@ mm2 = Number(mm2);
 				if(ddate == nowdate){
 					
 					if(HH1<HH2){
-						$('.S_time'+i).css("color","lightgray");
-						$('.S_time'+i).css("pointer-events","none");
+						$('.S_time'+i)
+								.css("color","#EAEAEA")
+								.css("pointer-events","none");
 					}else if(HH1=HH2){
 						if(mm1<mm2){
-							$('.S_time'+i).css("color","lightgray");
-							$('.S_time'+i).css("pointer-events","none");
+							$('.S_time'+i)
+										.css("color","#EAEAEA")
+										.css("pointer-events","none");
 						}
 					}
 				}else{
-					$('.S_time'+i).css("color","black");
-					$('.S_time'+i).css("pointer-events","auto");
+					$('.S_time'+i)
+								.css("color","black")
+								.css("pointer-events","auto")
+								.hover(
+										function(){
+											$(this).css('background','#EAEAEA');
+										},function(){
+											$(this).css('background','white');
+										}
+									);
 				}
 				
 				if(scsp != ''){
-					$("#S_scNum"+i).attr('sc',scsp+'관');
+					$("#S_scNum"+i).attr('sc',scsp+'관')
+								.css('color','#5D5D5D');
 				}
+				
+				$("#S_seat"+i).attr('to',tosp)
+							.css('color','#4374D9');
+				
 			}
 			$("#S_tim"+i).html($("#S_tim"+i).attr('tt'));
 			$("#S_scNum"+i).html($("#S_scNum"+i).attr('sc'));
+			$("#S_seat"+i).html($("#S_seat"+i).attr('to'));
 		
 		}
 		
@@ -330,9 +419,9 @@ mm2 = Number(mm2);
 	function Check3(no){
 		
 		$('#S_time').attr('mmm',ttset.split(',')[no-1]);
-		$('#S_time').html($('#S_time').attr('mmm'));
+		$('#S_time').html('시간&nbsp;&nbsp;&nbsp;'+$('#S_time').attr('mmm'));
 		$('#S_scNum').attr('nnn',scset.split(',')[no-1]+'관');
-		$('#S_scNum').html($('#S_scNum').attr('nnn'));
+		$('#S_scNum').html('상영관&nbsp;&nbsp;'+$('#S_scNum').attr('nnn'));
 		
 		document.getElementById("sid").value= ssset.split(',')[no-1];
 		
@@ -340,7 +429,7 @@ mm2 = Number(mm2);
 			if(i==no ){
 				$('.S_time'+i).css("border","solid 2px gray")
 			}else{
-				$('.S_time'+i).css("border","solid 0px")
+				$('.S_time'+i).css("border","solid 2px white")
 			}
 		}
 	} 
@@ -360,12 +449,11 @@ mm2 = Number(mm2);
 
 <form name="screenchoiceForm" action="screenchoice" method="post">
 
-
 	<!-- 영화  -->
 
 	<div class="S_choice" style="margin-right: 50px;">
 		<div align="center">
-			<h2>영화</h2>
+			<h2>영화</h2> 
 		</div>
 
 		<hr>
@@ -432,10 +520,11 @@ mm2 = Number(mm2);
 		<hr>
 		<c:forEach begin="1" end="20" var="no">
 			<div class="S_time${no }" onclick="Check3(${no})"
-				style="float: left;cursor: pointer;" align="center">
+				style="float: left;cursor: pointer;margin-left: 5px;" align="center">
 				<div id="S_ti${no }">
-					<div id="S_scNum${no }" align="center"></div>
-					<div id="S_tim${no }" align="center" style="font-size: 22px;"></div>
+					<div id="S_scNum${no }"></div>
+					<div id="S_tim${no }" style="font-size: 22px;"></div>
+					<div id="S_seat${no }"></div>
 				</div>
 			</div>
 			<c:if test="${no%3==0 }">
@@ -450,25 +539,22 @@ mm2 = Number(mm2);
 
 
 	<!-- 선택된 값 -->
-	<div style="background: lightgray; height: 130px; width: 90%;">
-		<div class="S_cho" style="width : 250px; " >   
-			<div id="S_movieimg" style="float: left; margin-top: 20px;"></div>
-			<div id="S_movie" style="text-align: center; font-size: 18px; float: left; margin-top: 50px; margin-left: 10px; width: 60%;">영화선택</div>
+	<div style="background: #353535; height: 130px; width: 90%;">
+		<div class="S_cho" style="padding : 0 30px; width :35%;" >   
+			<div id="S_movieimg"></div>
+			<div id="S_movie">영화선택</div>
 		</div>
 
 		<input type="hidden" name="mid" id="mid" value="-1">
 
-		<div class="S_cho" style="width : 150px;" >
-			<div id="S_date" style="font-size: 18px; float:left; margin-top: 50px;">날짜선택</div>
-		</div>
-		
-		<div class="S_cho" style="width : 200px;">
-			<div id="S_scNum" style="font-size: 15px; float: left; margin-top: 53px;"></div>
-			<div id="S_time" style="font-size: 18px; float: left; margin-top: 50px; margin-left: 10px;">시간선택</div>
+		<div class="S_cho" style="width : 30%;  margin-left:20px;"> 
+			<div id="S_date">날짜선택</div>
+			<div id="S_time">시간선택</div>
+			<div id="S_scNum"></div>
 		</div>
 		
 		<input type="hidden" name="sid" id="sid" value="-1">
-		<div class="S_cho">
+		<div class="S_cho" style="margin-left: 50px; overflow: a">
 		<div onclick="Chk()"
 			id="S_btn" >좌석선택</div>
 		</div>

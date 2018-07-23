@@ -14,6 +14,7 @@
 	margin-left: 10px;
 	border-radius: 4px;
 	text-align: center;
+	
 }
 .S_time:hover{
 	background-color:gray;
@@ -21,15 +22,24 @@
 }
 </style>
 
+<c:set var="scNumStr" value="" />
 <c:set var="dateStr" value="" />
 <c:set var="timeStr" value="" />
 <c:set var="titleStr" value="" />
 <c:set var="sidStr" value="" />
 <c:set var="midStr" value="" />
 <c:set var="gradeStr" value="" />
+
 <c:set var="dateListStr" value="" />
 
+<c:set var="cntStr" value=""/>
+<c:set var="rsidStr" value=""/>
+
+<c:set var="cineScNumStr" value=""/>
+<c:set var="totseatStr" value=""/>
+
 <c:forEach items="${dateTitleList}" var="dt" varStatus="no">
+	<c:set var="scNumStr" value="${scNumStr }${dt.scNum }," />
 	<c:set var="dateStr" value="${dateStr }${dt.mdate }," />
 	<c:set var="timeStr" value="${timeStr }${dt.mtime }," />
 	<c:set var="titleStr" value="${titleStr }${dt.movtitle }," />
@@ -42,12 +52,24 @@
 	<c:set var="dateListStr" value="${dateListStr }${dd.split(':')[0] }," />
 </c:forEach>
 
+<c:forEach items="${reserdata }" var="rr" varStatus="no">
+	<c:set var="cntStr" value="${cntStr }${rr.cnt },"/>
+	<c:set var="rsidStr" value="${rsidStr }${rr.sId },"/>
+</c:forEach>
+
+<c:forEach items="${cinemadata }" var="cc" varStatus="no">
+	<c:set var="cineScNumStr" value="${cineScNumStr }${cc.scNum },"/>
+	<c:set var="totseatStr" value="${totseatStr }${cc.totSeat },"/>
+</c:forEach>
+
 <script type="text/javascript">
 
 var now = new Date(); 
 
 var dddd = '${dateStr}';
 var dateStr = dddd.split(',');
+var sc = '${scNumStr}';
+var scNumStr = sc.split(',');
 var tttt = '${timeStr}';
 var timeStr = tttt.split(',');
 var ti = '${titleStr}';
@@ -61,6 +83,18 @@ var gradeStr = gg.split(',');
 
 var dls = '${dateListStr}';
 var dateListStr = dls.split(',');
+
+
+var cc = '${cntStr}';
+var cntStr = cc.split(',');
+var rs = '${rsidStr}';
+var rsidStr = rs.split(',');
+
+var cn = '${cineScNumStr}';
+var cineScNumStr = cn.split(',');
+var to = '${totseatStr}';
+var totseatStr = to.split(',');
+
 
 var nowtime = '${nowtime}';
 var nowdate = '${nowdate}';
@@ -94,19 +128,25 @@ mm2 = Number(mm2);
 	});
 	
 	function dateCheck(dd) {
-		//alert(dd)
+		
 		for(var i = 0; i<dateStr.length; i++){
 			$('#S_gradeimg'+i).html('');
+			$('#S_scNum'+i).html('');
+			$('#S_seat'+i).html('');
+			
 		}
-		var dates = new Date();
+		
+		var clkdate = Number(dd.split('-')[2]);
+		
 	
 		for(var i = 0; i < 14 ; i++){
 			
-			var clkdate = dd.split('-')[2];
-			
-			dates.setDate(now.getDate()+i)
-			//alert(dates.getDate() == clkdate);
-			 if(dates.getDate() == clkdate ){
+			//dates.setDate(now.getDate()+i);
+			var dates = new Date();
+			dates.setDate(dates.getDate()+i);
+	
+			if(dates.getDate() == clkdate ){
+				//alert('dates.getDate() : '+dates.getDate());
 				$('#S_dateset'+i).css("border","solid 2px");
 			}else{
 				$('#S_dateset'+i).css("border","solid 2px white");
@@ -114,11 +154,16 @@ mm2 = Number(mm2);
 		}
 		for(var i = 0; i<dateStr.length; i++){
 			$('#S_time'+i).css('padding','0px')
+						.css('margin','0px')
 						.css('border','solid 0px');
+			$('#S_scNum'+i).css('margin','0px');
+			$('#S_seat'+i).css('margin','0px');
 		}
 		
 		var lastT = '';
 		
+		var emptyseat = 0;
+		var tot = 0;
 		
 		for(var i = 0; i<dateStr.length; i++){
 
@@ -135,9 +180,32 @@ mm2 = Number(mm2);
 					lastT = titleStr[i];
 				}
 				
-			//alert(timeStr[i].split(':')[0]>nowtime.split(':'))
-			
-				$('#S_time'+i).html(timeStr[i])
+				var cnt = 0;
+				
+				for(var j=0;j<cntStr.length;j++){
+					if(rsidStr[j]==sidStr[i]){
+						cnt += Number(cntStr[j]);
+					}
+				}
+			//	alert('cnt:'+cnt);
+				
+				for(var j=0;j<totseatStr.length;j++){
+					if(scNumStr[i]==cineScNumStr[j]){
+						tot = Number(totseatStr[j]);
+						emptyseat = Number(totseatStr[j])-cnt; 
+					}
+				}
+				
+				$('#S_seat'+i).html(emptyseat+"석");
+				$('#S_seat'+i)
+							.css('margin','10px 0')
+							.css('width','30px')
+							.css('color','#4374D9');
+				$('#S_scNum'+i).html(scNumStr[i]+'관');
+				$('#S_scNum'+i)
+							.css('margin','10px 0')
+							.css('width','25px');
+				$('#S_time'+i).html(timeStr[i]);
 				$('#S_time'+i)
 							.css('margin','5px')
 							.css('width','57px');
@@ -214,6 +282,7 @@ mm2 = Number(mm2);
 
 	<!-- 영화제목(장르 / 런타임/ 개봉일)  -->
 
+	<div style="height: 500px; overflow: auto;">
 	<c:forEach items="${dateTitleList }" varStatus="no">
 		<div class="S_tt${no.index }"  >
 		<div id="S_tit${no.index }">
@@ -223,16 +292,23 @@ mm2 = Number(mm2);
 				onclick="movieCheck(${no.index})" ></div>
 		</div>
 			<!-- 시간리스트(남은좌석수/ 상영관) -->
-
-			<div class="S_time" id="S_time${no.index }" onclick="timeCheck(${no.index})"></div>
+			
+			<div class="S_time" id="S_time${no.index }" onclick="timeCheck(${no.index})" style="float :left;"></div>
+			<div class="S_scNum" id="S_scNum${no.index }" style="float:left; font-size: 13px;"></div>
+			<div class="S_seat" id="S_seat${no.index }" style="float:left; font-size: 13px;"></div>
+			
+			<div style="clear: both;"></div>
 		</div>
 	</c:forEach>
+	</div>
+	
 	<div style="clear : both;"></div>
+	
 	<hr>
 
-	<input type="hidden" name="sid" id="sid" value="sid" /> <input
-		type="hidden" name="mid" id="mid" value="mid" /> <input type="hidden"
-		name="title" id="title" value="title" />
+	<input type="hidden" name="sid" id="sid" value="sid" /> 
+	<input type="hidden" name="mid" id="mid" value="mid" />
+	<input type="hidden" name="title" id="title" value="title" />
 
 </form>
 

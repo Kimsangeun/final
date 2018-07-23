@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.jhta.proj.model.CinemaDAO;
+import com.jhta.proj.model.CinemaVO;
 import com.jhta.proj.model.MemberVO;
 import com.jhta.proj.model.MovDAO;
 import com.jhta.proj.model.MovVO;
@@ -39,6 +41,9 @@ public class ReserController {
 	@Resource
 	ScreenInfoDAO sdao;
 
+	@Resource
+	CinemaDAO cdao;
+	
 	ReserVO rvo;
 
 	/*
@@ -68,6 +73,15 @@ public class ReserController {
 			datearr.add(sdfd.format(dlist));
 		}
 		return datearr;
+	}
+	
+	@ModelAttribute("cinemadata")
+	public Object cinema(Model model, CinemaVO vo) {
+		
+		Object res = null;
+		res = cdao.list(vo);
+		
+		return res;
 	}
 
 	@ModelAttribute("reserdata")
@@ -132,7 +146,7 @@ public class ReserController {
 	public Object datetitlelist(Model model, ScreenInfoVO vo) {
 		Object res = null;
 		res = mdao.dateTitleList(vo);
-		System.out.println("롤롤롤:" + res);
+		//System.out.println("롤롤롤:" + res);
 		return res;
 	}
 
@@ -140,7 +154,7 @@ public class ReserController {
 	public Object cine3(Model model, ScreenInfoVO svo) {
 		model.addAttribute("menu", "reservation");
 
-		model.addAttribute("nowtime", "13:00");
+		model.addAttribute("nowtime", nowtime);
 		model.addAttribute("nowdate", nowdate);
 
 		String mm = "timetable";
@@ -204,6 +218,7 @@ public class ReserController {
 		
 		System.out.println(seatList);
 		model.addAttribute("seatList", seatList);
+		System.out.println("씻리스트싸이즈.."+seatList.size());
 		
 		String mm = "screenchoice";
 		model.addAttribute("rvo", rvo);
@@ -212,7 +227,7 @@ public class ReserController {
 		model.addAttribute("main", mm);
 		return "home";
 	}
-
+	
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
 	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price) {
 		System.out.println("병수1");
