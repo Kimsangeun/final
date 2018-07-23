@@ -10,14 +10,15 @@
 
 .S_time{
 	cursor: pointer; 
-	font-size: 20px; 
+	font-size: 17px; 
 	margin-left: 10px;
-	border-radius: 4px;
+	border-radius: 2px;
 	text-align: center;
 	
 }
 .S_time:hover{
-	background-color:gray;
+	border : solid 2px lightgray;
+	background-color: #4C4C4C;
 	color: white;
 }
 </style>
@@ -112,16 +113,16 @@ mm2 = Number(mm2);
 		for (var i = 0; i < gradeStr.length; i++) {
 			switch(gradeStr[i]){
 			case '18':
-				gradeStr[i] = "<img src='../resources/imgs/grade_18.png' width='20px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/grade_18.png' width='17px'/> "
 				break;			
 			case '15':
-				gradeStr[i] = "<img src='../resources/imgs/grade_15.png' width='20px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/grade_15.png' width='17px'/> "
 				break;
 			case '12':
-				gradeStr[i] = "<img src='../resources/imgs/grade_12.png' width='20px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/grade_12.png' width='17px'/> "
 				break;			
 			case '0':
-				gradeStr[i] = "<img src='../resources/imgs/grade_0.png' width='20px'/> "
+				gradeStr[i] = "<img src='../resources/imgs/grade_0.png' width='17px'/> "
 				break;
 			}
 		}
@@ -137,7 +138,6 @@ mm2 = Number(mm2);
 		}
 		
 		var clkdate = Number(dd.split('-')[2]);
-		
 	
 		for(var i = 0; i < 14 ; i++){
 			
@@ -174,10 +174,21 @@ mm2 = Number(mm2);
 					$('#S_gradeimg'+i).html('');
 					//$('#S_title'+i).css("border-top" ,"solid 0px")
 				}else{
+					
 					$('#S_gradeimg'+i).html(gradeStr[i]);
 					$('#S_title'+i).html(titleStr[i]);
-					
+				
 					lastT = titleStr[i];
+				}
+
+				if(i != dateStr.length){
+				//	alert('titleStr[i]:'+titleStr[i] )
+				//	alert('titleStr[i+1]:'+titleStr[i+1])
+					if(titleStr[i] != titleStr[i+1]){
+						$('#S_clear'+i).css('clear','both');
+						//$('#S_clear'+i).html("<hr style='margin:10px 0;'>");
+						 
+					}
 				}
 				
 				var cnt = 0;
@@ -196,14 +207,14 @@ mm2 = Number(mm2);
 					}
 				}
 				
-				$('#S_seat'+i).html(emptyseat+"석");
+				$('#S_seat'+i).html(emptyseat+"/"+tot+"석");
 				$('#S_seat'+i)
-							.css('margin','10px 0')
-							.css('width','30px')
+							.css('margin','8px 0')
+							.css('width','60px')
 							.css('color','#4374D9');
 				$('#S_scNum'+i).html(scNumStr[i]+'관');
 				$('#S_scNum'+i)
-							.css('margin','10px 0')
+							.css('margin','8px 0')
 							.css('width','25px');
 				$('#S_time'+i).html(timeStr[i]);
 				$('#S_time'+i)
@@ -215,6 +226,8 @@ mm2 = Number(mm2);
 				mm1 = Number(mm1);
 				
 				if(dd==nowdate){
+				//	alert('hh1:'+HH1)
+				//	alert('hh2:'+HH2)
 					if(HH1<HH2){
 						$('#S_time'+i).css("color","lightgray");
 						$('#S_time'+i).css("pointer-events","none");
@@ -256,7 +269,7 @@ mm2 = Number(mm2);
 
 <form name="screenchoiceForm" action="screenchoice">
 
-	<hr>
+	<hr style="height: 3px; background: #353535;">
 
 	<%-- 
 <c:forEach items="${dateTitleList }" var="dt" varStatus="no">
@@ -266,9 +279,9 @@ mm2 = Number(mm2);
 
 	<!-- 날짜  -->
 
-	<div style="width: 100%; margin: 0 5px;">
+	<div style="width: 100%;">
 		<c:forEach items="${datelist }" var="dd" varStatus="no">
-			<div class="S_dateset" id="S_dateset${no.index}" style="padding: 5px; margin: 5px; cursor: pointer; border : solid 2px white;"
+			<div class="S_dateset" id="S_dateset${no.index}" style="padding: 5px; margin:0 5px; cursor: pointer; border : solid 2px white;"
 				onclick="dateCheck('${dd.split(':')[0]}')" align="center">
 				<div>${dd.split('-')[1] }월 (${dd.split(':')[1]})</div>
 				<div style="font-size: 20px;">${dd.split(':')[0].split('-')[2] }</div>
@@ -278,27 +291,29 @@ mm2 = Number(mm2);
 	
 	<div style="clear: both;"></div>
 
-	<hr>
+	<hr style="height: 3px; background: #353535;"> 
 
 	<!-- 영화제목(장르 / 런타임/ 개봉일)  -->
 
 	<div style="height: 500px; overflow: auto;">
 	<c:forEach items="${dateTitleList }" varStatus="no">
-		<div class="S_tt${no.index }"  >
-		<div id="S_tit${no.index }">
-			<div id="S_gradeimg${no.index }" style="float:left; width: 25px;"></div>
+		<%-- <div class="S_tt${no.index }"  style="float:left;"> --%>
+		<div id="S_tit${no.index }" >
+			<div id="S_gradeimg${no.index }" style="float:left; width: 20px;"></div>
 			<div id="S_title${no.index }"
-				style="font-size: 23px; cursor: pointer; width:300px;" 
+				style="font-size: 20px; cursor: pointer; width:250px;" 
 				onclick="movieCheck(${no.index})" ></div>
 		</div>
 			<!-- 시간리스트(남은좌석수/ 상영관) -->
-			
+			<div style="float: left;">
 			<div class="S_time" id="S_time${no.index }" onclick="timeCheck(${no.index})" style="float :left;"></div>
 			<div class="S_scNum" id="S_scNum${no.index }" style="float:left; font-size: 13px;"></div>
 			<div class="S_seat" id="S_seat${no.index }" style="float:left; font-size: 13px;"></div>
-			
-			<div style="clear: both;"></div>
-		</div>
+			</div>
+			<div id="S_clear${no.index }"></div>
+		<!-- </div> -->
+		
+		
 	</c:forEach>
 	</div>
 	

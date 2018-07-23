@@ -29,20 +29,21 @@
 	<div class="tab-content" style="margin-top: 80px;">
 		<div class="tab-pane fade active in" id="first">
 			<p>
-				1관 좌석배치도<br> <img src="../resources/screenimg/${cinemadata.get(0).img }" />
+				1관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(0).img }" />
+				<img src="../resources/screenimg/Screen1.JPG"/>
 			</p>
 		</div>
 		<div class="tab-pane fade" id="second">
 			<p>
-				2관 좌석배치도<br> <img src="../resources/screenimg/${cinemadata.get(1).img }" />
+				2관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(1).img }" />
 		</div>
 		<div class="tab-pane fade" id="third">
 			<p>
-				3관 좌석배치도<br> <img src="../resources/screenimg/${cinemadata.get(2).img }" />
+				3관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(2).img }" />
 		</div>
 		<div class="tab-pane fade" id="fourth">
 			<p>
-				4관 좌석배치도<br> <img src="../resources/screenimg/${cinemadata.get(3).img }" />
+				4관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(3).img }" />
 		</div>
 
 

@@ -6,17 +6,44 @@
 <!DOCTYPE html>
 
 <style>
+html {
+	scrollbar-3dLight-Color: white;
+	scrollbar-arrow-color: white;  
+	scrollbar-base-color: #efefef; 
+	scrollbar-Face-Color: #dfdfdf;
+	scrollbar-Track-Color: white; 
+	scrollbar-DarkShadow-Color: white; 
+	scrollbar-Highlight-Color: white; 
+ 	scrollbar-Shadow-Color: white;
+ 	}
 .S_choice {
 	float: left;
 	margin: 10px 0;
-	width: 290px;
+	width: 300px;
 } 
 
 .S_cho {
 	height: 95%;
 	float :left;
 	color : #F6F6F6;
-	 margin-left:20px;
+	margin-left:20px;
+}
+.S_mov{
+	font-size: 17px; 
+	cursor: pointer; 
+	padding: 5px 0;
+	margin:7px 0;
+}
+.S_dateset{
+	margin: 10px 0px;
+}
+.S_mon{
+	font-size:30px;
+	margin-bottom: 5px;
+}
+.S_year{
+	font-size:13px;
+	margin-top: 5px;
 }
 #S_movieimg{
 	width : 60px;
@@ -44,33 +71,19 @@
 	width : 55%;
 	font-size: 15px; 
 }
-.S_mov{
-	font-size: 20px; 
-	cursor: pointer; 
-	padding: 10px 0;"
-}
-.S_mov:hover{
-	background: #EAEAEA;
-}
-
 #S_btn{
 	cursor: pointer; 
 	margin-left:50px; 
 	font-size:17px; 
-	color:white; 
-	background: red;
 	margin-top: 30px; 
 	padding:20px 10px; 
 	text-align:center;  
 	width: 120px; 
 	float: left;
-	border-radius: 3px;
 }
 #S_btn:hover{
-	font-size:20px; 
-	border: solid 5px red;
-	margin-top: 25px; 
-}
+	font-size:18px; 
+} 
 </style>
 
 <c:set var="scNumStr" value="" />
@@ -191,7 +204,9 @@ mm2 = Number(mm2);
    		for(var i = 0;i< dateListStr.length; i++){
 			$('#S_dateset'+i)
 			.css('color','lightgray')
-			.css('pointer-events','none');
+			.css('pointer-events','none')
+			.css("border","solid 0px")
+			.css("background","white");
 		}
    		
 		mid = mmid;
@@ -215,10 +230,6 @@ mm2 = Number(mm2);
 		$('#S_scNum').html('');
 		$('#S_date').html('날짜선택');
 		
-		for(var i = 0;i< dateListStr.length; i++){
-			$('#S_dateset'+i).css("color","lightgray")
-							.css("border","solid 0px");
-		} 
 		
 			for(var i = 0;i< dateStr.length; i++){
 
@@ -240,23 +251,29 @@ mm2 = Number(mm2);
 		for(var i = 0;i < titledate.length-1; i++){
 			$(titledate[i])
 						.css("color","black")
-						.css('pointer-events','auto')
-						.hover(
+						.css('pointer-events','auto');
+		}
+		
+	 	for(var i = 0; i < titleListStr.length; i++){
+	 
+			if(titleListStr[i] == title){
+				$('#S_mov'+i)
+							.css("border","solid 2px gray" )
+							.css("background","#4C4C4C" )
+							.css("color","#F6F6F6" );
+			}else{
+				$('#S_mov'+i)
+						.css("border","solid 0px" )
+						.css("background","white" )
+						.css("color","black" )
+						/* .hover(
 								function(){
 									$(this).css('background','#EAEAEA');
 								},
 								function(){
 									$(this).css('background','white');
 								}
-							);
-		}
-		
-	 	for(var i = 0; i < titleListStr.length; i++){
-			
-			if(titleListStr[i] == title){
-				$('#S_mov'+i).css("border","solid 2px gray" );
-			}else{
-				$('#S_mov'+i).css("border","solid 0px");
+							) */ ;
 			}
 		}
 		 
@@ -265,7 +282,7 @@ mm2 = Number(mm2);
 			$("#S_scNum"+i).html('');
 			$('#S_seat'+i).html('');
 			
-			$('.S_time'+i)
+			$('#S_tim'+i)
 						.css("background","white")
 						.css("border","solid 0px");
 		}
@@ -274,16 +291,19 @@ mm2 = Number(mm2);
    	
 	function Check2(ddate, day){
 		//alert(mid)
+		$('#S_time').html('시간선택');
+		$('#S_scNum').html('');
+		
 		scset = '';
 		ttset = '';
 		ssset = '';
 		toset = '';
 		
-		 clkdate = ddate;
+		clkdate = ddate;
 		
-		var YY=ddate.split('-')[0];
-		var MM=ddate.split('-')[1];
-		var dd=ddate.split('-')[2];
+		var YY = ddate.split('-')[0];
+		var MM = ddate.split('-')[1];
+		var dd = ddate.split('-')[2];
 		 
 		var emptyseat = 0;
 		var tot = 0;
@@ -341,15 +361,15 @@ mm2 = Number(mm2);
 				$("#S_scNum"+i).attr('sc','');
 				$("#S_seat"+i).attr('to','');
 				$('#S_ti'+i)
-				.css('margin','0px')
-				.css('padding','0px');
+						.css('margin','0px')
+						.css('padding','0px');
 				
 			}else{
 				$("#S_tim"+i).attr('tt',ttsp);	
 				$('#S_ti'+i)
-				.css('margin','5px')
-				.css('padding','5px');
-				
+						.css('margin','3px')
+						.css('padding','3px');
+						
 				var HH1 = ttsp.split(':')[0];
 				HH1 = Number(HH1);
 				var mm1 = ttsp.split(':')[1];
@@ -357,12 +377,13 @@ mm2 = Number(mm2);
 				
 				
 				if(ddate == nowdate){
-					
+					//alert('hh1:'+HH1)
+					//alert('hh2:'+HH2)
 					if(HH1<HH2){
 						$('.S_time'+i)
 								.css("color","#EAEAEA")
 								.css("pointer-events","none");
-					}else if(HH1=HH2){
+					}else if(HH1==HH2){
 						if(mm1<mm2){
 							$('.S_time'+i)
 										.css("color","#EAEAEA")
@@ -370,16 +391,18 @@ mm2 = Number(mm2);
 						}
 					}
 				}else{
-					$('.S_time'+i)
+					$('#S_tim'+i)
+								.css("border","solid 2px white")
+								.css("background","white")
 								.css("color","black")
 								.css("pointer-events","auto")
-								.hover(
+								/* .hover(
 										function(){
 											$(this).css('background','#EAEAEA');
 										},function(){
 											$(this).css('background','white');
 										}
-									);
+									) */;
 				}
 				
 				if(scsp != ''){
@@ -397,12 +420,43 @@ mm2 = Number(mm2);
 		
 		}
 		
+		
+		for(var i = 0;i< dateListStr.length; i++){
+			$('#S_dateset'+i).css("color","lightgray")
+							.css("border","solid 0px");
+		} 
+		
+			for(var i = 0;i< dateStr.length; i++){
+	
+				if(midStr[i] == mid){
+					 for (var j = 0; j < dateListStr.length; j++) {	
+						 if(dateStr[i] == dateListStr[j]){
+							titledate += '#S_dateset'+j+",";
+						}
+					} 
+				}
+			
+			}
+			
+		titledate = titledate.split(',');
+
+		for(var i = 0;i < titledate.length-1; i++){
+			$(titledate[i])
+						.css("color","black")
+						.css("background","white")
+						.css('pointer-events','auto');
+		}
+		
+		
 		for(var i = 0; i < dateListStr.length; i++){
 			
 			if(dateListStr[i] == ddate){
 				$('#S_dateset'+i).css("border","solid 2px gray")
+								.css("background","#4C4C4C")
+								.css("color","#F6F6F6");
 			}else{
-				$('#S_dateset'+i).css("border","solid 2px white")
+		/* 		$('#S_dateset'+i).css("border","solid 2px white")
+								.css("background","white") */
 			}
 		}
 		
@@ -422,9 +476,13 @@ mm2 = Number(mm2);
 		
 		for(var i=1;i<20;i++){
 			if(i==no ){
-				$('.S_time'+i).css("border","solid 2px gray")
+				$('#S_tim'+i).css("border","solid 2px gray")
+							.css("background","#4C4C4C")
+							.css("color","#F6F6F6");
 			}else{
-				$('.S_time'+i).css("border","solid 2px white")
+				$('#S_tim'+i).css("border","solid 2px white")
+							.css("background","white")
+							.css("color","black");
 			}
 		}
 	} 
@@ -464,7 +522,7 @@ mm2 = Number(mm2);
 							<c:when test="${mm.grade ==12}">grade_12.png</c:when>
 							<c:when test="${mm.grade == 0}">grade_0.png</c:when>
 						</c:choose>
-					 " alt="이미지없음" width="20px"/>
+					 " alt="이미지없음" width="18px"/>
 					${mm.title }
 				</div>
 			</c:forEach>
@@ -487,12 +545,25 @@ mm2 = Number(mm2);
 			<div style="height: 300px; overflow: auto; width: 100%;"
 				align="center">
 				<c:forEach items="${datelist }" var="dd" varStatus="no">
-					<div class="S_dateset" id="S_dateset${no.index}" onclick="Check2('${dd.split(':')[0]}','${dd.split(':')[1] }')"
-						style="cursor: pointer; padding: 5px 0;">
-						<div >${dd.split('-')[1] }월</div>
-						<div style="width:60px; height: 25px; line-height: 25px;" align='center'>
-							<div style="font-size: 25px; float: left;">${dd.split(':')[0].split('-')[2] }</div>
-							<div style="font-size: 15px;">${dd.split(':')[1]}</div> 
+					<c:if test="${no.index==0 }">
+						<div class="S_year">${dd.split('-')[0] }</div>
+						<div class="S_mon">${dd.split('-')[1] }</div>
+					</c:if>
+					<c:if test="${no.index!=0 }">
+						<c:if test="${datelist.get(no.index-1).split('-')[1] != dd.split('-')[1] }">
+							<div class="S_year">${dd.split('-')[0] }</div>
+							<div class="S_mon">${dd.split('-')[1] }</div>
+						</c:if>
+					</c:if>
+						
+					<div class="S_dateset" id="S_dateset${no.index}" 
+						onclick="Check2('${dd.split(':')[0]}','${dd.split(':')[1] }')" 
+						style="cursor: pointer; padding: 3px 0;">
+						
+						<div id="S_dateday" style="width:60px; height: 25px; line-height: 25px;" align="center">
+							<div style="font-size: 20px; float: left;">${dd.split(':')[0].split('-')[2] }</div>
+							<div style="font-size: 15px;
+							">${dd.split(':')[1]}</div> 
 						</div>
 					
 					</div>
@@ -515,14 +586,14 @@ mm2 = Number(mm2);
 		<hr>
 		<c:forEach begin="1" end="20" var="no">
 			<div class="S_time${no }" onclick="Check3(${no})"
-				style="float: left;cursor: pointer;margin-left: 5px;" align="center">
+				style="float: left;cursor: pointer;" align="center">
 				<div id="S_ti${no }">
-					<div id="S_scNum${no }"></div>
-					<div id="S_tim${no }" style="font-size: 22px;"></div>
-					<div id="S_seat${no }"></div>
+					<div id="S_scNum${no }" style="font-size: 12px;"></div>
+					<div id="S_tim${no }" style="font-size: 17px; padding:0 3px;"></div> 
+					<div id="S_seat${no }" style="font-size: 14px;"></div>
 				</div>
 			</div>
-			<c:if test="${no%3==0 }">
+			<c:if test="${no%4==0 }">
 				<div style="clear: both"></div>
 			</c:if>
 		</c:forEach>
@@ -549,9 +620,9 @@ mm2 = Number(mm2);
 		</div>
 		
 		<input type="hidden" name="sid" id="sid" value="-1">
-		<div class="S_cho" style="margin-left: 50px; overflow: a">
-		<div onclick="Chk()"
-			id="S_btn" >좌석선택</div>
+		<div class="S_cho" style="margin-left: 50px;">
+		<Button class="btn btn-danger"  onclick="Chk()"
+			id="S_btn" >좌석선택</Button>
 		</div>
 		<div style="clear: both"></div>
 	</div>

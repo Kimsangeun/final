@@ -48,6 +48,11 @@
 	clear: both;
 	margin: 0 8px;
 }
+
+
+#rtb tr:first-child {
+	background-color: #f5f5f5;
+}
 </style>
 <script type="text/javascript">
 
@@ -186,7 +191,7 @@
 		} */
 
 	function chkchk() {
-/* 		alert($("input:checkbox[name=check]:checked").length); */
+		/* 		alert($("input:checkbox[name=check]:checked").length); */
 		if ($("input:checkbox[name=check]:checked").length == 4) {
 
 			$('#agreeexit').trigger('click');
@@ -205,14 +210,50 @@
 
 
 
-<div>
 	<div>
 		<h2>결제하기</h2>
 	</div>
 	<hr>
 
 
+	<div align="center">
+	
+	
+	<table class="table table-hover" id="rtb" style="width:60%">
+		<tr>
+			<td colspan="2" align="center"><b>예매내역</b></td>
+		</tr>
+		<tr>
+			<td>좌석번호</td>
+			<td>${rvo.seatNum }</td>
+		</tr>
+		<tr>
+			<td>인원수</td>
+			<td>${rvo.cnt }</td>
+		</tr>
+		<tr>
+			<td>결제금액</td>
+			<td>${rvo.cost }</td>
+		</tr>
+	</table>
 
+<%-- 		<div style="width:30%">
+			<div style="font-size: 20px; float: left; width: 150px">좌석번호</div>
+			<div style="font-size: 20px; margin-left: 20px; float: left;">${rvo.seatNum }</div>
+
+			<div style="clear: both;"></div>
+			<div style="font-size: 20px; float: left; width: 150px">인원수</div>
+			<div style="font-size: 20px; margin-left: 20px; float: left;">${rvo.cnt }
+				명</div>
+			<div style="clear: both;"></div>
+
+			<div style="font-size: 20px; float: left; width: 150px">결제금액</div>
+			<div style="font-size: 20px; margin-left: 20px; float: left;">${rvo.cost }
+				원</div>
+		</div> --%>
+	<div style="clear:both"></div>
+	<hr>
+	</div>
 	<div align="center">
 		<div class="modal fade" id="agreeModal" tabindex="-1" role="dialog"
 			aria-labelledby="myModalLabel" aria-hidden="true">
@@ -229,23 +270,28 @@
 						<div class="R_leftbox">
 							<b>개인정보 처리방침</b><br>
 							<textarea rows="5" cols="30" style="resize: none">${agree1 }</textarea>
-							<br> <input type="checkbox" name="check">약관을 읽었으며, 동의합니다.
+							<br> <input type="checkbox" name="check">약관을 읽었으며,
+							동의합니다.
 						</div>
 						<div class="R_rightbox">
 							<b>영상정보 처리기기 운영 관리.방침</b><br>
 							<textarea rows="5" cols="30" style="resize: none">${agree2 }</textarea>
-							<br> <input type="checkbox" name="check">약관을 읽었으며, 동의합니다.
+							<br> <input type="checkbox" name="check">약관을 읽었으며,
+							동의합니다.
 						</div>
+						<br>
 
 						<div class="R_leftbox">
 							<b>전자금융거래 이용약관</b><br>
 							<textarea rows="5" cols="30" style="resize: none">${agree3 }</textarea>
-							<br> <input type="checkbox" name="check">약관을 읽었으며, 동의합니다.
+							<br> <input type="checkbox" name="check">약관을 읽었으며,
+							동의합니다.
 						</div>
 						<div class="R_rightbox">
 							<b>회원약관</b><br>
 							<textarea rows="5" cols="30" style="resize: none">${agree4 }</textarea>
-							<br> <input type="checkbox" name="check">약관을 읽었으며, 동의합니다.
+							<br> <input type="checkbox" name="check">약관을 읽었으며,
+							동의합니다.
 						</div>
 					</div>
 
@@ -472,4 +518,5 @@
 		</div>
 	</div>
 	<!-- 결제정보 디브 -->
-</div>
+
+
