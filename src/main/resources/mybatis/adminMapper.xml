@@ -25,6 +25,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 	
+	<select id="movieAll" resultType="movieVo" >
+		select * from movie
+	</select>
 	
 	<sql id="whereInfo">
 		<where>	
@@ -56,9 +59,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</where>
 	</sql>
 	
-	<select id="movieList" resultType="movieVo" >
-		select * from movie
-	</select>
 	
 	<select id="getScreen" resultType="screenVo" >
 		select * from cinema
@@ -136,6 +136,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         #{nation}, #{poster},#{steelcut},#{release},#{runtime},0) 
     </insert>
     
+    <insert id="movieModify" parameterType="movieVo">
+    
+    	update movie set title=#{title}, director = #{director}, actor = #{actor},
+    	plot = #{plot}, genre = #{genre}, grade = #{grade}, nation = #{nation},
+    	poster = #{poster}, steelcut = #{steelcut}, release = #{release},
+    	runtime = #{runtime} where mid = #{mid} 
+    
+    </insert>
+    
     <select id="movieDetail" resultType="movieVo" parameterType="movieVo">
         select * from movie where mid = #{mid}
     </select>
@@ -143,24 +152,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <select id="movieDelete" parameterType="movieVo">
         delete from movie where mid = #{mid}
     </select>
-	<!--  -->
-	
-	<!-- 회원 -->
-	
-	<select id="memList" resultType="memVo">
-		 select * from member
-	</select>
-	
-	<!--  -->
-	
-	<!-- 예매 리스트 -->
-	
-	<select id="resvList" resultType="resvVo">
-		  select reser.*,movie.title,screeninfo.scNum,screeninfo.mstart 
-		  from reser,movie,screeninfo 
-		  where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid
-	</select>
-	
 	<!--  -->
 	
 	<!-- 정산 -->
@@ -241,7 +232,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 이벤트(공지사항)게시판 메인화면에 걸을 게시물 가져오기  -->
 	<select id="event" resultType="boardVo">
 		select * from (select * from board order by regdate desc ) 
-		where kind ='notice' and <![CDATA[rownum<=4]]>
+		where kind ='notice' and pw = 1 and <![CDATA[rownum<=4]]>
 	</select>
+	<!--  -->
+	
+	<!-- 페이징... 카운트 -->
+	<select id="totalCount" resultType="java.lang.Integer" parameterType="java.lang.String">
+		select count(*) from ${value}
+	</select>
+	
+		<!-- 영화 -->
+	<select id="movieList" resultType="movieVo" parameterType="boardVo" >
+	select * from
+		(select rownum rnum, tt.* from(select * from movie) tt)
+		 <![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
+	</select>
+	
+	
+		<!-- 회원 -->	
+	<select id="memList" resultType="memVo" parameterType="boardVo">
+		select * from
+		(select rownum rnum, tt.* from(
+		 select * from member)tt )<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
+	</select>	
+	<!--  -->
+	
+		<!-- 예매 리스트 -->	
+	<select id="resvList" resultType="reserVo" parameterType="boardVo">
+		 select * from
+		(select rownum rnum, tt.* from(
+		  select reser.*,movie.title,screeninfo.scNum,screeninfo.mstart 
+		  from reser,movie,screeninfo 
+		  where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid) tt)
+		  <![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
+	</select>	
+		<!--  -->
 	<!--  -->
 </mapper>

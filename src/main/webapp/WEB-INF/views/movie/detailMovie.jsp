@@ -113,8 +113,6 @@
 .btn-wrap, .lists, .main {
 	display: block;
 }
-
-
 </style>
 
 <div class="row" style="padding-top: 100px">
@@ -125,16 +123,22 @@
 	<div class="col-md-8  col-xs-12">
 		<div style="padding-bottom: 25px; border-bottom: 1px solid lightgray;">
 			<p class="h1">
-				<img alt="fu"
+				<img alt="noImg"
 					src="${pageContext.request.contextPath}\resources\imgs/movie_icon_${moviedata['movie'].grade}.gif" />
 				${moviedata['movie'].title }
+				<c:if test="${mem.id eq 'admin' }">
+					<input class="btn btn-danger" type="button" value="삭제"
+						onclick="location.href='/proj/admin/deleteMovie?mid=${param.mid}'">
+					<input class="btn btn-warning" type="button" value="수정"
+						onclick="location.href='/proj/admin/modifyForm?mid=${param.mid}'">
+				</c:if>
 			</p>
 		</div>
 		<div style="padding-top: 25px; border-bottom: 1px solid lightgray;">
 			<div class="row" style="padding-right: 20px">
 
-				<div class="col-md-3 col-sm-4 col-xs-4" id="fixedStar"></div>
-				<div class="h3 col-md-7 col-sm-4 col-xs-4" id="hint1"></div>
+				<div class="col-md-4 col-sm-4 col-xs-4" id="fixedStar"></div>
+				<div class="h3 col-md-6 col-sm-4 col-xs-4" id="hint1"></div>
 				<a class="btn btn-danger col-md-2 col-sm-4 col-xs-4"
 					href="/proj/reservation/reser" role="button">예매하기 &raquo;</a>
 				<!-- <button onclick="location.href('proj/reservation/reser')"
@@ -191,7 +195,7 @@
 </c:if>
 
 
-		<span id="counter"><small>0/200</small></span>
+<span id="counter"><small>0/200</small></span>
 <form action="reviewInsert" method="POST">
 	<div class="row qq">
 		<div class="q form-group col-lg-2 col-xs-3 vertical-align">
@@ -221,66 +225,72 @@
 <div id="js-load" class="main border">
 	<ul id="aaa" class="list list-group row rw">
 		<c:forEach items="${moviedata['review']}" var="rr" varStatus="no">
-			<li class="list-group-item lists__item js-load col-lg-6 col-xs-12 " style="height:150px;">
-			<div ><p class="h3">${rr.id }
-			<c:if test="${mem.id eq rr.id}">
-			<form id="deleteReview" action="deleteReview" method="post">
-			<button type="button" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#myModal">
-					<span class="glyphicon glyphicon-remove"></span>
-					</button>
-					
-					<!-- Modal -->
-					<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-					  <div class="modal-dialog">
-					    <div class="modal-content">
-					      <div class="modal-header">
-					        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					        <h4 class="modal-title" id="myModalLabel">삭제</h4>
-					      </div>
-					      <div class="modal-body">
-					        리뷰를 삭제하시겠습니까?
-					      </div>
-					      <div class="modal-footer">
-					        <button type="button" onclick="submit()" class="btn btn-default" data-dismiss="modal">네</button>
-					        <button type="button" data-dismiss="modal" class="btn btn-primary">아니오</button>
-					      </div>
-					    </div>
-					  </div>
-					</div>
-						<input
-							type="hidden" value="${param.mid }" name="mid" /> 
-							<input
-							type="hidden" value="${rr.id }" name="id" />
-					</form>
-			</c:if>
-			</p>
-			</div>
-				
+			<li class="list-group-item lists__item js-load col-lg-6 col-xs-12 "
+				style="height: 150px;">
+				<p class="h3">${rr.id }
+					<c:if test="${mem.id eq rr.id}">
+						<form id="deleteReview" action="deleteReview" method="post">
+
+							<button type="button" class="btn btn-danger btn-xs"
+								data-toggle="modal" data-target="#myModal">
+								<span class="glyphicon glyphicon-remove"></span>
+							</button>
+
+							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+								aria-labelledby="myModalLabel" aria-hidden="true">
+								<div class="modal-dialog">
+									<div class="modal-content">
+										<div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal"
+												aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+											<h4 class="modal-title" id="myModalLabel">삭제</h4>
+										</div>
+										<div class="modal-body">리뷰를 삭제하시겠습니까?</div>
+										<div class="modal-footer">
+											<button type="button" onclick="submit()"
+												class="btn btn-default" data-dismiss="modal">네</button>
+											<button type="button" data-dismiss="modal"
+												class="btn btn-primary">아니오</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<input type="hidden" value="${param.mid }" name="mid" /> <input
+								type="hidden" value="${rr.id }" name="id" />
+						</form>
+					</c:if>
+				</p>
+
+
 				<div>
-				<div style="float:left"><fmt:formatDate pattern="yy.MM.dd HH:mm" value="${rr.reg_date }"/></div>
-				<div style="padding: 0 0 0 0; margin-left:5px" class="fixedStar" id="review_${no.index }"></div>
-				<script type="text/javascript">
+					<div style="float: left">
+						<fmt:formatDate pattern="yy.MM.dd HH:mm" value="${rr.reg_date }" />
+					</div>
+					<div style="padding: 0 0 0 0; margin-left: 5px" class="fixedStar"
+						id="review_${no.index }"></div>
+					<script type="text/javascript">
 				$(function() {
 				    $('#review_${no.index }').raty({
 						half:true,
 						path:'/proj/resources/imgs/',
 						scoreName:'rating',
 				    	  readOnly:  true,
-				    	  start:   ${rr.score/2}
+				    	  start: ${rr.score/2},
 				    });
 				});
 				</script>
 				</div>
-				<div>${rr.review }</div> 
-				
+				<div>${rr.review }</div>
 
 			</li>
 		</c:forEach>
 	</ul>
-
-	<div id="js-btn-wrap" class="btn-wrap">
-		<button id="moreButton" class="button btn btn-default">더보기</button>
-		<!-- <a href="javascript:;" class="button">더보기</a> -->
-	</div>
 </div>
+<div id="js-btn-wrap" class="btn-wrap">
+	<button id="moreButton" class="button btn btn-default">더보기</button>
+	<!-- <a href="javascript:;" class="button">더보기</a> -->
+</div>
+
 

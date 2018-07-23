@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jhta.proj.model.BoardVO;
 import com.jhta.proj.model.admin.AdminDAO;
 import com.jhta.proj.model.admin.MovieDAO;
 import com.jhta.proj.model.admin.MovieVO;
@@ -98,13 +99,11 @@ public class AdminController {
 		String res = "home";
 		//		System.out.println(vo);
 
-		if(service.equals("insert")||service.equals("insertMovie")) {
+		if(service.equals("insert")||service.equals("insertMovie")
+				||service.equals("modifyReg")) {
 			res = "admin/alert";
 			System.out.println("zzzz");
-			/*new timeChk().validate(vo, errors);
-			if(errors.hasErrors())
-				return res;*/
-
+			
 		}
 		
 		if(service.equals("time")){
@@ -120,7 +119,50 @@ public class AdminController {
 		System.out.println("데이타만");
 		Object res = null;
 		HashMap<String, Object> mapp = new HashMap<>();
+		BoardVO bvo = new BoardVO();
 		//System.out.println("날짜르"+vo.getShowtime());
+		
+		if(service.equals("member")||service.equals("resv")||service.equals("movie")) {
+			/* * * * * * * * * 페이징.* * * * * * * * * * * * * * * */
+			int page = 1, limit = 10, pageLimit = 4;
+			if (request.getParameter("page") != null && !request.getParameter("page").equals("")) {
+				page = Integer.parseInt(request.getParameter("page"));
+			}
+
+			int start = (page - 1) * limit + 1;
+			int end = page * limit;
+
+			int startPage = (page - 1) / pageLimit * pageLimit + 1;
+			int endPage = startPage + pageLimit - 1;
+
+			int total = 0;
+
+			// 삽입수정에서 파라미터 없는거 처리.
+			total = (int) adminDao.totalCount(service.equals("resv") ? "reser" : service);
+
+			int totalPage = total / limit;
+
+			if (total % limit != 0)
+				totalPage++;
+			if (endPage > totalPage)
+				endPage = totalPage;
+
+			request.setAttribute("page", page);
+			request.setAttribute("total", total);
+			request.setAttribute("start", start);
+			request.setAttribute("startPage", startPage);
+			request.setAttribute("endPage", endPage);
+			request.setAttribute("totalPage", totalPage);
+			
+			
+			mapp.put("start", start);
+			mapp.put("end", end);
+
+			bvo.setStart(start);
+			bvo.setEnd(end);
+			/* * * * * * * * * 페이징.* * * * * * * * * * * * * * * */
+		}
+
 		switch (service) {
 
 		case "time":
@@ -132,15 +174,27 @@ public class AdminController {
 
 			//한글코오딩
 			break;
+			
+
+		
+		case "member":
+			System.out.println("회원");
+			res = adminDao.memList(bvo);
+			System.out.println(res);
+			break;
+
+		case "resv":
+			System.out.println("예약");
+			res = adminDao.resvList(bvo);
+			
+			System.out.println(res);
+			break;
+
 		case "movie":
 			System.out.println("쿵쿵따리쿵쿵따");
-			mapp.put("movie", movieDao.getlist());
+			mapp.put("movie", movieDao.getlist(bvo));
 			res = mapp;
-			try {
-				//bb();
-			} catch (Exception e) {
-				// TODO: handle exception
-			}
+
 			break;
 
 		case "insert":
@@ -190,6 +244,7 @@ public class AdminController {
 			model.addAttribute("msg", mvo.getTitle()+"추가완료");
 			break;
 
+			
 		case "deleteMovie":
 			System.out.println(mvo);
 			MovieVO deleteFileVO = (MovieVO)movieDao.detailMovie(mvo);
@@ -205,6 +260,32 @@ public class AdminController {
 			model.addAttribute("msg", "삭제완료");
 
 			break;
+			
+		case "modifyForm":
+			System.out.println("수정궁"+mvo);
+			res = movieDao.detailMovie(mvo);
+			
+			break;
+		
+		case "modifyReg":
+			System.out.println("수정할 녀석스"+mvo);
+			MovieVO modifyFileVO = (MovieVO)movieDao.detailMovie(mvo);
+			for(String filename : modifyFileVO.getSteelcut().split("[|]"))
+			{deleteFile(filename,request,"cut");}
+			
+			if(mvo.getSteelcuts()!=null) {
+				mvo.setSteelcutsName(filesUP(mvo.getSteelcuts(),request));
+				mvo.getSteelcut();
+			}
+			if(mvo.getPoster1()!=null)
+				mvo.setPosterName(fileUP(mvo.getPoster1(),request,"poster"));
+
+			System.out.println("가공후"+mvo);
+
+			movieDao.modifyMovie(mvo);
+
+			model.addAttribute("url", "/proj/movie/detailMovie?mid="+mvo.getMid());
+			model.addAttribute("msg", mvo.getTitle()+"수정완료");
 
 		case "detailMovie":
 			System.out.println(mvo);
@@ -212,18 +293,6 @@ public class AdminController {
 			resVO.setRealpath(request.getRealPath("resources/"));
 			res = resVO;
 
-			System.out.println(res);
-			break;
-
-		case "member":
-			System.out.println("회원");
-			res = adminDao.memList();
-			System.out.println(res);
-			break;
-
-		case "resv":
-			System.out.println("예약");
-			res = adminDao.resvList();
 			System.out.println(res);
 			break;
 
@@ -235,11 +304,12 @@ public class AdminController {
 				mapp.put("settle",adminDao.dateSettle(svo));
 				//res = adminDao.dateSettle(svo);
 			}
-			mapp.put("movie", movieDao.getlist());
+			mapp.put("movie", movieDao.list());
 			res = mapp;
 			break;
 
 		}
+		
 		return res;
 	}
 

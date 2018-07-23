@@ -54,7 +54,9 @@ public class MovieController {
 			res = movieDao.nowMovie();
 			break;
 		case "comming":
+			System.out.println("자르잘");
 			res = movieDao.comingMovie();
+			System.out.println(res);
 			break;
 					
 		case "boxoffice":

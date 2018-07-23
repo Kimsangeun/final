@@ -45,4 +45,32 @@
 </c:forEach>
 </tbody>
 </table>
+<div class="center-block">
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    
+    <c:forEach var="i" begin="${startPage }" end="${endPage }">
+	    <c:choose>
+			<c:when test="${i==page }">
+				<li class="active"><a href="#">${i }</a></li>
+			</c:when>
+			<c:otherwise>
+				<li class=""><a href="member?page=${i }">${i }</a></li>
+			</c:otherwise>
+		</c:choose>
+    </c:forEach>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
+</div>
 </div>

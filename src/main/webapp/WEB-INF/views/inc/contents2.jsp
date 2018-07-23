@@ -8,16 +8,22 @@
 <script type="text/javascript">
 $(function() {
 $('.slider').bxSlider({
-
+	mode: 'fade',
+	 auto: true,        // 자동 실행 여부
+     autoHover: true,   // 마우스 호버시 정지 여부
 });
 });
 </script>
 
 
-<div class="slider" style=" padding:0 0 0 0;">
+
+
+<div class="slider">
 <c:forEach items="${event}" var="mm" varStatus="no">
 
-<img class="img-responsive" src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"			alt="slide">
+<a href="/proj/info/detail?bid=${mm.bid }">
+<img class="img-responsive" src="${pageContext.request.contextPath}\resources\board/${mm.upfile}" alt="slide">
+</a>
 </c:forEach>
 						
 </div>
@@ -79,18 +85,18 @@ $('.slider').bxSlider({
 		</a>
         	</p>
 		</div>
-      <div align="center" class="hidden-lg" >
+     <%--  <div align="center" class="hidden-lg" >
       	<img class="img-responsive" alt="" src="${pageContext.request.contextPath}\resources\imgs/ticket.png"/>
       	
-      </div>
+      </div> --%>
       <div class="row" >
 
         	<c:forEach begin="1" end="8" items="${mainpagemov}" var="mm" varStatus="no">
-        		<div align="center" class="col-lg-3 col-xs-6 col-sm-4 col-md-4">
+        		<div align="center" class="col-lg-3 col-xs-6 col-sm-4 col-md-3">
         		<a href="/proj/movie/detailMovie?mid=${mm.mid }">
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
         		</a>
-        		<p class="hidden-xs">${mm.title}</p>
+        		<p class="hidden-xs h3">${mm.title}</p>
 				<div class="fixedStar" id="Star_${no.index }"></div>
 				<script type="text/javascript">
 				$(function() {

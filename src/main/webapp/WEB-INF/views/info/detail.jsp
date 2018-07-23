@@ -61,7 +61,7 @@
 
 	<c:if test="${data.img && data.upfile!=null}">
 		<tr>
-			<td colspan="4"><img
+			<td colspan="4"><img class="img-responsive"
 				src="${pageContext.request.contextPath}\resources\board/${data.upfile}" />
 			</td>
 		</tr>
