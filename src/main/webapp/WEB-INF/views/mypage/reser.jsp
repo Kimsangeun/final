@@ -60,6 +60,8 @@ function cancel(rId) {
 <title>Insert title here</title>
 </head>
 <body>
+<div><h2>예매내역</h2></div>
+<hr>
 	<table id="frame" class="table table-hover">
 		<tr id="table_info">
 			<th class="info_no1 infotd">번호</th>
