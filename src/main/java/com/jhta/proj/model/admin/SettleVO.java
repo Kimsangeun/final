@@ -12,7 +12,13 @@ public class SettleVO {
 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date mstart;
-	String type,id,cost,coc,accnum,title,refund,num,cnt,start,end;
+	String type,id,cost,coc,accnum,title,refund,num,cnt,start,end,mid;
+	public String getMid() {
+		return mid;
+	}
+	public void setMid(String mid) {
+		this.mid = mid;
+	}
 	public Date getMstart() {
 		return mstart;
 	}
@@ -89,8 +95,10 @@ public class SettleVO {
 	public String toString() {
 		return "SettleVO [mstart=" + mstart + ", type=" + type + ", id=" + id + ", cost=" + cost + ", coc=" + coc
 				+ ", accnum=" + accnum + ", title=" + title + ", refund=" + refund + ", num=" + num + ", cnt=" + cnt
-				+ ", start=" + start + ", end=" + end + "]";
+				+ ", start=" + start + ", end=" + end + ", mid=" + mid + "]";
 	}
+	
+	
 	
 	
 	

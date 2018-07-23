@@ -119,11 +119,6 @@
 
 <script type="text/javascript">
 
-(function($){
-    $(window).on("load",function(){
-        $(".content").mCustomScrollbar();
-    });
-})(jQuery);
 
 var now = new Date(); 
 

@@ -14,22 +14,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
-<head>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
-</head>
+
 
 <script>
 	
 </script>
 
 
-<body>
-
-	<%-- <table border="" >
+<%-- <table border="" >
 <jsp:useBean id="now" class="java.util.Date" />
 <fmt:parseNumber
 value="${(now.time - now.time) / (1000*60*60*24) }"
@@ -52,43 +45,40 @@ integerOnly="true" /> </td>
 	
 </table> --%>
 
-	<div class="container-fluid" style="margin-top: 100px">
-		<jsp:useBean id="now" class="java.util.Date" />
-		<%-- <fmt:parseNumber value="${(now.time - now.time) / (1000*60*60*24) }"
+<div class="container-fluid" style="margin-top: 100px">
+	<jsp:useBean id="now" class="java.util.Date" />
+	<%-- <fmt:parseNumber value="${(now.time - now.time) / (1000*60*60*24) }"
 			integerOnly="true" /> --%>
-		<div class="row">
+	<div class="row">
 
-			<c:forEach begin="1" end="8" items="${moviedata}" var="mm"
-				varStatus="no">
-				<fmt:formatDate value="${mm.release}" var="date"
-					pattern="yyyy-MM-dd" />
-				<div class="movietool" align="center" 
-					style="width: 232px; height: 500px; margin: 5px;border: 1px solid gray;"
-					class="col-lg-2 col-xs-6 col-sm-4 col-md-4">
-					<a href="/proj/movie/detailMovie?mid=${mm.mid }"> <img
-						style="width: 100%; height: 336px"
-						src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}"
-						alt="Generic placeholder image">
-					</a>
+		<c:forEach begin="1" end="8" items="${moviedata}" var="mm"
+			varStatus="no">
+			<fmt:formatDate value="${mm.release}" var="date" pattern="yyyy-MM-dd" />
+			<div class="movietool" align="center"
+				style="width: 232px; height: 500px; margin: 5px; border: 1px solid gray;"
+				class="col-lg-2 col-xs-6 col-sm-4 col-md-4">
+				<a href="/proj/movie/detailMovie?mid=${mm.mid }"> <img
+					style="width: 100%; height: 336px"
+					src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}"
+					alt="Generic placeholder image">
+				</a>
 
-					<p>${date}
-						d-
-						<fmt:parseNumber
-							value="${(mm.release.time - now.time)  / (1000*60*60*24)+1}"
-							integerOnly="true" />
-					</p>
-					<p class="h3">${mm.title}</p>
-					<p>
-						<a class="btn btn-default"
-							href="/proj/movie/detailMovie?mid=${mm.mid }" role="button">상세정보
-							&raquo;</a> <a class="btn btn-default" href="#" role="button">예매하기
-							&raquo;</a>
-					</p>
+				<p>${date}
+					d-
+					<fmt:parseNumber
+						value="${(mm.release.time - now.time)  / (1000*60*60*24)+1}"
+						integerOnly="true" />
+				</p>
+				<p class="h3">${mm.title}</p>
+				<p>
+					<a class="btn btn-default"
+						href="/proj/movie/detailMovie?mid=${mm.mid }" role="button">상세정보
+						&raquo;</a> <a class="btn btn-default" href="#" role="button">예매하기
+						&raquo;</a>
+				</p>
 
-				</div>
-			</c:forEach>
+			</div>
+		</c:forEach>
 
-		</div>
 	</div>
-</body>
-</html>
+</div>

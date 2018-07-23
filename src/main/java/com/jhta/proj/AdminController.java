@@ -106,6 +106,11 @@ public class AdminController {
 				return res;*/
 
 		}
+		
+		if(service.equals("time")){
+			model.addAttribute("main", service);
+			model.addAttribute("menu", "admin");
+		}
 		return res;
 	}
 
@@ -227,10 +232,11 @@ public class AdminController {
 			System.out.println(svo);
 			if(svo.getStart()!=null && !svo.getStart().equals("")) {
 				System.out.println("aasdf");
-				res = adminDao.dateSettle(svo);
+				mapp.put("settle",adminDao.dateSettle(svo));
+				//res = adminDao.dateSettle(svo);
 			}
-			
-
+			mapp.put("movie", movieDao.getlist());
+			res = mapp;
 			break;
 
 		}

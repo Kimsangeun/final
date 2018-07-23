@@ -5,12 +5,24 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
-<style>
+<script type="text/javascript">
+$(function() {
+$('.slider').bxSlider({
+
+});
+});
+</script>
 
 
-</style>
+<div class="slider" style=" padding:0 0 0 0;">
+<c:forEach items="${event}" var="mm" varStatus="no">
 
-	<div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
+<img class="img-responsive" src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"			alt="slide">
+</c:forEach>
+						
+</div>
+
+	<%-- <div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
 		<!-- Indicators -->
 		<ol class="carousel-indicators">
 			<c:forEach items="${event}" var="mm" varStatus="no">
@@ -23,9 +35,9 @@
 				<img class="first-slide" 
 						src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"
 						alt="slide">
-					<%-- <a href="/proj/info/detail?bid=${mm.bid }"><img class="first-slide"
+					<a href="/proj/info/detail?bid=${mm.bid }"><img class="first-slide"
 						src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"
-						alt="slide"></a> --%>
+						alt="slide"></a>
 					<div class="container">
 						<div class="carousel-caption">
 							<h1>${mm.title}</h1>
@@ -38,37 +50,11 @@
 						</div>
 					</div>
 
-					<%-- <div>${mm.title}</div> --%>
-				</div>
-			</c:forEach>
-		</div>
-		<%-- <ol class="carousel-indicators">
-			<c:forEach items="${mainpagemov}" var="mm" varStatus="no">
-			<li data-target="#myCarousel" data-slide-to="${no.index }" class="${no.index eq 0 ? 'active' : 'a' }"></li>
-			</c:forEach>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<c:forEach items="${mainpagemov}" var="mm" varStatus="no">
-				<div class="${no.index eq 0 ? 'item active' : 'item' }">
-					<img class="first-slide"
-						src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}"
-						alt="slide">
-					<div class="container">
-						<div class="carousel-caption">
-							<h1>${mm.title}</h1>
-							<p>${mm.title}
-							</p>
-							<p>
-								<a class="btn btn-lg btn-primary" href="#" role="button">예매하러
-									가기</a>
-							</p>
-						</div>
-					</div>
-
 					<div>${mm.title}</div>
 				</div>
 			</c:forEach>
-		</div> --%>
+		</div>
+		
 		<a class="left carousel-control" href="#myCarousel" role="button"
 			data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
 			aria-hidden="true"></span> <span class="sr-only">Previous</span>
@@ -77,16 +63,22 @@
 			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 			<span class="sr-only">Next</span>
 		</a>
-	</div>
+	</div> --%>
 	
 	<!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
     
  	<!-- <div class="container-fluid"> -->
+ 	
+		
     <div class="container marketing" style="margin-top :50px">
-
-      <!-- Three columns of text below the carousel -->
+		<div align="right" >
+		<p><a class="btn btn-default" href="/proj/movie/boxoffice" role="button">
+		<span class="glyphicon glyphicon-plus"> 전체보기</span>
+		</a>
+        	</p>
+		</div>
       <div align="center" class="hidden-lg" >
       	<img class="img-responsive" alt="" src="${pageContext.request.contextPath}\resources\imgs/ticket.png"/>
       	
@@ -111,11 +103,11 @@
 						starOn:'star-on-big.png',
 						starOff:'star-off-big.png',
 				    	  readOnly:  true,
-				    	  start:    ${mm.rating/2}
+				    	  start:   ${mm.rating/2}
 				    	});
 				});
 				</script>
-        		<%-- <p>${mm.rating}</p> --%>
+
         		<p><a class="btn btn-default" href="/proj/movie/detailMovie?mid=${mm.mid }" role="button">상세정보 &raquo;</a>
         		<a class="btn btn-default" href="/proj/reservation/reser" role="button">예매하기 &raquo;</a></p>
         		

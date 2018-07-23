@@ -89,6 +89,13 @@ public class MovieController {
 		if(service.equals("reviewInsert")) {
 			
 			movieDao.reviewInsert(rvo);
+			movieDao.scoreUpdate(rvo);
+		}
+		if(service.equals("deleteReview")) {
+			
+			movieDao.reviewDelete(rvo);
+			movieDao.scoreUpdate(rvo);
+			
 		}
 		return "redirect:detailMovie?mid="+rvo.getMid();
 	}

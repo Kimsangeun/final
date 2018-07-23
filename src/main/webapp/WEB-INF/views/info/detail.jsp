@@ -6,7 +6,22 @@
 
 
 <div>
-	<h2>${data.kind }</h2>
+	<h2>
+	<c:choose>
+	
+	<c:when test="${data.kind == 'notice'}">
+	공지사항
+	</c:when>
+	<c:when test="${data.kind == 'faq'}">
+	FAQ
+	</c:when>
+	<c:when test="${data.kind == 'qna'}">
+	QNA
+	</c:when>
+	
+	</c:choose>
+	
+	</h2>
 </div>
 <hr>
 

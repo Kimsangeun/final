@@ -10,15 +10,15 @@
 	<table class="table table-hover" align="center" style="width:60%;">
 		<tr>
 			<td><b>제목</b></td>
-			<td><input type="text" name="title" value="[답변] ${data.title }"/></td>
+			<td><input type="text" name="title" value="[답변] ${data.title }" style="width:90%;" /></td>
 		</tr>
 		<tr>
 			<td><b>작성자</b></td>
-			<td><input type="text" name="pid" value="${mem.id }" /></td>
+			<td><input type="text" name="pid" value="${mem.id }" style="width:90%;"  /></td>
 		</tr>
 		<tr>
 			<td><b>내용</b></td>
-			<td><textarea name="content" rows="5" cols="30">${data.content }
+			<td><textarea name="content" rows="5"  style="width:90%;resize:none" >${data.content }
 			______________________
 </textarea></td>
 		</tr>
