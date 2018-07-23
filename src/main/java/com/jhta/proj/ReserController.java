@@ -64,13 +64,14 @@ public class ReserController {
 	SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
 	SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd:E");
 
-	Date now = new Date();
-
-	String nowtime = sdft.format(now);
-	String nowdate = sdfd.format(now).split(":")[0];
+//	Date now = new Date();
+//
+//	String nowtime = sdft.format(now);
+//	String nowdate = sdfd.format(now).split(":")[0];
 
 	@ModelAttribute("datelist") // 현재 날짜로부터 2주
 	public Object datelist(Model model) {
+		Date now = new Date();
 
 		ArrayList datearr = new ArrayList<>();
 
@@ -159,6 +160,12 @@ public class ReserController {
 	@RequestMapping("/timetable")
 	public Object cine3(Model model, ScreenInfoVO svo) {
 		model.addAttribute("menu", "reservation");
+		
+		Date now = new Date();
+
+		System.out.println("now:"+now);
+		String nowtime = sdft.format(now);
+		String nowdate = sdfd.format(now).split(":")[0];
 
 		model.addAttribute("nowtime", nowtime);
 		model.addAttribute("nowdate", nowdate);
@@ -173,6 +180,10 @@ public class ReserController {
 
 	@RequestMapping("/reser")
 	public Object cine2(Model model) {
+		Date now = new Date();
+
+		String nowtime = sdft.format(now);
+		String nowdate = sdfd.format(now).split(":")[0];
 
 		model.addAttribute("menu", "reservation");
 
