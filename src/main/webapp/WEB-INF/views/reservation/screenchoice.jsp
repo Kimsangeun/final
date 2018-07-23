@@ -54,21 +54,16 @@
 
 #S_btn {
 	cursor: pointer;
-	font-size: 35px;
+	font-size: 30px;
 	width: 100px;
-	padding: 5px 10px;
+	padding: 10px 5px; 
 	text-align: center;
 	border: solid 2px #5D5D5D;
 	margin-left: 95%;
 }
 #S_btn:hover {
-	width: 110px;
-	padding: 9px 13px;
-	margin-left: 94.5%;
-}
-
-#S_btn:hover {
-	
+	background: #4C4C4C;
+	color : #F6F6F6;
 }
 </style>
 
@@ -127,11 +122,13 @@ window.onload = function(){
 	 				
 	 				/* 예약된 좌석 처리부분. */
 	 				
-	 				$('#S_seat'+col+no).html('X');
-	 				$('#S_seat'+col+no).css("background-color", "gray");
-	 				$('#S_seat'+col+no).css('color', "lightgray");
-	 				$('#S_seat'+col+no).css('pointer-events', "none");
-	 				$('#S_seat'+col+no).css('cursor', "no-drop");
+	 				$('#S_seat'+col+no)
+					 				.html('X')
+					 				.css("background-color", "gray")
+					 				.css('color', "lightgray")
+					 				.css('pointer-events', "none")
+					 				.css('text-align', "center")
+					 				.css('cursor', "no-drop");
 	 			}
 	 		}
 		}
@@ -180,7 +177,7 @@ window.onload = function(){
 							.css("background-color","#ff0000")
 							.css("color","white");
  			arr[col-1][no-1] = 1;
-			//alert(arr);
+			alert(arr);
 			
 			var money= 3000;
 			if(alpha == 'D'){
@@ -241,7 +238,16 @@ window.onload = function(){
 	}
 	
 	function selchg(scnum) {
-		
+	
+		for(var col=1; col<=4; col++){
+			for(var no=1;no<=10; no++){
+				arr[col-1][no-1] = 0;
+				$('#S_seat'+col+no)
+					.css("background-color","#ffffff" )
+					.css("color","black" );
+			}
+		} 
+		alert(arr)
 		var splitSeat = seats.split(",");
 		
 		var numlist = '';
@@ -300,9 +306,7 @@ window.onload = function(){
 		 			
 		 			}
 		 			
-		 	
-		 			
-					seats = "";
+					seats = '';
 					cnt = 0;
 					price=0;
 						

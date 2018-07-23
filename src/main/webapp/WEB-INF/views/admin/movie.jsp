@@ -4,25 +4,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
-<!DOCTYPE html>
-<html>
-<head>
-
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
 
 <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.css">
 <script src="http://cdnjs.cloudflare.com/ajax/libs/timepicker/1.3.5/jquery.timepicker.min.js"></script>
-</head>
+<style>
+
+
+</style>
 
 <script>
 
 </script>
 
 
-<body>
+
 <div class="container">
-<button type="button" class="btn btn-danger" onclick="location.href='insertMovieForm'">추가</button>
 <!-- <input type="button" value="추가" onclick="location.href='insertMovieForm'"> -->
 <table class="table table-hover" >
 
@@ -45,36 +41,40 @@
 		<td>${mm.runtime}</td>
 		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.release}"/></td>
 		<td><input class="btn btn-danger" type="button" value="X" onclick="location.href='deleteMovie?mid=${mm.mid}'"></td>
-		<td>Modify</td>
-		<%-- <td>${mm.mstart}</td> --%>
+		<td><a href="modifyForm?mid=${mm.mid }">Modify</a></td>
 	</tr>
 </c:forEach>
-	<%-- <tr>
-		
-		<td colspan="4" align="right">영화명
-		<select name="mID" id="selectDate" >
-				<!-- <option value=""> 영화명 -->
-				<c:forEach items="${data['movie']}" var="mm">
-					<option value="${mm.mid }">${mm.title }
-				</c:forEach>
-		</select>상영관
-		<select name="scNum" id="selectScreen" >
-				<!-- <option value=""> 상영관 -->
-				<c:forEach items="${data['screen']}" var="mm">
-					<option value="${mm.scNum }">${mm.scNum }관
-				</c:forEach>
-		</select>	
-		상영시간	
-		<input type="text" class='timepicker' name="timeset" readonly>
-		<form:errors path="timeVo.mID"/>
-		<input type="hidden" value="${param.mstart eq null ? mindate : param.mstart}" name="mstart"/>
-		<!-- <input class="timepicker" /> -->
-		<input type="submit"/>
-		
-		</td>
-	</tr>	 --%>
+
 </tbody>
 </table>
+<button type="button" class="btn btn-danger pull-right" onclick="location.href='insertMovieForm'">추가</button>
+<div class="center-block">
+<nav>
+  <ul class="pagination">
+    <li>
+      <a href="#" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    
+    <c:forEach var="i" begin="${startPage }" end="${endPage }">
+	    <c:choose>
+			<c:when test="${i==page }">
+				<li class="active"><a href="#">${i }</a></li>
+			</c:when>
+			<c:otherwise>
+				<li class=""><a href="movie?page=${i }">${i }</a></li>
+			</c:otherwise>
+		</c:choose>
+    </c:forEach>
+    <li>
+      <a href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+
 </div>
-</body>
-</html>
+
+</div>

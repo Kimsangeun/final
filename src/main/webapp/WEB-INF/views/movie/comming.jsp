@@ -17,58 +17,55 @@
 
 
 
-<script>
+<script type="text/javascript">
+$(document).ready(function() {
+	   var maxHeight = -1;
+
+	   $('.features').each(function() {
+	     maxHeight = maxHeight > $(this).height() ? maxHeight : $(this).height();
+	   });
+
+	   $('.features').each(function() {
+	     $(this).height(maxHeight);
+	   });
+	 });
+
+
+/* 
+$(window).on('load', function () {
+	load('#js-load', '4');
+	$("#js-btn-wrap .button").on("click", function () {
+		load('#js-load', '4', '#js-btn-wrap');
+	})
 	
+}); */
+
 </script>
-
-
-<%-- <table border="" >
-<jsp:useBean id="now" class="java.util.Date" />
-<fmt:parseNumber
-value="${(now.time - now.time) / (1000*60*60*24) }"
-integerOnly="true" /> 일 지남.
-
-<c:forEach items="${moviedata}" var="mm" varStatus="no">
-
-<fmt:formatDate value="${mm.release}" var="date" pattern="yyyy-MM-dd" /> 
- 
-	<tr>
-		<td><a href="detailMovie?mid=${mm.mid }">
-		<img src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" /></a>
-		</td>
-		<td>${mm.title}</td>
-		<td>개봉일 ${date}</td>
-		<td>d-<fmt:parseNumber value="${(mm.release.time - now.time)  / (1000*60*60*24)+1}"
-integerOnly="true" /> </td>
-	</tr>
-</c:forEach>
-	
-</table> --%>
-
-<div class="container-fluid" style="margin-top: 100px">
+<div class="container" style="margin-top: 100px">
 	<jsp:useBean id="now" class="java.util.Date" />
 	<%-- <fmt:parseNumber value="${(now.time - now.time) / (1000*60*60*24) }"
 			integerOnly="true" /> --%>
 	<div class="row">
 
-		<c:forEach begin="1" end="8" items="${moviedata}" var="mm"
+		<c:forEach items="${moviedata}" var="mm"
 			varStatus="no">
-			<fmt:formatDate value="${mm.release}" var="date" pattern="yyyy-MM-dd" />
+			<fmt:formatDate value="${mm.release}" var="date" pattern="yyyy.MM.dd" />
 			<div class="movietool" align="center"
 				style="width: 232px; height: 500px; margin: 5px; border: 1px solid gray;"
-				class="col-lg-2 col-xs-6 col-sm-4 col-md-4">
+				class="col-lg-3 col-xs-6 col-sm-4 col-md-4">
 				<a href="/proj/movie/detailMovie?mid=${mm.mid }"> <img
 					style="width: 100%; height: 336px"
 					src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}"
 					alt="Generic placeholder image">
 				</a>
 
-				<p>${date}
-					d-
+				<p style="margin-top:10px"><span class="h4">${date}&nbsp&nbsp&nbsp</span>
+					<span class="h3 bg-primary" style="border-radius: 5px; padding:5px 15px 5px 15px;">
+					D&nbsp-
 					<fmt:parseNumber
 						value="${(mm.release.time - now.time)  / (1000*60*60*24)+1}"
-						integerOnly="true" />
-				</p>
+						integerOnly="true" /></span></p>
+			
 				<p class="h3">${mm.title}</p>
 				<p>
 					<a class="btn btn-default"

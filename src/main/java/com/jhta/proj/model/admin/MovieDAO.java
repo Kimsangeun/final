@@ -5,6 +5,8 @@ import javax.annotation.Resource;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Component;
 
+import com.jhta.proj.model.BoardVO;
+
 @Component
 public class MovieDAO {
 	//머지..?
@@ -12,12 +14,12 @@ public class MovieDAO {
 	SqlSessionTemplate sessionTemplate;
 	
 	public Object list() {
-		return sessionTemplate.selectList("adminMapper.movieList");
+		return sessionTemplate.selectList("adminMapper.movieAll");
 		
 	}
 	
-	public Object getlist() {
-		return sessionTemplate.selectList("adminMapper.movieList");
+	public Object getlist(BoardVO vo) {
+		return sessionTemplate.selectList("adminMapper.movieList",vo);
 		
 	}
 	
@@ -39,6 +41,10 @@ public class MovieDAO {
 	public Object detailMovie(MovieVO vo) {
 
 		return sessionTemplate.selectOne("adminMapper.movieDetail", vo);
+	}
+	
+	public Object modifyMovie(MovieVO vo) {
+		return sessionTemplate.update("adminMapper.movieModify", vo);
 	}
 	
 	public Object nowMovie() {
