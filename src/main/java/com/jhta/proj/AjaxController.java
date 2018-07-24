@@ -171,9 +171,8 @@ public class AjaxController {
 			throws NoPermissionException{
 		//@RequestParam(value="userid") String id
 		System.out.println("데드췍"+map);
-		mdao.reviewChk(map);
 		
-		System.out.println("리뷰"+mdao.reviewChk(map));
+		System.out.println("리뷰"+mdao.movieDeadlineChk(map));
 		//dao.ajaxemailChk(map);
 		
 		return map;

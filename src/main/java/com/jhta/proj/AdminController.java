@@ -84,7 +84,7 @@ public class AdminController {
 		model.addAttribute("main", service);
 		model.addAttribute("menu", "admin");
 		System.out.println("포비든킹덤");
-		if(service.equals("deleteMovie")) {
+		if(service.equals("deleteMovie")||service.equals("deadlineReg")) {
 			res = "admin/alert";
 		}
 		
@@ -319,7 +319,7 @@ public class AdminController {
 			System.out.println("데드데드");
 			movieDao.movieDeadline(mvo);
 			model.addAttribute("url", "/proj/movie/detailMovie?mid="+mvo.getMid());
-			model.addAttribute("msg", mvo.getTitle()+" 마감완료");
+			model.addAttribute("msg", "마감완료");
 			
 			break;
 
