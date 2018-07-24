@@ -13,7 +13,8 @@
 <script>
 
 </script>
-
+  <div style="margin-top:50px"><h2>예약목록</h2></div>
+  <hr>
 
 <div class="table-responsive container">
 <table class="table table-hover" >
@@ -51,7 +52,7 @@
 <nav>
   <ul class="pagination">
     <li>
-      <a href="#" aria-label="Previous">
+      <a class="${startPage eq 1 ? 'disabled': ''}" href="movie?page=${startPage-1 }" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
@@ -67,7 +68,7 @@
 		</c:choose>
     </c:forEach>
     <li>
-      <a href="#" aria-label="Next">
+      <a class="${endPage<totalPage ? 'disabled':''}" href="movie?page=${endPage+1 }" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

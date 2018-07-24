@@ -12,7 +12,9 @@
 <script>
 
 </script>
-
+<div class="page-header">
+  <h1>회원 목록<small></small></h1>
+</div>
 
 <div class="container">
 <table class="table table-hover" >
@@ -49,7 +51,7 @@
 <nav>
   <ul class="pagination">
     <li>
-      <a href="#" aria-label="Previous">
+      <a class="${startPage eq 1 ? 'disabled': ''}" href="member?page=${startPage-1 }" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
@@ -65,7 +67,7 @@
 		</c:choose>
     </c:forEach>
     <li>
-      <a href="#" aria-label="Next">
+      <a class="${endPage<totalPage ? 'disabled':''}" href="member?page=${endPage+1 }" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>

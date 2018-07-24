@@ -3,8 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <style>
   .modal-header, h4, .close {
-      background-color: black;
-      color:white !important;
+      background-color: #f7f5f7;
+      color:#5d5d5d !important;
       text-align: center;
       font-size: 30px;
   }

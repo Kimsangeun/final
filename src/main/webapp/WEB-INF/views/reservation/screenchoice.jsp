@@ -7,7 +7,7 @@
 #S_top {
 	float: left;
 	background: #353535;
-	padding: 0 30px;
+	padding: 0 3% ;
 	height: 100px;
 	color :#F6F6F6;
 }
@@ -389,7 +389,7 @@ window.onload = function(){
 			</select>
 		</div>
 	</div>
-	<div id="S_top" style="width: 360px;">
+	<div id="S_top" style="width: 330px;">
 		<img src="../resources/movposter/${svo.poster }" width="55px"
 			style="margin-top: 10px; margin-right: 10px; float: left;" /> 
 			<img src="../resources/imgs/
@@ -401,8 +401,7 @@ window.onload = function(){
 			</c:choose>
 		"
 			alt="이미지없음" width="18px" style="float: left; margin-top: 30px; margin-right: 5px;" />
-		<div id="S_cho2"
-			style="width: 70%; font-size: 17px; margin-top: 28px;">${svo.movtitle }</div>
+		<div id="S_cho2" style="width: 60%; font-size: 17px; margin-top: 28px;">${svo.movtitle }</div>
 	</div>
 	<div id="S_top" style="width: 40%; float: left;">
 		<div id="S_cho2" style="margin-top: 25px;">${svo.scNum }관</div>
@@ -515,7 +514,7 @@ window.onload = function(){
 	<input type="hidden" name="seatnum" /> <input type="hidden" name="cnt" />
 	<input type="hidden" name="price" />
 
-	<div style="float: left; margin-left: 40%;">
+	<div style="float: left; margin-left: 35%;">
 
 
 		<div style="font-size: 20px; float: left;">좌석번호</div>

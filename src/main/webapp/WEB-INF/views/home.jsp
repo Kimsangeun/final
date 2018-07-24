@@ -58,6 +58,26 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 
 
 </head>
+<style>
+@media screen and (min-width : 768px){
+.navbar .navbar-nav {
+
+  display: inline-block;
+
+  float: none;
+
+}
+
+.navbar .navbar-collapse{
+
+  text-align: center;
+
+}
+}
+@media screen and (max-width : 768px){
+
+}
+</style>
 
 <!-- NAVBAR
 ================================================== -->
@@ -74,11 +94,19 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 							<span class="sr-only">Toggle navigation</span> <span
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
+								
 						</button>
-						<a class="navbar-brand" href="/proj/"><img src="/proj/resources/imgs/cinemalogo.png" width="130px"/></a>
+						<a class="hidden-sm hidden-md hidden-lg navbar-brand" href="/proj/">
+							<img src="/proj/resources/imgs/cinemalogo.png" width="130px"/></a>
+						
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav"> 
+						<li class="hidden-xs "><a class="navbar-brand" href="/proj/">
+							<img src="/proj/resources/imgs/cinemalogo.png" width="130px"/>
+							</a>
+						</li>
+						
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown" role="button" aria-expanded="false">영화
 									<span class="caret"></span>
@@ -114,9 +142,8 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 									<li><a href="/proj/info/qna">1:1문의</a></li>
 								</ul></li>
 							<jsp:include page="admin/topmenu.jsp"></jsp:include>	
-						</ul>
-						<ul class="nav navbar-nav navbar-right">
-						<jsp:include page="mypage/topmenu.jsp"></jsp:include>
+							<li>
+							<jsp:include page="mypage/topmenu.jsp"></jsp:include>
 						<c:choose>
 							<c:when test="${mem.id == null }">
 							<%-- <li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -139,6 +166,10 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 							</a></li>	
 							</c:otherwise>
 						</c:choose>
+							</li>
+						</ul>
+						<ul class="nav navbar-nav navbar-right">
+						
 						</ul>
 	
 					</div>
