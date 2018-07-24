@@ -53,7 +53,7 @@ input[type="time"]::-webkit-clear-button {
 <fmt:formatDate var="mindate" value="<%= new Date(new Date().getTime() + 2*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
 <fmt:formatDate var="maxdate" value="<%= new Date(new Date().getTime() + 20*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
 <p class="h1">${param.mstart eq null ? mindate : param.mstart}<p>	
-<form action="#" method="post">
+<form action="?" >
 <div class="form-group">
 	<label for="tpick">날짜</label>
 	<input type="date" id="tpick" class="form_datetime" name="mstart" min="${mindate }" max="${maxdate }" 
