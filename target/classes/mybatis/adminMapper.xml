@@ -149,12 +149,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     	update movie set deadline=1 where mid=#{mid}
     </update>
     
-    <select id="movieDeadlineChk" parameterType="movieVo" resultType="java.lang.Integer">
+    <select id="movieDeadlineChk" parameterType="map" resultType="java.lang.Integer">
     	select count(*) from screeninfo where mstart>sysdate and mid=#{mid}
     </select>
     
     <select id="movieDetail" resultType="movieVo" parameterType="movieVo">
-        select * from movie where mid = #{mid}
+    
+    	SELECT A.*, Round(nvl(B.bb/C.cc*100,0),2) as bookingRate
+		FROM (SELECT * FROM MOVIE where mid = #{mid}) A,
+		      (select mid,count(*) as bb from 
+		      	(select reser.* from reser,screeninfo 
+		      		where reser.sid = screeninfo.sid 
+		      			and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1)) 
+		      			group by mid having count(*) >= 0) B,
+		      (select count(*)as cc from 
+		      (select * from reser,screeninfo 
+		      where reser.sid = screeninfo.sid 
+		      and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1))) C
+		WHERE A.mid = b.mid(+) order by bookingRate desc
+        <!-- select * from movie where mid = #{mid} -->
     </select>
     
     <select id="movieDelete" parameterType="movieVo">
@@ -191,17 +204,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 빡스오피수 & 영화정보--><!-- 날짜 추가헤ㅐ줘야ㅐ -->
 	<select id="boxoffice" resultType="movieVo">
+		
 		SELECT A.*, Round(nvl(B.bb/C.cc*100,0),2) as bookingRate
+		FROM (SELECT * FROM MOVIE where deadline=0) A,
+		      (select mid,count(*) as bb from 
+		      	(select reser.* from reser,screeninfo 
+		      		where reser.sid = screeninfo.sid 
+		      			and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1)) 
+		      			group by mid having count(*) >= 0) B,
+		      (select count(*)as cc from 
+		      (select * from reser,screeninfo 
+		      where reser.sid = screeninfo.sid 
+		      and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1))) C
+		WHERE A.mid = b.mid(+) order by bookingRate desc
+		
+<!-- 		SELECT A.*, Round(nvl(B.bb/C.cc*100,0),2) as bookingRate
 		FROM (SELECT * FROM MOVIE where deadline=0) A,
 		      (select mid,count(*) as bb from reser group by mid having count(*) >= 0) B,
 		      (select count(*)as cc from reser) C
-		WHERE A.mid = b.mid(+)
+		WHERE A.mid = b.mid(+) -->
 	</select>
 	<select id="nowShowing" resultType="movieVo">
-		select * from movie where <![CDATA[release <= sysdate]]>
+		select * from movie where <![CDATA[release <= sysdate]]> and deadline=0
 	</select>
 	<select id="comingSoon" resultType="movieVo">
-		select * from movie where <![CDATA[release > sysdate]]>
+	
+		SELECT A.*, Round(nvl(B.bb/C.cc*100,0),2) as bookingRate
+		FROM (SELECT * FROM MOVIE where deadline=0 and <![CDATA[release > sysdate]]>) A,
+		      (select mid,count(*) as bb from 
+		      	(select reser.* from reser,screeninfo 
+		      		where reser.sid = screeninfo.sid 
+		      			and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1)) 
+		      			group by mid having count(*) >= 0) B,
+		      (select count(*)as cc from 
+		      (select * from reser,screeninfo 
+		      where reser.sid = screeninfo.sid 
+		      and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1))) C
+		WHERE A.mid = b.mid(+) order by A.release desc
+		
 	</select>
 	
 	<!--  -->

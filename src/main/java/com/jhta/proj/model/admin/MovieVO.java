@@ -11,7 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Alias("movieVo")//as
 public class MovieVO {
-	Integer mid,runtime,rating,deadline;
+	Integer mid,runtime,deadline;
+	Float rating;
 	String title,actor,director,nation,genre,plot,poster,steelcut,grade
 	,realpath,bookingRate;//예매율
 	
@@ -67,10 +68,10 @@ public class MovieVO {
 	public void setRuntime(Integer runtime) {
 		this.runtime = runtime;
 	}
-	public Integer getRating() {
+	public Float getRating() {
 		return rating;
 	}
-	public void setRating(Integer rating) {
+	public void setRating(Float rating) {
 		this.rating = rating;
 	}
 	public String getTitle() {

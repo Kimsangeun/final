@@ -200,7 +200,7 @@
 			src="${pageContext.request.contextPath}\resources\movposter/${moviedata['movie'].poster}" />
 	</div>
 	<div class="col-md-8  col-xs-12">
-		<div style="padding-bottom: 25px; border-bottom: 1px solid lightgray;">
+		<div style="padding-bottom: 25px;">
 			<p class="h1">
 				<img alt="noImg"
 					src="${pageContext.request.contextPath}\resources\imgs/movie_icon_${moviedata['movie'].grade}.gif" />
@@ -216,17 +216,24 @@
 					</div>
 				</c:if>
 			</p>
+			<h3 class="text-left">예매율 ${moviedata['movie'].bookingRate }%</h3>
+			<hr>
 		</div>
-		<div style="padding-top: 25px; border-bottom: 1px solid lightgray;">
+		
+		<div style="padding-top: 25px;">
 			<div class="row" style="padding-right: 20px">
 
-				<div class="col-md-4 col-sm-4 col-xs-4" id="fixedStar"></div>
-				<div class="h3 col-md-6 col-sm-4 col-xs-4" id="hint1"></div>
-				<a class="btn btn-danger col-md-2 col-sm-4 col-xs-4"
+				<div class="h6 col-md-5 col-sm-5 col-xs-4" id="fixedStar">${moviedata['movie'].rating }
+				</div>
+				<div style="padding :0 0 0 0" class="h3 col-md-5 col-sm-4 col-xs-4">
+				
+				</div>
+				<a class="btn btn-danger col-md-2 col-sm-3 col-xs-4"
 					href="#" id="reservIn" role="button">예매하기 &raquo;</a>
 				<!-- <button onclick="location.href('proj/reservation/reser')"
 				class="btn btn-danger col-md-2 col-sm-4 col-xs-4">예매하기</button> -->
 			</div>
+			
 			<dl class="dl-horizontal text-left">
 				<dt>
 					<p class="text-left">개봉일 :</p>
@@ -249,14 +256,17 @@
 				<dd>${moviedata['movie'].genre }/${moviedata['movie'].runtime }
 					분</dd>
 			</dl>
+			<hr>
 		</div>
 	</div>
 </div>
+<hr>
 <div
-	style="padding-top: 25px; padding-bottom: 50px; border-bottom: 1px solid lightgray">
+	style="padding-top: 25px; padding-bottom: 50px;">
 	<p class="h2">줄거리</p>
 	<p>${moviedata['movie'].plot}</p>
 </div>
+<hr>
 <c:if
 	test="${moviedata['movie'].steelcut != null and moviedata['movie'].steelcut != '' }">
 
@@ -276,7 +286,7 @@
 
 	</div>
 </c:if>
-
+<hr>
 
 <span id="counter"><small>0/200</small></span>
 <form id="reviewInsert" action="reviewInsert" method="POST">
@@ -324,7 +334,7 @@
 	<!-- <input type="hidden" name="score"/> -->
 </form>
 
-
+<hr>
 <div id="js-load" class="main border">
 	<ul id="aaa" class="list list-group row rw">
 		<c:forEach items="${moviedata['review']}" var="rr" varStatus="no">

@@ -60,8 +60,8 @@ $('.slider').bxSlider({
       </div> --%>
       <div class="row" >
 
-        	<c:forEach begin="1" end="8" items="${mainpagemov}" var="mm" varStatus="no">
-        		<div align="center" class="col-lg-3 col-xs-6 col-sm-4 col-md-3">
+        	<c:forEach begin="0" end="7" items="${mainpagemov}" var="mm" varStatus="no">
+        		<div align="center" class="col-lg-3 col-xs-6 col-sm-4 col-md-3" style="height:500px">
         		<a href="/proj/movie/detailMovie?mid=${mm.mid }">
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
         		</a>
