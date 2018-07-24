@@ -283,7 +283,7 @@ mm2 = Number(mm2);
 
 	<!-- 날짜  -->
 
-	<div style="width: 100%;">
+	<div style="width: 100%; height : 65px; overflow: auto; ">
 		<c:forEach items="${datelist }" var="dd" varStatus="no">
 			<div class="S_dateset" id="S_dateset${no.index}" style="padding: 5px; margin:0 5px; cursor: pointer; border : solid 2px white;"
 				onclick="dateCheck('${dd.split(':')[0]}')" align="center">
