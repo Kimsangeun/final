@@ -10,9 +10,7 @@
 
 .S_time{
 	cursor: pointer; 
-	font-size: 17px; 
-	margin-left: 10px;
-	border-radius: 2px;
+	font-size: 17px; 	border-radius: 2px;
 	text-align: center;
 	
 }
@@ -147,7 +145,7 @@ mm2 = Number(mm2);
 	
 			if(dates.getDate() == clkdate ){
 				//alert('dates.getDate() : '+dates.getDate());
-				$('#S_dateset'+i).css("border","solid 2px");
+				$('#S_dateset'+i).css("border","solid 2px gray");
 			}else{
 				$('#S_dateset'+i).css("border","solid 2px white");
 			} 
@@ -158,15 +156,22 @@ mm2 = Number(mm2);
 						.css('border','solid 0px');
 			$('#S_scNum'+i).css('margin','0px');
 			$('#S_seat'+i).css('margin','0px');
+			$('#S_hr'+i).html('');
 		}
 		
 		var lastT = '';
 		
 		var emptyseat = 0;
 		var tot = 0;
-		
+	
 		for(var i = 0; i<dateStr.length; i++){
-
+			if(i != dateStr.length){
+				//alert('titleStr[i]:'+titleStr[i] )
+				//alert('titleStr[i+1]:'+titleStr[i+1])
+				if(titleStr[i] != titleStr[i+1]){
+					$('#S_clear'+i).css('clear','both');
+				}
+			}
 			if(dateStr[i]==dd){
 			//alert(dateStr[i] +":"+dd)
 				if(lastT == titleStr[i]){
@@ -174,22 +179,13 @@ mm2 = Number(mm2);
 					$('#S_gradeimg'+i).html('');
 					//$('#S_title'+i).css("border-top" ,"solid 0px")
 				}else{
-					
 					$('#S_gradeimg'+i).html(gradeStr[i]);
 					$('#S_title'+i).html(titleStr[i]);
-				
+					$('#S_hr'+i).html("<hr style='margin:20px 0; height :1px; background:lightgray; '>");
 					lastT = titleStr[i];
 				}
 
-				if(i != dateStr.length){
-				//	alert('titleStr[i]:'+titleStr[i] )
-				//	alert('titleStr[i+1]:'+titleStr[i+1])
-					if(titleStr[i] != titleStr[i+1]){
-						$('#S_clear'+i).css('clear','both');
-						//$('#S_clear'+i).html("<hr style='margin:10px 0;'>");
-						 
-					}
-				}
+				
 				
 				var cnt = 0;
 				
@@ -209,16 +205,16 @@ mm2 = Number(mm2);
 				
 				$('#S_seat'+i).html(emptyseat+"/"+tot+"석");
 				$('#S_seat'+i)
-							.css('margin','8px 0')
+							.css('margin','4px 0')
 							.css('width','60px')
 							.css('color','#4374D9');
 				$('#S_scNum'+i).html(scNumStr[i]+'관');
 				$('#S_scNum'+i)
-							.css('margin','8px 0')
+							.css('margin','4px 0')
 							.css('width','25px');
 				$('#S_time'+i).html(timeStr[i]);
 				$('#S_time'+i)
-							.css('margin','5px')
+							.css('margin','0 6px')
 							.css('width','57px');
 				var HH1 = timeStr[i].split(':')[0];
 				HH1 = Number(HH1);
@@ -231,9 +227,12 @@ mm2 = Number(mm2);
 					if(HH1<HH2){
 						$('#S_time'+i).css("color","lightgray");
 						$('#S_time'+i).css("pointer-events","none");
+						$('#S_seat'+i).html('마감');
 					}else if(HH1==HH2){
 						if(mm1<mm2){
 							$('#S_time'+i).css("color","lightgray");
+							$('#S_time'+i).css("pointer-events","none");
+							$('#S_seat'+i).html('마감');
 						}
 					}
 				}
@@ -269,7 +268,7 @@ mm2 = Number(mm2);
 
 <form name="screenchoiceForm" action="screenchoice">
 
-	<hr style="height: 3px; background: #353535;">
+	<hr style="height: 3px; background:gray;">
 
 	<%-- 
 <c:forEach items="${dateTitleList }" var="dt" varStatus="no">
@@ -291,13 +290,14 @@ mm2 = Number(mm2);
 	
 	<div style="clear: both;"></div>
 
-	<hr style="height: 3px; background: #353535;"> 
+	<hr style="height: 3px; background: gray;"> 
 
 	<!-- 영화제목(장르 / 런타임/ 개봉일)  -->
 
 	<div style="height: 500px; overflow: auto;">
 	<c:forEach items="${dateTitleList }" varStatus="no">
 		<%-- <div class="S_tt${no.index }"  style="float:left;"> --%>
+		<div id="S_hr${no.index }"></div>
 		<div id="S_tit${no.index }" >
 			<div id="S_gradeimg${no.index }" style="float:left; width: 20px;"></div>
 			<div id="S_title${no.index }"
@@ -305,8 +305,8 @@ mm2 = Number(mm2);
 				onclick="movieCheck(${no.index})" ></div>
 		</div>
 			<!-- 시간리스트(남은좌석수/ 상영관) -->
-			<div style="float: left;">
-			<div class="S_time" id="S_time${no.index }" onclick="timeCheck(${no.index})" style="float :left;"></div>
+			<div style="float: left;" >
+			<div class="S_time" id="S_time${no.index }" onclick="timeCheck(${no.index})" ></div>
 			<div class="S_scNum" id="S_scNum${no.index }" style="float:left; font-size: 13px;"></div>
 			<div class="S_seat" id="S_seat${no.index }" style="float:left; font-size: 13px;"></div>
 			</div>

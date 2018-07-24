@@ -181,7 +181,7 @@ mm2 = Number(mm2);
 			$('#S_dateset'+i).css("background","white")
 		} 
 		for(var i=1;i<20;i++){
-			$('.S_tim'+i).css("background","white")
+			$('#S_tim'+i).css("background","white")
 		} */
 		for(var i = 0;i< dateListStr.length; i++){
 			$('#S_dateset'+i).css('color','lightgray')
@@ -340,11 +340,14 @@ mm2 = Number(mm2);
 		}
 		//alert(ttset)
 		
-		for (var i = 0; i < 20; i++) {
+		for(var i=1;i<20;i++){
 			$("#S_tim"+i).attr('tt','');
+			$('#S_tim'+i).css("border","solid 2px white")
+						.css("background","white")
+						.css("pointer-events","auto")
+						.css("color","black");
 			$("#S_scNum"+i).attr('sc','');
 		}
-		
 		scset = scset.substring(0, scset.length-1);
 		ttset = ttset.substring(0, ttset.length-1);
 		toset = toset.substring(0, toset.length-1);
@@ -375,35 +378,34 @@ mm2 = Number(mm2);
 				var mm1 = ttsp.split(':')[1];
 				mm1 = Number(mm1);
 				
+				$("#S_seat"+i).attr('to',tosp)
+							.css('color','#4374D9');
 				
 				if(ddate == nowdate){
 					//alert('hh1:'+HH1)
 					//alert('hh2:'+HH2)
 					if(HH1<HH2){
-						$('.S_time'+i)
-								.css("color","#EAEAEA")
-								.css("pointer-events","none");
+						$('#S_tim'+i).css("color","#EAEAEA")
+									.css("background","#FFFFFF");
+						$('#S_tim'+i).css("pointer-events","none");
+						$("#S_seat"+i).attr('to','마감');
 					}else if(HH1==HH2){
 						if(mm1<mm2){
-							$('.S_time'+i)
+							$('#S_tim'+i)
 										.css("color","#EAEAEA")
-										.css("pointer-events","none");
+										.css("background","#FFFFFF");
+							$('#S_tim'+i).css("pointer-events","none");
+							$("#S_seat"+i).attr('to','마감');
 						}
 					}
+					
 				}else{
-					$('#S_tim
-							'+i)
+					$('#S_tim'+i)
 								.css("border","solid 2px white")
 								.css("background","white")
 								.css("color","black")
-								.css("pointer-events","auto")
-								/* .hover(
-										function(){
-											$(this).css('background','#EAEAEA');
-										},function(){
-											$(this).css('background','white');
-										}
-									) */;
+								.css("pointer-events","auto");
+								
 				}
 				
 				if(scsp != ''){
@@ -411,8 +413,6 @@ mm2 = Number(mm2);
 								.css('color','#5D5D5D');
 				}
 				
-				$("#S_seat"+i).attr('to',tosp)
-							.css('color','#4374D9');
 				
 			}
 			$("#S_tim"+i).html($("#S_tim"+i).attr('tt'));
@@ -461,12 +461,15 @@ mm2 = Number(mm2);
 			}
 		}
 		
-		for(var i=0;i<10;i++){
-			$('.S_time'+i).css("border","solid 2px white")
+		for(var i=1;i<20;i++){
+			$('#S_tim'+i).css("border","solid 2px white")
 		}
 	}
 
 	function Check3(no){
+		/* alert('clkdate:'+clkdate)
+		alert('nowdate:'+nowdate)
+		alert('ttset:'+ttset) */
 		$('#S_time').attr('mmm',ttset.split(',')[no-1]);
 		$('#S_time').html('시간&nbsp;&nbsp;&nbsp;'+$('#S_time').attr('mmm'));
 		$('#S_scNum').attr('nnn',scset.split(',')[no-1]+'관');
@@ -475,14 +478,48 @@ mm2 = Number(mm2);
 		document.getElementById("sid").value= ssset.split(',')[no-1];
 		
 		for(var i=1;i<20;i++){
+			$('#S_tim'+i).css("border","solid 2px white")
+						.css("background","white")
+						.css("color","black");
+		}
+		
+		for(var i=1;i<20;i++){
+			
+			var ttsp = ttset.split(',')[i-1];
+			
+			//alert('ttsp:'+ttsp)
+			
+			var HH1 = ttsp.split(':')[0];
+			HH1 = Number(HH1);
+			var mm1 = ttsp.split(':')[1];
+			mm1 = Number(mm1);
+			
 			if(i==no ){
 				$('#S_tim'+i).css("border","solid 2px gray")
 							.css("background","#4C4C4C")
 							.css("color","#F6F6F6");
 			}else{
-				$('#S_tim'+i).css("border","solid 2px white")
-							.css("background","white")
-							.css("color","black");
+				if(clkdate == nowdate){
+				//	alert('hh1:'+HH1)
+				//	alert('hh2:'+HH2)
+					if(HH1<HH2){
+						$('#S_tim'+i).css("color","#EAEAEA")
+									.css("background","#FFFFFF");
+						$('#S_tim'+i).css("pointer-events","none");
+					}else if(HH1==HH2){
+						if(mm1<mm2){
+							$('#S_tim'+i)
+										.css("color","#EAEAEA")
+										.css("background","#FFFFFF");
+							$('#S_tim'+i).css("pointer-events","none");
+						}
+					}
+				}else{
+					$('#S_tim'+i).css("border","solid 2px white")
+								.css("background","white")
+								.css("color","black");
+				}
+				
 			}
 		}
 	} 
@@ -514,7 +551,7 @@ mm2 = Number(mm2);
 		<div style="height: 300px; overflow: auto; width: 100%;" align="center">
 			<c:forEach items="${titlelist }" var="mm" varStatus="no">
 				<div class="S_mov" id="S_mov${no.index }"
-					onclick="Check1('${mm.title }', '${mm.poster }', ${mm.mId }, ${no.index})">
+					onclick="Check1('${mm.title }', '${mm.poster }', ${mm.mId })">
 					<img src="../resources/imgs/
 						<c:choose>
 							<c:when test="${mm.grade ==18}">grade_18.png</c:when>
@@ -585,11 +622,11 @@ mm2 = Number(mm2);
 		</div>
 		<hr>
 		<c:forEach begin="1" end="20" var="no">
-			<div class="S_time${no }" onclick="Check3(${no})"
-				style="float: left;cursor: pointer;" align="center">
+			<div class="S_time${no }" 
+				style="float: left; " align="center">
 				<div id="S_ti${no }">
 					<div id="S_scNum${no }" style="font-size: 12px;"></div>
-					<div id="S_tim${no }" style="font-size: 17px; padding:0 3px;"></div> 
+					<div id="S_tim${no }" onclick="Check3(${no})" style=" cursor:pointer;font-size: 17px; padding:0 3px;"></div> 
 					<div id="S_seat${no }" style="font-size: 14px;"></div>
 				</div>
 			</div>
