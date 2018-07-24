@@ -19,14 +19,14 @@ html {
 .S_choice {
 	float: left;
 	margin: 10px 0;
-	width: 300px;
+	
 } 
 
 .S_cho {
 	height: 95%;
 	float :left;
 	color : #F6F6F6;
-	margin-left:20px;
+	margin-left:30px;
 }
 .S_mov{
 	font-size: 17px; 
@@ -40,6 +40,7 @@ html {
 .S_mon{
 	font-size:30px;
 	margin-bottom: 5px;
+	margin-right:10px;
 }
 .S_year{
 	font-size:13px;
@@ -52,23 +53,23 @@ html {
 	margin-left: 10px;
 }
 #S_movie{
-	width : 40%;
+	width : 120px;
 	font-size: 15px; 
 	float: left; 
 	margin-top: 50px; 
 	margin-left: 15px; 
 }
 #S_date{
-	width : 55%;
+	width : 150px;
 	font-size: 15px; 
 	margin-top: 45px; 
 }
 #S_scNum{
-	width : 55%;
+	width : 150px;
 	font-size: 15px; 
 }
 #S_time{
-	width : 55%;
+	width : 150px;
 	font-size: 15px; 
 }
 #S_btn{
@@ -78,7 +79,7 @@ html {
 	margin-top: 30px; 
 	padding:20px 10px; 
 	text-align:center;  
-	width: 120px; 
+	width: 110px; 
 	float: left;
 }
 #S_btn:hover{
@@ -544,7 +545,7 @@ mm2 = Number(mm2);
 
 	<!-- 영화  -->
 
-	<div class="S_choice" style="margin-right: 50px;">
+	<div class="S_choice" style="width: 300px; margin-right: 4%; margin-left :6%;">
 		<div align="center">
 			<h2>영화</h2> 
 		</div>
@@ -573,7 +574,7 @@ mm2 = Number(mm2);
 
 	<!--날짜 -->
 
-	<div class="S_choice" style="overflow: auto; margin-right: 50px;">
+	<div class="S_choice" style="width: 20%; overflow: auto; margin-right: 4%;">
 		<div id="S_da" align="center">
 			<h2>날짜</h2>
 		</div>
@@ -601,9 +602,8 @@ mm2 = Number(mm2);
 						style="cursor: pointer; padding: 3px 0;">
 						
 						<div id="S_dateday" style="width:60px; height: 25px; line-height: 25px;" align="center">
-							<div style="font-size: 20px; float: left;">${dd.split(':')[0].split('-')[2] }</div>
-							<div style="font-size: 15px;
-							">${dd.split(':')[1]}</div> 
+							<div style="font-size: 20px; float: left; width:25px; margin-left:4px;">${dd.split(':')[0].split('-')[2] }</div>
+							<div style="font-size: 15px; ">${dd.split(':')[1]}</div> 
 						</div>
 					
 					</div>
@@ -617,11 +617,14 @@ mm2 = Number(mm2);
 
 	<!-- 시간 -->
 
-	<div class="S_choice" style="overflow: auto;">
+	<div class="S_choice" style="overflow: auto; width :290px;">
 		<div id="S_tim" align="center">
 			<h2>시간</h2>
 		</div>
 		<hr>
+		
+		<div style="height: 300px; overflow: auto; width: 100%;"
+				align="center">
 		<c:forEach begin="1" end="20" var="no">
 			<div class="S_time${no }" 
 				style="float: left; " align="center">
@@ -635,6 +638,7 @@ mm2 = Number(mm2);
 				<div style="clear: both"></div>
 			</c:if>
 		</c:forEach>
+		</div>
 	</div>
 	<div style="clear: both"></div>
 
@@ -643,13 +647,13 @@ mm2 = Number(mm2);
 
 
 	<!-- 선택된 값 -->
-	<div style="background: #353535; height: 130px; width: 90%;">
+	<div style="background: #353535; height: 130px; width:100%;">
 		<div class="S_cho" style="padding : 0 30px; width :35%;" >   
 			<div id="S_movieimg"></div>
 			<div id="S_movie">영화선택</div>
 		</div>
 
-		<input type="text" name="mid" id="mid" value="-1">
+		<input type="hidden" name="mid" id="mid" value="-1">
 
 		<div class="S_cho" style="width : 30%;  margin-left:20px;"> 
 			<div id="S_date">날짜선택</div>
@@ -657,7 +661,7 @@ mm2 = Number(mm2);
 			<div id="S_scNum"></div>
 		</div>
 		
-		<input type="text" name="sid" id="sid" value="-1">
+		<input type="hidden" name="sid" id="sid" value="-1">
 		<div class="S_cho" style="margin-left: 50px;">
 		<input type="button" class="btn btn-danger"  onclick="Chk()"
 			id="S_btn" value="좌석선택" >
