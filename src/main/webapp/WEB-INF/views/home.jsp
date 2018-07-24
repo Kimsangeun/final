@@ -74,10 +74,10 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="/proj/">크크크크</a>
+						<a class="navbar-brand" href="/proj/"><img src="/proj/resources/imgs/cinemalogo.png" width="150px"/></a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
-						<ul class="nav navbar-nav">
+						<ul class="nav navbar-nav"> 
 							<li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown" role="button" aria-expanded="false">영화
 									<span class="caret"></span>

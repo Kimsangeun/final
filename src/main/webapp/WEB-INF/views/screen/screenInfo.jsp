@@ -24,7 +24,7 @@
 			<li><a href="#third">3관</a></li>
 			<li><a href="#fourth">4관</a></li>
 		</ul>
-	</div>너무 코앞인가.
+	</div>
 	
 	</nav>
 	<div class="tab-content" style="margin-top: 80px;">
