@@ -75,7 +75,7 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="/proj/"><img src="/proj/resources/imgs/cinemalogo.png" width="150px"/></a>
+						<a class="navbar-brand" href="/proj/"><img src="/proj/resources/imgs/cinemalogo.png" width="130px"/></a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav"> 
