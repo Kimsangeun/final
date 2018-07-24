@@ -14,7 +14,24 @@ $('.slider').bxSlider({
 });
 });
 </script>
+<style>
 
+.ellipsis{
+
+ overflow: hidden;
+
+ text-overflow: ellipsis;
+
+ display: -webkit-box;
+
+ -webkit-line-clamp: 1; /* 라인수 */
+
+ -webkit-box-orient: vertical;
+
+ word-wrap:break-word; 
+
+} 
+</style>
 
 
 
@@ -28,54 +45,6 @@ $('.slider').bxSlider({
 						
 </div>
 
-	<%-- <div id="myCarousel" class="carousel slide hidden-xs" data-ride="carousel">
-		<!-- Indicators -->
-		<ol class="carousel-indicators">
-			<c:forEach items="${event}" var="mm" varStatus="no">
-			<li data-target="#myCarousel" data-slide-to="${no.index }" class="${no.index eq 0 ? 'active' : 'a' }"></li>
-			</c:forEach>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<c:forEach items="${event}" var="mm" varStatus="no">
-				<div class="${no.index eq 0 ? 'item active' : 'item' }">
-				<img class="first-slide" 
-						src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"
-						alt="slide">
-					<a href="/proj/info/detail?bid=${mm.bid }"><img class="first-slide"
-						src="${pageContext.request.contextPath}\resources\board/${mm.upfile}"
-						alt="slide"></a>
-					<div class="container">
-						<div class="carousel-caption">
-							<h1>${mm.title}</h1>
-							<p>${mm.title}
-							</p>
-							<!-- <p>
-								<a class="btn btn-lg btn-primary" href="#" role="button">
-								이벤트보러가기</a>
-							</p> -->
-						</div>
-					</div>
-
-					<div>${mm.title}</div>
-				</div>
-			</c:forEach>
-		</div>
-		
-		<a class="left carousel-control" href="#myCarousel" role="button"
-			data-slide="prev"> <span class="glyphicon glyphicon-chevron-left"
-			aria-hidden="true"></span> <span class="sr-only">Previous</span>
-		</a> <a class="right carousel-control" href="#myCarousel" role="button"
-			data-slide="next"> <span
-			class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	</div> --%>
-	
-	<!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-    
- 	<!-- <div class="container-fluid"> -->
  	
 		
     <div class="container marketing" style="margin-top :50px">
@@ -96,7 +65,7 @@ $('.slider').bxSlider({
         		<a href="/proj/movie/detailMovie?mid=${mm.mid }">
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
         		</a>
-        		<p class="hidden-xs h3">${mm.title}</p>
+        		<p class="hidden-xs h3 ellipsis">${mm.title}</p>
 				<div class="fixedStar" id="Star_${no.index }"></div>
 				<script type="text/javascript">
 				$(function() {
