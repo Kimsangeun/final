@@ -74,6 +74,85 @@
 		
 
 	});
+	
+	$(function() {
+		$("#deadlineGo").click(function() {
+	    	var userid = '${mem.id}';
+	    	if(userid==''){
+		    	   $('#noLoginModal').modal();
+		    	   return false;
+		    }
+
+	    	var godata={mid:${param.mid}};
+	    	
+	    	$.ajax({
+	            async: false,
+	            type : 'POST',
+	            data : godata,
+	            url : "/proj/ajax/deadlineChk",
+	            success : function(data) {
+	                if (data.chk > 0) {
+	                	$("#noLoginModal").modal();
+
+	                } else {
+	                	location.href="/proj/admin/deadlineReg?mid="+${param.mid};
+	                    //document.getElementById('reviewInsert').submit();
+	                }
+	            },
+	            error : function(error) {
+	                
+	                alert("error : " + error);
+	            }
+	        });
+	    	
+	  
+	    	
+	    });
+		
+	    $("#reservIn").click(function() {
+	    	var userid = '${mem.id}';
+	    	if(userid==''){
+		    	   $('#noLoginModal').modal();
+		    	   return false;
+		    }
+	    	
+	    	location.href="/proj/reservation/reser";
+	    	
+	    });
+	    
+	    $("#reviewIn").click(function() {
+	        
+	        //userid 를 param.
+	       
+	       var userid = '${mem.id}';
+	       var mid = ${moviedata['movie'].mid};
+	       var godata = {id:'${mem.id}',mid:${moviedata['movie'].mid}};
+	       
+	       if(userid==''){
+	    	   $('#noLoginModal').modal();
+	    	   return false;
+	       }
+	       
+	         $.ajax({
+	            async: false,
+	            type : 'POST',
+	            data : godata,
+	            url : "/proj/ajax/reviewChk",
+	            success : function(data) {
+	                if (data.chk > 0) {
+	                	$("#reviewModal").modal();
+
+	                } else {
+	                    document.getElementById('reviewInsert').submit();
+	                }
+	            },
+	            error : function(error) {
+	                
+	                alert("error : " + error);
+	            }
+	        });
+	    });
+	});
 	/* $('#starscore').click({
 	 console.log('gg');
 	 }); */
@@ -127,10 +206,14 @@
 					src="${pageContext.request.contextPath}\resources\imgs/movie_icon_${moviedata['movie'].grade}.gif" />
 				${moviedata['movie'].title }
 				<c:if test="${mem.id eq 'admin' }">
+					<div>
 					<input class="btn btn-danger" type="button" value="삭제"
 						onclick="location.href='/proj/admin/deleteMovie?mid=${param.mid}'">
 					<input class="btn btn-warning" type="button" value="수정"
 						onclick="location.href='/proj/admin/modifyForm?mid=${param.mid}'">
+					<input id="deadlineGo" class="btn btn-info" type="button" value="마감">
+					<!-- onclick="location.href='/proj/admin/deadlineReg?mid=${param.mid}'" -->
+					</div>
 				</c:if>
 			</p>
 		</div>
@@ -140,7 +223,7 @@
 				<div class="col-md-4 col-sm-4 col-xs-4" id="fixedStar"></div>
 				<div class="h3 col-md-6 col-sm-4 col-xs-4" id="hint1"></div>
 				<a class="btn btn-danger col-md-2 col-sm-4 col-xs-4"
-					href="/proj/reservation/reser" role="button">예매하기 &raquo;</a>
+					href="#" id="reservIn" role="button">예매하기 &raquo;</a>
 				<!-- <button onclick="location.href('proj/reservation/reser')"
 				class="btn btn-danger col-md-2 col-sm-4 col-xs-4">예매하기</button> -->
 			</div>
@@ -196,7 +279,7 @@
 
 
 <span id="counter"><small>0/200</small></span>
-<form action="reviewInsert" method="POST">
+<form id="reviewInsert" action="reviewInsert" method="POST">
 	<div class="row qq">
 		<div class="q form-group col-lg-2 col-xs-3 vertical-align">
 			<div class=" center-block" id="starscore"></div>
@@ -209,8 +292,28 @@
 				placeholder="스포일러는 삭제될 수 있습니다." maxlength="200"></textarea>
 		</div>
 		<div style="padding: 0 0 0 0;" class="q form-group col-lg-1 col-xs-1">
-			<button style="width: 100%; height: 100%" class="btn btn-default"
-				type="submit">작성</button>
+			<button id="reviewIn" style="width: 100%; height: 100%"
+				class="btn btn-default" type="button">작성</button>
+		</div>
+	</div>
+	<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog"
+		aria-labelledby="reviewModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="reviewModalLabel">삭제</h4>
+				</div>
+				<div class="modal-body">이전에 등록한 리뷰는 삭제됍니다. 그래도 등록하시겠습니까?</div>
+				<div class="modal-footer">
+					<button type="button" onclick="submit()" class="btn btn-default"
+						data-dismiss="modal">네</button>
+					<button type="button" data-dismiss="modal" class="btn">아니오</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	<fmt:formatNumber var="ss" value="${scor}" pattern="#.#" />
@@ -232,12 +335,12 @@
 						<form id="deleteReview" action="deleteReview" method="post">
 
 							<button type="button" class="btn btn-danger btn-xs"
-								data-toggle="modal" data-target="#myModal">
+								data-toggle="modal" data-target="#deleteModal">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
 
-							<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-								aria-labelledby="myModalLabel" aria-hidden="true">
+							<div class="modal fade" id="deleteModal" tabindex="-1"
+								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
 									<div class="modal-content">
 										<div class="modal-header">

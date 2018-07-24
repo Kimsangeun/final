@@ -87,6 +87,7 @@ public class AdminController {
 		if(service.equals("deleteMovie")) {
 			res = "admin/alert";
 		}
+		
 
 		return res;
 	}
@@ -100,7 +101,7 @@ public class AdminController {
 		//		System.out.println(vo);
 
 		if(service.equals("insert")||service.equals("insertMovie")
-				||service.equals("modifyReg")) {
+				||service.equals("modifyReg")||service.equals("deadlineReg")) {
 			res = "admin/alert";
 			System.out.println("zzzz");
 			
@@ -290,7 +291,7 @@ public class AdminController {
 			movieDao.modifyMovie(mvo);
 
 			model.addAttribute("url", "/proj/movie/detailMovie?mid="+mvo.getMid());
-			model.addAttribute("msg", mvo.getTitle()+"수정완료");
+			model.addAttribute("msg", mvo.getTitle()+" 수정완료");
 
 		case "detailMovie":
 			System.out.println(mvo);
@@ -311,6 +312,15 @@ public class AdminController {
 			}
 			mapp.put("movie", movieDao.list());
 			res = mapp;
+			break;
+		
+		case "deadlineReg":
+
+			System.out.println("데드데드");
+			movieDao.movieDeadline(mvo);
+			model.addAttribute("url", "/proj/movie/detailMovie?mid="+mvo.getMid());
+			model.addAttribute("msg", mvo.getTitle()+" 마감완료");
+			
 			break;
 
 		}

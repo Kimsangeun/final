@@ -1,5 +1,7 @@
 package com.jhta.proj.model.admin;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -60,6 +62,30 @@ public class MovieDAO {
 	public Object boxoffice() {
 
 		return sessionTemplate.selectList("adminMapper.boxoffice");
+	}
+	
+	public Object movieDeadline(MovieVO vo) {	//영화마감
+		return sessionTemplate.update("adminMapper.movieDeadline", vo);
+	}
+	
+	public Object movieDeadlineChk(Map<String, Object> map) {
+
+		
+		if((int)sessionTemplate.selectOne("adminMapper.movieDeadlineChk",map)>=1) {
+			map.put("chk", 1);
+		}
+		
+		return map;
+	}
+	
+	public Object reviewChk(Map<String, Object> map) {
+
+		
+		if((int)sessionTemplate.selectOne("adminMapper.reviewChk",map)>=1) {
+			map.put("chk", 1);
+		}
+		
+		return map;
 	}
 	
 	public Object review(MovieVO vo) {

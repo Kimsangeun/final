@@ -49,10 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<where>	
 			<choose>
 				<when test="showdate!=null and showdate!=''">
-					<![CDATA[release <= TO_DATE(#{showdate},'yyyy-MM-dd')]]>
+					<![CDATA[release <= TO_DATE(#{showdate},'yyyy-MM-dd')]]> and deadline=0
 				</when>
 				<otherwise>
-					<![CDATA[release <= sysdate]]>
+					<![CDATA[release <= sysdate]]> and deadline=0
 				</otherwise>
 			</choose>
 
@@ -131,19 +131,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         </selectKey> -->
     
         insert into movie (mid,title,director, actor ,plot ,genre ,
-        grade ,nation ,poster,steelcut, release, runtime,rating) 
+        grade ,nation ,poster,steelcut, release, runtime,rating,deadline) 
         values (MOVIE_MID.NEXTVAL, #{title}, #{director},#{actor}, #{plot}, #{genre}, #{grade},
-        #{nation}, #{poster},#{steelcut},#{release},#{runtime},0) 
+        #{nation}, #{poster},#{steelcut},#{release},#{runtime},0,0) 
     </insert>
     
-    <insert id="movieModify" parameterType="movieVo">
+    <update id="movieModify" parameterType="movieVo">
     
     	update movie set title=#{title}, director = #{director}, actor = #{actor},
     	plot = #{plot}, genre = #{genre}, grade = #{grade}, nation = #{nation},
     	poster = #{poster}, steelcut = #{steelcut}, release = #{release},
     	runtime = #{runtime} where mid = #{mid} 
     
-    </insert>
+    </update>
+    
+    <update  id="movieDeadline" parameterType="movieVo">
+    	update movie set deadline=1 where mid=#{mid}
+    </update>
+    
+    <select id="movieDeadlineChk" parameterType="movieVo" resultType="java.lang.Integer">
+    	select count(*) from screeninfo where mstart>sysdate and mid=#{mid}
+    </select>
     
     <select id="movieDetail" resultType="movieVo" parameterType="movieVo">
         select * from movie where mid = #{mid}
@@ -181,10 +189,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!--  -->
 	
-	<!-- 빡스오피수 & 영화정보-->
+	<!-- 빡스오피수 & 영화정보--><!-- 날짜 추가헤ㅐ줘야ㅐ -->
 	<select id="boxoffice" resultType="movieVo">
 		SELECT A.*, Round(nvl(B.bb/C.cc*100,0),2) as bookingRate
-		FROM (SELECT * FROM MOVIE) A,
+		FROM (SELECT * FROM MOVIE where deadline=0) A,
 		      (select mid,count(*) as bb from reser group by mid having count(*) >= 0) B,
 		      (select count(*)as cc from reser) C
 		WHERE A.mid = b.mid(+)
@@ -199,16 +207,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  -->
 	
 	<!-- 리뷰 -->
+		<!-- 영화에 이미등록한 리뷰있는지 체크 -->
+	<select id="reviewChk" parameterType="map" resultType="java.lang.Integer">
+		SELECT count(*) from review where mid = #{mid} and id = #{id}
+	</select>
+	
 		<!-- 리뷰가져오기 -->
 	<select id="review" parameterType="movieVo" resultType="reviewVo">
 		SELECT * from review where mid = #{mid} order by reg_date desc 
 	</select>
 	
 		<!-- 리뷰등록 -->
-	<insert id="reviewInsert" parameterType="reviewVo">
-		insert into review (mid,id,reg_date,score,review) 
-        values (#{mid},#{id},sysdate,#{score},#{review}) 
-	</insert>
+	<update id="reviewInsert" parameterType="reviewVo">
+		merge into review 
+		using DUAL 
+		on (id=#{id} and mid=#{mid})
+		when matched then 
+		update set review=#{review}, reg_date=sysdate, score=#{score}
+		when not matched then 
+		insert (id,mid,reg_date,review,score) values (#{id},#{mid},sysdate,#{review},#{score} )
+		<!-- insert into review (mid,id,reg_date,score,review) 
+        values (#{mid},#{id},sysdate,#{score},#{review})  -->
+	</update>
 	
 		<!-- 삭제전 리뷰가 있는지 확인 -->
 	<select id="deleteChk" parameterType="reviewVo" resultType="reviewVo">
@@ -244,7 +264,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 영화 -->
 	<select id="movieList" resultType="movieVo" parameterType="boardVo" >
 	select * from
-		(select rownum rnum, tt.* from(select * from movie) tt)
+		(select rownum rnum, tt.* from(select * from movie order by release) tt)
 		 <![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
 	</select>
 	
