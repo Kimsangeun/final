@@ -74,6 +74,9 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 
 }
 }
+@media screen and (max-width : 768px){
+
+}
 </style>
 
 <!-- NAVBAR
@@ -93,13 +96,13 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 								class="icon-bar"></span>
 								
 						</button>
-						<a class="hidden-lg navbar-brand" href="/proj/">
-							<img src="/proj/resources/imgs/cinemalogo.png" width="130px"/>
+						<a class="hidden-sm hidden-md hidden-lg navbar-brand" href="/proj/">
+							<img src="/proj/resources/imgs/cinemalogo.png" width="130px"/></a>
 						
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav"> 
-						<li class="hidden-xs hidden-sm"><a class="navbar-brand" href="/proj/">
+						<li class="hidden-xs "><a class="navbar-brand" href="/proj/">
 							<img src="/proj/resources/imgs/cinemalogo.png" width="130px"/>
 							</a>
 						</li>

@@ -12,9 +12,10 @@
 <script>
 
 </script>
+<div class="page-header">
+  <h1>회원 목록<small></small></h1>
+</div>
 
-<div style="margin-top:50px"><h2>회원목록</h2></div>
-  <hr>
 <div class="container">
 <table class="table table-hover" >
 

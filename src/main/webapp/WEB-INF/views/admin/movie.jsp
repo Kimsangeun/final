@@ -17,8 +17,9 @@
 </script>
 
 
-<div style="margin-top:50px"><h2>영화목록</h2></div>
-  <hr>
+<div class="page-header">
+  <h1>영화관리 <small></small></h1>
+</div>
 <div class="container">
 <!-- <input type="button" value="추가" onclick="location.href='insertMovieForm'"> -->
 <table class="table table-hover" >

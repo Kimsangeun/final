@@ -49,12 +49,15 @@ input[type="time"]::-webkit-clear-button {
 
 </style>
 
-<div style="margin-top:50px"><h2>상영시간표</h2></div>
-  <hr>
-<div class="container">
+
 <fmt:formatDate var="mindate" value="<%= new Date(new Date().getTime() + 2*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
 <fmt:formatDate var="maxdate" value="<%= new Date(new Date().getTime() + 20*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
-<p class="h1">${param.mstart eq null ? mindate : param.mstart}<p>	
+<%-- <p class="h1">${param.mstart eq null ? mindate : param.mstart}<p>	 --%>
+<div class="page-header">
+  <h1>상영시간표 <small>${param.mstart eq null ? mindate : param.mstart}</small></h1>
+</div>
+<div class="container">
+
 <form action="?" >
 <div class="form-group">
 	<label for="tpick">날짜</label>

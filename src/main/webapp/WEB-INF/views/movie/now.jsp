@@ -26,7 +26,42 @@
 	     $(this).height(maxHeight);
 	   });
 	 }); */
+	 $(document).ready(function(){
+		 
+		 var aa = 0;
+		 console.log('${moviedata[1]}');
+		/*  aa.sort(function(a,b){
+			 return a.rating - b.rating;
+		 });
+		 console.log(aa);
+		 console.log('zz'); */
+		/*   $('.order').click(function(){
+		     var fruitName = $('ul').children('li').get(); //리스트의 자식엘리먼트를 가져와 변수에 저장
+		     fruitName.sort(function(a,b){ // 배열변수? fruitName에 sort함수를 호출/ a,b에 할당
+		          var val1 =$(a).text().toUpperCase(); // 배열의 엘리먼트들을 대문자로 변경
+		          var val2 =$(b).text().toUpperCase();
+		          return(val1<val2)?-1:(val1>val2)?1:0; //★ 
+		       /*
+		* 첫번째 값 < 두번째 값 : 0보다 작은 값을 반환 : 두번째 값을 아래로
+		* 첫번째 값 = 두번째 값 : 0을 반환 : 정렬순서를 그대로
+		* 첫번째 값  > 두번째 값 : 0보다 큰 값을 반환 : 첫번째 값을 아래로
+		★ 를 if문으로 풀어보자면 다음과 같다.
 
+		    if (val1 < val2)
+		    {
+		         valStr = -1;
+		    }else
+		    {
+		          if (val1 > val2)
+		          {
+		               valStr = 1;
+		          }else{
+		               valStr = 0;
+		          }
+		    } 
+		    */
+
+		});
 
 
 $(window).on('load', function () {
