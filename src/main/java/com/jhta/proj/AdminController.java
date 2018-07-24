@@ -125,7 +125,7 @@ public class AdminController {
 		
 		if(service.equals("member")||service.equals("resv")||service.equals("movie")) {
 			/* * * * * * * * * 페이징.* * * * * * * * * * * * * * * */
-			int page = 1, limit = 10, pageLimit = 4;
+			int page = 1, limit = 10, pageLimit = 10;
 			if (request.getParameter("page") != null && !request.getParameter("page").equals("")) {
 				page = Integer.parseInt(request.getParameter("page"));
 			}

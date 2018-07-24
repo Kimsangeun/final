@@ -53,11 +53,19 @@
 <div class="center-block">
 <nav>
   <ul class="pagination">
-    <li class="${startPage eq 1 ? 'disabled': ''}">
+  	<c:if test="${startPage >1 }">
+	<li><a href="movie?page=1" aria-label="Previous"><span aria-hidden="true">[처음]</span></a></li>
+	<li>
       <a href="movie?page=${startPage-1 }" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
+	</c:if>
+    <%-- <li>
+      <a href="movie?page=${startPage-1 }" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li> --%>
     
     <c:forEach var="i" begin="${startPage }" end="${endPage }">
 	    <c:choose>
@@ -69,9 +77,15 @@
 			</c:otherwise>
 		</c:choose>
     </c:forEach>
-    <li class="${endPage<totalPage ? 'disabled':''}">
+    <c:if test="${endPage<totalPage}"></c:if>
+    <li>
       <a href="movie?page=${endPage+1 }" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+    <li>
+      <a href="movie?page=${totalPage }" aria-label="Next">
+        <span aria-hidden="true">마지막</span>
       </a>
     </li>
   </ul>
