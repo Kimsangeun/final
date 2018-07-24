@@ -47,7 +47,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		movie.mid ,
 		movie.grade as grade 
 		from screeninfo, movie
-		where screeninfo.mid = movie.mid
+		<![CDATA[
+		where screeninfo.mid = movie.mid  and screeninfo.mstart >= sysdate and screeninfo.mstart < sysdate+13
+		
+		]]>
+		
 		order by movtitle asc, mtime asc
 	</select>
 	

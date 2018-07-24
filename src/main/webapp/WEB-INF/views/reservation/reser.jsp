@@ -290,6 +290,9 @@ mm2 = Number(mm2);
 	
    	
 	function Check2(ddate, day){
+		
+		document.getElementById("sid").value= '-1';
+		
 		//alert(mid)
 		$('#S_time').html('시간선택');
 		$('#S_scNum').html('');
@@ -526,9 +529,9 @@ mm2 = Number(mm2);
 	
 	function Chk(){
 		if(document.getElementById("mid").value == -1){
-			alert('영화를 선택해 주세요.')
+			alert('영화를 선택해 주세요.');
 		}else if(document.getElementById("sid").value == -1){
-			alert('시간을 선택해 주세요.')
+			alert('시간을 선택해 주세요.');
 		}else{
 			document.screenchoiceForm.submit();
 		}
@@ -612,8 +615,6 @@ mm2 = Number(mm2);
 
 	</div>
 
-
-
 	<!-- 시간 -->
 
 	<div class="S_choice" style="overflow: auto;">
@@ -648,7 +649,7 @@ mm2 = Number(mm2);
 			<div id="S_movie">영화선택</div>
 		</div>
 
-		<input type="hidden" name="mid" id="mid" value="-1">
+		<input type="text" name="mid" id="mid" value="-1">
 
 		<div class="S_cho" style="width : 30%;  margin-left:20px;"> 
 			<div id="S_date">날짜선택</div>
@@ -656,10 +657,10 @@ mm2 = Number(mm2);
 			<div id="S_scNum"></div>
 		</div>
 		
-		<input type="hidden" name="sid" id="sid" value="-1">
+		<input type="text" name="sid" id="sid" value="-1">
 		<div class="S_cho" style="margin-left: 50px;">
-		<Button class="btn btn-danger"  onclick="Chk()"
-			id="S_btn" >좌석선택</Button>
+		<input type="button" class="btn btn-danger"  onclick="Chk()"
+			id="S_btn" value="좌석선택" >
 		</div>
 		<div style="clear: both"></div>
 	</div>
