@@ -106,6 +106,9 @@ public class MovieVO {
 	}
 	public String getPlot() {
 		
+		if(plot==null) {
+			plot="";
+		}
 		/*plot.replaceAll("\n", "<br>");*/
 		return plot.replaceAll("\n", "<br>");
 	}

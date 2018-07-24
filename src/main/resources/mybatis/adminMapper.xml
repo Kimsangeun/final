@@ -240,7 +240,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		      (select * from reser,screeninfo 
 		      where reser.sid = screeninfo.sid 
 		      and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1))) C
-		WHERE A.mid = b.mid(+) order by A.release desc
+		WHERE A.mid = b.mid(+) order by A.release
 		
 	</select>
 	

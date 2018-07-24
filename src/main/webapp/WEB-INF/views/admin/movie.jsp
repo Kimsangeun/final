@@ -17,7 +17,8 @@
 </script>
 
 
-
+<div style="margin-top:50px"><h2>영화목록</h2></div>
+  <hr>
 <div class="container">
 <!-- <input type="button" value="추가" onclick="location.href='insertMovieForm'"> -->
 <table class="table table-hover" >
@@ -51,8 +52,8 @@
 <div class="center-block">
 <nav>
   <ul class="pagination">
-    <li>
-      <a href="#" aria-label="Previous">
+    <li class="${startPage eq 1 ? 'disabled': ''}">
+      <a href="movie?page=${startPage-1 }" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
@@ -67,8 +68,8 @@
 			</c:otherwise>
 		</c:choose>
     </c:forEach>
-    <li>
-      <a href="#" aria-label="Next">
+    <li class="${endPage<totalPage ? 'disabled':''}">
+      <a href="movie?page=${endPage+1 }" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
