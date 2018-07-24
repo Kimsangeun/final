@@ -67,7 +67,8 @@
   widht:50px
   }
   </style>
-
+  <div style="margin-top:50px"><h2>정산</h2></div>
+  <hr>
  <div style="margin-top: 50px" class="row">
 	<form action="?" class="form-inline">
 	<div class="form-group">

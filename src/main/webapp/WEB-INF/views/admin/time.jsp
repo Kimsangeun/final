@@ -49,6 +49,8 @@ input[type="time"]::-webkit-clear-button {
 
 </style>
 
+<div style="margin-top:50px"><h2>상영시간표</h2></div>
+  <hr>
 <div class="container">
 <fmt:formatDate var="mindate" value="<%= new Date(new Date().getTime() + 2*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
 <fmt:formatDate var="maxdate" value="<%= new Date(new Date().getTime() + 20*60*60*24*1000) %>" pattern="yyyy-MM-dd"/>
