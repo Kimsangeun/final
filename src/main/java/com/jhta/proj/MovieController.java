@@ -2,6 +2,7 @@ package com.jhta.proj;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -89,7 +90,7 @@ public class MovieController {
 	public String ciiPost(@PathVariable String service,ReviewVO rvo, Model model) {
 		System.out.println(rvo);
 		if(service.equals("reviewInsert")) {
-			
+
 			movieDao.reviewInsert(rvo);
 			movieDao.scoreUpdate(rvo);
 		}

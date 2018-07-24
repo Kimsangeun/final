@@ -11,12 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.json.simple.JSONObject;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.proj.model.MemberDAO;
+import com.jhta.proj.model.admin.MovieDAO;
 import com.jhta.proj.util.Coolsms;
 import com.jhta.proj.util.MakeNumber;
 
@@ -25,6 +27,9 @@ public class AjaxController {
 	
 	@Resource
 	MemberDAO dao;
+	
+	@Resource
+	MovieDAO mdao;
 	
 	@Resource
 	MakeNumber cerf;
@@ -141,6 +146,36 @@ public class AjaxController {
 			map.put("chk", "N");
 		}
 		*/
+		return map;
+		
+	}
+	
+	@RequestMapping(value="/ajax/reviewChk", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> reviewChk(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
+			throws NoPermissionException{
+		//@RequestParam(value="userid") String id
+		System.out.println("리뷰췍"+map);
+		mdao.reviewChk(map);
+		
+		System.out.println("리뷰"+mdao.reviewChk(map));
+		//dao.ajaxemailChk(map);
+		
+		return map;
+		
+	}
+	
+	@RequestMapping(value="/ajax/deadlineChk", method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, Object> deadlineChk(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
+			throws NoPermissionException{
+		//@RequestParam(value="userid") String id
+		System.out.println("데드췍"+map);
+		mdao.reviewChk(map);
+		
+		System.out.println("리뷰"+mdao.reviewChk(map));
+		//dao.ajaxemailChk(map);
+		
 		return map;
 		
 	}

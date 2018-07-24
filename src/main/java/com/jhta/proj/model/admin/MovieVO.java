@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @Alias("movieVo")//as
 public class MovieVO {
-	Integer mid,runtime,rating;
+	Integer mid,runtime,rating,deadline;
 	String title,actor,director,nation,genre,plot,poster,steelcut,grade
 	,realpath,bookingRate;//예매율
 	
@@ -22,6 +22,12 @@ public class MovieVO {
 	
 	
 	
+	public Integer getDeadline() {
+		return deadline;
+	}
+	public void setDeadline(Integer deadline) {
+		this.deadline = deadline;
+	}
 	public ArrayList<String> getGen() {
 		return gen;
 	}
@@ -165,7 +171,7 @@ public class MovieVO {
 				+ actor + ", director=" + director + ", nation=" + nation + ", genre=" + genre + ", plot=" + plot
 				+ ", poster=" + poster + ", steelcut=" + steelcut + ", grade=" + grade + ", poster1=" + poster1
 				+ ", release=" + release +", steelcuts"
-				+ steelcuts+", genres="+genres+", gen="+gen
+				+ steelcuts+", genres="+genres+", gen="+gen+", deadline="+deadline
 				+ "]";
 	}
 	

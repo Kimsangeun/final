@@ -168,9 +168,27 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 		</c:otherwise>
 	</c:choose>
 	
-	
+	<!-- 로그인 모달~~~ -->
+	<div class="modal fade" id="noLoginModal" tabindex="-1" role="dialog"
+		aria-labelledby="noLoginModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="noLoginModalLabel">로그인 필요</h4>
+				</div>
+				<div class="modal-body">로그인 후 이용 가능한 서비스 입니다.</div>
+				<div class="modal-footer">
+					<button id="noLoginModalOk" type="button" data-dismiss="modal" class="btn btn-primary">확인</button>
+				</div>
+			</div>
+		</div>
 	</div>
-
+	</div>
+	
 
 
 
