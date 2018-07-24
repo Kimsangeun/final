@@ -56,6 +56,7 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
     html, body { height:100%} 
     </style>
 
+
 </head>
 
 <!-- NAVBAR
@@ -118,14 +119,18 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 						<jsp:include page="mypage/topmenu.jsp"></jsp:include>
 						<c:choose>
 							<c:when test="${mem.id == null }">
-							<li class="dropdown"><a href="#" class="dropdown-toggle"
+							<%-- <li class="dropdown"><a href="#" class="dropdown-toggle"
 								data-toggle="dropdown" role="button" aria-expanded="false">로그인
 									<span class="caret"></span>
 							</a>
 								<ul class="dropdown-menu" role="menu">
 									<li><jsp:include page="inc/hightop2.jsp" /></li>
 
-								</ul></li>
+								</ul></li> --%>
+								<li data-toggle="modal" data-target="#myModal"><a href="#">로그인</a></li>
+								
+								<!-- Modal -->
+								  
 							</c:when>
 							<c:otherwise>
 							<li class="dropdown"><a href="/proj/logOut" 
@@ -143,8 +148,12 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 		</div>
 	</div>
 
-	<!-- Carousel -->
+
+
+
+	<!-- 본체 -->
 	<div style="margin-top :50px">
+	<jsp:include page="inc/login.jsp"/>
 	<c:choose>
 		<c:when test="${main==null}">
 			<jsp:include page="inc/contents2.jsp" />
@@ -158,6 +167,8 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 			</div>
 		</c:otherwise>
 	</c:choose>
+	
+	
 	</div>
 
 
