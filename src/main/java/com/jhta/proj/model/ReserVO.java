@@ -12,7 +12,7 @@ public class ReserVO {
 	
 	String id, seatNum, accNum,coc, title;
 	int rId, cost, sId, mId, cnt, scNum; 
-	Date mstart;	
+	Date mstart;
 	
 	public String getTitle() {
 		return title;
