@@ -151,12 +151,15 @@ mm2 = Number(mm2);
 			} 
 		}
 		for(var i = 0; i<dateStr.length; i++){
+			$('#S_tit'+i).css('padding','0px')
+						.css('margin','0px');
 			$('#S_time'+i).css('padding','0px')
 						.css('margin','0px')
 						.css('border','solid 0px');
 			$('#S_scNum'+i).css('margin','0px');
 			$('#S_seat'+i).css('margin','0px');
 			$('#S_hr'+i).html('');
+			$('#S_bor'+i).css('border','solid 0px');
 		}
 		
 		var lastT = '';
@@ -181,11 +184,10 @@ mm2 = Number(mm2);
 				}else{
 					$('#S_gradeimg'+i).html(gradeStr[i]);
 					$('#S_title'+i).html(titleStr[i]);
-					$('#S_hr'+i).html("<hr style='margin:20px 0; height :1px; background:lightgray; '>");
+					$('#S_hr'+i).html("<hr>");
 					lastT = titleStr[i];
 				}
 
-				
 				
 				var cnt = 0;
 				
@@ -216,6 +218,8 @@ mm2 = Number(mm2);
 				$('#S_time'+i)
 							.css('margin','0 6px')
 							.css('width','57px');
+				$('#S_bor'+i).css('border','solid 1px gray');
+				$('#S_tit'+i).css('margin-bottom','10px');
 				var HH1 = timeStr[i].split(':')[0];
 				HH1 = Number(HH1);
 				var mm1 = timeStr[i].split(':')[1];
@@ -233,6 +237,7 @@ mm2 = Number(mm2);
 							$('#S_time'+i).css("color","lightgray");
 							$('#S_time'+i).css("pointer-events","none");
 							$('#S_seat'+i).html('마감');
+						
 						}
 					}
 				}
@@ -301,11 +306,12 @@ mm2 = Number(mm2);
 		<div id="S_tit${no.index }" >
 			<div id="S_gradeimg${no.index }" style="float:left; width: 20px;"></div>
 			<div id="S_title${no.index }"
-				style="font-size: 20px; cursor: pointer; width:250px;" 
+				style="font-size: 20px; cursor: pointer; width:300px;" 
 				onclick="movieCheck(${no.index})" ></div>
 		</div>
+		<div id="S_hr${no.index }"></div>
 			<!-- 시간리스트(남은좌석수/ 상영관) -->
-			<div style="float: left;" >
+			<div id="S_bor${no.index }" style="float: left;" align="center">
 			<div class="S_time" id="S_time${no.index }" onclick="timeCheck(${no.index})" ></div>
 			<div class="S_scNum" id="S_scNum${no.index }" style="float:left; font-size: 13px;"></div>
 			<div class="S_seat" id="S_seat${no.index }" style="float:left; font-size: 13px;"></div>
