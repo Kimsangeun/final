@@ -18,11 +18,11 @@
 
 	<nav class="navbar navbar-default" style="width:40%">
 	<div>
-		<ul class="nav navbar-nav nav-tabs">
-			<li class="active"><a href="#first">1관</a></li>
-			<li><a href="#second">2관</a></li>
-			<li><a href="#third">3관</a></li>
-			<li><a href="#fourth">4관</a></li>
+		<ul class="nav navbar-nav nav-tabs" style="width:100%">
+			<li class="active" style="width:25%"><a href="#first">1관</a></li>
+			<li style="width:25%"><a href="#second">2관</a></li>
+			<li style="width:25%"><a href="#third">3관</a></li>
+			<li style="width:25%"><a href="#fourth" >4관</a></li>
 		</ul>
 	</div>
 	
@@ -45,9 +45,5 @@
 			<p>
 				4관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(3).img }" />
 		</div>
-
-
 	</div>
-
-
 </div>
