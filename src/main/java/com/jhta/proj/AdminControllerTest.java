@@ -37,7 +37,7 @@ import com.jhta.proj.model.admin.TimeTableVO;
 
 
 public class AdminControllerTest {
-	HttpServletRequest request;
+	HttpServletRequest request; //돼라
 	
 	Model model = new Model() {
 		@Override
