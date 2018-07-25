@@ -122,7 +122,7 @@ public class LogController {
 			sendMail.setText("임시비밀번호는"+temp+"입니다.");
 					
 			sendMail.setFrom("admin@megacinema.com", "메가시네마");
-			sendMail.setTo("liveorevil@naver.com");
+			sendMail.setTo(info.getEmail());
 			sendMail.send();
 			
 			}else {

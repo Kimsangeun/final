@@ -11,6 +11,7 @@ $('.slider').bxSlider({
 	mode: 'fade',
 	 auto: true,        // 자동 실행 여부
      autoHover: true,   // 마우스 호버시 정지 여부
+     captions: true,	// 밑에캡션
 });
 });
 </script>
@@ -36,10 +37,11 @@ $('.slider').bxSlider({
 
 
 <div class="slider">
-<c:forEach items="${event}" var="mm" varStatus="no">
+<c:forEach items="${promo}" var="mm" varStatus="no">
 
-<a href="/proj/info/detail?bid=${mm.bid }">
-<img class="img-responsive" src="${pageContext.request.contextPath}\resources\board/${mm.upfile}" alt="slide">
+<a href="/proj/movie/detailMovie?mid=${mm.cnt }">
+<img class="img-responsive" title="${mm.title }"
+src="${pageContext.request.contextPath}\resources\board/${mm.upfile}" alt="slide">
 </a>
 </c:forEach>
 						

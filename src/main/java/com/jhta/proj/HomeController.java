@@ -48,10 +48,10 @@ public class HomeController {
 	@Resource
 	AdminDAO adminDao;
 	
-	@ModelAttribute("event")
+	@ModelAttribute("promo")
 	public Object see() {
 		
-		Object res = adminDao.event();
+		Object res = adminDao.promo();
 		return res;
 	}
 	

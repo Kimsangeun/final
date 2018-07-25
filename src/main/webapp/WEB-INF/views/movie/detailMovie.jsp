@@ -92,7 +92,7 @@
 	            url : "/proj/ajax/deadlineChk",
 	            success : function(data) {
 	                if (data.chk > 0) {
-	                	$("#noLoginModal").modal();
+	                	$("#noDeleteModal").modal();
 
 	                } else {
 	                	location.href="/proj/admin/deadlineReg?mid="+${param.mid};
@@ -105,7 +105,35 @@
 	            }
 	        });
 	    	
-	  
+	    });
+		
+		$("#deleteGo").click(function() {
+	    	var userid = '${mem.id}';
+	    	if(userid==''){
+		    	   $('#noLoginModal').modal();
+		    	   return false;
+		    }
+
+	    	var godata={mid:${param.mid}};
+	    	
+	    	$.ajax({
+	            async: false,
+	            type : 'POST',
+	            data : godata,
+	            url : "/proj/ajax/deadlineChk",
+	            success : function(data) {
+	                if (data.chk > 0) {
+	                	$("#noDeleteModal").modal();
+
+	                } else {
+	                	location.href='/proj/admin/deleteMovie?mid='+${param.mid};
+	                }
+	            },
+	            error : function(error) {
+	                
+	                alert("error : " + error);
+	            }
+	        });
 	    	
 	    });
 		
@@ -194,7 +222,28 @@
 }
 </style>
 
+<!-- 삭제막기 모달~~~ -->
+	<div class="modal fade" id="noDeleteModal" tabindex="-1" role="dialog"
+		aria-labelledby="noDeleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="noLoginModalLabel">삭제 불가</h4>
+				</div>
+				<div class="modal-body">상영시간표에 영화가 존재합니다.</div>
+				<div class="modal-footer">
+					<button id="noDeleteModalOk" type="button" data-dismiss="modal" class="btn btn-primary">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
 <div class="row" style="padding-top: 100px">
+	
 	<div class="col-md-4 col-xs-12">
 		<img class="img-responsive"
 			src="${pageContext.request.contextPath}\resources\movposter/${moviedata['movie'].poster}" />
@@ -207,8 +256,7 @@
 				${moviedata['movie'].title }
 				<c:if test="${mem.id eq 'admin' }">
 					<div>
-					<input class="btn btn-danger" type="button" value="삭제"
-						onclick="location.href='/proj/admin/deleteMovie?mid=${param.mid}'">
+					<input id="deleteGo" class="btn btn-danger" type="button" value="삭제">
 					<input class="btn btn-warning" type="button" value="수정"
 						onclick="location.href='/proj/admin/modifyForm?mid=${param.mid}'">
 					<input id="deadlineGo" class="btn btn-info" type="button" value="마감">
