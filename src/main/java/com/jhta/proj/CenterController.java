@@ -20,10 +20,8 @@ import com.jhta.proj.model.BoardDAO;
 import com.jhta.proj.model.BoardVO;
 import com.jhta.proj.model.MemberVO;
 import com.jhta.proj.model.admin.MovieDAO;
-import com.jhta.proj.model.admin.MovieVO;
 import com.jhta.proj.model.admin.ScreenDAO;
 import com.jhta.proj.model.admin.TimeTableDAO;
-import com.jhta.proj.model.admin.TimeTableVO;
 
 /**
  * Handles requests for the application home page.

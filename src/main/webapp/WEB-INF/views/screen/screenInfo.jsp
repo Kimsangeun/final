@@ -16,7 +16,7 @@
 <div align="center">
 	<!-- 전체 디브 -->
 
-	<nav class="navbar navbar-default" style="width:40%">
+	<nav class="navbar navbar-default" style="width:60%">
 	<div>
 		<ul class="nav navbar-nav nav-tabs" style="width:100%">
 			<li class="active" style="width:25%"><a href="#first">1관</a></li>
@@ -27,23 +27,23 @@
 	</div>
 	
 	</nav>
-	<div class="tab-content" style="margin-top: 80px;">
+	<div class="tab-content" style="margin-top: 80px;width:60%">
 		<div class="tab-pane fade active in" id="first">
 			<p>
-				1관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(0).img }" />
+				1관 좌석배치도<br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(0).img }" />
 			</p>
 		</div>
 		<div class="tab-pane fade" id="second">
 			<p>
-				2관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(1).img }" />
+				2관 좌석배치도<br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(1).img }" />
 		</div>
 		<div class="tab-pane fade" id="third">
 			<p>
-				3관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(2).img }" />
+				3관 좌석배치도<br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(2).img }" />
 		</div>
 		<div class="tab-pane fade" id="fourth">
 			<p>
-				4관 좌석배치도<br> <img src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(3).img }" />
+				4관 좌석배치도<br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(3).img }" />
 		</div>
 	</div>
 </div>

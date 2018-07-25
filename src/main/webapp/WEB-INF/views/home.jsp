@@ -70,7 +70,7 @@ user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 
 .navbar .navbar-collapse{
 
-  text-align: center;
+  text-align: left;
 
 }
 }
