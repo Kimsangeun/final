@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -32,6 +31,7 @@ import com.jhta.proj.model.admin.TimeTableVO;
 /**
  * Handles requests for the application home page.
  */
+
 @Controller
 @RequestMapping("admin/{service}")
 public class AdminController {
@@ -97,7 +97,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	String sss(@PathVariable String service,SettleVO svo,BoardVO bvo ,TimeTableVO vo,BindingResult errors, Model model) {
+	String sss(@PathVariable String service,SettleVO svo,BoardVO bvo ,TimeTableVO vo, Model model) {
 
 		//System.out.println("보이루" + vo);
 		System.out.println("포스트");
