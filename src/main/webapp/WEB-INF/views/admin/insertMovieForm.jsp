@@ -39,8 +39,31 @@ function getMultipleSelectedValue()
   alert(gen);
 }
 
+function chk_file_type(obj) {
+	 var file_kind = obj.value.lastIndexOf('.');
+	 var file_name = obj.value.substring(file_kind+1,obj.length);
+	 var file_type = file_name.toLowerCase();
+
+
+
+	// var check_file_type=new Array();​
+
+	 var check_file_type=['jpg','gif','png','jpeg','bmp'];
+
+
+
+	 if(check_file_type.indexOf(file_type)==-1){
+		 $('#oLoginModal').modal();
+	  obj.outerHTML = obj.outerHTML;
+	  /* var parent_Obj=obj.parentNode
+	  var node=parent_Obj.replaceChild(obj.cloneNode(true),obj); */
+	  return false;
+	 }
+	}
+
 function preview_images() 
 {
+
  var total_file=document.getElementById("images").files.length;
  for(var i=0;i<total_file;i++)
  {
@@ -49,7 +72,18 @@ function preview_images()
  }
 }
 </script>
-
+<div class="modal fade" id="oLoginModal" tabindex="-1" role="dialog"
+		aria-labelledby="oLoginModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				
+				<div class="modal-body">이미지 파일만 올려주세요.</div>
+				<div class="modal-footer">
+					<button id="noLoginModalOk" type="button" data-dismiss="modal" class="btn btn-primary">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
 <div class="container" style="padding-top: 50px">
 
 	<form name="movie" action="insertMovie" method="post" enctype="multipart/form-data"
@@ -77,9 +111,9 @@ function preview_images()
 				<option value="옴니버스">옴니버스</option>				<option value="서부">서부</option>
 				<option value="스릴러">스릴러</option>				<option value="스포츠">스포츠</option>
 				<option value="시대극/사극">시대극/사극</option>				<option value="아동">아동</option>
-				<option value="액션어드벤처">액션어드벤처</option>				<option value="역사">역사</option>
-				<option value="전기">전기</option>				<option value="전쟁">전쟁</option>
-				<option value="종교">종교</option>				<option value="재난">재난</option>
+				<option value="액션">액션</option>				<option value="어드벤처">어드벤처</option>	
+				<option value="역사">역사</option>				<option value="전기">전기</option>				
+				<option value="전쟁">전쟁</option>				<option value="종교">종교</option>				<option value="재난">재난</option>
 				<option value="청춘영화">청춘영화</option>				<option value="퀴어">퀴어</option>
 				<option value="판타지">판타지</option>				<option value="학원물">학원물</option>
 				<option value="에로">에로</option>				
@@ -115,12 +149,12 @@ function preview_images()
 		</div>
 		<div class="form-group">
 			<label for="poster">포스터</label> 
-			<input required="required" type="file" id="poster" name="poster1" class="form-control"/>
+			<input accept="image/*" onchange='chk_file_type(this)' required="required" type="file" id="poster" name="poster1" class="form-control"/>
 		</div>
 
 		<div class="form-group">
 			<label for="1">스틸컷</label> 
-			<input type="file" class="form-control" id="images" required="required"
+			<input type="file" accept="image/*" class="form-control" id="images" required="required"
 			name="steelcuts" onchange="preview_images();" multiple/>
 			 <div class="row" id="image_preview"></div>
 		</div>
@@ -132,85 +166,7 @@ function preview_images()
 				placeholder="줄거리를 입력해 주세요" rows="5" name="plot" cols="20"></textarea>
 		</div>
 		
-		<button type="submit" class="btn btn-default">제출</button>
+		<button type="submit" class="btn btn-default pull-right">제출</button>
 	</form>
-	<!-- <form action="insertMovie" method="post" enctype="multipart/form-data"
-		accept-charset="UTF-8">
-		<table id="movieClass" class="table table-hover">
-			<tr>
 
-				<td>타이틀</td>
-				<td><input type="text" name="title" /></td>
-			</tr>
-			<tr>
-				<td>국가</td>
-				<td><input type="text" name="nation" /></td>
-			</tr>
-			<tr>
-				<td>장르</td>
-				<td><input type="text" name="genre" /></td>
-			</tr>
-			<tr>
-				<td>런타임</td>
-				<td><input type="text" name="runtime" /></td>
-			</tr>
-
-			<tr>
-				<td>상영등급</td>
-				<td><input type="text" name="grade" /></td>
-			</tr>
-			<tr>
-				<td>감독</td>
-				<td><input type="text" name="director" /></td>
-			</tr>
-			<tr>
-				<td>배우</td>
-				<td><input type="text" name="actor" /></td>
-			</tr>
-			<tr>
-				<td>개봉일</td>
-				<td><input type="date" name="release" /></td>
-			</tr>
-
-			<tr>
-			<td>다중이</td>
-			<td><div class="input_wrap">
-            <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
-            <input type="file" name="steelcutss" id="input_imgs" multiple/>
-        </div> 
-        <div>
-        <div class="imgs_wrap">
-            <img class="img-responsive" id="img" />
-        </div>
-    </div></td>
-		</tr>
-       
-
-			<tr>
-				<td>스틸컷(여러장 업로드)</td>
-				<td><input type="file" name="steelcuts" id="input_imgs"
-					multiple="multiple" /></td>
-			</tr>
-
-
-			<tr>
-				<td>포스터</td>
-				<td><input type="file" name="poster1" /></td>
-			</tr>
-			<tr class="item1">
-			<td>스틸컷
-			<button type="button" class="addBtn btn btn-default">+</button></td>
-			<td><input type="file" name="steelcuts[0]" /></td>
-		</tr>
-			<tr>
-				<td>줄거리</td>
-				<td><textarea style="resize: vertical;" class="form-control"
-						rows="5" name="plot" cols="20">줄거리</textarea></td>
-			</tr>
-			<tr>
-				<td colspan="2" align="center"><input class="btn btn-default"
-					type="submit" value="추가" /></td>
-			</tr>
-		</table>
-	</form> -->
 </div>

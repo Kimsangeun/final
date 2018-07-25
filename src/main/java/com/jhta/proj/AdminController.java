@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.jhta.proj.model.BoardDAO;
 import com.jhta.proj.model.BoardVO;
 import com.jhta.proj.model.admin.AdminDAO;
 import com.jhta.proj.model.admin.MovieDAO;
@@ -48,6 +49,9 @@ public class AdminController {
 
 	@Resource
 	AdminDAO adminDao;
+	
+	@Resource
+	BoardDAO boardDao;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -80,7 +84,7 @@ public class AdminController {
 
 		String res = "home";
 		//		System.out.println(vo);
-		System.out.println("안녕하세요");
+		System.out.println("안녕하세요12344");
 		model.addAttribute("main", service);
 		model.addAttribute("menu", "admin");
 		System.out.println("포비든킹덤");
@@ -93,7 +97,7 @@ public class AdminController {
 	}
 
 	@RequestMapping(method=RequestMethod.POST)
-	String sss(@PathVariable String service,SettleVO svo ,TimeTableVO vo,BindingResult errors, Model model) {
+	String sss(@PathVariable String service,SettleVO svo,BoardVO bvo ,TimeTableVO vo,BindingResult errors, Model model) {
 
 		//System.out.println("보이루" + vo);
 		System.out.println("포스트");
@@ -101,7 +105,8 @@ public class AdminController {
 		//		System.out.println(vo);
 
 		if(service.equals("insert")||service.equals("insertMovie")
-				||service.equals("modifyReg")||service.equals("deadlineReg")) {
+				||service.equals("modifyReg")||service.equals("deadlineReg")
+				||service.equals("promoReg")) {
 			res = "admin/alert";
 			System.out.println("zzzz");
 			
@@ -111,11 +116,13 @@ public class AdminController {
 			model.addAttribute("main", service);
 			model.addAttribute("menu", "admin");
 		}
+		
+
 		return res;
 	}
 
 	@ModelAttribute("data")
-	Object res(@PathVariable String service,MovieVO mvo,TimeTableVO tvo,SettleVO svo
+	Object res(@PathVariable String service,MovieVO mvo,TimeTableVO tvo,SettleVO svo,BoardVO bovo
 			,Model model,HttpServletRequest request) {
 		System.out.println("데이타만");
 		Object res = null;
@@ -322,7 +329,28 @@ public class AdminController {
 			model.addAttribute("msg", "마감완료");
 			
 			break;
-
+			
+		case "promotion":
+			//mapp.put("promo",)
+			mapp.put("promo", adminDao.promo());
+			mapp.put("movie", movieDao.list());
+			res = mapp;
+			break;
+			
+		case "promoReg":
+			//mapp.put("promo",)
+			System.out.println(bovo);
+			
+			bovo.setUpfile(fileUP(bovo.getMmfile(),request,"promo"));
+			adminDao.promoUpdate(bovo);
+			deleteFile(bovo.getContent(), request, "promo");
+			
+			model.addAttribute("url", "promotion");
+			model.addAttribute("msg", "완료");
+/*			mapp.put("promo", adminDao.promoUpdate(bovo));
+			mapp.put("movie", movieDao.list());
+			res = mapp;*/
+			break;
 		}
 		
 		return res;
@@ -338,6 +366,7 @@ public class AdminController {
 							+up.getOriginalFilename();
 
 			String folder = root.equals("poster") ? "movposter" : "movcut";
+			if(root.equals("promo")) folder="board";
 			filePath = request.getRealPath("resources/")+folder+"/"+up.getOriginalFilename();
 			//String changeName = up.getOriginalFilename();
 			int i = 1;
@@ -381,6 +410,7 @@ public class AdminController {
 
 		System.out.println(filename);
 		String folder = root.equals("poster") ? "movposter" : "movcut";
+		if(root.equals("promo")) folder="board";
 		String filePath = request.getRealPath("resources/")+folder+"/"+filename;
 		File file = new File(filePath);
 

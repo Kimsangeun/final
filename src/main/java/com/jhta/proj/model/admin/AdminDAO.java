@@ -40,6 +40,14 @@ public class AdminDAO {
 		return sessionTemplate.selectList("adminMapper.event");
 	}
 	
+	public Object promo(){
+		return sessionTemplate.selectList("adminMapper.promoList");
+	}
+	
+	public Object promoUpdate(BoardVO vo){
+		return sessionTemplate.update("adminMapper.promoUpdate",vo);
+	}
+	
 	public Object dateSettle(SettleVO vo){
 		return sessionTemplate.selectList("adminMapper.dateSettle",vo);
 	}

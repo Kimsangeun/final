@@ -14,6 +14,7 @@
 			<li><a href="/proj/admin/member">회원</a></li>
 			<li><a href="/proj/admin/resv">예약</a></li>
 			<li><a href="/proj/admin/settle">정산</a></li>
+			<li><a href="/proj/admin/promotion">홍보</a></li>
 			<li class="divider"></li>
 			<li><a href="/proj/logOut">로그아웃</a></li>
 		</ul></li>
