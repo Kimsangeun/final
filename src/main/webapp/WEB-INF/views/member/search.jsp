@@ -62,7 +62,7 @@
 				</div>
 				<div class="form-group">	
 					<label for="id_phone" class="col-sm-2 control-label">휴대전화</label>
-					<div  class="col-sm-6"><input type="text" class="form-control" id="id_phone" name="id_name" style="width : 80%;"></div>
+					<div  class="col-sm-6"><input type="text" class="form-control" id="id_phone" name="id_phone" style="width : 80%;"></div>
 				</div>
 				<hr style=" margin-top: 5%;">
 				<div>
@@ -88,7 +88,7 @@
 				</div>
 				<div class="form-group">	
 					<label for="pw_phone" class="col-sm-2 control-label">휴대전화</label>
-					<div  class="col-sm-6"><input type="text" class="form-control" id="pw_phone" name="pw_name" style="width : 80%;"></div>
+					<div  class="col-sm-6"><input type="text" class="form-control" id="pw_phone" name="pw_phone" style="width : 80%;"></div>
 				</div>
 				<hr style=" margin-top: 50px;">
 				<div>
