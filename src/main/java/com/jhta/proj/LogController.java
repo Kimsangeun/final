@@ -64,7 +64,10 @@ public class LogController {
 	@RequestMapping("search")
 	public String search(HttpSession session,Model model) {
 		
-		return "member/search";
+		model.addAttribute("menu","member");
+		model.addAttribute("main","search");
+		
+		return "home";
 	}
 	
 	@RequestMapping("idSearch")
@@ -118,11 +121,11 @@ public class LogController {
 				
 			msg = "회원님의 이메일("+info.getEmail()+")로 임시비밀번호를 전송하였습니다.";
 			
-			sendMail.setSubject("[메가시네마 임시비밀번호]");
+			sendMail.setSubject("[시네마중앙 임시비밀번호]");
 			sendMail.setText("임시비밀번호는"+temp+"입니다.");
 					
-			sendMail.setFrom("admin@megacinema.com", "메가시네마");
-			sendMail.setTo("liveorevil@naver.com");
+			sendMail.setFrom("admin@megacinema.com", "시네마중앙");
+			sendMail.setTo(info.getEmail());
 			sendMail.send();
 			
 			}else {
