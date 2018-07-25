@@ -28,8 +28,7 @@
 	 }); */
 	 $(document).ready(function(){
 		 
-		 var aa = 0;
-		 console.log('${moviedata[1]}');
+		
 		/*  aa.sort(function(a,b){
 			 return a.rating - b.rating;
 		 });
@@ -91,7 +90,7 @@ $(window).on('load', function () {
 	display: block;
 }
 
-
+.short_txt01 {overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 </style>
 
 <div id="js-load" class="container" style="margin-top: 100px">
@@ -134,7 +133,7 @@ $(window).on('load', function () {
         		<a href="/proj/movie/detailMovie?mid=${mm.mid }">
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
         		</a>
-        		<p class="hidden-xs h3 ellipsis">${mm.title}</p>
+        		<p class="hidden-xs h3 short_txt01">${mm.title}</p>
 				<div class="fixedStar" id="Star_${no.index }"></div>
 				<script type="text/javascript">
 				$(function() {

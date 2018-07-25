@@ -272,6 +272,10 @@
 			<div class="row" style="padding-right: 20px">
 
 				<div class="h6 col-md-5 col-sm-5 col-xs-4" id="fixedStar">${moviedata['movie'].rating }
+				<c:set var = "reCnt" value = "0"/>
+				<c:forEach items="${moviedata['review']}" var="rr" varStatus="no">
+				<c:set var = "reCnt" value = "${no.index+1 }"/>
+				</c:forEach>(${reCnt }명 참여)
 				</div>
 				<div style="padding :0 0 0 0" class="h3 col-md-5 col-sm-4 col-xs-4">
 				
@@ -339,6 +343,7 @@
 <span id="counter"><small>0/200</small></span>
 <form id="reviewInsert" action="reviewInsert" method="POST">
 	<div class="row qq">
+		
 		<div class="q form-group col-lg-2 col-xs-3 vertical-align">
 			<div class=" center-block" id="starscore"></div>
 		</div>
