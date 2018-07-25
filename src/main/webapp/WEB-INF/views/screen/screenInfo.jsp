@@ -25,25 +25,28 @@
 			<li style="width:25%"><a href="#fourth" >4관</a></li>
 		</ul>
 	</div>
-	
-	</nav>
+	 
+	</nav> 
 	<div class="tab-content" style="margin-top: 80px;width:60%">
 		<div class="tab-pane fade active in" id="first">
 			<p>
-				1관 좌석배치도<br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(0).img }" />
-			</p>
+				<h1>1관 좌석배치도</h1><br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(0).img }" />
+				<h3>좌석수 : 32석 / <font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h3>
 		</div>
 		<div class="tab-pane fade" id="second">
-			<p>
-				2관 좌석배치도<br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(1).img }" />
+			<p> 
+				<h1>2관 좌석배치도</h1><br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(1).img }" />
+				<h3>좌석수 : 40석 / <font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h3>
 		</div>
 		<div class="tab-pane fade" id="third">
 			<p>
-				3관 좌석배치도<br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(2).img }" />
+				<h1>3관 좌석배치도</h1><br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(2).img }" />
+				<h3>좌석수 : 32석 / <font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h3>
 		</div>
 		<div class="tab-pane fade" id="fourth">
 			<p>
-				4관 좌석배치도<br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(3).img }" />
+				<h1>4관 좌석배치도</h1><br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(3).img }" />
+				<h3>좌석수 : 36석 / <font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h3>
 		</div>
 	</div>
 </div>

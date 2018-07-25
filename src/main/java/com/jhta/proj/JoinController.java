@@ -1,9 +1,7 @@
 package com.jhta.proj;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +14,7 @@ import com.jhta.proj.model.MemberVO;
 public class JoinController {
 	
 	@Resource
+	
 	MemberDAO dao;
 	
 	@RequestMapping("joinForm")

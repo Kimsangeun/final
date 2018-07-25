@@ -202,6 +202,146 @@ public class BoardVO {
 		return imgs.contains(exp);
 	}
 
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((arr == null) ? 0 : arr.hashCode());
+		result = prime * result + ((bid == null) ? 0 : bid.hashCode());
+		result = prime * result + ((cnt == null) ? 0 : cnt.hashCode());
+		result = prime * result + ((content == null) ? 0 : content.hashCode());
+		result = prime * result + ((end == null) ? 0 : end.hashCode());
+		result = prime * result + ((gid == null) ? 0 : gid.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((kind == null) ? 0 : kind.hashCode());
+		result = prime * result + ((lev == null) ? 0 : lev.hashCode());
+		result = prime * result + ((mmfile == null) ? 0 : mmfile.hashCode());
+		result = prime * result + ((pid == null) ? 0 : pid.hashCode());
+		result = prime * result + ((pw == null) ? 0 : pw.hashCode());
+		result = prime * result + ((regdate == null) ? 0 : regdate.hashCode());
+		result = prime * result + ((reply == null) ? 0 : reply.hashCode());
+		result = prime * result + ((schCol == null) ? 0 : schCol.hashCode());
+		result = prime * result + ((sdf == null) ? 0 : sdf.hashCode());
+		result = prime * result + ((seq == null) ? 0 : seq.hashCode());
+		result = prime * result + ((start == null) ? 0 : start.hashCode());
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((upfile == null) ? 0 : upfile.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BoardVO other = (BoardVO) obj;
+		if (arr == null) {
+			if (other.arr != null)
+				return false;
+		} else if (!arr.equals(other.arr))
+			return false;
+		if (bid == null) {
+			if (other.bid != null)
+				return false;
+		} else if (!bid.equals(other.bid))
+			return false;
+		if (cnt == null) {
+			if (other.cnt != null)
+				return false;
+		} else if (!cnt.equals(other.cnt))
+			return false;
+		if (content == null) {
+			if (other.content != null)
+				return false;
+		} else if (!content.equals(other.content))
+			return false;
+		if (end == null) {
+			if (other.end != null)
+				return false;
+		} else if (!end.equals(other.end))
+			return false;
+		if (gid == null) {
+			if (other.gid != null)
+				return false;
+		} else if (!gid.equals(other.gid))
+			return false;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (kind == null) {
+			if (other.kind != null)
+				return false;
+		} else if (!kind.equals(other.kind))
+			return false;
+		if (lev == null) {
+			if (other.lev != null)
+				return false;
+		} else if (!lev.equals(other.lev))
+			return false;
+		if (mmfile == null) {
+			if (other.mmfile != null)
+				return false;
+		} else if (!mmfile.equals(other.mmfile))
+			return false;
+		if (pid == null) {
+			if (other.pid != null)
+				return false;
+		} else if (!pid.equals(other.pid))
+			return false;
+		if (pw == null) {
+			if (other.pw != null)
+				return false;
+		} else if (!pw.equals(other.pw))
+			return false;
+		if (regdate == null) {
+			if (other.regdate != null)
+				return false;
+		} else if (!regdate.equals(other.regdate))
+			return false;
+		if (reply == null) {
+			if (other.reply != null)
+				return false;
+		} else if (!reply.equals(other.reply))
+			return false;
+		if (schCol == null) {
+			if (other.schCol != null)
+				return false;
+		} else if (!schCol.equals(other.schCol))
+			return false;
+		if (sdf == null) {
+			if (other.sdf != null)
+				return false;
+		} else if (!sdf.equals(other.sdf))
+			return false;
+		if (seq == null) {
+			if (other.seq != null)
+				return false;
+		} else if (!seq.equals(other.seq))
+			return false;
+		if (start == null) {
+			if (other.start != null)
+				return false;
+		} else if (!start.equals(other.start))
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (upfile == null) {
+			if (other.upfile != null)
+				return false;
+		} else if (!upfile.equals(other.upfile))
+			return false;
+		return true;
+	}
+
 	@Override
 	public String toString() {
 		return "BoardVO [bid=" + bid + ", gid=" + gid + ", seq=" + seq + ", lev=" + lev + ", cnt=" + cnt + ", regdate="

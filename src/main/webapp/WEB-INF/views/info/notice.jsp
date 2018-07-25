@@ -55,8 +55,7 @@
 				[${i }]
 			</c:when>
 			<c:otherwise>
-				<a
-					href="${kind }?page=${i }&schCol=${param.schCol }&title=${param.title}">${i }</a>
+				<a href="${kind }?page=${i }&schCol=${param.schCol }&title=${param.title}">${i }</a>
 			</c:otherwise>
 		</c:choose>
 	</c:forEach>
