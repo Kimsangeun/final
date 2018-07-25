@@ -311,7 +311,7 @@ input[type="password"]
 		</div>
 		
 		<div class="each" style="margin-top:5%;">
-			<div class="button_modify" style="float:left; margin-left:15%;">
+			<div class="button_modify" style="float:left; margin-left:25%;">
 			<input name = "modify" id="modBtn" type="button" value="회원수정" class= "btn btn-default"/>
 			</div>
 			<div class="button_withdrawal">
