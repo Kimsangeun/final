@@ -66,7 +66,7 @@ public class AdminController {
 	String main(@PathVariable String service) {
 		String res = service;
 
-		switch (service) {		
+		switch (service) {		 
 
 			case "insert":
 				res = "alert";
