@@ -256,10 +256,11 @@
 				${moviedata['movie'].title }
 				<c:if test="${mem.id eq 'admin' }">
 					<div>
-					<input id="deleteGo" class="btn btn-danger" type="button" value="삭제">
+					<input id="deadlineGo" ${moviedata['movie'].deadline eq 1 ? 'disabled':'' } class="btn btn-info" type="button" value="마감">
 					<input class="btn btn-warning" type="button" value="수정"
 						onclick="location.href='/proj/admin/modifyForm?mid=${param.mid}'">
-					<input id="deadlineGo" class="btn btn-info" type="button" value="마감">
+					
+					<input id="deleteGo" class="btn btn-danger" type="button" value="삭제">
 					<!-- onclick="location.href='/proj/admin/deadlineReg?mid=${param.mid}'" -->
 					</div>
 				</c:if>

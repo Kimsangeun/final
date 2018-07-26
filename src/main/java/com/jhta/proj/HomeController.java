@@ -58,7 +58,7 @@ public class HomeController {
 	@ModelAttribute("mainpagemov")
 	public Object movie() {
 		Object res = movieDao.boxoffice();
-		System.out.println(res);
+		//System.out.println(res);
 		return res;
 	}
 	

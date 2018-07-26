@@ -107,7 +107,7 @@ public class AjaxController {
 		
 		String api_key = "NCSFTLCC5UICCUDI";
 		String api_secret = "2ZTHIMVFZSGIFTVWFZ1YGVI6DCERZMSG";
-		//Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성
+		//Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성 여기도 잠그기
 		Integer key = cerf.makeNum(6); // 인증키 생성
 		
 		map.put("certNum", key);
@@ -119,6 +119,8 @@ public class AjaxController {
 		/*
 		 * Parameters 관련정보 : http://www.coolsms.co.kr/SDK_Java_API_Reference_ko#toc-0
 		 */
+		
+		//여기부터 아래 잠궈놓을것
 		/*HashMap<String, String> set = new HashMap<String, String>();
 		set.put("to", (String)map.get("phone")); // 수신번호
 		set.put("from", "01071303039"); // 발신번호

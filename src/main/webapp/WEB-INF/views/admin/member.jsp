@@ -50,11 +50,14 @@
 <div class="center-block">
 <nav>
   <ul class="pagination">
-    <li>
-      <a class="${startPage eq 1 ? 'disabled': ''}" href="member?page=${startPage-1 }" aria-label="Previous">
+     <c:if test="${startPage >1 }">
+	<li><a href="member?page=1" aria-label="Previous"><span aria-hidden="true">[처음]</span></a></li>
+	<li>
+      <a href="member?page=${startPage-1 }" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
+	</c:if>
     
     <c:forEach var="i" begin="${startPage }" end="${endPage }">
 	    <c:choose>
@@ -66,11 +69,18 @@
 			</c:otherwise>
 		</c:choose>
     </c:forEach>
+    <c:if test="${endPage<totalPage}">
     <li>
-      <a class="${endPage<totalPage ? 'disabled':''}" href="member?page=${endPage+1 }" aria-label="Next">
+      <a href="member?page=${endPage+1 }" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
+    <li>
+      <a href="member?page=${totalPage }" aria-label="Next">
+        <span aria-hidden="true">마지막</span>
+      </a>
+    </li>
+    </c:if>
   </ul>
 </nav>
 
