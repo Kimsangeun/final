@@ -112,7 +112,7 @@ public class AdminController {
 			
 		}
 		
-		if(service.equals("time")||service.equals("settle")){
+		if(service.equals("time")||service.equals("settle")||service.equals("sales")){
 			model.addAttribute("main", service);
 			model.addAttribute("menu", "admin");
 		}
@@ -350,6 +350,18 @@ public class AdminController {
 /*			mapp.put("promo", adminDao.promoUpdate(bovo));
 			mapp.put("movie", movieDao.list());
 			res = mapp;*/
+			break;
+			
+		case "sales":
+			System.out.println("매추르");
+			System.out.println(svo);
+			if(svo.getFrom()!=null) {
+				System.out.println("aasdf");
+				mapp.put("settle",adminDao.dateSettle(svo));
+				
+			}
+			mapp.put("movie", movieDao.list());
+			res = mapp;
 			break;
 		}
 		

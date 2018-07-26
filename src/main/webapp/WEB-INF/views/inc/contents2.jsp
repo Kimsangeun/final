@@ -53,7 +53,7 @@ $('.slider').bxSlider({
 
 @media screen and (min-width : 1200px){
 .rank{
-	left:33px;
+	left:17px;
 	}
 }
 </style>

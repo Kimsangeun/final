@@ -12,7 +12,7 @@ public class SettleVO {
 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date mstart;
-	String type,id,cost,coc,accnum,title,refund,num,cnt,mid,from,to;
+	String type,id,cost,coc,accnum,title,refund,num,cnt,mid,from,to,yearselect,monthselect;
 	public String getFrom() {
 		return from;
 	}
@@ -91,12 +91,26 @@ public class SettleVO {
 	public void setCnt(String cnt) {
 		this.cnt = cnt;
 	}
+	public String getYearselect() {
+		return yearselect;
+	}
+	public void setYearselect(String yearselect) {
+		this.yearselect = yearselect;
+	}
+	public String getMonthselect() {
+		return monthselect;
+	}
+	public void setMonthselect(String monthselect) {
+		this.monthselect = monthselect;
+	}
 	@Override
 	public String toString() {
 		return "SettleVO [mstart=" + mstart + ", type=" + type + ", id=" + id + ", cost=" + cost + ", coc=" + coc
 				+ ", accnum=" + accnum + ", title=" + title + ", refund=" + refund + ", num=" + num + ", cnt=" + cnt
-				+ ", mid=" + mid + ", from=" + from + ", to=" + to + "]";
+				+ ", mid=" + mid + ", from=" + from + ", to=" + to + ", yearselect=" + yearselect + ", monthselect="
+				+ monthselect + "]";
 	}
+
 	
 
 	

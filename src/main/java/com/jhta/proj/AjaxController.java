@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.proj.model.MemberDAO;
+import com.jhta.proj.model.admin.AdminDAO;
 import com.jhta.proj.model.admin.MovieDAO;
 import com.jhta.proj.util.Coolsms;
 import com.jhta.proj.util.MakeNumber;
@@ -30,6 +31,9 @@ public class AjaxController {
 	
 	@Resource
 	MovieDAO mdao;
+	
+	@Resource
+	AdminDAO adao;
 	
 	@Resource
 	MakeNumber cerf;
@@ -178,6 +182,21 @@ public class AjaxController {
 		//dao.ajaxemailChk(map);
 		
 		return map;
+		
+	}
+	
+	@RequestMapping(value="/ajax/sales", method = RequestMethod.POST)
+	@ResponseBody
+	public Object sales(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
+			throws NoPermissionException{
+		//@RequestParam(value="userid") String id
+		System.out.println("sales : "+map);
+		
+		System.out.println("후후세일스"+map);
+		System.out.println(map);
+		//dao.ajaxemailChk(map);
+		
+		return adao.dayList(map);
 		
 	}
 	

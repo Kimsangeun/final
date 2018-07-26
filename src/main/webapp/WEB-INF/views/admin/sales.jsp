@@ -10,20 +10,16 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-/*   showOn: "button",
-buttonImage: "../resources/imgs/calendar2.png",
-buttonImageOnly: true,
-buttonText: "Select date" */
-/* numberOfMonths: 3 */
+
  
   $( function() {
-	    var dateFormat = "mm/dd/yyyy",
+	    var dateFormat = "yyyy",
 	      from = $( "#from" )
 	        .datepicker({
-	          defaultDate: "+1w",
-	          changeMonth: true,
+/* 	          defaultDate: "+1w", */
+	          changeYear: true,
 	          maxDate:new Date(),
-
+	          dateFormat: 'yy',
 	        })
 	        .on( "change", function() {
 	          to.datepicker( "option", "minDate", getDate( this ) );
@@ -52,67 +48,143 @@ buttonText: "Select date" */
 	  } );
 
   </script>
-  
+  <script type="text/javascript">
+$(document).ready(function()
+{   
+    $(".monthPicker").datepicker({
+        dateFormat: 'yy-MM-dd',
+        changeMonth: true, 
+        changeYear: true,
+        showButtonPanel: true,
+        monthNames: 
+        [ "1월", "2월", "3월", "4월", "5월", "6월", 
+        "7월", "8월", "9월", "10월", "11월", "12월" ],
+        monthNamesShort: 
+            [ "1", "2", "3", "4", "5", "6", 
+            "7", "8", "9", "10", "11", "12" ] ,
+
+        onClose: function(dateText, inst) {
+            var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).val($.datepicker.formatDate('yy-MM', new Date(year, month, 1)));
+        }
+    });
+
+    $(".monthPicker").focus(function () {
+        $(".ui-datepicker-calendar").hide();
+        $("#ui-datepicker-div").position({
+            my: "center top",
+            at: "center bottom",
+            of: $(this)
+        });
+    });
+});
+
+$(function() {
+    $('.date-picker-year').datepicker({
+        changeYear: true,
+        showButtonPanel: true,
+        dateFormat: 'yy',
+        onClose: function(dateText, inst) { 
+            var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+            $(this).datepicker('setDate', new Date(year, 1));
+        }
+    });
+$(".date-picker-year").focus(function () {
+		$(".ui-datepicker-calendar").hide();
+        $(".ui-datepicker-month").hide();
+    });
+});
+</script>
    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
+    $(document).ready(function() {
+        $("#gogogo").click(function() {
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
-        ]);
+    	  var godata = $("#fom1").serialize();
+    	  console.log(godata);
 
-        var options = {
-          chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          }
-        };
+    	  $.ajax({
+              async: false,
+	            type : 'POST',
+	            data : godata,
+	            url : "/proj/ajax/sales",
+	            success : function(data) {
+	            	var data2 = new google.visualization.DataTable(data);
+	               console.log(data.length);
+	              
+	           	var data4 = new google.visualization.DataTable();
+	        	data4.addColumn('string', 'DAY');
+	           	data4.addColumn('number', '합계');
+	           
+	           	console.log(data[0]['SUM']);
+	           
+	           	var myArray = new Array(data.length);
+	           for(var i =0 ;i<data.length;i++ ){
+	        	   myArray[i] = new Array(2);
+	        	   myArray[i][1] = data[i]['SUM'];
+	        	   myArray[i][0] = data[i]['DAY'];
+	           		
+	           		console.log(myArray[i]);
+	           		
+	           		
+	           		//data4.addRows(data);
+	           	}
+	           
+	            console.log(myArray);
+	            data4.addRows(myArray);
+	            console.log(data4);
+	            
+	            var options = {
+	           	          chart: {
+	           	            title: '중앙시네마 일별 매출',
+	           	            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+	           	          }
+	           	        };
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+	           	        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
+	           	        chart.draw(data4, google.charts.Bar.convertOptions(options));
+	            },
+	            error : function(error) {
+	                
+	                alert("error : " + error);
+	            }
+              });
+    	  
+    	 
       }
-    </script> <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', '잭스', '섹스s', '보스'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
-        ]);
-
-        var options = {
-          chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-          }
-        };
-
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
-
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
+        });
+    });
     </script>
-  <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+  
   <style>
   .ui-datepicker-trigger { 
   position: relative; left: -29px; top: 2px; 
   widht:50px
   }
   </style>
+  
+  
+  
+  
   <div style="margin-top:50px"><h2>정산</h2></div>
   <hr>
+  <div id="columnchart_material" style="width:100%; height: 500px;"></div>
+ <form id="fom1">
+  <input type="hidden" name="monthselect" value="2018-05" >
+  <input type="hidden" name="mid" value="0" >
+  <button class="btn btn-primary" id="gogogo" type="button"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+</form>
+  
+  
+  
+  
+  <input name="startYear" id="startYear" class="date-picker-year" />   
+    <input type="text" id="month" name="month" class="monthPicker" />
  <div style="margin-top: 50px" class="row">
 	<form action="#" class="form-inline" method="POST">
 	<div class="form-group">

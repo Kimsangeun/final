@@ -178,16 +178,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  -->
 	
 	<!-- 정산 -->
-	<select id="yearList" parameterType="settleVo" resultType="settleVo">
-		select reser.*,screeninfo.mstart,movie.title from reser,screeninfo ,MOVIE
-		where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid
-		and to_char(mstart,'YYYY')=#{num} order by screeninfo.mstart
+	<!-- 년도별 매출  -->
+	<select id="movieSettleYear" parameterType="map" resultType="map">
+		select sum(cost) as sum,to_char(mstart,'yyyy') as year from reser
+		 <if test="mid != 0">
+			where movie.mid = #{mid}		
+		</if>
+		 group by to_char(mstart,'yyyy')order by year
 	</select>
-	<!-- 영화별 정산  -->
-	<select id="movieSettle" parameterType="settleVo" resultType="settleVo">
-		select reser.*,screeninfo.mstart,movie.title from reser,screeninfo ,MOVIE
-		where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid
-		and to_char(mstart,'YYYY')=#{num} order by screeninfo.mstart
+	<!-- 월별 매출  -->
+	<select id="movieSettleMonth" parameterType="map" resultType="map">
+		select sum(cost) as sum,to_char(mstart,'yyyy-MM') as month from 
+		reser where to_char(mstart,'yyyy')=#{yearselect} 
+		 <if test="mid != 0">
+			and movie.mid = #{mid}		
+		</if>
+		group by to_char(mstart,'yyyy-MM')order by month
+	</select>
+	<!-- 일별 매출  -->
+	<select id="movieSettleDay" parameterType="map" resultType="map">
+		select sum(cost) as sum,to_char(mstart,'yyyy-MM-dd') as day from 
+		reser where to_char(mstart,'yyyy-MM')=#{monthselect}  
+		 <if test="mid != 0">
+			and movie.mid = #{mid}		
+		</if>
+		group by to_char(mstart,'yyyy-MM-dd') order by day
 	</select>
 	<!-- 날짜조회  -->
 	<select id="dateSettle" parameterType="settleVo" resultType="settleVo">
@@ -342,7 +357,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on (bid=#{bid})
 		
 		when matched then  -->
-		update board set upfile = #{upfile} , title = #{title}, cnt=#{cnt}   where bid=#{bid} 
+		update board set upfile = #{upfile} , cnt=#{cnt}   where bid=#{bid} 
 		<!-- 
 		when not matched then 
 		insert into board
