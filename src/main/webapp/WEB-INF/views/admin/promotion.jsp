@@ -15,7 +15,7 @@
 
 <div class="page-header">
 	<h1>
-		메인배너 <small></small>
+		신작 홍보 <small></small>
 	</h1>
 </div>
 <div class="">
@@ -39,18 +39,18 @@
 		 </select>
 		</div>
 		<div class="form-group">
-			<label for="poster">배너이미지(1600X600 사이즈)</label> 
+			<label for="poster">배너이미지</label> 
 			<input accept="image/*" value="${mm.upfile }" required="required" type="file" id="poster" name="mmfile" class="form-control"/>
 		</div>
-	  <div class="form-group">
-	    <label for="title">문구</label>
+	  <!-- <div class="form-group">
+	    <label for="title">홍보문구</label>
 	    <input type="text" class="form-control" id="title" name="title" placeholder="문구를 입력하세요"
 	    maxlength="100">
 	   
-	  </div>
+	  </div> -->
 		 <input type="hidden" name="bid" value="${mm.bid }">
 		 <input type="hidden" name="content" value="${mm.upfile }"><!-- 가져가서삭제할 올드파일 -->
-	  <button type="submit" class="btn btn-default form-group">추가/수정${no.index }</button>
+	  <button type="submit" class="btn btn-default form-group">추가/수정</button>
 
 	</form>
 	</c:forEach>

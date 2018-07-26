@@ -12,7 +12,19 @@ public class SettleVO {
 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	Date mstart;
-	String type,id,cost,coc,accnum,title,refund,num,cnt,start,end,mid;
+	String type,id,cost,coc,accnum,title,refund,num,cnt,mid,from,to;
+	public String getFrom() {
+		return from;
+	}
+	public void setFrom(String from) {
+		this.from = from;
+	}
+	public String getTo() {
+		return to;
+	}
+	public void setTo(String to) {
+		this.to = to;
+	}
 	public String getMid() {
 		return mid;
 	}
@@ -79,26 +91,14 @@ public class SettleVO {
 	public void setCnt(String cnt) {
 		this.cnt = cnt;
 	}
-	public String getStart() {
-		return start;
-	}
-	public void setStart(String start) {
-		this.start = start;
-	}
-	public String getEnd() {
-		return end;
-	}
-	public void setEnd(String end) {
-		this.end = end;
-	}
 	@Override
 	public String toString() {
 		return "SettleVO [mstart=" + mstart + ", type=" + type + ", id=" + id + ", cost=" + cost + ", coc=" + coc
 				+ ", accnum=" + accnum + ", title=" + title + ", refund=" + refund + ", num=" + num + ", cnt=" + cnt
-				+ ", start=" + start + ", end=" + end + ", mid=" + mid + "]";
+				+ ", mid=" + mid + ", from=" + from + ", to=" + to + "]";
 	}
 	
-	
+
 	
 	
 	

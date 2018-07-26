@@ -112,7 +112,7 @@ public class AdminController {
 			
 		}
 		
-		if(service.equals("time")){
+		if(service.equals("time")||service.equals("settle")){
 			model.addAttribute("main", service);
 			model.addAttribute("menu", "admin");
 		}
@@ -312,10 +312,10 @@ public class AdminController {
 		case "settle":
 			System.out.println("정산");
 			System.out.println(svo);
-			if(svo.getStart()!=null && !svo.getStart().equals("")) {
+			if(svo.getFrom()!=null) {
 				System.out.println("aasdf");
 				mapp.put("settle",adminDao.dateSettle(svo));
-				//res = adminDao.dateSettle(svo);
+				
 			}
 			mapp.put("movie", movieDao.list());
 			res = mapp;

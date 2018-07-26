@@ -340,7 +340,7 @@
 	</div>
 </c:if>
 <hr>
-
+<p class="h2">한줄평</p>
 <span id="counter"><small>0/200</small></span>
 <form id="reviewInsert" action="reviewInsert" method="POST">
 	<div class="row qq">
@@ -455,7 +455,7 @@
 		</c:forEach>
 	</ul>
 </div>
-<div id="js-btn-wrap" class="btn-wrap">
+<div id="js-btn-wrap" class="btn-wrap" align="center">
 	<button id="moreButton" class="button btn btn-default">더보기</button>
 	<!-- <a href="javascript:;" class="button">더보기</a> -->
 </div>

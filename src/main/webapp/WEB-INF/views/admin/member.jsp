@@ -21,11 +21,12 @@
 
 	<thead>
 	<tr>
-		<td>번호</td>
-		<td>ID</td>
-		<td>이름</td>
-		<td>E-mail</td>
-		<td>상태</td>
+		<th>번호</th>
+		<th>ID</th>
+		<th>이름</th>
+		<th>E-mail</th>
+		<th>휴대폰</th>
+		<th>상태</th>
 		<!-- <td>삭제</td>
 		<td>변경</td> -->
 		<!-- <td>날짜</td> -->
@@ -38,6 +39,7 @@
 		<td>${mm.id}</td>
 		<td>${mm.name}</td>
 		<td>${mm.email}</td>
+		<td>${mm.phone}</td>
 		<td>${mm.out eq 0 ? '정상' : '탈퇴'}</td>
 		<%-- <td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.birth}"/></td> --%>
 		<%-- <td><input type="button" value="X" onclick="location.href='deleteMovie?mid=${mm.mid}'"></td>

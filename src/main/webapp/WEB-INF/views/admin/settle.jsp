@@ -10,10 +10,11 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
-
-
-
-
+/*   showOn: "button",
+buttonImage: "../resources/imgs/calendar2.png",
+buttonImageOnly: true,
+buttonText: "Select date" */
+/* numberOfMonths: 3 */
   $( function() {
 	    var dateFormat = "mm/dd/yyyy",
 	      from = $( "#from" )
@@ -21,11 +22,7 @@
 	          defaultDate: "+1w",
 	          changeMonth: true,
 	          maxDate:new Date(),
-		      /*   showOn: "button",
-		        buttonImage: "../resources/imgs/calendar2.png",
-		        buttonImageOnly: true,
-		        buttonText: "Select date" */
-	          /* numberOfMonths: 3 */
+
 	        })
 	        .on( "change", function() {
 	          to.datepicker( "option", "minDate", getDate( this ) );
@@ -35,12 +32,6 @@
 	        defaultDate: "+1w",
 	        changeMonth: true,
 	        maxDate:new Date(),
-	     /*  showOn: "button", */
-	      /* 
-	      buttonImage: "../resources/imgs/calendar2.png",
-	      buttonImageOnly: true,
-	      buttonText: "Select date" */
-	        /* numberOfMonths: 3 */
 	      })
 	      .on( "change", function() {
 	        from.datepicker( "option", "maxDate", getDate( this ) );
@@ -70,22 +61,23 @@
   <div style="margin-top:50px"><h2>정산</h2></div>
   <hr>
  <div style="margin-top: 50px" class="row">
-	<form action="?" class="form-inline">
+	<form action="#" class="form-inline" method="POST">
 	<div class="form-group">
 	<label for="from">조회기간</label> 
-	<input type="text" id="from" name="start" value="${param.start }" required="required"> ~ 
-	<input type="text" id="to" name="end" value="${param.end }" required="required">
-	</div>
+	<input type="text" id="from" name="from" value="${param.from }" required="required"> ~ 
+	<input type="text" id="to" name="to" value="${param.to }" required="required">
+
+	</div> 
 	<div class="form-group">
-	<label for="movieSelect">영화별 보기</label>
+	 <label for="movieSelect">영화별 보기</label>
 	 <select name="mid" id="movieSelect" class="selectpicker" data-live-search="true"> 
 	 <option value="0">전체</option> 
 	 <c:forEach items="${data['movie'] }" var="mm">
 	 <option value="${mm.mid }">${ mm.title}</option> 
 	 </c:forEach>
 	 </select>
-	</div>
-	<button class="btn btn-primary" onclick="submit()"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+	</div> 
+	<button class="btn btn-primary" type="submit"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
 	</form>
 	
 </div>
@@ -116,25 +108,27 @@
 			<td>${mm.coc }</td>
 			<td>${mm.accnum }</td>
 			<td>${mm.refund eq 0 ? '처리' : '환불' }</td>
-			<td>${mm.cost}</td>
+			<td><fmt:formatNumber value="${mm.cost}" type="currency" currencySymbol="￦"/></td>
 			<c:set var="sum" value="${sum+mm.cost}"/>
 			<c:set var="noCost" value="${mm.refund eq 0 ? noCost:noCost+mm.cost}"/>
 			
 		</tr>
 	</c:forEach>
 	<tr>
-	<td colspan="6">썸</td>
-	<td>${sum}</td>
+	<td colspan="6">판매금액</td>
+	<td><fmt:formatNumber value="${sum}" type="currency" currencySymbol="￦"/></td>
 	</tr>
 	<tr>
 	<td colspan="6">환불금액</td>
-	<td>${noCost}</td>
+	<td><fmt:formatNumber value="${noCost}" type="currency" currencySymbol="￦"/></td>
 	</tr>
 	<tr>
 	<td colspan="6">합계</td>
-	<td>${sum-noCost }</td>
+	<td><fmt:formatNumber value="${sum-noCost }" type="currency" currencySymbol="￦"/>
+</td>
 	</tr>
 
+<%-- <fmt:formatNumber value="${mm.cost}" type="currency" currencySymbol="￦"/> --%>
 
 
 
