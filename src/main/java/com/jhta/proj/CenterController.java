@@ -87,12 +87,13 @@ public class CenterController {
 	}
 
 	@ModelAttribute("data")
-	Object list(@PathVariable String service, BoardVO bvo, Model model, HttpServletRequest request, HttpSession session) {
+	Object list(@PathVariable String service, BoardVO bvo, Model model, HttpServletRequest request,
+			HttpSession session) {
 		System.out.println("데이타 탄다");
 		Object res = null;
-		
-		MemberVO v1 = (MemberVO)session.getAttribute("mem");
-		if(v1 != null)
+		kind = service;
+		MemberVO v1 = (MemberVO) session.getAttribute("mem");
+		if (v1 != null)
 			bvo.setId(v1.getId());
 		// System.out.println(vo);
 
@@ -113,7 +114,11 @@ public class CenterController {
 		// 삽입수정에서 파라미터 없는거 처리.
 		if (request.getParameter("schCol") != null) {
 			System.out.println("title::" + request.getParameter("title"));
-			total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"));
+			if (kind.equals("qna") && !v1.getId().equals("admin")) {
+				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"), v1.getId() );
+			} else {
+				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"));
+			}
 		} else {
 			System.out.println("schCol 널이다");
 			total = (int) boardDao.totalCount(kind);
@@ -163,7 +168,7 @@ public class CenterController {
 			break;
 
 		case "qna":
-			
+
 			kind = "qna";
 
 			bvo.setKind("qna");
@@ -184,9 +189,9 @@ public class CenterController {
 			bvo.setKind(kind);
 			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
 			System.out.println("centercontrol_insetreg::" + bvo);
-			System.out.println(":::"+bvo.getMmfile());
-			if(bvo.getMmfile() != null || !bvo.getMmfile().equals("")) {
-				System.out.println("asdasdasdasdasdasdasd"+bvo.getMmfile());
+			System.out.println(":::" + bvo.getMmfile());
+			if (bvo.getMmfile() != null || !bvo.getMmfile().equals("")) {
+				System.out.println("asdasdasdasdasdasdasd" + bvo.getMmfile());
 				bvo.setUpfile(fileUP(bvo.getMmfile(), request));
 			}
 			res = boardDao.insert(bvo);
@@ -236,22 +241,22 @@ public class CenterController {
 
 		case "replyReg":
 			System.out.println("centercontrol_replyreg...");
-			
-			System.out.println("디테일로 가져오기전 bvo"+bvo);
+
+			System.out.println("디테일로 가져오기전 bvo" + bvo);
 			String content = bvo.getContent();
 			String title = bvo.getTitle();
-			
-			bvo = (BoardVO)boardDao.detail(bvo);
-			
-			System.out.println("디테일로 가져온 bvo"+bvo);
-			
+
+			bvo = (BoardVO) boardDao.detail(bvo);
+
+			System.out.println("디테일로 가져온 bvo" + bvo);
+
 			bvo.setTitle(title);
 			bvo.setContent(content);
-			bvo.setPid(((MemberVO)request.getSession().getAttribute("mem")).getId());
-			
+			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
+
 			model.addAttribute("url", "detail?bid=" + bvo.getBid());
 			model.addAttribute("msg", "답변완료");
-			
+
 			boardDao.nextSeq(bvo);
 			res = boardDao.reply(bvo);
 			break;

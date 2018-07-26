@@ -17,6 +17,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select> -->
 
 
+	<select id="totalCount3" resultType="java.lang.Integer"
+		parameterType="hashmap"><!-- schCol / title -->
+		select count(*) from board
+		<include refid="whereSch" />
+	</select>
 	<select id="totalCount1" resultType="java.lang.Integer"
 		parameterType="hashmap"><!-- schCol / title -->
 		select count(*) from board
@@ -40,7 +45,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select rownum rnum, tt.* from
 		(select * from board
 		<include refid="whereSch" />
-		order by gid desc, seq) tt) 
+		order by gid desc, seq, regdate) tt) 
 	<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
 	</select>
 	

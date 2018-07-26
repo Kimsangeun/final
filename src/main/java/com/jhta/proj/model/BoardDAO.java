@@ -66,6 +66,15 @@ public class BoardDAO {
 		
 		return sessionTemplate.selectOne("boardMapper.totalCount1", map);
 	}
+	public Object totalCount(String kind, String title, String schCol, String id) {
+		Map<String, String> map = new HashMap<>();
+		map.put("kind", kind);
+		map.put("schCol", schCol);
+		map.put("title", title);
+		map.put("id", id);
+		
+		return sessionTemplate.selectOne("boardMapper.totalCount1", map);
+	}
 
 	public Object totalCount(String kind) {
 		return sessionTemplate.selectOne("boardMapper.totalCount2", kind);

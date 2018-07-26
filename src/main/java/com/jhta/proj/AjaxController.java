@@ -122,7 +122,7 @@ public class AjaxController {
 		/*HashMap<String, String> set = new HashMap<String, String>();
 		set.put("to", (String)map.get("phone")); // 수신번호
 		set.put("from", "01071303039"); // 발신번호
-		set.put("text", "안녕하세요 메가시네마입니다. 인증번호는 [" + key + "] 입니다."); // 문자내용
+		set.put("text", "안녕하세요 시네마중앙입니다. 인증번호는 [" + key + "] 입니다."); // 문자내용
 		set.put("type", "sms"); // 문자 타입
 
 		JSONObject result = coolsms.send(set); // 보내기&전송결과받기
