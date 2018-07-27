@@ -66,7 +66,7 @@ public class AdminController {
 	String main(@PathVariable String service) {
 		String res = service;
 
-		switch (service) {		
+		switch (service) {		 
 
 			case "insert":
 				res = "alert";
@@ -112,7 +112,7 @@ public class AdminController {
 			
 		}
 		
-		if(service.equals("time")){
+		if(service.equals("time")||service.equals("settle")||service.equals("sales")){
 			model.addAttribute("main", service);
 			model.addAttribute("menu", "admin");
 		}
@@ -312,10 +312,10 @@ public class AdminController {
 		case "settle":
 			System.out.println("정산");
 			System.out.println(svo);
-			if(svo.getStart()!=null && !svo.getStart().equals("")) {
+			if(svo.getFrom()!=null) {
 				System.out.println("aasdf");
 				mapp.put("settle",adminDao.dateSettle(svo));
-				//res = adminDao.dateSettle(svo);
+				
 			}
 			mapp.put("movie", movieDao.list());
 			res = mapp;
@@ -350,6 +350,18 @@ public class AdminController {
 /*			mapp.put("promo", adminDao.promoUpdate(bovo));
 			mapp.put("movie", movieDao.list());
 			res = mapp;*/
+			break;
+			
+		case "sales":
+			System.out.println("매추르");
+			System.out.println(svo);
+			if(svo.getFrom()!=null) {
+				System.out.println("aasdf");
+				mapp.put("settle",adminDao.dateSettle(svo));
+				
+			}
+			mapp.put("movie", movieDao.list());
+			res = mapp;
 			break;
 		}
 		

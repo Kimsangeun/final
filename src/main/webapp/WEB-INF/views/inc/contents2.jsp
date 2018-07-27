@@ -11,7 +11,7 @@ $('.slider').bxSlider({
 	mode: 'fade',
 	 auto: true,        // 자동 실행 여부
      autoHover: true,   // 마우스 호버시 정지 여부
-     captions: true,	// 밑에캡션
+     /* captions: true,	// 밑에캡션 */
 });
 });
 </script>
@@ -32,6 +32,30 @@ $('.slider').bxSlider({
  word-wrap:break-word; 
 
 } 
+
+@media screen and (max-width : 500px){
+.col-xs-4{
+	width:220px;
+	}
+}
+
+@media screen and (max-width : 992px){
+.rank{
+	left:10px;
+	}
+}
+
+@media screen and (max-width : 1200px){
+.rank{
+	left:20px;
+	}
+}
+
+@media screen and (min-width : 1200px){
+.rank{
+	left:17px;
+	}
+}
 </style>
 
 
@@ -63,10 +87,14 @@ src="${pageContext.request.contextPath}\resources\board/${mm.upfile}" alt="slide
       <div class="row" >
 
         	<c:forEach begin="0" end="7" items="${mainpagemov}" var="mm" varStatus="no">
-        		<div align="center" class="col-lg-3 col-xs-6 col-sm-4 col-md-3" style="height:500px">
+        		<div align="center" class="col-lg-3 col-xs-4 col-sm-4 col-md-3" style="height:500px">
+        		
         		<a href="/proj/movie/detailMovie?mid=${mm.mid }">
+        		<img class="rank"  style="position: absolute;width:40px;top:3px;"
+        		src="${pageContext.request.contextPath}\resources\imgs/${no.index+1}.png" alt="Generic placeholder image" >
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
         		</a>
+        		
         		<p class="hidden-xs h3 ellipsis">${mm.title}</p>
 				<div class="fixedStar" id="Star_${no.index }"></div>
 				<script type="text/javascript">
@@ -100,8 +128,9 @@ src="${pageContext.request.contextPath}\resources\board/${mm.upfile}" alt="slide
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">영화, 그 이상의 감동<span class="text-muted"><br></span></h2>
+          <p class="lead"><br>중앙시네마는 선진화된 관람문화와 최고의 서비스로<br>고객에게 잊을 수 없는 감동을 선사합니다
+          </p>
         </div>
         <div class="col-md-5">
           <img style="padding-top:100px" class="featurette-image img-responsive center-block" 
@@ -114,8 +143,8 @@ src="${pageContext.request.contextPath}\resources\board/${mm.upfile}" alt="slide
 
       <div class="row featurette">
         <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Oh yeah, it's that good. 영화관 <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+          <h2 class="featurette-heading">LIFE THEATER <span class="text-muted"></span></h2>
+          <p class="lead">영화보다 멋진 당신의 일상을 위하여<br>안목있는 콘텐츠와 라이프스타일을 제안합니다</p>
         </div>
         <div class="col-md-5 col-md-pull-7">
           <img style="padding-top:100px" class="featurette-image img-responsive center-block" 
@@ -128,8 +157,8 @@ src="${pageContext.request.contextPath}\resources\board/${mm.upfile}" alt="slide
 
       <div class="row featurette">
         <div class="col-md-7">
-          <h2 class="featurette-heading">스낵바<span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">없는게 없습니다.</p>
+          <h2 class="featurette-heading">SNACK BAR<span class="text-muted"></span></h2>
+          <p class="lead">오직 중앙시네마에서만 만날 수 있는 최고의 팝콘을 즐겨보세요</p>
         </div>
         <div class="col-md-5">
           <img style="padding-top:100px" class="featurette-image img-responsive center-block" 
