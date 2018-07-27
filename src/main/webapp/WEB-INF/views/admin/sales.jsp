@@ -238,7 +238,7 @@
 
 
 <div style="margin-top: 50px">
-	<h2>정산</h2>
+	<h2>매출</h2>
 </div>
 <hr>
 
@@ -250,8 +250,7 @@
 		role="tab" data-toggle="tab">월 매출</a></li>
 	<li role="presentation"><a href="#day" aria-controls="day"
 		role="tab" data-toggle="tab">일 매출</a></li>
-	<li role="presentation"><a href="#settings"
-		aria-controls="settings" role="tab" data-toggle="tab">암것도아님</a></li>
+	
 </ul>
 
 <div class="tab-content">
