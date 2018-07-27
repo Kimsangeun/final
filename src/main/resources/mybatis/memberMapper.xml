@@ -34,7 +34,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reser, movie, screeninfo 
 		where reser.mid = movie.mid 
 		and reser.id = #{id} 
-		and reser.sid = screeninfo.sid
+		and reser.sid = screeninfo.sid 
+		order by screeninfo.mstart desc
 	</select>
 	
 	<delete id="cancle" parameterType="reserVo">

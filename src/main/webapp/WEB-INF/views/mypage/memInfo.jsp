@@ -80,7 +80,8 @@ $(function(){
 			data : data,
 			type : 'POST',
 			success: function(result){
-				alert(result.msg);		
+				alert(result.msg);
+				document.location.href="/proj/logOut";
 			}
 		
 		});
@@ -247,6 +248,11 @@ input[type="password"]
 	width : 85%;
 	height : 40px;
 	
+}
+
+.error_next_box{
+	color: red;
+	font-size : 12px;
 }
 
 

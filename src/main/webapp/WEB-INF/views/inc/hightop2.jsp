@@ -32,7 +32,7 @@ margin: 0 10%;
 		<c:when test="${mem eq null }">
 		<li><form action="/proj/loginReg" method="post">
 			ID<input type="text" name="id">
-			pw<input type="text" name="pw">
+			pw<input type="password" name="pw">
 			<input type="submit" value="로그인">
 			<div><a href="/proj/search">ID/PW찾기</a></div>
 			<a href="/proj/joinForm">회원가입</a>

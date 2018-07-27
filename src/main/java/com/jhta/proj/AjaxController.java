@@ -97,7 +97,6 @@ public class AjaxController {
 		
 	}
 	
-	
 	@RequestMapping(value="/ajax/smsSend", method = RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> smsSend(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 

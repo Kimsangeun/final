@@ -12,7 +12,7 @@
 user-scalable=0, minimum-scale=1.0, maximum-scale=1.0"/>
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-<title>중앙박스</title>
+<title>시네마중앙</title>
 
 
 <link rel="stylesheet"
