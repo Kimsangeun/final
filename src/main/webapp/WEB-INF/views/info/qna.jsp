@@ -7,16 +7,16 @@
 </div>
 <hr>
 
-	<table class="table table-hover">
+	<table class="table table-hover" align="center" style="width:60%;">
 
 		<form action="?">
 			<tr>
 			<c:choose>
 			<c:when test="${kind eq 'qna'}">
-				<td colspan="4" align="center">검색 <select name="schCol">	
+				<td colspan="4" align="center"> <select name="schCol">	
 			</c:when>
 			<c:otherwise>
-				<td colspan="5" align="center">검색 <select name="schCol">
+				<td colspan="5" align="center"> <select name="schCol">
 			</c:otherwise>
 			</c:choose>
 						<option value="title">제목</option>
@@ -36,7 +36,7 @@
 		</form>
 
 		<tr>
-			<td><b>번호</b></td>
+			<td width="50px"><b>번호</b></td>
 			<td><b>제목</b></td>
 			<td><b>작성자</b></td>
 			<td><b>작성일</b></td>
@@ -44,14 +44,14 @@
 			<c:when test="${kind eq 'qna'}">	
 			</c:when>
 			<c:otherwise>
-				<td><b>조회수</b></td>
+				<td width="70px"><b>조회수</b></td>
 			</c:otherwise>
 			</c:choose>
 		</tr>
 
 		<c:forEach items="${data }" var="row" varStatus="no">
 			<tr>
-				<td>${total-(no.index + ((page-1)*10))}</td>
+				<td>${total-(no.index + ((page-1)*7))}</td>
 				<td><a href="detail?bid=${row.bid }">${row.title}</a></td>
 				<td>${row.pid}</td>
 				<td>${row.regdateStr}</td>
@@ -75,11 +75,11 @@
 			</c:choose>
 		</tr>
 	</table>
+<div align="center">
 <c:if test="${startPage >1 }">
 	<a href="${kind }?page=1&schCol=${param.schCol }&title=${param.title}"">[처음]</a>
-	<a href="${kind }?page=${startPage-1 }&schCol=${param.schCol }&title=${param.title}""><</a>
+	<a href="${kind }?page=${startPage-1 }&schCol=${param.schCol }&title=${param.title}"><</a>
 </c:if>
-<div align="center">
 <c:forEach var="i" begin="${startPage }" end="${endPage }">
 	<c:choose>
 		<c:when test="${i==page }">

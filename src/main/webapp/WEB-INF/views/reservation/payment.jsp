@@ -222,18 +222,12 @@
 	<table class="table table-hover" id="rtb" style="width:60%">
 		<tr>
 			<td colspan="2" align="center"><b>예매내역</b></td>
-		</tr>
-		<tr>
-			<td>좌석번호</td>
-			<td>${rvo.seatNum }</td>
-		</tr>
-		<tr>
-			<td>인원수</td>
-			<td>${rvo.cnt }</td>
-		</tr>
-		<tr>
-			<td>결제금액</td>
-			<td>${rvo.cost }</td>
+		</tr><tr>
+			<td>좌석번호</td><td>${rvo.seatNum }</td>
+		</tr><tr>
+			<td>인원수</td><td>${rvo.cnt }</td>
+		</tr><tr>
+			<td>결제금액</td><td>${rvo.cost }</td>
 		</tr>
 	</table>
 
@@ -304,9 +298,6 @@
 				</div>
 			</div>
 		</div>
-
-
-
 
 		<div style="width: 100%; float: left; padding: 0 30%" align="center">
 			<form action="/proj/reservation/payend" method="post" id="pendfrm"

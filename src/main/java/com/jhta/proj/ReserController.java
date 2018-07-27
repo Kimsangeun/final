@@ -242,7 +242,8 @@ public class ReserController {
 	}
 	
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price,
+	public Object cine24(Model model, @RequestParam String seatnum,
+			@RequestParam int cnt, @RequestParam int price,
 			HttpServletRequest request) {
 		System.out.println("병수1");
 		model.addAttribute("menu", "reservation");

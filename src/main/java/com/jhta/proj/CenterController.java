@@ -77,7 +77,7 @@ public class CenterController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	String aaa(@PathVariable String service, Model model, BoardVO bvo, BindingResult errors) {
+	String aaa(@PathVariable String service) {
 		String res = "home";
 		if (service.equals("insertReg") || service.equals("modifyReg") || service.equals("replyReg")) {
 			res = "/admin/alert";
@@ -91,14 +91,16 @@ public class CenterController {
 			HttpSession session) {
 		System.out.println("데이타 탄다");
 		Object res = null;
-		kind = service;
+		if (service.equals("notice") || service.equals("faq") || service.equals("qna")) {
+			kind = service;
+		}
 		MemberVO v1 = (MemberVO) session.getAttribute("mem");
 		if (v1 != null)
 			bvo.setId(v1.getId());
 		// System.out.println(vo);
 
 		/* * * * * * * * * 페이징.* * * * * * * * * * * * * * * */
-		int page = 1, limit = 10, pageLimit = 4;
+		int page = 1, limit = 7, pageLimit = 3;
 		if (request.getParameter("page") != null && !request.getParameter("page").equals("")) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
@@ -115,7 +117,8 @@ public class CenterController {
 		if (request.getParameter("schCol") != null) {
 			System.out.println("title::" + request.getParameter("title"));
 			if (kind.equals("qna") && !v1.getId().equals("admin")) {
-				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"), v1.getId() );
+				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"),
+						v1.getId());
 			} else {
 				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"));
 			}
@@ -311,4 +314,55 @@ public class CenterController {
 			System.out.println("파일이 존재하지 않습니다.");
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((boardDao == null) ? 0 : boardDao.hashCode());
+		result = prime * result + ((kind == null) ? 0 : kind.hashCode());
+		result = prime * result + ((movieDao == null) ? 0 : movieDao.hashCode());
+		result = prime * result + ((screenDao == null) ? 0 : screenDao.hashCode());
+		result = prime * result + ((timeDao == null) ? 0 : timeDao.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CenterController other = (CenterController) obj;
+		if (boardDao == null) {
+			if (other.boardDao != null)
+				return false;
+		} else if (!boardDao.equals(other.boardDao))
+			return false;
+		if (kind == null) {
+			if (other.kind != null)
+				return false;
+		} else if (!kind.equals(other.kind))
+			return false;
+		if (movieDao == null) {
+			if (other.movieDao != null)
+				return false;
+		} else if (!movieDao.equals(other.movieDao))
+			return false;
+		if (screenDao == null) {
+			if (other.screenDao != null)
+				return false;
+		} else if (!screenDao.equals(other.screenDao))
+			return false;
+		if (timeDao == null) {
+			if (other.timeDao != null)
+				return false;
+		} else if (!timeDao.equals(other.timeDao))
+			return false;
+		return true;
+	}
+	
+	
 }
