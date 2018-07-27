@@ -11,7 +11,7 @@
 <table class="table table-hover" align="center" style="width:60%;">
 	<form action="?">
 		<tr>
-			<td colspan="5" align="center">검색 <select name="schCol">
+			<td colspan="5" align="center"> <select name="schCol">
 					<option value="title">제목</option>
 					<option value="pid">작성자</option>
 					<option value="content">내용</option>
@@ -21,16 +21,16 @@
 		</tr>
 	</form>
 	<tr>
-		<td><b>번호</b></td>
+		<td width="50px"><b>번호</b></td>
 		<td><b>제목</b></td>
 		<td><b>작성자</b></td>
 		<td><b>작성일</b></td>
-		<td><b>조회수</b></td>
+		<td width="70px"><b>조회수</b></td>
 	</tr>
 
 	<c:forEach items="${data }" var="row" varStatus="no">
 		<tr>
-			<td>${total-(no.index + ((page-1)*10))}</td>
+			<td>${total-(no.index + ((page-1)*7))}</td>
 			<td><a href="detail?bid=${row.bid }">${row.title}</a></td>
 			<td>${row.pid}</td>
 			<td>${row.regdateStr}</td>
