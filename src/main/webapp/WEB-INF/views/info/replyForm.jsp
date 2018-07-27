@@ -36,11 +36,13 @@ function gogo(){
 		<tr>
 			<td><b>내용</b></td>
 			<td><textarea name="content" rows="5"  style="width:90%;resize:none" id="ct" >${data.content }
-			______________________
+______________________
 </textarea></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="submit" value="작성" /> <a href="detail?bid=${data.bid}">뒤로</a></td>
+			<td colspan="2" align="center"><a style="cursor: pointer" onclick="gogo()">작성</a>
+
+<a href="detail?bid=${data.bid}">뒤로</a></td>
 		</tr>
 	</table>
 </form>

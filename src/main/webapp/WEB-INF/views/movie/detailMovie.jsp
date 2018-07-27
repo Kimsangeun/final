@@ -256,10 +256,11 @@
 				${moviedata['movie'].title }
 				<c:if test="${mem.id eq 'admin' }">
 					<div>
-					<input id="deleteGo" class="btn btn-danger" type="button" value="삭제">
+					<input id="deadlineGo" ${moviedata['movie'].deadline eq 1 ? 'disabled':'' } class="btn btn-info" type="button" value="마감">
 					<input class="btn btn-warning" type="button" value="수정"
 						onclick="location.href='/proj/admin/modifyForm?mid=${param.mid}'">
-					<input id="deadlineGo" class="btn btn-info" type="button" value="마감">
+					
+					<input id="deleteGo" class="btn btn-danger" type="button" value="삭제">
 					<!-- onclick="location.href='/proj/admin/deadlineReg?mid=${param.mid}'" -->
 					</div>
 				</c:if>
@@ -339,7 +340,7 @@
 	</div>
 </c:if>
 <hr>
-
+<p class="h2">한줄평</p>
 <span id="counter"><small>0/200</small></span>
 <form id="reviewInsert" action="reviewInsert" method="POST">
 	<div class="row qq">
@@ -454,7 +455,7 @@
 		</c:forEach>
 	</ul>
 </div>
-<div id="js-btn-wrap" class="btn-wrap">
+<div id="js-btn-wrap" class="btn-wrap" align="center">
 	<button id="moreButton" class="button btn btn-default">더보기</button>
 	<!-- <a href="javascript:;" class="button">더보기</a> -->
 </div>

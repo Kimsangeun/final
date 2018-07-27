@@ -62,7 +62,7 @@ img{
 }
 } */
 </style>
-<div><h2>박스오피스</h2></div>
+<div style="margin-top:50px"><h2>박스오피스</h2></div>
 
 <hr>
 <div id="js-load" class="container" style="margin-top: 100px">

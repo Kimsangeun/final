@@ -132,7 +132,7 @@ function preview_images()
 				</textarea>
 		</div>
 		
-		<button type="submit" class="btn btn-default">수정</button>
+		<button type="submit" class="btn btn-default pull-right">수정</button>
 	</form>
 
 </div>

@@ -53,8 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		parameterType="boardVo">
 		select * from
 		(select rownum rnum, tt.* from
-		(select * from board
-		 where pid = #{id}<!--  or pid = 'admin' and kind = #{kind}  --> order by gid desc, seq) tt) 
+		(select * from
+		(select * from board where gid in (select bid from board where kind='qna' and pid=#{pid})) order by gid desc, seq) tt) 
 	<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
 	</select>
 

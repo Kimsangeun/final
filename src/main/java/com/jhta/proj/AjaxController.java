@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jhta.proj.model.MemberDAO;
+import com.jhta.proj.model.admin.AdminDAO;
 import com.jhta.proj.model.admin.MovieDAO;
 import com.jhta.proj.util.Coolsms;
 import com.jhta.proj.util.MakeNumber;
@@ -30,6 +31,9 @@ public class AjaxController {
 	
 	@Resource
 	MovieDAO mdao;
+	
+	@Resource
+	AdminDAO adao;
 	
 	@Resource
 	MakeNumber cerf;
@@ -107,7 +111,7 @@ public class AjaxController {
 		
 		String api_key = "NCSFTLCC5UICCUDI";
 		String api_secret = "2ZTHIMVFZSGIFTVWFZ1YGVI6DCERZMSG";
-		//Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성
+		//Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성 여기도 잠그기
 		Integer key = cerf.makeNum(6); // 인증키 생성
 		
 		map.put("certNum", key);
@@ -119,6 +123,8 @@ public class AjaxController {
 		/*
 		 * Parameters 관련정보 : http://www.coolsms.co.kr/SDK_Java_API_Reference_ko#toc-0
 		 */
+		
+		//여기부터 아래 잠궈놓을것
 		/*HashMap<String, String> set = new HashMap<String, String>();
 		set.put("to", (String)map.get("phone")); // 수신번호
 		set.put("from", "01071303039"); // 발신번호
@@ -176,6 +182,36 @@ public class AjaxController {
 		//dao.ajaxemailChk(map);
 		
 		return map;
+		
+	}
+	
+	@RequestMapping(value="/ajax/sales", method = RequestMethod.POST)
+	@ResponseBody
+	public Object sales(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
+			throws NoPermissionException{
+		//@RequestParam(value="userid") String id
+		Object res = null;
+		System.out.println("sales : "+map);
+		
+		System.out.println("후후세일스"+map);
+		System.out.println(map);
+		
+		switch ((String)map.get("type")) {
+		case "day":
+			res = adao.dayList(map);
+			break;
+		case "month":
+			res = adao.monthList(map);
+			break;
+		case "year":
+			res = adao.yearList(map);
+			System.out.println("이어다이어"+res);
+			break;
+
+		}
+		//dao.ajaxemailChk(map);
+		
+		return res;
 		
 	}
 	

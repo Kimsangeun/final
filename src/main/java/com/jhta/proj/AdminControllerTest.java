@@ -58,7 +58,6 @@ public class AdminControllerTest {
 	
 	@Test
 	public void testSelectList() {
-		//fail("Not yet implemented");
 		AdminController a = new AdminController();
 		String res = a.selectList("deleteMovie", new TimeTableVO(),model);
 		
@@ -69,7 +68,6 @@ public class AdminControllerTest {
 
 	@Test
 	public void testSss() {
-		//fail("Not yet implemented");
 		
 		AdminController a = new AdminController();
 		String res = a.sss("time",new SettleVO(),new BoardVO() ,new TimeTableVO(), model);
@@ -78,7 +76,11 @@ public class AdminControllerTest {
 		
 		assertEquals("메시지", "home", res);
 	}
-
+	
+	
+	
+	
+/*
 	@Test
 	public void testRes() {
 		//fail("Not yet implemented");
@@ -101,5 +103,5 @@ public class AdminControllerTest {
 	public void testDeleteFile() {
 		fail("Not yet implemented");
 	}
-
+*/
 }

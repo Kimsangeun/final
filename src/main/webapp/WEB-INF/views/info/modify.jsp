@@ -7,7 +7,6 @@
 <script>
 
 function gogo(){
-	
 	if($('#inmain').is(':checked') == true){
 		$('#pw').val(1);
 	}
@@ -24,7 +23,7 @@ function gogo(){
 		alert('내용을 입력하세요');
 		return;
 	}
- 	document.insfrm.submit(); 
+ 	document.modfrm.submit(); 
 }
 </script>
 <div>
@@ -50,14 +49,24 @@ function gogo(){
 	<input type="hidden" name="bid" value="${data.bid}">
 
 	<table class="table table-hover" align="center" style="width:60%;">
-		<tr>
-			<td><b>작성자</b></td>
-			<td colspan="3"><input type="text" name="pid" disabled="disabled"
-				value="${data.pid }"  style="width:90%;"  /></td>
+				<tr>
+			<td ><b>작성자</b></td>
+<%-- 			<c:choose>
+			<c:when test="${data.kind != 'notice'}"> --%>
+			<td colspan="3" align="center">${mem.id }</td>
+			
+<%-- 			</c:when>
+			<c:otherwise>
+			<td align="center">${mem.id }</td>
+			<td ><b>메인화면</b></td>
+			<td align="center"><input type="checkbox" name="inmain" id="inmain"></td>
+			
+			</c:otherwise>
+			</c:choose> --%>
 		</tr>
 		<tr>
 			<td><b>제목</b></td>
-			<td><input type="text" name="title" value="${data.title }" style="width:90%;"  id="tt" /></td>
+			<td colspan="3"><input type="text" name="title" value="${data.title }" style="width:90%;"  id="tt" /></td>
 		</tr>
 		<tr>
 			<td><b>파일</b></td>
@@ -69,7 +78,7 @@ function gogo(){
 			<td colspan="4"><textarea style="width:90%;resize:none"rows="5" name="content" id="ct">${data.content }</textarea></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><input type="button" onclick="gogo()" value="작성">
+			<td colspan="4" align="center"><a style="cursor: pointer" onclick="gogo()">작성</a>
 				<a href="${data.kind}">뒤로</a></td>
 		</tr>
 	</table>
