@@ -179,6 +179,7 @@ public class CenterController {
 			System.out.println(bvo);
 
 			String id = ((MemberVO) request.getSession().getAttribute("mem")).getId();
+			bvo.setPid(id);
 			if (id.equals("admin"))
 				res = boardDao.someList(bvo);
 			else {
