@@ -190,13 +190,28 @@ public class AjaxController {
 	public Object sales(@RequestParam Map<String, Object> map, HttpServletRequest servletRequest) 
 			throws NoPermissionException{
 		//@RequestParam(value="userid") String id
+		Object res = null;
 		System.out.println("sales : "+map);
 		
 		System.out.println("후후세일스"+map);
 		System.out.println(map);
+		
+		switch ((String)map.get("type")) {
+		case "day":
+			res = adao.dayList(map);
+			break;
+		case "month":
+			res = adao.monthList(map);
+			break;
+		case "year":
+			res = adao.yearList(map);
+			System.out.println("이어다이어"+res);
+			break;
+
+		}
 		//dao.ajaxemailChk(map);
 		
-		return adao.dayList(map);
+		return res;
 		
 	}
 	

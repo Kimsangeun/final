@@ -180,27 +180,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!-- 정산 -->
 	<!-- 년도별 매출  -->
 	<select id="movieSettleYear" parameterType="map" resultType="map">
-		select sum(cost) as sum,to_char(mstart,'yyyy') as year from reser
+		select sum(cost) as sum,to_char(mstart,'yyyy') as day from 
+		(select reser.cost,screeninfo.mstart,screeninfo.mid
+		 from reser,screeninfo where reser.sid = screeninfo.sid)
 		 <if test="mid != 0">
-			where movie.mid = #{mid}		
+			where mid = #{mid}		
 		</if>
-		 group by to_char(mstart,'yyyy')order by year
+		 group by to_char(mstart,'yyyy')order by day
 	</select>
 	<!-- 월별 매출  -->
 	<select id="movieSettleMonth" parameterType="map" resultType="map">
-		select sum(cost) as sum,to_char(mstart,'yyyy-MM') as month from 
-		reser where to_char(mstart,'yyyy')=#{yearselect} 
+		select sum(cost) as sum,to_char(mstart,'yyyy-MM') as day from 
+		(select reser.cost,screeninfo.mstart,screeninfo.mid
+		 from reser,screeninfo where reser.sid = screeninfo.sid)
+		 where to_char(mstart,'yyyy')=#{select} 
 		 <if test="mid != 0">
-			and movie.mid = #{mid}		
+			and mid = #{mid}		
 		</if>
-		group by to_char(mstart,'yyyy-MM')order by month
+		group by to_char(mstart,'yyyy-MM')order by day
 	</select>
 	<!-- 일별 매출  -->
 	<select id="movieSettleDay" parameterType="map" resultType="map">
 		select sum(cost) as sum,to_char(mstart,'yyyy-MM-dd') as day from 
-		reser where to_char(mstart,'yyyy-MM')=#{monthselect}  
+		(select reser.cost,screeninfo.mstart,screeninfo.mid
+		 from reser,screeninfo where reser.sid = screeninfo.sid)
+		 where to_char(mstart,'yyyy-MM')=#{select}  
 		 <if test="mid != 0">
-			and movie.mid = #{mid}		
+			and mid = #{mid}		
 		</if>
 		group by to_char(mstart,'yyyy-MM-dd') order by day
 	</select>

@@ -158,7 +158,7 @@ src="${pageContext.request.contextPath}\resources\board/${mm.upfile}" alt="slide
       <div class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">SNACK BAR<span class="text-muted"></span></h2>
-          <p class="lead">오직 중앙시네마에서만 만날 수 있는 최고의 팝콘을 즐겨보세요</p>
+          <p class="lead">오직 시네마중앙에서만 만날 수 있는 최고의 팝콘을 즐겨보세요</p>
         </div>
         <div class="col-md-5">
           <img style="padding-top:100px" class="featurette-image img-responsive center-block" 
