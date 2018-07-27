@@ -309,12 +309,12 @@ mm2 = Number(mm2);
 		var MM = ddate.split('-')[1];
 		var dd = ddate.split('-')[2];
 		 
-		var emptyseat = 0;
-		var tot = 0;
-		
 		$('#S_date').attr('dd',YY+'/'+MM+'/'+dd+' '+'('+day+')');
 		$('#S_date').html('날짜&nbsp;&nbsp;&nbsp;' +$('#S_date').attr('dd'))
 					.css('margin-top','30px');
+		
+		var emptyseat = 0;
+		var tot = 0;
 		
 		for(var i = 0;i< dateStr.length; i++){
 			
@@ -370,7 +370,6 @@ mm2 = Number(mm2);
 				$('#S_ti'+i)
 						.css('margin','0px')
 						.css('padding','0px');
-				
 			}else{
 				$("#S_tim"+i).attr('tt',ttsp);	
 				$('#S_ti'+i)
@@ -386,8 +385,6 @@ mm2 = Number(mm2);
 							.css('color','#4374D9');
 				
 				if(ddate == nowdate){
-					//alert('hh1:'+HH1)
-					//alert('hh2:'+HH2)
 					if(HH1<HH2){
 						$('#S_tim'+i).css("color","#EAEAEA")
 									.css("background","#FFFFFF");
@@ -610,7 +607,6 @@ mm2 = Number(mm2);
 				</c:forEach>
 			</div>
 			<div style="clear: both;"></div>
-
 		</div>
 
 	</div>
@@ -654,14 +650,15 @@ mm2 = Number(mm2);
 		</div>
 
 		<input type="hidden" name="mid" id="mid" value="-1">
-
+		<input type="hidden" name="sid" id="sid" value="-1">
+		
 		<div class="S_cho" style="width : 30%;  margin-left:20px;"> 
 			<div id="S_date">날짜선택</div>
 			<div id="S_time">시간선택</div>
 			<div id="S_scNum"></div>
 		</div>
 		
-		<input type="hidden" name="sid" id="sid" value="-1">
+		
 		<div class="S_cho" style="margin-left: 50px;">
 		<input type="button" class="btn btn-danger"  onclick="Chk()"
 			id="S_btn" value="좌석선택" >

@@ -89,10 +89,10 @@ public class ReserController {
 	}
 
 	@ModelAttribute("reserdata")
-	public Object rese(Model model, ReserVO vo) {
+	public Object rese(Model model) {
 
 		Object res = null;
-		res = rdao.list(vo);
+		res = rdao.list();
 
 		return res;
 	}
@@ -147,15 +147,15 @@ public class ReserController {
 	 */
 
 	@ModelAttribute("dateTitleList")
-	public Object datetitlelist(Model model, ScreenInfoVO vo) {
+	public Object datetitlelist(Model model) {
 		Object res = null;
-		res = mdao.dateTitleList(vo);
+		res = mdao.dateTitleList();
 		//System.out.println("롤롤롤:" + res);
 		return res;
 	}
 
 	@RequestMapping("/timetable")
-	public Object cine3(Model model, ScreenInfoVO svo) {
+	public Object cine3(Model model) {
 		model.addAttribute("menu", "reservation");
 		
 		Date now = new Date();

@@ -11,8 +11,8 @@ public class ReserDAO { //���� ����
 	@Resource
 	SqlSessionTemplate sessionTemplate;
 	
-	public Object list(ReserVO vo) {
-		return sessionTemplate.selectList("reser.list", vo);
+	public Object list() {
+		return sessionTemplate.selectList("reser.list");
 	}
 	public Object insert(ReserVO vo) {
         return sessionTemplate.insert("reser.insert", vo);
