@@ -25,22 +25,35 @@ function gogo(){
 	}
  	document.modfrm.submit(); 
 }
+
+function filedel(bid){
+	 if(confirm('파일을 삭제하시겠습니까?\n삭제된 파일은 복구할 수 없습니다.')){
+/*		 var frm = document.frm;
+		 frm.action="ResQnAFileDelete";
+*/		 
+location.href="modify?bid="+bid;
+		request.setAttribute("fdelete", "delete");
+		
+/* 		 document.location="modify?bid=101"; */
+	 }
+}
 </script>
 <div>
-	<h2>	<c:choose>
-	
-	<c:when test="${data.kind == 'notice'}">
+	<h2>
+		<c:choose>
+
+			<c:when test="${data.kind == 'notice'}">
 	공지사항
 	</c:when>
-	<c:when test="${data.kind == 'faq'}">
+			<c:when test="${data.kind == 'faq'}">
 	FAQ
 	</c:when>
-	<c:when test="${data.kind == 'qna'}">
+			<c:when test="${data.kind == 'qna'}">
 	QNA
 	</c:when>
-	
-	</c:choose>
-</h2>
+
+		</c:choose>
+	</h2>
 </div>
 <hr>
 
@@ -48,14 +61,14 @@ function gogo(){
 	accept-charset="UTF-8" name="modfrm">
 	<input type="hidden" name="bid" value="${data.bid}">
 
-	<table class="table table-hover" align="center" style="width:60%;">
-				<tr>
-			<td ><b>작성자</b></td>
-<%-- 			<c:choose>
+	<table class="table table-hover" align="center" style="width: 60%;">
+		<tr>
+			<td><b>작성자</b></td>
+			<%-- 			<c:choose>
 			<c:when test="${data.kind != 'notice'}"> --%>
 			<td colspan="3" align="center">${mem.id }</td>
-			
-<%-- 			</c:when>
+
+			<%-- 			</c:when>
 			<c:otherwise>
 			<td align="center">${mem.id }</td>
 			<td ><b>메인화면</b></td>
@@ -66,20 +79,30 @@ function gogo(){
 		</tr>
 		<tr>
 			<td><b>제목</b></td>
-			<td colspan="3"><input type="text" name="title" value="${data.title }" style="width:90%;"  id="tt" /></td>
+			<td colspan="3"><input type="text" name="title"
+				value="${data.title }" style="width: 90%;" id="tt" /></td>
 		</tr>
 		<tr>
 			<td><b>파일</b></td>
-			<td colspan="3"><input type="file" name="mmfile"
-				value="${data.mmfile }" /></td>
+			<td colspan="3"><c:choose>
+					<c:when test="${data.upfile!='' }">
+					${data.upfile }
+					<input type="hidden" name="upfile" value="${data.upfile }" />
+						<input type="button" onclick="filedel(${data.bid})" value="파일삭제">
+					</c:when>
+					<c:otherwise>
+						<input type="file" name="mmfile" />
+					</c:otherwise>
+				</c:choose></td>
 		</tr>
-		
+
 		<tr>
-			<td colspan="4"><textarea style="width:90%;resize:none"rows="5" name="content" id="ct">${data.content }</textarea></td>
+			<td colspan="4"><textarea style="width: 90%; resize: none"
+					rows="5" name="content" id="ct">${data.content }</textarea></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><a style="cursor: pointer" onclick="gogo()">작성</a>
-				<a href="${data.kind}">뒤로</a></td>
+			<td colspan="4" align="center"><a style="cursor: pointer"
+				onclick="gogo()">작성</a> <a href="${data.kind}">뒤로</a></td>
 		</tr>
 	</table>
 </form>

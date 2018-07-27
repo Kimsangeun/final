@@ -340,13 +340,14 @@ window.onload = function(){
 		numlist = numlist.split(' ');
 		
 		for (var i = 0; i < numlist.length; i++) {
-			$(numlist[i]).css("background", "gray");
-			$(numlist[i]).css("color", "lightgray");
-			$(numlist[i]).html("&nbsp;X&nbsp;");
+			$(numlist[i])
+						.css("background", "gray")
+						.css("text-align", "center")
+						.css("color", "lightgray")
+						.html("X");
 		}
 	
-		/* 결제 팝업뜨게하고 최대한 비슷하게. */
-		//동의합니다.
+	
 	}
 
 	function chksubmit() {

@@ -56,6 +56,9 @@ $('.slider').bxSlider({
 	left:17px;
 	}
 }
+
+
+
 </style>
 
 

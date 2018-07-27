@@ -222,11 +222,19 @@ public class CenterController {
 			break;
 
 		case "modify":
+			System.out.println("--------------------------------------------------------------");
+			BoardVO bvv = (BoardVO)boardDao.detail(bvo);
+			if(request.getAttribute("fdelete") != null) {
+				deleteFile(bvv.getUpfile(), request);
+				bvv.setUpfile("");
+				bvv.setMmfile(null);
+				request.setAttribute("fdelete", null);
+			}
 			System.out.println("centercontrol_modify...");
 			System.out.println(bvo);
 			// res = boardDao.detail(bvo);
 			// bvo = boardDao.findBoard(bvo.getBid());
-			res = boardDao.detail(bvo);
+			res = bvv;
 			break;
 
 		case "modifyReg":

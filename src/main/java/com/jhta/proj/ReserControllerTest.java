@@ -7,24 +7,31 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.jhta.proj.model.MovDAO;
 import com.jhta.proj.model.MovVO;
 import com.jhta.proj.model.ReserDAO;
+import com.jhta.proj.model.ScreenInfoDAO;
 import com.jhta.proj.model.ScreenInfoVO;
 
 public class ReserControllerTest {
 	HttpServletRequest request;
+	HttpSession session;
 	
 	@Resource
 	MovDAO mdao;
 	
 	@Resource
 	ReserDAO rdao;
+	
+	@Resource
+	ScreenInfoDAO sdao;
 	
 	Model model = new Model() {
 		@Override
@@ -88,7 +95,7 @@ public class ReserControllerTest {
 	public void testTit() {
 		fail("Not yet implemented");
 	}*/
-
+/*
 	@Test
 	public void testRese() {
 		ReserController rr = new ReserController();
@@ -98,7 +105,7 @@ public class ReserControllerTest {
 		
 		
 	}
-	
+	*/
 /*	@Test
 	public void testDatetitlelist() {
 		fail("Not yet implemented");
@@ -121,12 +128,13 @@ public class ReserControllerTest {
 		assertEquals("home", res);
 	}
 	
+	
 	/*
 	@Test
 	public void testCine6() { //screenchoice
 		fail("Not yet implemented");
 	}
-
+	
 	@Test
 	public void testCine24() { //payment
 		fail("Not yet implemented");

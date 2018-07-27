@@ -31,22 +31,22 @@
 		<div class="tab-pane fade active in" id="first">
 			<p>
 				<h2>1관 좌석배치도</h2><br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(0).img }" />
-				<h4>좌석수 : 32석 / <font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h4>
+				<h3>좌석수 : 32석 <br><font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h3>
 		</div>
 		<div class="tab-pane fade" id="second">
 			<p> 
 				<h2>2관 좌석배치도</h2><br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(1).img }" />
-				<h4>좌석수 : 40석 / <font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h4>
+				<h3>좌석수 : 40석 <br><font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h3>
 		</div>
 		<div class="tab-pane fade" id="third">
 			<p>
 				<h2>3관 좌석배치도</h2><br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(2).img }" />
-				<h4>좌석수 : 32석 / <font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h4>
+				<h3>좌석수 : 32석 <br><font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h3>
 		</div>
 		<div class="tab-pane fade" id="fourth">
 			<p>
 				<h2>4관 좌석배치도</h2><br> <img width="100%" src="${pageContext.request.contextPath}/resources/Screenimg/${cinemadata.get(3).img }" />
-				<h4>좌석수 : 36석 / <font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h4>
+				<h3>좌석수 : 36석 <br><font style="color:green"> ㅁ </font>일반석 : 3,000원 / <font style="color:red"> ㅁ </font>우등석 : 4,000원</h3>
 		</div>
 	</div>
 </div>

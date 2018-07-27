@@ -169,8 +169,16 @@
 		$(".goChart").click(
 				function() {
 					var godata = $("#form_"+$(this).prop('title')).serialize();
+					console.log(godata.select);
 					var id = "columnchart_material_"+$(this).prop('title');
 					var type = $(this).prop('title');
+					console.log(type);
+					if(type == 'day'){
+						godata="type=day&sel_year=2018&sel_month=01&select="+$('#sel_year').val()
+						+"-"+$('#sel_month').val()+"&mid=0";
+						
+					}
+					//var type=type=day&sel_year=2018&sel_month=01&select=%2F&mid=0
 				google.charts.load('current', {'packages' : [ 'bar' ]});
 				google.charts.setOnLoadCallback(drawChart);
 				function drawChart() {
@@ -278,8 +286,9 @@
 		<div id="columnchart_material_month" style="width: 100%; height: 500px;"></div>
 		<form id="form_month">
 			<input type="hidden" name="type" value="month">
-			<input type="hidden" name="select" value="2018">
 			<div class="form-group pull-right">
+				<label for="movieSelect_month">연도 선택</label>
+				<input type="text" class="date-picker-year" value="2018" id="select" name="select"  required="required">
 				<label for="movieSelect_month">영화별 보기</label> <select name="mid"
 					id="movieSelect_month" class="selectpicker" data-live-search="true">
 					<option value="0">전체</option>
@@ -287,6 +296,7 @@
 						<option value="${mm.mid }">${ mm.title}</option>
 					</c:forEach>
 				</select>
+				
 				<button class="btn btn-primary goChart" title="month" id="gomonth" type="button">
 					<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 				</button>
@@ -297,8 +307,17 @@
 	<div id="columnchart_material_day" style="width: 100%; height: 500px;"></div>
 		<form id="form_day">
 			<input type="hidden" name="type" value="day">
-			<input type="hidden" name="select" value="2018-05">
 			<div class="form-group pull-right">
+				<label for="sel_year">연도 선택</label>
+				<input type="text" class="date-picker-year" value="2018" id="sel_year" name="sel_year" required="required">
+				<label for="sel_month">월 선택</label>
+				<select required="required" id="sel_month" name="sel_month">
+				<option selected value="01">1월</option><option value="02">2월</option><option value="03">3월</option>
+				<option value="04">4월</option><option value="05">5월</option><option value="06">6월</option>
+				<option value="07">7월</option><option value="08">8월</option><option value="09">9월</option>
+				<option value="10">10월</option><option value="11">11월</option><option value="12">12월</option>
+				</select>
+				<input type="hidden" name="select" value="${sel_year }/${sel_month}">
 				<label for="movieSelect_day">영화별 보기</label> <select name="mid"
 					id="movieSelect_day" class="selectpicker" data-live-search="true">
 					<option value="0">전체</option>

@@ -275,6 +275,22 @@ public class ReserController {
 		System.out.println("포스트로 받았다.");
 		model.addAttribute("menu", "reservation");
 
+		ArrayList<String> sl = new ArrayList();
+
+		for (String seat : (rdao.seatlist(rvo) + "").split(",")) {
+			sl.add(seat);
+		}
+
+		for (String seat : rvo.getSeatNum().split(",")) {
+			if (sl.contains(seat)) {
+				System.out.println("!!좌석중복!!");
+				
+				request.setAttribute("msg", "이미 예약된 좌석입니다.");
+				request.setAttribute("url", "/proj");
+				return "alert";
+			}
+		}
+
 		if (request.getParameter("paytype").equals("csh")) {
 			rvo.setCoc("cash");
 		} else
