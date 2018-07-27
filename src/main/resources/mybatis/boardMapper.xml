@@ -25,7 +25,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="totalCount1" resultType="java.lang.Integer"
 		parameterType="hashmap"><!-- schCol / title -->
 		select count(*) from board
-		<include refid="whereSch" />
+		<include refid="whereSchId" />
 	</select>
 
 	<select id="totalCount2" resultType="java.lang.Integer"
@@ -60,17 +60,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- <sql id="whereSch"> <where> kind = #{kind} <if test="gogo!=null and 
 		gogo!=''"> ${schCol} like '%${gogo}%' </if> </where> </sql> -->
+	<sql id="whereSchId">
+		<where>
+			kind = #{kind}
+			and gid in (select bid from board where kind='qna' and pid=#{id})
+			<if test="title!=null and title!=''">
+				and ${schCol} like '%'||#{title}||'%'
+			</if>
+		</where>
+	</sql>
+
 	<sql id="whereSch">
 		<where>
 			kind = #{kind}
 			<if test="title!=null and title!=''">
-				<!-- <choose> <when test="schCol=='cnt'"> <![CDATA[ cnt <= #{title}]]> 
-					</when> <otherwise> -->
 				and ${schCol} like '%'||#{title}||'%'
-				<!-- </otherwise> </choose> -->
 			</if>
 		</where>
 	</sql>
+
 	<select id="boardListSch" resultType="boardVo"
 		parameterType="boardVo">
 		select * from board
@@ -112,6 +120,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{pid}, #{title}, #{content}, #{upfile}, #{kind}, #{pw})
 	</insert>
 
+
+	<select id="maxbid" resultType="java.lang.Integer" parameterType="boardVo">
+		select max(bid) from board
+	</select>
 
 	<sql id="whereseq">
 		<where>

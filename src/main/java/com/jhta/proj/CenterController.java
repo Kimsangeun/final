@@ -258,7 +258,8 @@ public class CenterController {
 			bvo.setContent(content);
 			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
 
-			model.addAttribute("url", "detail?bid=" + bvo.getBid());
+			System.out.println((int)boardDao.maxBid(bvo)+1);
+			model.addAttribute("url", "qna");
 			model.addAttribute("msg", "답변완료");
 
 			boardDao.nextSeq(bvo);
@@ -269,7 +270,6 @@ public class CenterController {
 	}
 
 	String fileUP(MultipartFile up, HttpServletRequest request) {
-
 		String changeName = up.getOriginalFilename();
 		System.out.println(changeName + "gogo");
 		try {
