@@ -26,6 +26,8 @@ function gogo(){
 		alert('내용을 입력하세요');
 		return;
 	}
+	
+	if()
  	document.insfrm.submit(); 
 }
 </script>
