@@ -167,4 +167,7 @@ gid = #{gid} and seq > #{seq} and kind = #{kind}
 		bid=#{bid}
 	</delete>
 
+	<update id="filedelete" parameterType="boardVo">
+		update board set upfile='' where bid=#{bid}
+	</update>
 </mapper>

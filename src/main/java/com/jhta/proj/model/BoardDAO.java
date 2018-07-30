@@ -102,6 +102,10 @@ public class BoardDAO {
 		System.out.println(ii + "asdasd");
 		return ii;
 	}
+	
+	public Object filedelete(BoardVO bvo) {
+		return sessionTemplate.insert("boardMapper.filedelete", bvo);
+	}
 
 	/*
 	 * public Object someList(BoardVO bvo, Integer start, Integer end, String kind)

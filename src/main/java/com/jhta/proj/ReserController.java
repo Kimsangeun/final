@@ -284,7 +284,7 @@ public class ReserController {
 				System.out.println("!!좌석중복!!");
 				
 				request.setAttribute("msg", "이미 예약된 좌석입니다.");
-				request.setAttribute("url", "home");
+				request.setAttribute("url", "/proj");
 				return "alert";
 			}
 		}
