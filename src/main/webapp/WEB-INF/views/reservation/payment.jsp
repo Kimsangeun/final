@@ -135,8 +135,8 @@
 				return;
 			}
 		}
-		else
-			alert(selectPay);
+		
+
 		document.pendfrm.submit();
 	}
 

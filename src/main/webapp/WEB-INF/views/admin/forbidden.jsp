@@ -14,7 +14,6 @@ $("#noAdminModal").on('hidden.bs.modal',function(){
 
 
 </script>
-
 <div class="modal fade" id="noAdminModal" tabindex="-1" role="dialog"
 	aria-labelledby="noAdminModalLabel" aria-hidden="true">
 	<div class="modal-dialog">
@@ -24,7 +23,7 @@ $("#noAdminModal").on('hidden.bs.modal',function(){
 					aria-label="Close">
 					<span aria-hidden="true">&times;</span>
 				</button>
-				<h4 class="modal-title" id="noAdminModalLabel">관리자</h4>
+				<h4 class="modal-title" id="noAdminModalLabel">로그인</h4>
 			</div>
 			<div class="modal-body"><c:if test="${mem != null }">관리자 계정으로 </c:if>로그인 후 이용 가능합니다.</div>
 			<div class="modal-footer">

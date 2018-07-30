@@ -46,7 +46,7 @@ public class ReserController {
 
 	@Resource
 	CinemaDAO cdao;
-	
+
 	ReserVO rvo;
 
 	/*
@@ -61,10 +61,10 @@ public class ReserController {
 	SimpleDateFormat sdft = new SimpleDateFormat("HH:mm");
 	SimpleDateFormat sdfd = new SimpleDateFormat("YYYY-MM-dd:E");
 
-//	Date now = new Date();
-//
-//	String nowtime = sdft.format(now);
-//	String nowdate = sdfd.format(now).split(":")[0];
+	// Date now = new Date();
+	//
+	// String nowtime = sdft.format(now);
+	// String nowdate = sdfd.format(now).split(":")[0];
 
 	@ModelAttribute("datelist") // 현재 날짜로부터 2주
 	public Object datelist(Model model) {
@@ -78,13 +78,13 @@ public class ReserController {
 		}
 		return datearr;
 	}
-	
+
 	@ModelAttribute("cinemadata")
 	public Object cinema(Model model, CinemaVO vo) {
-		
+
 		Object res = null;
 		res = cdao.list(vo);
-		
+
 		return res;
 	}
 
@@ -150,17 +150,17 @@ public class ReserController {
 	public Object datetitlelist(Model model, ScreenInfoVO vo) {
 		Object res = null;
 		res = mdao.dateTitleList(vo);
-		//System.out.println("롤롤롤:" + res);
+		// System.out.println("롤롤롤:" + res);
 		return res;
 	}
 
 	@RequestMapping("/timetable")
 	public Object cine3(Model model, ScreenInfoVO svo) {
 		model.addAttribute("menu", "reservation");
-		
+
 		Date now = new Date();
 
-		System.out.println("now:"+now);
+		System.out.println("now:" + now);
 		String nowtime = sdft.format(now);
 		String nowdate = sdfd.format(now).split(":")[0];
 
@@ -232,7 +232,6 @@ public class ReserController {
 		System.out.println(seatList);
 		model.addAttribute("seatList", seatList);
 
-
 		String mm = "screenchoice";
 		model.addAttribute("rvo", rvo);
 		model.addAttribute("svo", svo);
@@ -240,10 +239,9 @@ public class ReserController {
 		model.addAttribute("main", mm);
 		return "home";
 	}
-	
+
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public Object cine24(Model model, @RequestParam String seatnum,
-			@RequestParam int cnt, @RequestParam int price,
+	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price,
 			HttpServletRequest request) {
 		System.out.println("병수1");
 		model.addAttribute("menu", "reservation");
@@ -274,6 +272,22 @@ public class ReserController {
 	public Object cine5(Model model, HttpServletRequest request) {
 		System.out.println("포스트로 받았다.");
 		model.addAttribute("menu", "reservation");
+
+		ArrayList<String> sl = new ArrayList();
+
+		for (String seat : (rdao.seatlist(rvo) + "").split(",")) {
+			sl.add(seat);
+		}
+
+		for (String seat : rvo.getSeatNum().split(",")) {
+			if (sl.contains(seat)) {
+				System.out.println("!!좌석중복!!");
+				
+				request.setAttribute("msg", "이미 예약된 좌석입니다.");
+				request.setAttribute("url", "home");
+				return "alert";
+			}
+		}
 
 		if (request.getParameter("paytype").equals("csh")) {
 			rvo.setCoc("cash");
