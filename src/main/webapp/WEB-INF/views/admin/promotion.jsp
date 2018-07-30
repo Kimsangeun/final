@@ -15,7 +15,7 @@
 
 <div class="page-header">
 	<h1>
-		신작 홍보 <small></small>
+		매인배너 홍보 <small></small>
 	</h1>
 </div>
 <div class="">
