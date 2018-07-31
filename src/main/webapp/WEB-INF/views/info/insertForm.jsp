@@ -26,6 +26,8 @@ function gogo(){
 		alert('내용을 입력하세요');
 		return;
 	}
+	
+	if()
  	document.insfrm.submit(); 
 }
 </script>
@@ -54,18 +56,18 @@ function gogo(){
 	<table class="table table-hover" align="center" style="width:60%;">
 		<tr>
 			<td ><b>작성자</b></td>
-			<c:choose>
-			<c:when test="${param.kind != 'notice'}">
+<%-- 			<c:choose>
+			<c:when test="${param.kind != 'notice'}"> --%>
 			<td colspan="3" align="center">${mem.id }</td>
 			
-			</c:when>
+<%-- 			</c:when>
 			<c:otherwise>
 			<td align="center">${mem.id }</td>
 			<td ><b>메인화면</b></td>
 			<td align="center"><input type="checkbox" name="inmain" id="inmain"></td>
 			
 			</c:otherwise>
-			</c:choose>
+			</c:choose> --%>
 		</tr>
 		<tr>
 			<td><b>제목</b></td>
@@ -88,7 +90,7 @@ function gogo(){
 			<td colspan="3"><textarea style="width: 90%;resize:none" rows="5"  name="content" id="ct"></textarea></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"  ><input type="button" onclick="gogo()" name="smbtn" value="작성">
+			<td colspan="4" align="center"><a style="cursor: pointer" onclick="gogo()">작성</a>
 			<a href="${param.kind }" >뒤로</a></td>
 		</tr>
 	</table>

@@ -13,9 +13,80 @@
 </style>
 
 <script>
+$(function() {
+	$(".deadlineGo").click(function() {
+    	var mid = $(this).prop('title');
+    	console.log(mid);
 
+    	var godata={mid:mid};
+    	$.ajax({
+            async: false,
+            type : 'POST',
+            data : godata,
+            url : "/proj/ajax/deadlineChk",
+            success : function(data) {
+                if (data.chk > 0) {
+                	$("#noDeleteModal").modal();
+
+                } else {
+                	location.href="/proj/admin/deadlineReg?mid="+mid;
+                    //document.getElementById('reviewInsert').submit();
+                }
+            },
+            error : function(error) {
+                
+                alert("error : " + error);
+            }
+        }); 
+    	
+    });
+ 	
+	$(".deleteGo").click(function() {
+		var mid = $(this).prop('title');
+    	console.log(mid);
+    	var godata={mid:mid};
+    	
+    	$.ajax({
+            async: false,
+            type : 'POST',
+            data : godata,
+            url : "/proj/ajax/deadlineChk",
+            success : function(data) {
+                if (data.chk > 0) {
+                	$("#noDeleteModal").modal();
+
+                } else {
+                	location.href='/proj/admin/deleteMovie?mid='+mid;
+                }
+            },
+            error : function(error) {
+                
+                alert("error : " + error);
+            }
+        });
+    	
+    });
+});
 </script>
-
+<!-- 삭제막기 모달~~~ -->
+	<div class="modal fade" id="noDeleteModal" tabindex="-1" role="dialog"
+		aria-labelledby="noDeleteModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="noLoginModalLabel">삭제 불가</h4>
+				</div>
+				<div class="modal-body">상영시간표에 영화가 존재합니다.</div>
+				<div class="modal-footer">
+					<button id="noDeleteModalOk" type="button" data-dismiss="modal" class="btn btn-primary">확인</button>
+				</div>
+			</div>
+		</div>
+	</div>
 
 <div class="page-header">
   <h1>영화관리 <small></small></h1>
@@ -30,8 +101,9 @@
 		<th>제목</th>
 		<th>런타임</th>
 		<th>개봉일</th>
-		<th>삭제</th>
+		<th>마감</th>
 		<th>변경</th>
+		<th>삭제</th>
 		<!-- <td>날짜</td> -->
 	</tr>	
 	</thead>
@@ -40,10 +112,21 @@
 	<tr>
 		<td>${mm.mid}</td>
 		<td><a href="/proj/movie/detailMovie?mid=${mm.mid }">${mm.title}</a></td>
-		<td>${mm.runtime}</td>
+		<td>${mm.runtime}</td><!--  onclick="location.href='deadlineReg?mid=${mm.mid}' onclick="location.href='deleteMovie?mid=${mm.mid}'-->
 		<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.release}"/></td>
-		<td><input class="btn btn-danger" type="button" value="X" onclick="location.href='deleteMovie?mid=${mm.mid}'"></td>
-		<td><a href="modifyForm?mid=${mm.mid }">Modify</a></td>
+		<td>
+		<c:choose>
+			<c:when test="${mm.deadline eq 1 }">
+				<input id="deadline" title="${mm.mid }" disabled="disabled"  class="btn btn-info" type="button" value="마감">
+			</c:when>
+			<c:otherwise>
+				<input id="deadline" title="${mm.mid }"  class="btn btn-info deadlineGo" type="button" value="마감">
+			</c:otherwise>
+		</c:choose>
+		
+		</td>
+		<td><input class="btn btn-warning" type="button" value="수정" onclick="location.href='modifyForm?mid=${mm.mid }'"></td>
+		<td><input id="deleteBtn" title="${mm.mid }" class="btn btn-danger deleteGo" type="button" value="X" ></td>
 	</tr>
 </c:forEach>
 
@@ -77,7 +160,7 @@
 			</c:otherwise>
 		</c:choose>
     </c:forEach>
-    <c:if test="${endPage<totalPage}"></c:if>
+    <c:if test="${endPage<totalPage}">
     <li>
       <a href="movie?page=${endPage+1 }" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
@@ -88,6 +171,7 @@
         <span aria-hidden="true">마지막</span>
       </a>
     </li>
+    </c:if>
   </ul>
 </nav>
 

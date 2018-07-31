@@ -89,10 +89,10 @@ public class ReserController {
 	}
 
 	@ModelAttribute("reserdata")
-	public Object rese(Model model, ReserVO vo) {
+	public Object rese(Model model) {
 
 		Object res = null;
-		res = rdao.list(vo);
+		res = rdao.list();
 
 		return res;
 	}
@@ -147,15 +147,15 @@ public class ReserController {
 	 */
 
 	@ModelAttribute("dateTitleList")
-	public Object datetitlelist(Model model, ScreenInfoVO vo) {
+	public Object datetitlelist(Model model) {
 		Object res = null;
-		res = mdao.dateTitleList(vo);
+		res = mdao.dateTitleList();
 		//System.out.println("롤롤롤:" + res);
 		return res;
 	}
 
 	@RequestMapping("/timetable")
-	public Object cine3(Model model, ScreenInfoVO svo) {
+	public Object cine3(Model model) {
 		model.addAttribute("menu", "reservation");
 		
 		Date now = new Date();
@@ -242,7 +242,8 @@ public class ReserController {
 	}
 	
 	@RequestMapping(value = "/payment", method = RequestMethod.POST)
-	public Object cine24(Model model, @RequestParam String seatnum, @RequestParam int cnt, @RequestParam int price,
+	public Object cine24(Model model, @RequestParam String seatnum,
+			@RequestParam int cnt, @RequestParam int price,
 			HttpServletRequest request) {
 		System.out.println("병수1");
 		model.addAttribute("menu", "reservation");
@@ -273,6 +274,22 @@ public class ReserController {
 	public Object cine5(Model model, HttpServletRequest request) {
 		System.out.println("포스트로 받았다.");
 		model.addAttribute("menu", "reservation");
+
+		ArrayList<String> sl = new ArrayList();
+
+		for (String seat : (rdao.seatlist(rvo) + "").split(",")) {
+			sl.add(seat);
+		}
+
+		for (String seat : rvo.getSeatNum().split(",")) {
+			if (sl.contains(seat)) {
+				System.out.println("!!좌석중복!!");
+				
+				request.setAttribute("msg", "이미 예약된 좌석입니다.");
+				request.setAttribute("url", "/proj");
+				return "alert";
+			}
+		}
 
 		if (request.getParameter("paytype").equals("csh")) {
 			rvo.setCoc("cash");

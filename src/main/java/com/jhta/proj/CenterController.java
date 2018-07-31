@@ -77,7 +77,7 @@ public class CenterController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
-	String aaa(@PathVariable String service, Model model, BoardVO bvo, BindingResult errors) {
+	String aaa(@PathVariable String service) {
 		String res = "home";
 		if (service.equals("insertReg") || service.equals("modifyReg") || service.equals("replyReg")) {
 			res = "/admin/alert";
@@ -87,17 +87,20 @@ public class CenterController {
 	}
 
 	@ModelAttribute("data")
-	Object list(@PathVariable String service, BoardVO bvo, Model model, HttpServletRequest request, HttpSession session) {
+	Object list(@PathVariable String service, BoardVO bvo, Model model, HttpServletRequest request,
+			HttpSession session) {
 		System.out.println("데이타 탄다");
 		Object res = null;
-		
-		MemberVO v1 = (MemberVO)session.getAttribute("mem");
-		if(v1 != null)
+		if (service.equals("notice") || service.equals("faq") || service.equals("qna")) {
+			kind = service;
+		}
+		MemberVO v1 = (MemberVO) session.getAttribute("mem");
+		if (v1 != null)
 			bvo.setId(v1.getId());
 		// System.out.println(vo);
 
 		/* * * * * * * * * 페이징.* * * * * * * * * * * * * * * */
-		int page = 1, limit = 10, pageLimit = 4;
+		int page = 1, limit = 7, pageLimit = 3;
 		if (request.getParameter("page") != null && !request.getParameter("page").equals("")) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
@@ -113,7 +116,12 @@ public class CenterController {
 		// 삽입수정에서 파라미터 없는거 처리.
 		if (request.getParameter("schCol") != null) {
 			System.out.println("title::" + request.getParameter("title"));
-			total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"));
+			if (kind.equals("qna") && !v1.getId().equals("admin")) {
+				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"),
+						v1.getId());
+			} else {
+				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"));
+			}
 		} else {
 			System.out.println("schCol 널이다");
 			total = (int) boardDao.totalCount(kind);
@@ -163,7 +171,7 @@ public class CenterController {
 			break;
 
 		case "qna":
-			
+
 			kind = "qna";
 
 			bvo.setKind("qna");
@@ -171,6 +179,7 @@ public class CenterController {
 			System.out.println(bvo);
 
 			String id = ((MemberVO) request.getSession().getAttribute("mem")).getId();
+			bvo.setPid(id);
 			if (id.equals("admin"))
 				res = boardDao.someList(bvo);
 			else {
@@ -184,9 +193,9 @@ public class CenterController {
 			bvo.setKind(kind);
 			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
 			System.out.println("centercontrol_insetreg::" + bvo);
-			System.out.println(":::"+bvo.getMmfile());
-			if(bvo.getMmfile() != null || !bvo.getMmfile().equals("")) {
-				System.out.println("asdasdasdasdasdasdasd"+bvo.getMmfile());
+			System.out.println(":::" + bvo.getMmfile());
+			if (bvo.getMmfile() != null) {
+				System.out.println("asdasdasdasdasdasdasd" + bvo.getMmfile());
 				bvo.setUpfile(fileUP(bvo.getMmfile(), request));
 			}
 			res = boardDao.insert(bvo);
@@ -213,11 +222,19 @@ public class CenterController {
 			break;
 
 		case "modify":
+			System.out.println("--------------------------------------------------------------");
+			BoardVO bvv = (BoardVO)boardDao.detail(bvo);
+			if(request.getAttribute("fdelete") != null) {
+				deleteFile(bvv.getUpfile(), request);
+				bvv.setUpfile("");
+				bvv.setMmfile(null);
+				request.setAttribute("fdelete", null);
+			}
 			System.out.println("centercontrol_modify...");
 			System.out.println(bvo);
 			// res = boardDao.detail(bvo);
 			// bvo = boardDao.findBoard(bvo.getBid());
-			res = boardDao.detail(bvo);
+			res = bvv;
 			break;
 
 		case "modifyReg":
@@ -236,22 +253,23 @@ public class CenterController {
 
 		case "replyReg":
 			System.out.println("centercontrol_replyreg...");
-			
-			System.out.println("디테일로 가져오기전 bvo"+bvo);
+
+			System.out.println("디테일로 가져오기전 bvo" + bvo);
 			String content = bvo.getContent();
 			String title = bvo.getTitle();
-			
-			bvo = (BoardVO)boardDao.detail(bvo);
-			
-			System.out.println("디테일로 가져온 bvo"+bvo);
-			
+
+			bvo = (BoardVO) boardDao.detail(bvo);
+
+			System.out.println("디테일로 가져온 bvo" + bvo);
+
 			bvo.setTitle(title);
 			bvo.setContent(content);
-			bvo.setPid(((MemberVO)request.getSession().getAttribute("mem")).getId());
-			
-			model.addAttribute("url", "detail?bid=" + bvo.getBid());
+			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
+
+			System.out.println((int)boardDao.maxBid(bvo)+1);
+			model.addAttribute("url", "qna");
 			model.addAttribute("msg", "답변완료");
-			
+
 			boardDao.nextSeq(bvo);
 			res = boardDao.reply(bvo);
 			break;
@@ -260,7 +278,6 @@ public class CenterController {
 	}
 
 	String fileUP(MultipartFile up, HttpServletRequest request) {
-
 		String changeName = up.getOriginalFilename();
 		System.out.println(changeName + "gogo");
 		try {
@@ -306,4 +323,55 @@ public class CenterController {
 			System.out.println("파일이 존재하지 않습니다.");
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((boardDao == null) ? 0 : boardDao.hashCode());
+		result = prime * result + ((kind == null) ? 0 : kind.hashCode());
+		result = prime * result + ((movieDao == null) ? 0 : movieDao.hashCode());
+		result = prime * result + ((screenDao == null) ? 0 : screenDao.hashCode());
+		result = prime * result + ((timeDao == null) ? 0 : timeDao.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CenterController other = (CenterController) obj;
+		if (boardDao == null) {
+			if (other.boardDao != null)
+				return false;
+		} else if (!boardDao.equals(other.boardDao))
+			return false;
+		if (kind == null) {
+			if (other.kind != null)
+				return false;
+		} else if (!kind.equals(other.kind))
+			return false;
+		if (movieDao == null) {
+			if (other.movieDao != null)
+				return false;
+		} else if (!movieDao.equals(other.movieDao))
+			return false;
+		if (screenDao == null) {
+			if (other.screenDao != null)
+				return false;
+		} else if (!screenDao.equals(other.screenDao))
+			return false;
+		if (timeDao == null) {
+			if (other.timeDao != null)
+				return false;
+		} else if (!timeDao.equals(other.timeDao))
+			return false;
+		return true;
+	}
+	
+	
 }

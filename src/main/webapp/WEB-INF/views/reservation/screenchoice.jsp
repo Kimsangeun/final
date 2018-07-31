@@ -119,7 +119,6 @@ window.onload = function(){
 	 		for(ss in list){
 	 			//alert(list[ss]);
 	 			if(list[ss].trim() == alpha+no ){
-	 				
 	 				/* 예약된 좌석 처리부분. */
 	 				
 	 				$('#S_seat'+col+no)
@@ -127,8 +126,7 @@ window.onload = function(){
 					 				.css("background-color", "gray")
 					 				.css('color', "lightgray")
 					 				.css('pointer-events', "none")
-					 				.css('text-align', "center")
-					 				.css('cursor', "no-drop");
+					 				.css('text-align', "center");
 	 			}
 	 		}
 		}
@@ -211,7 +209,6 @@ window.onload = function(){
 				if(arr[i][j] == 1){
 				
 					switch(i){
-					
 					case 0:
 						alpha = 'A';
 						break;
@@ -225,9 +222,7 @@ window.onload = function(){
 						alpha = 'D';
 						break;
 					}
-					
 					seat += alpha+(j+1)+',';
-					//alert(seat)
 				}
 			}
 		}
@@ -345,13 +340,14 @@ window.onload = function(){
 		numlist = numlist.split(' ');
 		
 		for (var i = 0; i < numlist.length; i++) {
-			$(numlist[i]).css("background", "gray");
-			$(numlist[i]).css("color", "lightgray");
-			$(numlist[i]).html("&nbsp;X&nbsp;");
+			$(numlist[i])
+						.css("background", "gray")
+						.css("text-align", "center")
+						.css("color", "lightgray")
+						.html("X");
 		}
 	
-		/* 결제 팝업뜨게하고 최대한 비슷하게. */
-		//동의합니다.
+	
 	}
 
 	function chksubmit() {

@@ -17,10 +17,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select> -->
 
 
-	<select id="totalCount1" resultType="java.lang.Integer"
+	<select id="totalCount3" resultType="java.lang.Integer"
 		parameterType="hashmap"><!-- schCol / title -->
 		select count(*) from board
 		<include refid="whereSch" />
+	</select>
+	<select id="totalCount1" resultType="java.lang.Integer"
+		parameterType="hashmap"><!-- schCol / title -->
+		select count(*) from board
+		<include refid="whereSchId" />
 	</select>
 
 	<select id="totalCount2" resultType="java.lang.Integer"
@@ -50,22 +55,33 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select rownum rnum, tt.* from
 		(select * from board
 		 where pid = #{id} or pid = 'admin' and kind = 'qna' order by gid desc, seq) tt) 
+		(select * from
+		(select * from board where gid in (select bid from board where kind='qna' and pid=#{pid})) order by gid desc, seq) tt) 
 	<![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
 	</select>
 
 	<!-- <sql id="whereSch"> <where> kind = #{kind} <if test="gogo!=null and 
 		gogo!=''"> ${schCol} like '%${gogo}%' </if> </where> </sql> -->
+	<sql id="whereSchId">
+		<where>
+			kind = #{kind}
+			and gid in (select bid from board where kind='qna' and pid=#{id})
+			<if test="title!=null and title!=''">
+				and ${schCol} like '%'||#{title}||'%'
+			</if>
+		</where>
+	</sql>
+
 	<sql id="whereSch">
 		<where>
 			kind = #{kind}
 			<if test="title!=null and title!=''">
-				<!-- <choose> <when test="schCol=='cnt'"> <![CDATA[ cnt <= #{title}]]> 
-					</when> <otherwise> -->
 				and ${schCol} like '%'||#{title}||'%'
 				<!-- </otherwise> </choose> -->
 			</if>
 		</where>
 	</sql>
+
 	<select id="boardListSch" resultType="boardVo"
 		parameterType="boardVo">
 		select * from board

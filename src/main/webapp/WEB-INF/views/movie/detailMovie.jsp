@@ -256,10 +256,11 @@
 				${moviedata['movie'].title }
 				<c:if test="${mem.id eq 'admin' }">
 					<div>
-					<input id="deleteGo" class="btn btn-danger" type="button" value="삭제">
+					<input id="deadlineGo" ${moviedata['movie'].deadline eq 1 ? 'disabled':'' } class="btn btn-info" type="button" value="마감">
 					<input class="btn btn-warning" type="button" value="수정"
 						onclick="location.href='/proj/admin/modifyForm?mid=${param.mid}'">
-					<input id="deadlineGo" class="btn btn-info" type="button" value="마감">
+					
+					<input id="deleteGo" class="btn btn-danger" type="button" value="삭제">
 					<!-- onclick="location.href='/proj/admin/deadlineReg?mid=${param.mid}'" -->
 					</div>
 				</c:if>
@@ -272,6 +273,10 @@
 			<div class="row" style="padding-right: 20px">
 
 				<div class="h6 col-md-5 col-sm-5 col-xs-4" id="fixedStar">${moviedata['movie'].rating }
+				<c:set var = "reCnt" value = "0"/>
+				<c:forEach items="${moviedata['review']}" var="rr" varStatus="no">
+				<c:set var = "reCnt" value = "${no.index+1 }"/>
+				</c:forEach>(${reCnt }명 참여)
 				</div>
 				<div style="padding :0 0 0 0" class="h3 col-md-5 col-sm-4 col-xs-4">
 				
@@ -335,10 +340,11 @@
 	</div>
 </c:if>
 <hr>
-
+<p class="h2">한줄평</p>
 <span id="counter"><small>0/200</small></span>
 <form id="reviewInsert" action="reviewInsert" method="POST">
 	<div class="row qq">
+		
 		<div class="q form-group col-lg-2 col-xs-3 vertical-align">
 			<div class=" center-block" id="starscore"></div>
 		</div>
@@ -449,7 +455,7 @@
 		</c:forEach>
 	</ul>
 </div>
-<div id="js-btn-wrap" class="btn-wrap">
+<div id="js-btn-wrap" class="btn-wrap" align="center">
 	<button id="moreButton" class="button btn btn-default">더보기</button>
 	<!-- <a href="javascript:;" class="button">더보기</a> -->
 </div>

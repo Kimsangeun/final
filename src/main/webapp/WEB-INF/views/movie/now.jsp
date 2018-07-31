@@ -15,53 +15,37 @@
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
 <script type="text/javascript">
-/* $(document).ready(function() {
-	   var maxHeight = -1;
 
-	   $('.features').each(function() {
-	     maxHeight = maxHeight > $(this).height() ? maxHeight : $(this).height();
-	   });
+/* var i = 0;
+$(document).ready(function() {
+ 
+    var currentPage = 1;
+    checkForHash();
+ 
+    $(‘#btn1’).add(‘#btn2’).add(‘#btn3’).bind(‘click’, function(e) {
+        currentPage = $(this).val();
+        showPage($(this).val());
+    });
+ 
+    $(‘#link’).bind(‘click’, function(e) {
+        document.location.hash = “#” + currentPage;
+    });
+});
+ 
+function checkForHash() {
+    if(document.location.hash){
+        var HashLocationName = document.location.hash;
+        HashLocationName = HashLocationName.replace(“#”,”“);
+        $(“#display”).html(HashLocationName)
+    } else {
+        $(“#display”).html($(‘#btn1’).val())
+    }
+}
+ 
+function showPage(value) {
+    $(“#display”).html(value)
+} */
 
-	   $('.features').each(function() {
-	     $(this).height(maxHeight);
-	   });
-	 }); */
-	 $(document).ready(function(){
-		 
-		 var aa = 0;
-		 console.log('${moviedata[1]}');
-		/*  aa.sort(function(a,b){
-			 return a.rating - b.rating;
-		 });
-		 console.log(aa);
-		 console.log('zz'); */
-		/*   $('.order').click(function(){
-		     var fruitName = $('ul').children('li').get(); //리스트의 자식엘리먼트를 가져와 변수에 저장
-		     fruitName.sort(function(a,b){ // 배열변수? fruitName에 sort함수를 호출/ a,b에 할당
-		          var val1 =$(a).text().toUpperCase(); // 배열의 엘리먼트들을 대문자로 변경
-		          var val2 =$(b).text().toUpperCase();
-		          return(val1<val2)?-1:(val1>val2)?1:0; //★ 
-		       /*
-		* 첫번째 값 < 두번째 값 : 0보다 작은 값을 반환 : 두번째 값을 아래로
-		* 첫번째 값 = 두번째 값 : 0을 반환 : 정렬순서를 그대로
-		* 첫번째 값  > 두번째 값 : 0보다 큰 값을 반환 : 첫번째 값을 아래로
-		★ 를 if문으로 풀어보자면 다음과 같다.
-
-		    if (val1 < val2)
-		    {
-		         valStr = -1;
-		    }else
-		    {
-		          if (val1 > val2)
-		          {
-		               valStr = 1;
-		          }else{
-		               valStr = 0;
-		          }
-		    } 
-		    */
-
-		});
 
 
 $(window).on('load', function () {
@@ -91,8 +75,12 @@ $(window).on('load', function () {
 	display: block;
 }
 
-
+.short_txt01 {overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 </style>
+
+<div style="margin-top:50px"><h2>현재상영작</h2></div>
+
+<hr>
 
 <div id="js-load" class="container" style="margin-top: 100px">
 		<%-- <div class="row">
@@ -134,7 +122,7 @@ $(window).on('load', function () {
         		<a href="/proj/movie/detailMovie?mid=${mm.mid }">
         		<img class="img-responsive" src="${pageContext.request.contextPath}\resources\movposter/${mm.poster}" alt="Generic placeholder image" >
         		</a>
-        		<p class="hidden-xs h3 ellipsis">${mm.title}</p>
+        		<p class="hidden-xs h3 short_txt01">${mm.title}</p>
 				<div class="fixedStar" id="Star_${no.index }"></div>
 				<script type="text/javascript">
 				$(function() {

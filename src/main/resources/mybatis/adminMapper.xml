@@ -26,7 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<select id="movieAll" resultType="movieVo" >
-		select * from movie
+		select * from movie order by release desc
 	</select>
 	
 	<sql id="whereInfo">
@@ -93,12 +93,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 1. 같은시간, 모든영화관, 같은영화 //상영관 상관없이 같은시간에 시작하는지 그럼 같은시간 같은관 다른영화도 찾아보고 막아야한다.(->screenChk)-->
 	<select id="timeChk" resultType="timeVo" parameterType="timeVo">
-		 select * from screeninfo where TO_CHAR(mstart, 'yyyy-MM-dd hh24:mi') = #{showtime} and mID = #{mID}
+		 select * from screeninfo where 
+		 TO_CHAR(mstart, 'yyyy-MM-dd hh24:mi') = #{showtime} and mID = #{mID}
 	</select>
 	
 	<!-- 2. 같은시간, 같은상영관, 다른영화 //다음은 상영 시작, 끝시간 사이에 같은관 시간표 삽입 막기(->시간 중복/timeOverlap) -->
 	<select id="screenChk" resultType="timeVo" parameterType="timeVo">
-		 select * from screeninfo where TO_CHAR(mstart, 'yyyy-MM-dd hh24:mi') = #{showtime} and scNum = #{scNum}
+		 select * from screeninfo where 
+		 TO_CHAR(mstart, 'yyyy-MM-dd hh24:mi') = #{showtime} and scNum = #{scNum}
 	</select>
 
 	<!-- 3. 기존영화 시작시간 ~ 시작시간+영화런타임+30분 사이의 타임에 영화 삽입 막기 //
@@ -176,23 +178,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<!--  -->
 	
 	<!-- 정산 -->
-	<select id="yearList" parameterType="settleVo" resultType="settleVo">
-		select reser.*,screeninfo.mstart,movie.title from reser,screeninfo ,MOVIE
-		where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid
-		and to_char(mstart,'YYYY')=#{num} order by screeninfo.mstart
+	<!-- 년도별 매출  -->
+	<select id="movieSettleYear" parameterType="map" resultType="map">
+		select sum(cost) as sum,to_char(mstart,'yyyy') as day from 
+		(select reser.cost,screeninfo.mstart,screeninfo.mid
+		 from reser,screeninfo where reser.sid = screeninfo.sid)
+		 <if test="mid != 0">
+			where mid = #{mid}		
+		</if>
+		 group by to_char(mstart,'yyyy')order by day
 	</select>
-	<!-- 영화별 정산  -->
-	<select id="movieSettle" parameterType="settleVo" resultType="settleVo">
-		select reser.*,screeninfo.mstart,movie.title from reser,screeninfo ,MOVIE
-		where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid
-		and to_char(mstart,'YYYY')=#{num} order by screeninfo.mstart
+	<!-- 월별 매출  -->
+	<select id="movieSettleMonth" parameterType="map" resultType="map">
+		select sum(cost) as sum,to_char(mstart,'yyyy-MM') as day from 
+		(select reser.cost,screeninfo.mstart,screeninfo.mid
+		 from reser,screeninfo where reser.sid = screeninfo.sid)
+		 where to_char(mstart,'yyyy')=#{select} 
+		 <if test="mid != 0">
+			and mid = #{mid}		
+		</if>
+		group by to_char(mstart,'yyyy-MM')order by day
+	</select>
+	<!-- 일별 매출  -->
+	<select id="movieSettleDay" parameterType="map" resultType="map">
+		select sum(cost) as sum,to_char(mstart,'yyyy-MM-dd') as day from 
+		(select reser.cost,screeninfo.mstart,screeninfo.mid
+		 from reser,screeninfo where reser.sid = screeninfo.sid)
+		 where to_char(mstart,'yyyy-MM')=#{select}  
+		 <if test="mid != 0">
+			and mid = #{mid}		
+		</if>
+		group by to_char(mstart,'yyyy-MM-dd') order by day
 	</select>
 	<!-- 날짜조회  -->
 	<select id="dateSettle" parameterType="settleVo" resultType="settleVo">
 		select reser.*,screeninfo.mstart,movie.title from reser,screeninfo,MOVIE 
 		where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid
-		and screeninfo.mstart between (to_date(#{start},'MM/dd/yy'))
-		 and (to_date(#{end},'MM/dd/yy')+1)
+		and screeninfo.mstart between (to_date(#{from},'MM/dd/yy'))
+		 and (to_date(#{to},'MM/dd/yy')+1)
 		 <if test="mid != 0">
 			and movie.mid = #{mid}		
 		</if>
@@ -210,22 +233,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		      (select mid,count(*) as bb from 
 		      	(select reser.* from reser,screeninfo 
 		      		where reser.sid = screeninfo.sid 
-		      			and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1)) 
+		      			and( screeninfo.mstart
+		      			 BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1)) 
 		      			group by mid having count(*) >= 0) B,
 		      (select count(*)as cc from 
 		      (select * from reser,screeninfo 
 		      where reser.sid = screeninfo.sid 
-		      and( screeninfo.mstart BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1))) C
+		      and( screeninfo.mstart
+		       BETWEEN TRUNC(SYSDATE-7, 'w')+1 and TRUNC(SYSDATE, 'w')+1))) C
 		WHERE A.mid = b.mid(+) order by bookingRate desc
-		
-<!-- 		SELECT A.*, Round(nvl(B.bb/C.cc*100,0),2) as bookingRate
-		FROM (SELECT * FROM MOVIE where deadline=0) A,
-		      (select mid,count(*) as bb from reser group by mid having count(*) >= 0) B,
-		      (select count(*)as cc from reser) C
-		WHERE A.mid = b.mid(+) -->
+
 	</select>
 	<select id="nowShowing" resultType="movieVo">
-		select * from movie where <![CDATA[release <= sysdate]]> and deadline=0
+		select * from movie where 
+		<![CDATA[release <= sysdate]]> and deadline=0
 	</select>
 	<select id="comingSoon" resultType="movieVo">
 	
@@ -304,7 +325,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<!-- 영화 -->
 	<select id="movieList" resultType="movieVo" parameterType="boardVo" >
 	select * from
-		(select rownum rnum, tt.* from(select * from movie order by release) tt)
+		(select rownum rnum, tt.* from(select * from movie order by release desc) tt)
 		 <![CDATA[ where rnum >=#{start} and rnum <= #{end} ]]>
 	</select>
 	
@@ -342,7 +363,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		on (bid=#{bid})
 		
 		when matched then  -->
-		update board set upfile = #{upfile} , title = #{title}, cnt=#{cnt}   where bid=#{bid} 
+		update board set upfile = #{upfile} , cnt=#{cnt}   where bid=#{bid} 
 		<!-- 
 		when not matched then 
 		insert into board

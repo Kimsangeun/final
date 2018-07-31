@@ -26,15 +26,15 @@
           <form role="form" action="/proj/loginReg" method="post">
             <div class="form-group">
               <label for="usrname"><span class="glyphicon glyphicon-user"></span> Username</label>
-              <input type="text" class="form-control" id="usrname" name="id" placeholder="Enter email">
+              <input type="text" class="form-control" id="usrname" name="id" placeholder="Enter ID">
             </div>
             <div class="form-group">
               <label for="psw"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
-              <input type="text" class="form-control" id="psw" name="pw" placeholder="Enter password">
+              <input type="password" class="form-control" id="psw" name="pw" placeholder="Enter password">
             </div>
-            <div class="checkbox">
+           <!--  <div class="checkbox">
               <label><input type="checkbox" value="" checked>Remember me</label>
-            </div>
+            </div> -->
               <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
           </form>
         </div>

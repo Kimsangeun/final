@@ -251,7 +251,6 @@ mm2 = Number(mm2);
 	}
 	
 	function timeCheck(no){
-		//alert(sidStr[no]+":"+midStr[no])
 		
 		document.getElementById('sid').value = sidStr[no];
 		document.getElementById('mid').value = midStr[no];

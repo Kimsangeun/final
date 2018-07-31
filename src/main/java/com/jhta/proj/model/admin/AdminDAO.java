@@ -1,6 +1,7 @@
 package com.jhta.proj.model.admin;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -25,15 +26,19 @@ public class AdminDAO {
 		
 	}
 
-	public Object yearList(SettleVO vo) {
-		return sessionTemplate.selectList("adminMapper.yearList",vo);
+	public Object yearList(Map<String, Object> map) {
+		return sessionTemplate.selectList("adminMapper.movieSettleYear",map);
 		
 	}
 	
 
-	public Object monthList(SettleVO vo) {
-		return sessionTemplate.selectList("adminMapper.monthList",vo);
+	public Object monthList(Map<String, Object> map) {
+		return sessionTemplate.selectList("adminMapper.movieSettleMonth",map);
 		
+	}
+	
+	public Object dayList(Map<String, Object> map) {
+		return sessionTemplate.selectList("adminMapper.movieSettleDay",map);
 	}
 	
 	public Object event(){
