@@ -117,8 +117,7 @@ public class CenterController {
 		if (request.getParameter("schCol") != null) {
 			System.out.println("title::" + request.getParameter("title"));
 			if (kind.equals("qna") && !v1.getId().equals("admin")) {
-				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"),
-						v1.getId());
+				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"), v1.getId());
 			} else {
 				total = (int) boardDao.totalCount(kind, request.getParameter("title"), request.getParameter("schCol"));
 			}
@@ -223,24 +222,30 @@ public class CenterController {
 
 		case "modify":
 			System.out.println("--------------------------------------------------------------");
-			BoardVO bvv = (BoardVO)boardDao.detail(bvo);
-			if(request.getAttribute("fdelete") != null) {
+			bvo = (BoardVO)boardDao.detail(bvo);
+/*			if(request.getAttribute("fdelete").equals(true)) {
 				deleteFile(bvv.getUpfile(), request);
 				bvv.setUpfile("");
 				bvv.setMmfile(null);
-				request.setAttribute("fdelete", null);
-			}
+				request.setAttribute("fdelete", false);
+			}*/
+			
 			System.out.println("centercontrol_modify...");
 			System.out.println(bvo);
+
+
 			// res = boardDao.detail(bvo);
 			// bvo = boardDao.findBoard(bvo.getBid());
-			res = bvv;
+			res = bvo;
 			break;
 
 		case "modifyReg":
 			System.out.println("centercontrol_modifyreg...");
 			System.out.println(bvo);
-
+			if (bvo.getMmfile() != null) {
+				System.out.println("asdasdasdasdasdasdasd" + bvo.getMmfile());
+				bvo.setUpfile(fileUP(bvo.getMmfile(), request));
+			}
 			res = boardDao.modify(bvo);
 			model.addAttribute("url", "detail?bid=" + bvo.getBid());
 			model.addAttribute("msg", "수정완료");

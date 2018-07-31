@@ -81,7 +81,7 @@ $(function(){
 			type : 'POST',
 			success: function(result){
 				alert(result.msg);
-				if((result.msg).equals("회원탈퇴완료")){
+				if(result.msg == "회원탈퇴완료"){
 					document.location.href="/proj/logOut";
 				}
 			}
