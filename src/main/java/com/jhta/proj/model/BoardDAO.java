@@ -64,7 +64,7 @@ public class BoardDAO {
 		map.put("schCol", schCol);
 		map.put("title", title);
 
-		return sessionTemplate.selectOne("boardMapper.totalCount1", map);
+		return sessionTemplate.selectOne("boardMapper.totalCount3", map);
 	}
 
 	public Object totalCount(String kind, String title, String schCol, String id) {
