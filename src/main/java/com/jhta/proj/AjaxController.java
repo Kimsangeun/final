@@ -110,7 +110,7 @@ public class AjaxController {
 		
 		String api_key = "NCSFTLCC5UICCUDI";
 		String api_secret = "2ZTHIMVFZSGIFTVWFZ1YGVI6DCERZMSG";
-		//Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성 여기도 잠그기
+		Coolsms coolsms = new Coolsms(api_key, api_secret); // 메시지보내기 객체 생성 여기도 잠그기
 		Integer key = cerf.makeNum(6); // 인증키 생성
 		
 		map.put("certNum", key);
@@ -124,7 +124,7 @@ public class AjaxController {
 		 */
 		
 		//여기부터 아래 잠궈놓을것
-		/*HashMap<String, String> set = new HashMap<String, String>();
+		HashMap<String, String> set = new HashMap<String, String>();
 		set.put("to", (String)map.get("phone")); // 수신번호
 		set.put("from", "01071303039"); // 발신번호
 		set.put("text", "안녕하세요 시네마중앙입니다. 인증번호는 [" + key + "] 입니다."); // 문자내용
@@ -150,7 +150,7 @@ public class AjaxController {
 			
 			map.put("chk", "N");
 		}
-		*/
+		
 		return map;
 		
 	}

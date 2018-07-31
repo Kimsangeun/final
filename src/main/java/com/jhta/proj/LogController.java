@@ -124,7 +124,7 @@ public class LogController {
 			sendMail.setSubject("[시네마중앙 임시비밀번호]");
 			sendMail.setText("임시비밀번호는"+temp+"입니다.");
 					
-			sendMail.setFrom("admin@megacinema.com", "시네마중앙");
+			sendMail.setFrom("admin@cinemajoongang.net", "시네마중앙");
 			sendMail.setTo(info.getEmail());
 			sendMail.send();
 			
