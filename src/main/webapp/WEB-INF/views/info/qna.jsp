@@ -20,15 +20,8 @@
 			</c:otherwise>
 			</c:choose>
 						<option value="title">제목</option>
-						<option value="pid">작성자</option>
 						<option value="content">내용</option>
-						<c:choose>
-						<c:when test="${kind eq 'qna'}">	
-						</c:when>
-						<c:otherwise>
-							<option value="cnt">조회수</option>
-						</c:otherwise>
-						</c:choose>
+
 						
 				</select> <input type="text" name="title" /><input type="submit" value="검색" />
 				</td>
