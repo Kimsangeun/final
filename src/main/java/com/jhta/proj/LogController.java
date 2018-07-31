@@ -134,7 +134,7 @@ public class LogController {
 		}else {
 			msg = "입력하신 정보를 확인해주십시오.";
 		}
-		
+		//
 		System.out.println(msg);
 		
 		model.addAttribute("msg", msg);
