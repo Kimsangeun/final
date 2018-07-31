@@ -14,9 +14,7 @@
 		<tr>
 			<td colspan="5" align="center"><select name="schCol">
 					<option value="title">제목</option>
-					<option value="pid">작성자</option>
 					<option value="content">내용</option>
-					<option value="cnt">조회수</option>
 			</select> <input type="text" name="title" /><input type="submit" value="검색" />
 			</td>
 		</tr>
