@@ -168,8 +168,8 @@ html, body {
 
 									</c:when>
 									<c:otherwise>
-										<li class="dropdown"><a href="/proj/logOut" role="button"
-											aria-expanded="false">로그아웃 <span class="caret"></span>
+										<li class=""><a href="/proj/logOut" role="button"
+											aria-expanded="false">로그아웃
 										</a></li>
 									</c:otherwise>
 								</c:choose></li>

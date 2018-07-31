@@ -10,7 +10,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 
 	<select id="list" resultType="reserVo">
-		select * from reser
+		select reser.* from reser,(select * from screeninfo where mstart > trim(sysdate-1)) aa
+where aa.sid = reser.sid
 	</select>
 	<insert id="insert" parameterType="reserVo">
 		<selectKey keyProperty="rId" order="BEFORE"

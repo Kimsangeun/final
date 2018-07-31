@@ -339,6 +339,8 @@
 
 	</div>
 </c:if>
+<jsp:useBean id="now" class="java.util.Date" />
+<c:if test="${moviedata['movie'].release > now}">
 <hr>
 <p class="h2">한줄평</p>
 <span id="counter"><small>0/200</small></span>
@@ -459,5 +461,5 @@
 	<button id="moreButton" class="button btn btn-default">더보기</button>
 	<!-- <a href="javascript:;" class="button">더보기</a> -->
 </div>
-
+</c:if>
 

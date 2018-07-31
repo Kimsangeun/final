@@ -102,10 +102,14 @@ $(window).on('load', function () {
 			
 				<p class="h3">${mm.title}</p>
 				<p>
-					<a class="btn btn-default"
+				
+					<a class="btn btn-default ${(((mm.release.time - now.time)  / (1000*60*60*24)+1) < 7) ? '':'col-lg-12 col-md-12'}"
 						href="/proj/movie/detailMovie?mid=${mm.mid }" role="button">상세정보
-						&raquo;</a> <a class="btn btn-default" href="#" role="button">예매하기
+						&raquo;</a> 
+						<c:if test="${((mm.release.time - now.time)  / (1000*60*60*24)+1) < 7}">
+						<a class="btn btn-default" href="/proj/reservation/reser" role="button">예매하기
 						&raquo;</a>
+						</c:if>
 				</p>
 
 			</div>

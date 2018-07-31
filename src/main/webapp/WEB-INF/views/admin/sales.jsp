@@ -175,7 +175,7 @@
 					console.log(type);
 					if(type == 'day'){
 						godata="type=day&sel_year=2018&sel_month=01&select="+$('#sel_year').val()
-						+"-"+$('#sel_month').val()+"&mid=0";
+						+"-"+$('#sel_month').val()+"&mid="+$('#movieSelect_day').val();
 						
 					}
 					//var type=type=day&sel_year=2018&sel_month=01&select=%2F&mid=0

@@ -107,7 +107,7 @@ img{
 				<p>
 					<a class="btn btn-default"
 						href="/proj/movie/detailMovie?mid=${mm.mid }" role="button">상세정보
-						&raquo;</a> <a class="btn btn-default" href="#" role="button">예매하기
+						&raquo;</a> <a class="btn btn-default" href="/proj/reservation/reser" role="button">예매하기
 						&raquo;</a>
 				</p>
 
