@@ -131,6 +131,8 @@ public class LogController {
 			}else {
 				msg = "탈퇴하신 회원님은 PW찾기를 사용하실 수 없습니다.";
 			}
+		}else {
+			msg = "입력하신 정보를 확인해주십시오.";
 		}
 		
 		System.out.println(msg);

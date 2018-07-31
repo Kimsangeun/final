@@ -29,8 +29,6 @@ public class MemberDAO {
 		
 		MemberVO info = sessionTemplate.selectOne("mem.pwSearch",vo);
 		
-		System.out.println(info.getOut());
-		
 		if(info!=null) {
 			
 			if(info.getOut()==0) {
