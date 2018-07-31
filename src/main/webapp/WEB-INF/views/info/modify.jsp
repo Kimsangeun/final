@@ -32,7 +32,7 @@ function filedel(bid){
 		 frm.action="ResQnAFileDelete";
 */		 
 location.href="modify?bid="+bid;
-		request.setAttribute("fdelete", "delete");
+		request.setAttribute("fdelete", true);
 		
 /* 		 document.location="modify?bid=101"; */
 	 }
@@ -84,16 +84,7 @@ location.href="modify?bid="+bid;
 		</tr>
 		<tr>
 			<td><b>파일</b></td>
-			<td colspan="3"><c:choose>
-					<c:when test="${data.upfile!='' }">
-					${data.upfile }
-					<input type="hidden" name="upfile" value="${data.upfile }" />
-						<input type="button" onclick="filedel(${data.bid})" value="파일삭제">
-					</c:when>
-					<c:otherwise>
-						<input type="file" name="mmfile" />
-					</c:otherwise>
-				</c:choose></td>
+			<td colspan="3"><input type="file" name="mmfile" /></td>
 		</tr>
 
 		<tr>

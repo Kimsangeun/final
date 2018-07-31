@@ -27,7 +27,6 @@ function gogo(){
 		return;
 	}
 	
-	if()
  	document.insfrm.submit(); 
 }
 </script>
