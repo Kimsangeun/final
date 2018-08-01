@@ -339,6 +339,10 @@ public class AdminController {
 			System.out.println("데드데드");
 			movieDao.movieDeadline(mvo);
 			model.addAttribute("url", "/proj/movie/detailMovie?mid="+mvo.getMid());
+			if(mvo.getRealpath()!=null) {
+				model.addAttribute("url", "/proj/admin/movie?page="+mvo.getRealpath());
+			}
+			
 			model.addAttribute("msg", "마감완료");
 			
 			break;

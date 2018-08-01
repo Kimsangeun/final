@@ -16,7 +16,8 @@
 $(function() {
 	$(".deadlineGo").click(function() {
     	var mid = $(this).prop('title');
-    	console.log(mid);
+    	var page = ${param.page==null ? '1':param.page};
+    	console.log(page);
 
     	var godata={mid:mid};
     	$.ajax({
@@ -29,7 +30,7 @@ $(function() {
                 	$("#noDeleteModal").modal();
 
                 } else {
-                	location.href="/proj/admin/deadlineReg?mid="+mid;
+                	location.href="/proj/admin/deadlineReg?mid="+mid+"&realpath="+page;
                     //document.getElementById('reviewInsert').submit();
                 }
             },
