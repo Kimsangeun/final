@@ -281,10 +281,12 @@
 				<div style="padding :0 0 0 0" class="h3 col-md-5 col-sm-4 col-xs-4">
 				
 				</div>
+				<c:if test="${((moviedata['movie'].release.time - now.time)  / (1000*60*60*24)+1) < 7}">
 				<a class="btn btn-danger col-md-2 col-sm-3 col-xs-4"
 					href="#" id="reservIn" role="button">예매하기 &raquo;</a>
 				<!-- <button onclick="location.href('proj/reservation/reser')"
 				class="btn btn-danger col-md-2 col-sm-4 col-xs-4">예매하기</button> -->
+				</c:if>
 			</div>
 			
 			<dl class="dl-horizontal text-left">
@@ -340,7 +342,7 @@
 	</div>
 </c:if>
 <jsp:useBean id="now" class="java.util.Date" />
-<c:if test="${moviedata['movie'].release > now}">
+<c:if test="${moviedata['movie'].release < now}">
 <hr>
 <p class="h2">한줄평</p>
 <span id="counter"><small>0/200</small></span>

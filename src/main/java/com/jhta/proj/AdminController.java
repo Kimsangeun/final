@@ -258,10 +258,22 @@ public class AdminController {
 			MovieVO deleteFileVO = (MovieVO)movieDao.detailMovie(mvo);
 			System.out.println(deleteFileVO);
 			deleteFile(deleteFileVO.getPoster(),request,"poster");
-			
+			System.out.println("1111");
 			//스틸컷들 지우기
-			for(String filename : deleteFileVO.getSteelcut().split("[|]"))
-			{deleteFile(filename,request,"cut");}
+			if(deleteFileVO.getSteelcut() == null) {
+				System.out.println("zzz");
+			}
+			else if(deleteFileVO.getSteelcut().indexOf("[|]")==-1)
+			{
+				System.out.println("1zz");
+				deleteFile(deleteFileVO.getSteelcut(),request,"cut");
+			}
+			else {
+				System.out.println("z2");
+				for(String filename : deleteFileVO.getSteelcut().split("[|]"))
+				{deleteFile(filename,request,"cut");}
+			}
+			System.out.println("3333");
 			
 			movieDao.deleteMovie(mvo);
 			model.addAttribute("url", "movie");

@@ -276,7 +276,7 @@ public class CenterController {
 			bvo.setContent(content);
 			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
 
-			System.out.println((int)boardDao.maxBid(bvo)+1);
+//			System.out.println((int)boardDao.maxBid(bvo)+1);
 			model.addAttribute("url", "qna");
 			model.addAttribute("msg", "답변완료");
 
