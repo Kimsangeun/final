@@ -262,6 +262,8 @@ mm2 = Number(mm2);
 		document.getElementById('mid').value = midStr[no];
 		document.getElementById('title').value = titleStr[no];
 		
+		location.href = '/proj/movie/detailMovie?mid='+midStr[no];
+		
 	}
 	
 </script>
