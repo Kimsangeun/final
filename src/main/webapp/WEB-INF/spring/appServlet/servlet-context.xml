@@ -43,7 +43,8 @@
 		<interceptor>
 			<mapping path="/reservation/reser" />
 			<mapping path="/reservation/screenchoice" />
- 			<mapping path="/info/qna" />
+			<mapping path="/info/qna" />
+<!-- 			<mapping path="/info/*" /> -->
 			<!-- <mapping path="/movie/reviewInsert" /> -->
 <!-- 			<exclude-mapping path="/info/notice" /> -->
 			<exclude-mapping path="/info/forbidden" />

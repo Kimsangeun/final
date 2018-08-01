@@ -123,7 +123,12 @@ public class CenterController {
 			}
 		} else {
 			System.out.println("schCol 널이다");
-			total = (int) boardDao.totalCount(kind);
+			if (kind.equals("qna") && !v1.getId().equals("admin")) {
+				total = (int) boardDao.totalCount(kind, v1.getId());
+				System.out.println("total::"+total);
+			} else {
+				total = (int) boardDao.totalCount(kind);
+			}
 		}
 
 		int totalPage = total / limit;
@@ -271,7 +276,7 @@ public class CenterController {
 			bvo.setContent(content);
 			bvo.setPid(((MemberVO) request.getSession().getAttribute("mem")).getId());
 
-			System.out.println((int)boardDao.maxBid(bvo)+1);
+//			System.out.println((int)boardDao.maxBid(bvo)+1);
 			model.addAttribute("url", "qna");
 			model.addAttribute("msg", "답변완료");
 

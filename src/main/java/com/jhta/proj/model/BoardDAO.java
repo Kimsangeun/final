@@ -80,6 +80,13 @@ public class BoardDAO {
 	public Object totalCount(String kind) {
 		return sessionTemplate.selectOne("boardMapper.totalCount2", kind);
 	}
+	public Object totalCount(String kind, String id) {
+		Map<String, String> map = new HashMap<>();
+		map.put("kind", kind);
+		map.put("id", id);
+		System.out.println("토탈4");
+		return sessionTemplate.selectOne("boardMapper.totalCount4", map);
+	}
 
 	public Object someList(BoardVO bvo) {
 		return sessionTemplate.selectList("boardMapper.someList", bvo);
