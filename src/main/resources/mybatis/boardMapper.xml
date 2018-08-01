@@ -117,6 +117,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		(select max(bid)+1 from board)
 	</sql>
 
+	<select id="maxbid" resultType="Integer">
+	select max(bid)+1 from board
+	</select>
 
 	<insert id="boardInsert" parameterType="boardVo">
 		<selectKey keyProperty="bid" order="BEFORE"
