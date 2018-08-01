@@ -398,15 +398,23 @@
 		<c:forEach items="${moviedata['review']}" var="rr" varStatus="no">
 			<li class="list-group-item lists__item js-load col-lg-6 col-xs-12 "
 				style="height: 150px;">
-				<p class="h3">${rr.id }
+				<div >
+				<p class="h3 col-md-4">${rr.id }
+					<c:forEach items="${moviedata['realShow']}" var="bbb" >
+						<c:if test="${bbb.id eq rr.id }">
+							<br><small>[실관람]</small>
+						</c:if>
+					</c:forEach>
+					</p>
 					<c:if test="${mem.id eq rr.id}">
+					
 						<form id="deleteReview" action="deleteReview" method="post">
-
-							<button type="button" class="btn btn-danger btn-xs"
+<p>
+							<button type="button" class="btn btn-danger btn-xs" style="vertical-align:middle;"
 								data-toggle="modal" data-target="#deleteModal">
 								<span class="glyphicon glyphicon-remove"></span>
 							</button>
-
+						</p>
 							<div class="modal fade" id="deleteModal" tabindex="-1"
 								role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 								<div class="modal-dialog">
@@ -431,9 +439,10 @@
 							<input type="hidden" value="${param.mid }" name="mid" /> <input
 								type="hidden" value="${rr.id }" name="id" />
 						</form>
-					</c:if>
-				</p>
 
+					</c:if>
+
+				</div>
 
 				<div>
 					<div style="float: left">

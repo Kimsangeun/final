@@ -73,6 +73,9 @@ public class MovieController {
 			res = movieDao.review(mvo);	//리뷰
 			System.out.println(res);
 			map.put("review", res);
+			res = movieDao.realShow(mvo);
+			System.out.println(res);
+			map.put("realShow", res);
 			res = map;
 			System.out.println(res);
 			//System.out.println(res);

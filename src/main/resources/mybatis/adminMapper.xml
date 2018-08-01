@@ -278,6 +278,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * from review where mid = #{mid} order by reg_date desc 
 	</select>
 	
+		<!-- 레쟈에서 mid와 id 이용해서 실관람객인지 -->
+	<select id="realShow" parameterType="movieVo" resultType="reviewVo">
+		select id from reser where mid =#{mid} group by id
+	</select>
+	
 		<!-- 리뷰등록 -->
 	<update id="reviewInsert" parameterType="reviewVo">
 		merge into review 

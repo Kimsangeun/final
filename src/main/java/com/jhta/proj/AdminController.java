@@ -317,6 +317,7 @@ public class AdminController {
 			MovieVO resVO = (MovieVO) movieDao.detailMovie(mvo);
 			resVO.setRealpath(request.getRealPath("resources/"));
 			res = resVO;
+			
 
 			System.out.println(res);
 			break;
