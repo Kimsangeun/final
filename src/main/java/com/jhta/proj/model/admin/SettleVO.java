@@ -11,7 +11,7 @@ public class SettleVO {
 	
 
 	@DateTimeFormat(pattern="yyyy-MM-dd")
-	Date mstart;
+	Date mstart,paydate;
 	String type,id,cost,coc,accnum,title,refund,num,cnt,mid,from,to,yearselect,monthselect;
 	public String getFrom() {
 		return from;
@@ -102,6 +102,13 @@ public class SettleVO {
 	}
 	public void setMonthselect(String monthselect) {
 		this.monthselect = monthselect;
+	}
+	
+	public Date getPaydate() {
+		return paydate;
+	}
+	public void setPaydate(Date paydate) {
+		this.paydate = paydate;
 	}
 	@Override
 	public String toString() {

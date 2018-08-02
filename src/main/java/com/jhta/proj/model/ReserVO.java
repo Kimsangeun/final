@@ -12,7 +12,7 @@ public class ReserVO {
 	
 	String id, seatNum, accNum,coc, title;
 	int rId, cost, sId, mId, cnt, scNum; 
-	Date mstart;
+	Date mstart, paydate;
 	
 	public String getTitle() {
 		return title;
@@ -86,6 +86,13 @@ public class ReserVO {
 
 	public void setCnt(int cnt) {
 		this.cnt = cnt;
+	}
+	
+	public Date getPaydate() {
+		return paydate;
+	}
+	public void setPaydate(Date paydate) {
+		this.paydate = paydate;
 	}
 	@Override
 	public String toString() {

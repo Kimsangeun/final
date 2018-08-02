@@ -327,7 +327,7 @@ public class AdminController {
 			System.out.println(svo);
 			if(svo.getFrom()!=null) {
 				System.out.println("aasdf");
-				mapp.put("settle",adminDao.dateSettle(svo));
+				mapp.put("settle",adminDao.dateSettle2(svo));
 				
 			}
 			mapp.put("movie", movieDao.list());
@@ -350,7 +350,8 @@ public class AdminController {
 		case "promotion":
 			//mapp.put("promo",)
 			mapp.put("promo", adminDao.promo());
-			mapp.put("movie", movieDao.list());
+			mapp.put("movie", movieDao.movieNoDead());
+			//mapp.put("movie2", movieDao.list());
 			res = mapp;
 			break;
 			

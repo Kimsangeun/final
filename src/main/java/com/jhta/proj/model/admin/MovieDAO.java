@@ -25,6 +25,11 @@ public class MovieDAO {
 		
 	}
 	
+	public Object movieNoDead() {
+		return sessionTemplate.selectList("adminMapper.movieNoDead");
+		
+	}
+	
 	public Object selectDayMovieList(TimeTableVO vo) {
 		return sessionTemplate.selectList("adminMapper.selectDayMovieList",vo);
 		

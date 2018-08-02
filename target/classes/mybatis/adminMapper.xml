@@ -29,6 +29,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from movie order by release desc
 	</select>
 	
+	
+		<!-- 노데드라인영화 -->
+	<select id="movieNoDead" resultType="movieVo" parameterType="boardVo" >
+		select * from movie where deadline = 0 order by release desc
+	</select>
+	
+	
 	<sql id="whereInfo">
 		<where>	
 			<choose>
@@ -220,6 +227,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			and movie.mid = #{mid}		
 		</if>
 		  order by screeninfo.mstart
+	</select>
+	
+	<!-- 날짜조회  -->
+	<select id="dateSettle2" parameterType="settleVo" resultType="settleVo">
+		select reser.*,movie.title from reser,screeninfo,MOVIE 
+		where reser.sid = screeninfo.sid and screeninfo.mid = movie.mid
+		and reser.paydate between (to_date(#{from},'MM/dd/yy'))
+		 and (to_date(#{to},'MM/dd/yy')+1)
+		 <if test="mid != 0">
+			and movie.mid = #{mid}		
+		</if>
+		  order by reser.paydate
 	</select>
 	
 	

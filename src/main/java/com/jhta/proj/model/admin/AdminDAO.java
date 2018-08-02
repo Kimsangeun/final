@@ -56,6 +56,9 @@ public class AdminDAO {
 	public Object dateSettle(SettleVO vo){
 		return sessionTemplate.selectList("adminMapper.dateSettle",vo);
 	}
+	public Object dateSettle2(SettleVO vo){
+		return sessionTemplate.selectList("adminMapper.dateSettle2",vo);
+	}
 	
 	public Object totalCount(String board) {
 		return sessionTemplate.selectOne("adminMapper.totalCount",board);

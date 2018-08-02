@@ -18,9 +18,9 @@ where aa.sid = reser.sid
 			resultType="java.lang.Integer">
 		<include refid="maxId" /></selectKey>
 
-		insert into reser (id, rid, cost, coc, sid, mid, cnt, seatnum, accnum)
+		insert into reser (id, rid, cost, coc, sid, mid, cnt, seatnum, accnum,paydate)
 		values(#{id}, #{rId}, #{cost}, #{coc}, #{sId}, #{mId}, #{cnt},
-		#{seatNum}, #{accNum})
+		#{seatNum}, #{accNum},sysdate)
 	</insert>
 
 	<select id="detail" parameterType="reserVo" resultType="reserVo">

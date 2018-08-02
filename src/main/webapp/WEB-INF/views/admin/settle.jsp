@@ -105,7 +105,7 @@ buttonText: "Select date" */
 	<c:forEach var="mm" items="${data['settle'] }" varStatus="no">
 
 		<tr class="${mm.refund eq 0 ? 'primary' : 'danger'  }">
-			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.mstart}" /></td>
+			<td><fmt:formatDate pattern="yyyy-MM-dd" value="${mm.paydate}" /></td>
 			<td>${mm.id }</td>
 			<td>${mm.title}</td>
 			<td>${mm.coc }</td>
