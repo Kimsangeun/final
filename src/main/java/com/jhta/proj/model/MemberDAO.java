@@ -60,7 +60,7 @@ public class MemberDAO {
 		
 		System.out.println("예약지웠다");
 		
-		sessionTemplate.delete("mem.cancle",vo);
+		sessionTemplate.update("mem.cancle",vo);
 		
 		return sessionTemplate.selectList("mem.reser", v1);
 

@@ -34,13 +34,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select * from reser, movie, screeninfo 
 		where reser.mid = movie.mid 
 		and reser.id = #{id} 
-		and reser.sid = screeninfo.sid 
+		and reser.sid = screeninfo.sid and reser.refund = 0 
 		order by screeninfo.mstart desc
 	</select>
 	
-	<delete id="cancle" parameterType="reserVo">
-		delete from reser where rid=#{rId}
-	</delete>
+	<update id="cancle" parameterType="reserVo">
+		update reser set refund = 1 where rid=#{rId}
+	</update>
 	
 	<select id="info" parameterType="memberVo" resultType="memberVo">
 		select * from member where id = #{id}

@@ -254,7 +254,7 @@ function checkBirthday() {
         showErrorMsg(oMsg,"정말이세요?연세가...");
         return false;
     } else if (age < 14) {
-        showErrorMsg(oMsg,"만 14세 미만의 어린이는 보호자 동의가 필요합니다.");
+        showErrorMsg(oMsg,"만 14세 미만의 어린이는 가입이 불가합니다.");
         return false;
         
     } else {
@@ -544,7 +544,7 @@ input[type="password"]
 <title>Insert title here</title>
 </head>
 <body>
-	<form id="join_form" action="/proj/joinMember">
+	<form id="join_form" action="/proj/joinMember" method="POST">
 	<input type="hidden" id="birthday" name="birthday" value="">
 	<div class="frame">
 		<!-- 아이디 -->
